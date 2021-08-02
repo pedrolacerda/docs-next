@@ -50,7 +50,7 @@ Se você inspecionar este elemento em suas ferramentas de desenvolvedor do Chrom
 
 ![Ferramentas de Desenvolvedor do Chrome mostrando um nome acessível para o input usando a label](/images/AccessibleLabelChromeDevTools.png)
 
-:::warning Warning:
+::: warning Aviso:
 Embora você possa ter visto _labels_ envolvendo os campos _input_ como este:
 
 ```html
@@ -167,7 +167,7 @@ Você pode ver a descrição inspecionando nas ferramentas de desenvolvedor do C
 
 Evite usar _placeholders_, pois eles podem confundir muitos usuários.
 
-Um dos problemas com os _placeholders_ é que eles não atendem aos [critérios de contraste de cor](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) por padrão; corrigir o contraste da cor faz com que o _placeholder_ pareça estar com dados pré-preenchidos nos _inputs_. Olhando para o exemplo a seguir, você pode ver que o _placeholder_ para Sobrenome que atende aos critérios de contraste de cor parece estar pré-preenchidos com dados:
+Um dos problemas com os _placeholders_ é que eles não atendem aos [critérios de contraste de cor](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) por padrão; corrigir o contraste da cor faz com que o _placeholder_ se pareça com dados pré-preenchidos nos _inputs_. Olhando para o exemplo a seguir, você pode ver que o _placeholder_ para Sobrenome que atende aos critérios de contraste de cor, parece um dado pré-preenchido:
 
 <p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="MWeyNjZ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Placeholder">
   <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/MWeyNjZ">
@@ -180,7 +180,8 @@ Um dos problemas com os _placeholders_ é que eles não atendem aos [critérios 
 
 ### Instruções
 
-Ao adicionar instruções para seus _inputs_, certifique-se de vinculá-los corretamente. Você pode fornecer instruções adicionais e vincular vários ids dentro de um [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute). Isso permite um design mais flexível.
+Ao adicionar instruções para seus _inputs_, certifique-se de vinculá-los corretamente.
+Você pode fornecer instruções adicionais e vincular vários ids dentro de um [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute). Isso permite um design mais flexível.
 
 ```html
 <fieldset>
@@ -255,7 +256,7 @@ Podemos usar CSS para ocultar elementos visualmente, mas mantê-los disponíveis
 
 #### aria-hidden="true"
 
-Adicionar `aria-hidden="true"` ocultará o elemento de tecnologias assistivas, mas o deixará visualmente disponível para outros usuários. Não use em elementos focáveis, puramente decorativos, duplicados ou fora da tela.
+Adicionar `aria-hidden="true"` ocultará o elemento de tecnologias assistivas, mas o deixará visualmente disponível para outros usuários. Não use em elementos focáveis, puramente em conteúdo decorativo, duplicados ou fora da tela.
 
 ```html
 <p>Este não está escondido de leitores de tela.</p>
@@ -264,7 +265,8 @@ Adicionar `aria-hidden="true"` ocultará o elemento de tecnologias assistivas, m
 
 ### Botões
 
-Ao usar botões dentro de um formulário, você deve definir o tipo para evitar o envio do formulário. Você também pode usar _inputs_ para criar botões:
+Ao usar botões dentro de um formulário, você deve definir o tipo para evitar o envio do formulário.
+Você também pode usar _inputs_ para criar botões:
 
 ```html
 <form action="/dataCollectionLocation" method="post" autocomplete="on">
@@ -285,7 +287,7 @@ Ao usar botões dentro de um formulário, você deve definir o tipo para evitar 
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-#### Imagens funcionais
+#### Imagens Funcionais
 
 Você pode usar esta técnica para criar imagens funcionais.
 
