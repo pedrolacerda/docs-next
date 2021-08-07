@@ -2,7 +2,7 @@
 
 ## Porque API de Composição?
 
-::: tip NOTA
+::: tip Nota
 Chegando até esta etapa da documentação, você já deve estar familiarizado com [os fundamentos do Vue](introduction.md) e o [básico sobre componentes](component-basics.md).
 :::
 
@@ -10,7 +10,7 @@ Chegando até esta etapa da documentação, você já deve estar familiarizado c
 
 A criação de componentes Vue nos permite extrair partes repetíveis da interface, juntamente com sua funcionalidade, em partes reutilizáveis de código. Apenas isso já pode levar nossa aplicação bem longe em termos de manutenibilidade e flexibilidade. No entanto, nossa experiência coletiva provou que isso por si só pode não ser suficiente, especialmente quando a aplicação está ficando muito grande - algo como centenas de componentes. Ao lidar com aplicações tão grandes, compartilhar e reutilizar o código torna-se importantíssimo.
 
-Vamos imaginar que em nossa aplicação temos uma visão para mostrar uma lista de repositórios de um determinado usuário. Além disso, queremos aplicar recursos de pesquisa e de filtros. O componente que manipula essa visualização pode ser assim:
+Vamos imaginar que em nossa aplicação temos uma tela (_view_) para mostrar uma lista de repositórios de um determinado usuário. Além disso, queremos aplicar recursos de pesquisa e de filtros. O componente que manipula essa visualização pode ser assim:
 
 ```js
 // src/components/UserRepositories.vue
@@ -48,7 +48,7 @@ export default {
 
 Este componente tem várias responsabilidades:
 
-1. Obter repositórios para esse nome de usuário de uma API, supostamente externa, e atualizá-los sempre que o usuário mudar;
+1. Obter repositórios para esse nome de usuário de uma API, presumivelmente externa, e atualizá-los sempre que o usuário mudar;
 2. Procurar repositórios usando uma string `searchQuery`; e
 3. Filtrar repositórios usando um objeto `filters`.
 
@@ -72,11 +72,11 @@ Agora que já sabemos o **porquê**, podemos chegar ao **como**. Para começar a
 
 A nova opção de componente `setup` é executada **antes** do componente ser criado, uma vez que as `props` estão resolvidas, e serve como ponto de entrada para APIs de composição.
 
-::: warning
-Como a instância do componente ainda não foi criada quando `setup` é executado, não há `this` dentro da opção `setup`. Isso significa que, com exceção de `props`, você não poderá acessar nenhuma propriedade declarada no componente – **estado local**, **propriedades _computed_** ou **métodos**.
+::: warning Aviso
+Como a instância do componente ainda não foi criada quando `setup` é executado, não há `this` dentro da opção `setup`. Isso significa que, com exceção de `props`, você não poderá acessar nenhuma propriedade declarada no componente – **estado local**, **dados computados** ou **métodos**.
 :::
 
-A opção `setup` deve ser uma função que aceita `props` e `context`, sobre os quais falaremos [depois] (composition-api-setup.html#arguments). Além disso, tudo o que retornamos de `setup` será exposto ao resto do nosso componente (propriedades _computed_, métodos, _lifecycle hooks_ e assim por diante), bem como ao template do componente.
+A opção `setup` deve ser uma função que aceita `props` e `context`, sobre os quais falaremos [depois](composition-api-setup.html#argumentos). Além disso, tudo o que retornamos de `setup` será exposto ao resto do nosso componente (dados computados, métodos, gatilhos de ciclo de vida e assim por diante), bem como ao _template_ do componente.
 
 Vamos adicionar `setup` ao nosso componente:
 
@@ -105,11 +105,10 @@ Começaremos com as partes mais óbvias:
 
 - A lista de repositórios;
 - A função para atualizar a lista de repositórios; e
-- Retornar a lista e a função para que sejam acessíveis por outras opções de componentes.
-
+- Retornar a lista e a função para que sejam acessíveis por outras opções de componente.
 
 ```js
-// src/components/UserRepositories.vue função `setup`
+// função `setup` de src/components/UserRepositories.vue
 import { fetchUserRepositories } from '@/api/repositories'
 
 // dentro do nosso componente
@@ -128,7 +127,7 @@ setup (props) {
 
 Este é o nosso ponto de partida, exceto que ainda não está funcionando porque nossa variável `repositories` não é reativa. Isso significa que, da perspectiva do usuário, a lista de repositórios permaneceria vazia. Vamos consertar isso!
 
-### Variáveis reativas com `ref`
+### Variáveis Reativas com `ref`
 
 No Vue 3.0, podemos tornar qualquer variável reativa em qualquer lugar com uma nova função `ref`, como:
 
@@ -158,14 +157,14 @@ Encapsular valores dentro de um objeto pode parecer desnecessário, mas é preci
 
 Ter um objeto encapsulado com qualquer valor nos permite passá-lo com segurança por toda a nossa aplicação, sem a preocupação de perder sua reatividade em algum lugar ao longo do caminho.
 
-::: tip NOTA
-Em outras palavras, `ref` cria uma **referência reativa** para nosso valor. O conceito de trabalhar com **referências** será usado frequentemente em toda a API de Composição.
+::: tip Nota
+Em outras palavras, `ref` cria uma **Referência Reativa** para nosso valor. O conceito de trabalhar com **Referências** será usado frequentemente em toda a API de Composição.
 :::
 
 De volta ao nosso exemplo, vamos criar uma variável `repositories` reativa:
 
 ```js
-// src/components/UserRepositories.vue função `setup`
+// função `setup` de src/components/UserRepositories.vue
 import { fetchUserRepositories } from '@/api/repositories'
 import { ref } from 'vue'
 
@@ -228,21 +227,20 @@ export default {
 }
 ```
 
-Nós movemos várias partes de nossa primeira preocupação lógica para o método `setup`, bem colocadas próximas umas das outras. O que resta é chamar `getUserRepositories` no `mounted` e configurar um observador para fazer isso sempre que a propriedade `user` mudar.
+Nós movemos várias partes de nossa primeira preocupação lógica para o método `setup`, bem colocadas próximas umas das outras. O que resta é chamar `getUserRepositories` no gatilho `mounted` e configurar um observador para fazer isso sempre que a propriedade `user` mudar.
 
-Começaremos com o _lifecycle hook_.
+Começaremos com o gatilho de ciclo de vida.
 
-### Registro de _Lifecycle Hook_ no `setup`
+### Registro de Gatilho de Ciclo de Vida no `setup`
 
+Para tornar a API de Composição completa em comparação com a API de Opções, também precisamos de uma maneira de registrar gatilhos de ciclo de vida dentro de `setup`. Isso é possível graças a várias novas funções exportadas do Vue. Gatilhos de ciclo de vida na API de Composição têm o mesmo nome da API de Opções, mas são prefixados com `on`: ou seja, `mounted` seria parecido com `onMounted`.
 
-Para tornar a API de Composição completa em comparação com a API de opções, também precisamos de uma maneira de registrar _lifecycle hooks_ dentro de `setup`. Isso é possível graças a várias novas funções exportadas do Vue. _Lifecycle hooks_ na API de Composição têm o mesmo nome da API de opções, mas são prefixados com `on`: ou seja, `mounted` seria parecido com `onMounted`.
-
-Essas funções aceitam um retorno de chamada que será executado quando o _hook_ for chamado pelo componente.
+Essas funções aceitam um retorno de chamada (_callback_) que será executado quando o gatilho for chamado pelo componente.
 
 Vamos adicioná-lo à nossa função `setup`:
 
 ```js
-// src/components/UserRepositories.vue função `setup`
+// função `setup` de src/components/UserRepositories.vue
 import { fetchUserRepositories } from '@/api/repositories'
 import { ref, onMounted } from 'vue'
 
@@ -264,15 +262,15 @@ setup (props) {
 
 Agora precisamos reagir às mudanças feitas na propriedade `user`. Para isso, usaremos a função independente `watch`.
 
-### Reagindo às mudanças com `watch`
+### Reagindo às Mudanças com `watch`
 
 Assim como configuramos um observador na propriedade `user` dentro de nosso componente usando a opção `watch`, podemos fazer o mesmo usando a função `watch` importada do Vue. Três argumentos são aceitos:
 
-- Uma **referência reativa** ou função `getter` que queremos observar;
-- Um retorno de chamada; ou
+- Uma **Referência Reativa** ou função _getter_ que queremos observar;
+- Um retorno de chamada (_callback_); e
 - Opções de configuração opcionais.
 
-**Aqui está um exemplo de como funciona:*
+**Aqui está um exemplo de como funciona:**
 
 ```js
 import { ref, watch } from 'vue'
@@ -285,7 +283,7 @@ watch(counter, (newValue, oldValue) => {
 
 Sempre que `counter` é modificado, por exemplo `counter.value = 5`, o `watch` irá disparar e executar o retorno de chamada (segundo argumento) que neste caso irá registrar `'O novo valor do contador é: 5'` em nosso console.
 
-**Abaixo está o equivalente da API de opções:**
+**Abaixo está o equivalente na API de Opções:**
 
 ```js
 export default {
@@ -302,29 +300,29 @@ export default {
 }
 ```
 
-Para mais detalhes sobre `watch`, consulte nosso [guia aprofundado]().
+Para mais detalhes sobre `watch`, consulte nosso [guia aprofundado](reactivity-computed-watchers.html#watch).
 
 **Vamos agora aplicá-lo ao nosso exemplo:**
 
 ```js
-// src/components/UserRepositories.vue função `setup`
+// função `setup` de src/components/UserRepositories.vue
 import { fetchUserRepositories } from '@/api/repositories'
 import { ref, onMounted, watch, toRefs } from 'vue'
 
 // in our component
 setup (props) {
-  // usa `toRefs` para criar uma referência reativa para a propriedade `user`
+  // usando `toRefs` para criar uma Referência Reativa para a propriedade `user`
   const { user } = toRefs(props)
 
   const repositories = ref([])
   const getUserRepositories = async () => {
-    // atualiza `props.user` para `user.value`, para acessar o valor de referência
+    // atualiza `props.user` para `user.value`, para acessar o valor da referência
     repositories.value = await fetchUserRepositories(user.value)
   }
 
   onMounted(getUserRepositories)
 
-  // define um observador na referência reativa para a propriedade `user`
+  // define um observador na Referência Reativa para a propriedade `user`
   watch(user, getUserRepositories)
 
   return {
@@ -336,11 +334,11 @@ setup (props) {
 
 Você provavelmente notou o uso de `toRefs` no topo de nosso `setup`. Isso é para garantir que nosso observador reaja às mudanças feitas na propriedade `user`.
 
-Com essas mudanças em vigor, acabamos de mover toda a primeira preocupação lógica para um único lugar. Agora podemos fazer o mesmo com a segunda preocupação - filtrar com base em `searchQuery`, desta vez com uma propriedade computada.
+Com essas mudanças em vigor, acabamos de mover toda a primeira preocupação lógica para um único lugar. Agora podemos fazer o mesmo com a segunda preocupação - filtrar com base em `searchQuery`, desta vez com um dado computado.
 
-### Propriedades `computed` independentes
+### Propriedades `computed` Independentes
 
-Semelhante a `ref` e `watch`, as propriedades `computed` também podem ser criadas fora de um componente Vue com a função `computed` importada do Vue. Vamos voltar ao nosso contra-exemplo:
+Semelhante a `ref` e `watch`, as dados computados também podem ser criados fora de um componente Vue com a função `computed` importada do Vue. Vamos voltar ao nosso contra-exemplo:
 
 ```js
 import { ref, computed } from 'vue'
@@ -353,29 +351,29 @@ console.log(counter.value) // 1
 console.log(twiceTheCounter.value) // 2
 ```
 
-Aqui, a função `computed` retorna uma **referência reativa** de somente leitura na saída do retorno da chamada "tipo getter", passado como o primeiro argumento para `computed`. Para acessar o atributo **value** da variável computada recém-criada, precisamos usar a propriedade `.value` assim como com `ref`.
+Aqui, a função `computed` retorna uma **Referência Reativa** de somente leitura na saída do retorno da chamada "estilo getter", passado como primeiro argumento para `computed`. Para acessar o atributo **value** da variável computada recém-criada, precisamos usar a propriedade `.value` assim como com `ref`.
 
 Vamos mover nossa funcionalidade de pesquisa para `setup`:
 
 ```js
-// src/components/UserRepositories.vue função `setup`
+// função `setup` de src/components/UserRepositories.vue
 import { fetchUserRepositories } from '@/api/repositories'
 import { ref, onMounted, watch, toRefs, computed } from 'vue'
 
 // no nosso componente
 setup (props) {
-  // usa `toRefs` para criar uma referência reativa para a propriedade `user`
+  // usando `toRefs` para criar uma Referência Reativa para a propriedade `user`
   const { user } = toRefs(props)
 
   const repositories = ref([])
   const getUserRepositories = async () => {
-    // atualiza `props.user` para `user.value`, para acessar o valor de referência
+    // atualiza `props.user` para `user.value`, para acessar o valor da referência
     repositories.value = await fetchUserRepositories(user.value)
   }
 
   onMounted(getUserRepositories)
 
-  // define um observador na referência reativa para a propriedade `user`
+  // define um observador na Referência Reativa para a propriedade `user`
   watch(user, getUserRepositories)
 
   const searchQuery = ref('')
@@ -530,4 +528,4 @@ export default {
 
 E nós terminamos!
 
-Lembre-se de que apenas arranhamos a superfície da API de Composição e o que ela nos permite fazer. Para saber mais sobre isso, consulte o guia detalhado.
+Tenha em mente que apenas arranhamos a superfície da API de Composição e o que ela nos permite fazer. Para saber mais sobre isso, consulte o guia detalhado.
