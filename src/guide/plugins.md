@@ -12,15 +12,15 @@ Não há escopo estritamente definido para um _plugin_, mas os cenários comuns 
 
 4. Adicionar alguns métodos de instância globais, anexando-os a `config.globalProperties`.
 
-5. Uma biblioteca com uma API própria, que ao mesmo tempo injeta alguma combinação dos anteriores. (Ex.: [vue-router](https://github.com/vuejs/vue-router)).
+5. Uma biblioteca que fornece uma API própria, que ao mesmo tempo injeta alguma combinação dos anteriores. (Ex.: [vue-router](https://github.com/vuejs/vue-router)).
 
 ## Escrevendo um Plugin
 
 Para entender melhor como criar seus próprios _plugins_ Vue.js, criaremos uma versão muito simplificada de um _plugin_ que exibe strings prontas para `i18n`.
 
-Sempre que este plugin é adicionado a uma aplicação, o método `install` será chamado se for um objeto. Se for uma `function`, a própria função será chamada. Em ambos os casos, ele receberá dois parâmetros - o objeto `app` resultante do `createApp` do Vue, e as opções passadas pelo usuário.
+Sempre que este _plugin_ for adicionado a uma aplicação, o método `install` será chamado se for um objeto. Se for uma `function`, a própria função será chamada. Em ambos os casos, ele receberá dois parâmetros - o objeto `app` resultante do `createApp` do Vue, e as opções passadas pelo usuário.
 
-Vamos começar configurando o objeto de _plugin_. Recomenda-se criá-lo em um arquivo separado e exportá-lo, conforme mostrado a seguir, para manter a lógica contida e separada.
+Vamos começar configurando o objeto do _plugin_. Recomenda-se criá-lo em um arquivo separado e exportá-lo, conforme mostrado a seguir, para manter a lógica contida e separada.
 
 ```js
 // plugins/i18n.js
@@ -75,9 +75,9 @@ export default {
 }
 ```
 
-Os usuários do `plugin` agora serão capazes de fazer `inject['i18n']` em seus componentes e acessar o objeto.
+Os usuários do _plugin_ agora serão capazes de fazer `inject['i18n']` em seus componentes e acessar o objeto.
 
-Além disso, como temos acesso ao objeto `app`, todos os outros recursos como o uso de `mixin` e `directive` estão disponíveis para o _plugin_. Para aprender mais sobre `createApp` e a instância do aplicativo, verifique a [documentação da Referência da API](/api/application-api.html).
+Além disso, como temos acesso ao objeto `app`, todos os outros recursos como o uso de `mixin` e `directive` estão disponíveis para o _plugin_. Para aprender mais sobre `createApp` e a instância do aplicativo, verifique a [documentação da API da Aplicação](/api/application-api.html).
 
 ```js
 // plugins/i18n.js
@@ -113,7 +113,7 @@ Depois que um aplicativo Vue foi inicializado com `createApp()`, você pode adic
 
 Usaremos o `i18nPlugin` que criamos na seção [Escrevendo um Plugin](#escrevendo-um-plugin) para fins de demonstração.
 
-O método `use()` recebe dois parâmetros. O primeiro é o `plugin` a ser instalado, neste caso `i18nPlugin`.
+O método `use()` recebe dois parâmetros. O primeiro é o _plugin_ a ser instalado, neste caso `i18nPlugin`.
 
 Ele também impede automaticamente que você use o mesmo _plugin_ mais de uma vez, portanto, chamá-lo várias vezes no mesmo _plugin_ instalará o _plugin_ apenas uma vez.
 
