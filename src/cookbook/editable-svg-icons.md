@@ -40,9 +40,9 @@ Vamos criar um componente de ícone base (`IconBase.vue`) que usa um `slot`.
 </template>
 ```
 
-Você pode usar essa base de ícones como está – a única coisa que você pode precisar atualizar é a e `viewBox` dependendo da `viewBox` dos ícones que for utilizar. Na base, vamos usar propriedades para `width`, `height`, `iconColor`, e `iconColor`, para que possam ser atualizados dinamicamente. O nome será usado tanto para o conteúdo do `<title>` como para o `id` para acessilibidade.
+Você pode usar esse ícone base como está – a única coisa que você pode precisar atualizar é a `viewBox` dependendo da `viewBox` dos ícones que for utilizar. Na base, vamos usar propriedades `width`, `height`, `iconColor` e `iconName`, para que possam ser atualizados dinamicamente. O nome será usado tanto para o conteúdo do `<title>` como para o `id` para acessibilidade.
 
-Nosso script ficará assim, teremos alguns valores padrão para que nosso ícone seja renderizado de forma consistente, a menos que declaremos o contrário: 
+Nosso *script* ficará assim, teremos alguns valores padrão para que nosso ícone seja renderizado de forma consistente, a menos que declaremos o contrário: 
 
 ```js
 export default {
@@ -69,7 +69,7 @@ export default {
 
 A propriedade `currentColor` , usada como padrão para o preenchimento, irá permitir ao ícone herdar a cor do texto que o rodeia. Também poderíamos passar uma cor diferente como `prop` se quisermos.
 
-Podemos usá-lo assim, com o único conteúdo de `IconWrite.vue` contendo os `path` dentro do ícone:
+Podemos usá-lo assim, bastando que o conteúdo do componente `IconWrite.vue` seja um conjunto de `path` referente ao desenho desejado:
 
 ```html
 <icon-base icon-name="write"><icon-write /></icon-base>
@@ -92,7 +92,7 @@ Agora, se quisermos fazer vários tamanhos para o ícone, podemos fazer isso fac
 
 ## Ícones Animáveis
 
-Manter os ícones como componentes é muito útil quando você deseja animá-los, especialmente em uma interação. Os SVGs embutidos (*inline*) têm o maior suporte para interação de qualquer método. Eis um exemplo básico de um ícone animado no evento `@click`:
+Manter os ícones como componentes é muito útil quando você deseja animá-los, especialmente em uma interação. Os SVGs embutidos (*inline*) têm maior suporte a interações, seja através de *script* ou de *style*. Eis um exemplo básico de um ícone animado no evento `@click`:
 
 ```html
 <template>
@@ -105,7 +105,7 @@ Manter os ícones como componentes é muito útil quando você deseja animá-los
     aria-labelledby="scissors"
     role="presentation"
   >
-    <title id="scissors" lang="en">Scissors Animated Icon</title>
+    <title id="scissors" lang="en">Ícone de Tesoura Animado</title>
     <path id="bk" fill="#fff" d="M0 0h100v100H0z" />
     <g ref="leftscissor">
       <path d="M..." />
@@ -143,15 +143,15 @@ export default {
 
 Estamos aplicando `refs` aos grupos de caminhos que precisamos mover e, como ambos os lados da tesoura devem mover-se em conjunto, criamos uma função que permite a reutilização em ambas as `refs`. O uso da biblioteca GreenSock ajuda a resolver questões de suporte às animações e problemas de `transform-origin` entre os navegadores.
 
-<p data-height="300" data-theme-id="0" data-slug-hash="dJRpgY" data-default-tab="result" data-user="Vue" data-embed-version="2" data-pen-title="Editable SVG Icon System: Animated icon" class="codepen">See the Pen <a href="https://codepen.io/team/Vue/pen/dJRpgY/">Editable SVG Icon System: Animated icon</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>) on <a href="https://codepen.io">CodePen</a>.</p><script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<p data-height="300" data-theme-id="0" data-slug-hash="dJRpgY" data-default-tab="result" data-user="Vue" data-embed-version="2" data-pen-title="Editable SVG Icon System: Animated icon" class="codepen">Veja o Exemplo <a href="https://codepen.io/team/Vue/pen/dJRpgY/">Sistema de Ícones SVG Editáveis: Ícone Animado</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>) no <a href="https://codepen.io">CodePen</a>.</p><script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-<p style="margin-top:-30px">Um resultado atingido facilmente! E fácil de se atualizar sempre que necessário.</p>
+Um resultado atingido facilmente! E fácil de se atualizar sempre que necessário.
 
 Pode ver mais exemplos de animações [neste repositório](https://github.com/sdras/vue-sample-svg-icons/)
 
 ## Notas Adicionais
 
-Os *designers* podem mudar de ideias. Ou podem ocorrer mudanças nos requisitos do produto. Manter todo o seu sistema de ícones baseados em componentes garante a possibilidade de atualizá-los todos, e os ter automaticamente aplicados em todo o sistema. Mesmo com o uso de uma ferramenta do tipo icon loader, algumas situações irão requerer que você recrie ou edite todos os SVG, para fazer alterações globais. O presente método pode ainda poupar-lhe tempo e dor.
+Os *designers* podem mudar de ideias. Ou podem ocorrer mudanças nos requisitos do produto. Manter a lógica para todo o sistema de ícones em um componente base garante a possibilidade de atualizá-los todos, e ter isso automaticamente propagado por todo o sistema. Mesmo com o uso de uma ferramenta do tipo *icon loader*, algumas situações irão requerer que você recrie ou edite todos os SVG, para fazer alterações globais. O presente método pode ainda poupar-lhe tempo e dor.
 
 ## Quando Evitar Este Padrão
 
