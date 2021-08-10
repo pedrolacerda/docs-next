@@ -48,4 +48,4 @@
   })
   ```
 
-- **Ver também:** [Componentes](../guide/component-basics.html)
+- **Ver também:** [Básico sobre Componentes](../guide/component-basics.html)
