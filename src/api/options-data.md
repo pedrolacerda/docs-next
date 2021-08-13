@@ -6,13 +6,13 @@
 
 - **Detalhes:**
 
-  A função que retorna um objeto de dados para a instância do componente. Em `data`, não recomendamos observar objetos com seu próprio comportamento com estado, como objetos de API do navegador e propriedades de protótipo. Uma boa ideia seria ter aqui apenas um objeto simples que representa os dados do componente.
+  A função que retorna um objeto de dados para a instância do componente. Em `data`, não recomendamos observar objetos com seu próprio comportamento com estado, como objetos de API do navegador e propriedades _prototype_. Uma boa ideia seria ter aqui apenas um objeto simples que representa os dados do componente.
 
   Uma vez observado, você não pode mais adicionar propriedades reativas ao objeto de dados raiz. Portanto, é recomendável declarar antecipadamente todas as propriedades reativas de nível raiz, antes da criação da instância.
 
-  Depois da instância ser criada, o objeto de dados original pode ser acessado como `vm.$data`. A instância do componente também faz proxy de todas as propriedades encontradas no objeto de dados, então `vm.a` será equivalente a `vm.$data.a`.
+  Depois da instância ser criada, o objeto de dados original pode ser acessado como `vm.$data`. A instância do componente também faz _proxy_ de todas as propriedades encontradas no objeto de dados, então `vm.a` será equivalente a `vm.$data.a`.
 
-  Propriedades que comecem com `_` ou `$` **não** será feito proxy na instância do componente porque eles podem entrar em conflito com as propriedades internas do Vue ou métodos de API. Você terá que acessá-las como `vm.$data._property`.
+  Propriedades que comecem com `_` ou `$` **não** terão seu _proxy_ feito na instância do componente porque eles podem entrar em conflito com as propriedades internas do Vue ou métodos de API. Você terá que acessá-las como `vm.$data._property`.
 
 - **Exemplo:**
 
@@ -48,13 +48,13 @@
 
   Com a sintaxe baseada em Object, você pode usar as seguintes opções:
 
-  - `type`: pode ser um dos seguintes construtores nativos: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, qualquer função construtora personalizada ou um array delas. Irá verificar se um prop tem um determinado tipo, e irá lançar um aviso se não tiver. [Mais informação](../guide/component-props.html#prop-types) em tipos de props.
+  - `type`: pode ser um dos seguintes construtores nativos: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, qualquer função construtora personalizada ou um array delas. Irá verificar se um prop tem um determinado tipo, e irá lançar um aviso se não tiver. [Mais informação](../guide/component-props.html#tipos-de-propriedades) em tipos de props.
   - `default`: `any`
     Especifica um valor padrão para o prop. Se o prop não é passado, este valor será usado em seu lugar. Valores padrão de tipo Object ou Array devem ser retornados de uma função *factory*.
   - `required`: `Boolean`
     Define se o prop é necessário. Em ambiente de não-produção, um aviso de console será lançado se esse valor for verdadeiro e o prop não for passado.
   - `validator`: `Function`
-    Função validadora personalizada que usa o valor do prop como único argumento. Exceto em ambiente de produção, um aviso de console será lançado se essa função retornar um valor falso (ou seja, a validação falhar). Pode ler mais sobre validação de prop [aqui](../guide/component-props.html#prop-validation).
+    Função validadora personalizada que usa o valor do prop como único argumento. Exceto em ambiente de produção, um aviso de console será lançado se essa função retornar um valor falso (ou seja, a validação falhar). Pode ler mais sobre validação de prop [aqui](../guide/component-props.html#validacao-de-propriedades).
 
 - **Exemplo:**
 
@@ -92,9 +92,9 @@
 
 - **Detalhes:**
 
-  Propriedades computadas a serem combinadas na instância do componente. Todos os getters e setters tem o seu contexto `this` vinculado automaticamente à instância do componente.
+  Dados computados a serem combinados na instância do componente. Todos os getters e setters tem o seu contexto `this` vinculado automaticamente à instância do componente.
 
-  Note que se usar *arrow function* com uma propriedade computada, `this` não será a instância do componente, mas você poderá ter acesso a instância através do primeiro argumento da função:
+  Note que se usar *arrow function* com um dado computado, `this` não será a instância do componente, mas você poderá ter acesso a instância através do primeiro argumento da função:
 
   ```js
   computed: {
@@ -102,7 +102,7 @@
   }
   ```
 
-  Propriedades computadas são cacheadas, e apenas recalculados quando dependências reativas mudam. Note que se uma certa dependência está fora do escopo da instância (ex.: não reativa), o dado computado **não** será atualizado.
+  Dados computados são cacheados, e apenas re-computados quando dependências reativas mudam. Note que se uma certa dependência está fora do escopo da instância (ex.: não reativa), o dado computado **não** será atualizado.
 
 - **Exemplo:**
 
@@ -145,8 +145,8 @@
 
   Métodos a serem combinados na instância do componente. Você pode acessar esses métodos diretamente na instância VM ou usá-los em expressões de diretiva. Todos os métodos terão o seu contexto `this` automaticamente vinculado à instância do componente.
 
-  :::tip Note
-  Note que **você não deve usar *arrow function* para definir um método** (ex. `plus: () => this.a++`). A razão é que *arrow functions* fazem bind do contexto pai, então `this` não será a instância Vue como você está esperando e `this.a` será undefined.
+  ::: tip Nota
+  Note que **você não deve usar *arrow function* para definir um método** (ex. `plus: () => this.a++`). A razão é que *arrow functions* fazem *bind* do contexto pai, então `this` não será a instância Vue como você está esperando e `this.a` será `undefined`.
   :::
 
 - **Exemplo:**
@@ -177,7 +177,7 @@
 
 - **Detalhes:**
 
-  Um objeto onde as chaves são expressões para observar e os valores são os callbacks correspondentes. O valor também pode ser uma string de um nome de método ou um Object que contém opções adicionais. A instância do componente chamará `$watch()` para cada entrada no objeto na inicialização. Veja [$watch](instance-methods.html#watch) para mais informações sobre as opções `deep`, `immediate` e `flush`.
+  Um objeto onde as chaves são expressões para observar e os valores são os *callbacks* correspondentes. O valor também pode ser uma string de um nome de método ou um Object que contém opções adicionais. A instância do componente chamará `$watch()` para cada entrada no objeto na inicialização. Veja [$watch](instance-methods.html#watch) para mais informações sobre as opções `deep`, `immediate` e `flush`.
 
 - **Exemplo:**
 
@@ -200,8 +200,8 @@
       },
       // nome do método como string
       b: 'someMethod',
-      // o callback será chamado sempre que qualquer uma das propriedades do objeto observado mudar,
-      // independentemente de sua profundidade aninhada
+      // o callback será chamado na alteração das propriedades do objeto
+      // observado, independentemente de sua profundidade aninhada
       c: {
         handler(val, oldVal) {
           console.log('c mudou')
@@ -215,7 +215,7 @@
         },
         immediate: true
       },
-      // você pode passar uma array de callbacks, eles serão chamados um por um
+      // você pode passar um array de callbacks, eles serão chamados um por um
       f: [
         'handle1',
         function handle2(val, oldVal) {
@@ -244,11 +244,11 @@
   vm.a = 3 // => new: 3, old: 1
   ```
 
-  ::: tip Note
-  Note que _você não deve usar arrow function para definir um observador_ (ex. `searchQuery: newValue => this.updateAutocomplete(newValue)`). A razão é que *arrow functions* fazem bind do contexto pai, então `this` não será a instância do componente como você espera e `this.updateAutocomplete` será undefined.
+  ::: tip Nota
+  Note que _você não deve usar arrow function para definir um observador_ (ex. `searchQuery: newValue => this.updateAutocomplete(newValue)`). A razão é que *arrow functions* fazem *bind* do contexto pai, então `this` não será a instância do componente como você espera e `this.updateAutocomplete` será `undefined`.
   :::
 
-- **Ver também:** [Observadores](../guide/computed.html#watchers)
+- **Ver também:** [Observadores](../guide/computed.html#observadores)
 
 ## emits
 
@@ -258,7 +258,7 @@
 
   Uma lista/*hash* de eventos personalizados pode ser emitida do componente. Possui tanto uma sintaxe simples baseada em Array como, alternativamente, uma sintaxe baseada em Object que permite configurar uma validação de evento.
 
-  Na sintaxe baseada em Object, o valor de cada propriedade pode ser `null` ou uma função validadora. A função de validação receberá os argumentos adicionais passados para a chamada `$emit`. Por exemplo, se `this.$emit('foo', 1)` for chamado, o validador correspondente para `foo` receberá o argumento `1`. A função validadora deve retornar um booleano para indicar se os argumentos do evento são válidos.
+  Na sintaxe baseada em Object, o valor de cada propriedade pode ser `null` ou uma função de validação. A função de validação receberá os argumentos adicionais passados para a chamada `$emit`. Por exemplo, se `this.$emit('foo', 1)` for chamado, o validador correspondente para `foo` receberá o argumento `1`. A função de validação deve retornar um booleano para indicar se os argumentos do evento são válidos.
 
 - **Uso:**
 
@@ -284,7 +284,7 @@
         if (payload.email && payload.password) {
           return true
         } else {
-          console.warn(`Evento de envio payload inválido!`)
+          console.warn(`Payload do evento 'submit' inválido!`)
           return false
         }
       }
@@ -292,8 +292,8 @@
   })
   ```
 
-  ::: tip Note
+  ::: tip Nota
   Os eventos listados na opção `emits` **não** serão herdados pelo elemento raiz do componente e também serão excluídos da propriedade `$attrs`.
   :::
 
-* **Ver também:** [Herança de Atributo](../guide/component-attrs.html#attribute-inheritance)
+* **Ver também:** [Herança de Atributos](../guide/component-attrs.html#heranca-de-atributos)
