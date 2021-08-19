@@ -6,7 +6,7 @@
 
 - **Detalhes:**
 
-  Atualiza o [textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) do elemento. Se você precisa atualizar a parte de `textContent`, você deve usar [interpolações mustache](/guide/template-syntax.html#text).
+  Atualiza o [textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) do elemento. Se você precisa atualizar a parte de `textContent`, você deve usar [interpolações mustache](/guide/template-syntax.html#texto).
 
 - **Exemplo:**
 
@@ -16,7 +16,7 @@
   <span>{{msg}}</span>
   ```
 
-- **Ver também:** [Sintaxe de Templates - Interpolações](../guide/template-syntax.html#text)
+- **Ver também:** [Sintaxe de Templates - Interpolações](../guide/template-syntax.html#texto)
 
 ## v-html
 
@@ -24,13 +24,13 @@
 
 - **Detalhes:**
 
-  Atualiza o [innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) do elemento. **Perceba que os conteúdos são inseridos como HTML puro - eles não serão compilados como templates Vue**. Se você se encontra tentando compor templates usando `v-html`, tente repensar a solução usando componentes em vez disso.
+  Atualiza o [innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) do elemento. **Perceba que os conteúdos são inseridos como HTML puro - eles não serão compilados como templates Vue**. Se você se encontra tentando compor *templates* usando `v-html`, tente repensar a solução usando componentes em vez disso.
 
-  ::: warning
-  Renderizar dinamicamente HTML arbitrário em seu website pode ser muito perigoso porque isso pode facilmente levar a [ataques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Apenas use `v-html` em conteúdo confiável e **nunca** em conteúdo fornecido por usuário.
+  ::: warning AVISO
+  Renderizar dinamicamente HTML arbitrário em seu website pode ser muito perigoso porque isso pode facilmente levar a [ataques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Apenas use `v-html` em conteúdo confiável e **nunca** em conteúdo fornecido pelo usuário.
   :::
 
-  Em [Componentes Single File](../guide/single-file-component.html), estilos `scoped` não serão aplicados a conteúdos `v-html`, pois tal HTML não é processado pelo compilador de templates do Vue. Se você quer atingir conteúdo `v-html` com CSS com escopo, é possível utilizar [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) ou um elemento global adicional `<style>` , com uma estratégia manual de escopo como BEM.
+  Em [Componentes Single-File](../guide/single-file-component.html), estilos `scoped` não serão aplicados a conteúdos `v-html`, pois tal HTML não é processado pelo compilador de *templates* do Vue. Se você quer atingir o conteúdo de `v-html` com CSS `scoped`, é possível utilizar [CSS Modules](https://vue-loader.vuejs.org/en/features/css-modules.html) ou um adicional elemento `<style>` global, com uma estratégia manual de escopo como BEM.
 
 - **Exemplo:**
 
@@ -62,7 +62,7 @@
 
   Esta diretiva dispara transições quando sua condição muda.
 
-  Quando usada em conjunto com `v-if`, `v-for` tem uma prioridade maior. Não recomendamos o uso dessas duas diretivas juntas em um elemento - consulte a [guia de renderização de listas](../guide/list.html#v-for-with-v-if) para obter detalhes.
+  Quando usados juntos, `v-if` tem uma prioridade maior que `v-for`. Não recomendamos o uso dessas duas diretivas juntas em um elemento - consulte o [guia de renderização de listas](../guide/list.html#utilizando-v-if-com-v-for) para obter detalhes.
 
 - **Ver também:** [Renderização Condicional - v-if](../guide/conditional.html#v-if)
 
@@ -74,7 +74,7 @@
 
 - **Uso:**
 
-  Significa o bloco "senão" de uma cadeia `v-if` ou `v-if`/`v-else-if`.
+  Denota o "bloco senão" de um `v-if` ou cadeia de `v-if`/`v-else-if`.
 
   ```html
   <div v-if="Math.random() > 0.5">
@@ -95,7 +95,7 @@
 
 - **Uso:**
 
-  Significa o bloco "senão caso" para `v-if`. Pode ser encadeado.
+  Denota o "bloco senão se" para `v-if`. Pode ser encadeado.
 
   ```html
   <div v-if="type === 'A'">
@@ -108,7 +108,7 @@
     C
   </div>
   <div v-else>
-    Não A/B/C
+    Não é A/B/C
   </div>
   ```
 
@@ -120,7 +120,7 @@
 
 - **Uso:**
 
-  Renderiza o elemento ou bloco de template múltiplas vezes baseado nos dados de origem (*source data*). O valor da diretiva deve usar a sintaxe especial `alias in expression` para fornecer um alias para o elemento atual ser iterado em:
+  Renderiza o elemento ou bloco de *template* múltiplas vezes baseado nos dados de origem (*source data*). O valor da diretiva deve usar a sintaxe especial `alias in expression` para fornecer um apelido para o elemento atual sendo iterado:
 
   ```html
   <div v-for="item in items">
@@ -128,7 +128,7 @@
   </div>
   ```
 
-  Alternativamente, você também pode especificar um alias para o índice (ou a chave, se usada em um Objeto):
+  Alternativamente, você também pode especificar um apelido para o índice (ou a chave, se usada em um Objeto):
 
   ```html
   <div v-for="(item, index) in items"></div>
@@ -144,9 +144,9 @@
   </div>
   ```
 
-  `v-for` também pode trabalhar em valores que implementam o [Protocolo Iterável](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol), incluindo `Map` e `Set` nativos.
+  `v-for` também pode funcionar em valores que implementam o [Protocolo Iterável](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol), incluindo `Map` e `Set` nativos.
 
-  O uso detalhado de `v-for` é explicado na seção de Guia com *link* abaixo.
+  O uso detalhado de `v-for` é explicado na seção do guia com *link* abaixo.
 
 - **Ver também:**
   - [Renderização de Listas](../guide/list.html)
@@ -165,7 +165,7 @@
   - `.prevent` - chama `event.preventDefault()`.
   - `.capture` - adiciona escuta de eventos em modo de captura.
   - `.self` - aciona o manipulador somente se o evento foi disparado a partir deste elemento.
-  - `.{keyAlias}` - aciona o manipulador apenas em certas chaves.
+  - `.{keyAlias}` - aciona o manipulador apenas em certas teclas.
   - `.once` - aciona o manipulador somente uma vez.
   - `.left` - aciona o manipulador somente para eventos do botão esquerdo do mouse.
   - `.right` - aciona o manipulador somente para eventos do botão direito do mouse.
@@ -176,16 +176,16 @@
 
   Atribui uma escuta de evento ao elemento. O tipo de evento é indicado pelo argumento. A expressão pode ser um nome de método, uma declaração *inline*, ou omitida quando há modificadores presentes.
 
-  Quando usada em um elemento normal, escuta somente [**eventos nativos de DOM**](https://developer.mozilla.org/en-US/docs/Web/Events). Quando usada em um componente de elemento personalizado, escuta **eventos personalizados** emitidos naquele componente-filho.
+  Quando usado em um elemento normal, escuta somente [**eventos nativos do DOM**](https://developer.mozilla.org/en-US/docs/Web/Events). Quando usado em um componente de elemento personalizado, escuta **eventos personalizados** emitidos naquele componente-filho.
 
-  Quando escutando a eventos nativos de DOM, o método recebe o evento nativo como argumento único. Quando usada declaração *inline*, ela tem acesso à propriedade especial `$event`: `v-on:click="handle('ok', $event)"`.
+  Quando escutando a eventos nativos do DOM, o método recebe o evento nativo como argumento único. Quando usada declaração *inline*, ela tem acesso à propriedade especial `$event`: `v-on:click="handle('ok', $event)"`.
 
-  `v-on` também oferece suporte à vinculação a um objeto de pares de evento/ouvinte sem um argumento. Observe que ao usar a sintaxe do objeto, ela não oferece suporte a nenhum modificador.
+  `v-on` também oferece suporte à vinculação a um objeto de pares evento/ouvinte sem um argumento. Observe que ao usar a sintaxe de objeto, ela não oferece suporte a nenhum modificador.
 
 - **Exemplo:**
 
   ```html
-  <!-- manipulador de método -->
+  <!-- método manipulador -->
   <button v-on:click="doThis"></button>
 
   <!-- evento dinâmico -->
@@ -200,19 +200,19 @@
   <!-- forma abreviada para o evento dinâmico -->
   <button @[event]="doThis"></button>
 
-  <!-- para a propagação  -->
+  <!-- para a propagação -->
   <button @click.stop="doThis"></button>
 
-  <!-- previne padrão -->
+  <!-- previne o padrão -->
   <button @click.prevent="doThis"></button>
 
-  <!-- previne padrão sem expressão -->
+  <!-- previne o padrão sem expressão -->
   <form @submit.prevent></form>
 
-  <!-- modificador em cadeia -->
+  <!-- modificadores encadeados -->
   <button @click.stop.prevent="doThis"></button>
 
-  <!-- modificador de chave usando keyAlias -->
+  <!-- modificador de tecla usando keyAlias -->
   <input @keyup.enter="onEnter" />
 
   <!-- o evento de clique será acionado somente uma vez -->
@@ -233,34 +233,34 @@
 
 - **Ver também:**
   - [Manipulação de Eventos](../guide/events.html)
-  - [Componentes - Eventos Personalizados](../guide/component-basics.html#listening-to-child-components-events)
+  - [Componentes - Eventos Personalizados](../guide/component-basics.html#escutando-eventos-dos-filhos)
 
 ## v-bind
 
 - **Forma abreviada:** `:`
 
-- **Espera:** `any (with argument) | Object (without argument)`
+- **Espera:** `any (com argumento) | Object (sem argumento)`
 
 - **Argumento:** `attrOrProp (opcional)`
 
 - **Modificadores:**
 
-  - `.camel` -  transforma o nome do atributo de kebab-case para camelCase.
+  - `.camel` - transforma o nome do atributo de *kebab-case* para *camelCase*.
 
 - **Uso:**
 
-  Dinamicamente faz a interligação de um ou mais atributos ou propriedades de um componente a uma expressão.
+  Dinamicamente vincula um ou mais atributos ou propriedades de um componente a uma expressão.
 
-  Quando usado para o vínculo de atributos `class` ou `style`, suporta tipos de valores adicionais como Array ou Objects. Veja na seção do Guia abaixo para mais detalhes.
+  Quando usado para o vínculo de atributos `class` ou `style`, suporta tipos de valores adicionais como Array ou Objects. Veja na seção do guia com *link* abaixo para mais detalhes.
 
-  Quando usado para vincular uma propriedade, a propriedade deve ser devidamente declarada no elemento-filho.
+  Quando usado para vincular uma propriedade, a propriedade deve estar devidamente declarada no elemento-filho.
 
-  Quando usado sem argumentos, pode ser utilizado para vincular em um objeto contendo pares nome-valor. Perceba que, neste modo,`class` e `style` não suportam Array ou Objects.
+  Quando usado sem argumento, pode ser utilizado para vincular em um objeto contendo pares nome-valor. Perceba que, neste modo,`class` e `style` não suportam Array ou Objects.
 
 - **Exemplo:**
 
   ```html
-  <!-- interligando a um atributo -->
+  <!-- vinculando a um atributo -->
   <img v-bind:src="imageSrc" />
 
   <!-- nome de atributo dinâmico -->
@@ -275,19 +275,18 @@
   <!-- com concatenação de string inline -->
   <img :src="'/path/to/images/' + fileName" />
 
-  <!-- interligando classes -->
+  <!-- vinculando classes -->
   <div :class="{ red: isRed }"></div>
   <div :class="[classA, classB]"></div>
   <div :class="[classA, { classB: isB, classC: isC }]">
-
-    <!-- interligando estilos -->
+    <!-- vinculando estilos -->
     <div :style="{ fontSize: size + 'px' }"></div>
     <div :style="[styleObjectA, styleObjectB]"></div>
 
-    <!-- interligando um objeto com atributos -->
+    <!-- vinculando um objeto com atributos -->
     <div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
 
-    <!-- interligando propriedade. "prop" deve ser declarado em my-component -->
+    <!-- vinculando propriedade. "prop" deve estar declarado em my-component -->
     <my-component :prop="someThing"></my-component>
 
     <!-- transmite todas as props do pai em comum com o componente-filho -->
@@ -295,7 +294,6 @@
 
     <!-- XLink -->
     <svg><a :xlink:special="foo"></a></svg>
-
   </div>
   ```
 
@@ -305,15 +303,15 @@
   <svg :view-box.camel="viewBox"></svg>
   ```
 
-  `.camel`  não é necessário se você está usando *templates* baseados em String ou compilando com `vue-loader`/`vueify`.
+  `.camel` não é necessário se você está usando *templates* baseados em String ou compilando com `vue-loader`/`vueify`.
 
 - **Ver também:**
   - [Interligações em Classes e Estilos](../guide/class-and-style.html)
-  - [Componentes - Propriedades](../guide/component-basics.html#passing-data-to-child-components-with-props)
+  - [Componentes - Propriedades](../guide/component-basics.html#passando-dados-aos-filhos-com-propriedades)
 
 ## v-model
 
-- **Espera:** varia baseado no valor do elemento de input de formulário ou saída de componentes
+- **Espera:** varia baseado no valor dos elementos de input de formulário ou *output* de componentes
 
 - **Limitado a:**
 
@@ -325,33 +323,33 @@
 - **Modificadores:**
 
   - [`.lazy`](../guide/forms.html#lazy) - escuta por eventos `change` ao invés de `input`
-  - [`.number`](../guide/forms.html#number) - faz a conversão da String informada para números
-  - [`.trim`](../guide/forms.html#trim) - faz trim dos dados informados
+  - [`.number`](../guide/forms.html#number) - converte a String do input válida para números
+  - [`.trim`](../guide/forms.html#trim) - faz *trim* dos dados do input
 
 - **Uso:**
 
-  Cria uma interligação de mão dupla (*two-way binding*) em um elemento de entrada (*input*) de formulário ou componente. Para uso detalhado e outras observações, veja o *link* abaixo para a seção do Guia.
+  Cria um vínculo de mão dupla (*two-way binding*) em um elemento input de formulário ou componente. Para uso detalhado e outras observações, veja o *link* abaixo para a seção do Guia.
 
 - **Ver também:**
   - [Interligações em Formulários](../guide/forms.html)
-  - [Componentes - Componentes de Formulários usando Eventos Personalizados](../guide/component-custom-events.html#v-model-arguments)
+  - [Componentes - Componentes de Formulários usando Eventos Personalizados](../guide/component-custom-events.html#argumentos-do-v-model)
 
 ## v-slot
 
 - **Forma abreviada:** `#`
 
-- **Espera:** expressão JavaScript que seja válida na posição de um argumento de função (aceita desestruturação em [ambientes suportados](../guide/component-slots.html#destructuring-slot-props)). Opcional - somente necessário se estiver esperando que propriedades sejam passadas ao *slot*.
+- **Espera:** expressão JavaScript que seja válida na posição de um argumento de função (aceita desestruturação em [ambientes suportados](../guide/component-slots.html#desestruturando-props-do-slot)). Opcional - somente necessário se estiver esperando que propriedades sejam passadas ao *slot*.
 
-- **Argumento:** nome de *slot* (opcional, o valor padrão é `default`)
+- **Argumento:** nome do *slot* (opcional, o valor padrão é `default`)
 
 - **Limitado a:**
 
   - `<template>`
-  - [componentes](../guide/component-slots.html#abbreviated-syntax-for-lone-default-slots) (para um único *slot* padrão com propriedades)
+  - [componentes](../guide/component-slots.html#sintaxe-abreviada-para-slot-unico-e-default) (para um único *slot* padrão com propriedades)
 
 - **Uso:**
 
-  Denotar *slots* ou *slots* nomeados que esperam receber propriedades.
+  Denote *slots* nomeados ou *slots* que esperam receber propriedades.
 
 - **Exemplo:**
 
@@ -359,15 +357,15 @@
   <!-- Slots nomeados -->
   <base-layout>
     <template v-slot:header>
-      Header content
+      Conteúdo do Header
     </template>
 
     <template v-slot:default>
-      Default slot content
+      Conteúdo do slot Default
     </template>
 
     <template v-slot:footer>
-      Footer content
+      Conteúdo do Footer
     </template>
   </base-layout>
 
@@ -397,7 +395,7 @@
 
 - **Uso:**
 
-  Pula a compilação para esse elemento e todos seus filhos. Você pode usar isso para mostrar tags mustache sem conversão (*raw*). Pular uma grande quantidade de nós sem diretivas pode acelerar a compilação.
+  Pula a compilação para esse elemento e todos seus filhos. Você pode usar isso para mostrar tags mustache sem conversão (*raw*). Pular uma grande quantidade de nós sem diretivas também pode acelerar a compilação.
 
 - **Exemplo:**
 
@@ -411,7 +409,7 @@
 
 - **Uso:**
 
-  Essa diretiva permanecerá no elemento até que a instância associada de Vue termine de compilar. Ao ser combinada com regras CSS como `[v-cloak] { display: none }`, essa diretiva pode ser usada para esconder interligações mustache não-compiladas até que a instância de Vue esteja pronta.
+  Essa diretiva permanecerá no elemento até que a instância de componente associada termine de compilar. Ao ser combinada com regras CSS como `[v-cloak] { display: none }`, essa diretiva pode ser usada para esconder interligações mustache não-compiladas até que a instância do componente esteja pronta.
 
 - **Exemplo:**
 
@@ -454,7 +452,7 @@
   ```
 
 - **Ver também:**
-  - [Sintaxe de Templates - Interpolações](../guide/template-syntax.html#text)
+  - [Sintaxe de Templates - Interpolações](../guide/template-syntax.html#texto)
 
 ## v-is
 
@@ -462,9 +460,9 @@
 
 - **Espera:** string literal
 
-- **Limitado a:**  elementos HTML nativos
+- **Limitado a:** elementos HTML nativos
 
-- **Uso:** Ao usar modelos no DOM, o modelo está sujeito às regras de análise de HTML nativo. Alguns elementos HTML, como `<ul>`, `<ol>`, `<table>` e `<select>` têm restrições sobre quais elementos podem aparecer dentro deles, e alguns elementos como `<li>`, `<tr>`, e `<option>` só podem aparecer dentro de alguns determinados elementos. Como solução alternativa, podemos usar a diretiva `v-is` nestes elementos:
+- **Uso:** Ao usar *templates* no DOM, o *template* está sujeito às regras de análise nativas de HTML. Alguns elementos HTML, como `<ul>`, `<ol>`, `<table>` e `<select>` têm restrições sobre quais elementos podem aparecer dentro deles, e alguns elementos como `<li>`, `<tr>`, e `<option>` só podem aparecer dentro de alguns determinados elementos. Como solução alternativa, podemos usar a diretiva `v-is` nestes elementos:
 
 ```html
 <table>
@@ -472,8 +470,8 @@
 </table>
 ```
 
-:::warning
-`v-is` funciona como uma ligação dinâmica 2.x `:is` - então, para renderizar um componente por seu nome registrado, seu valor deve ser um string literal de JavaScript:
+:::warning AVISO
+`v-is` funciona como o vínculo dinâmico `:is` da v2.x - então, para renderizar um componente por seu nome registrado, seu valor deve ser um string literal de JavaScript:
 
 ```html
 <!-- Incorreto, nada será renderizado -->
