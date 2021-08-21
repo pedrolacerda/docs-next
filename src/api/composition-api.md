@@ -1,10 +1,10 @@
 # API de Composição
 
-> Esta seção usa a sintaxe  de [Componentes Single File](../guide/single-file-component.html) como exemplos de códigos
+> Esta seção usa a sintaxe de [Componentes Single-File](../guide/single-file-component.html) como exemplos de códigos
 
 ## `setup`
 
-Uma opção de componente que é executado **antes** do componente ser criado, uma vez que as `props` são resolvidas, e serve como um ponto de entrada para *API* de composição
+Uma opção de componente que é executada **antes** do componente ser criado, uma vez que as `props` são resolvidas, e serve como um ponto de entrada para a *API* de composição
 
 - **Argumentos:**
 
@@ -33,7 +33,7 @@ Para obter a inferência de tipos para os argumentos passados para o `setup()`, 
 
 - **Exemplo**
 
-  Com o template:
+  Com o *template*:
 
   ```vue-html
   <!-- MyBook.vue -->
@@ -47,7 +47,7 @@ Para obter a inferência de tipos para os argumentos passados para o `setup()`, 
     export default {
       setup() {
         const readersNumber = ref(0)
-        const book = reactive({ title: 'Vue 3: o guia.' })
+        const book = reactive({ title: 'Guia do Vue 3' })
 
         // Expõe para o template
         return {
@@ -69,19 +69,18 @@ Para obter a inferência de tipos para os argumentos passados para o `setup()`, 
   export default {
     setup() {
       const readersNumber = ref(0)
-      const book = reactive({ title: 'Vue 3 O Guia' })
-      // Observe que precisamos expor explicitamente o valor de *ref* aqui.
+      const book = reactive({ title: 'Guia do Vue 3' })
+      // Observe que precisamos expor explicitamente o valor do "ref" aqui.
       return () => h('div', [readersNumber.value, book.title])
     }
   }
   ```
 
-- **Veja também**: [API de Composição `setup`](../guide/composition-api-setup.html)
+- **Veja também**: [`setup` da API de Composição](../guide/composition-api-setup.html)
 
-## Ciclos de vida
+## Gatilhos de Ciclo de Vida
 
-<!-- Lifecycle hooks can be registered with directly-imported `onX` functions: -->
-Os gatilhos de ciclos de vida podem ser registrados importando diretamente as funções `onX`:
+Os gatilhos de ciclo de vida podem ser registrados com funções `onX` importadas diretamente:
 
 ```js
 import { onMounted, onUpdated, onUnmounted } from 'vue'
@@ -101,13 +100,11 @@ const MyComponent = {
 }
 ```
 
-Essas funções de registro de ciclo de vida somente podem ser usadas  de forma síncrona durante o [`setup`](#setup), já que eles dependem do estado global para localizar a instância ativa atual (A instância do componente cujo o `setup()` esta chamando agora). Chamá-los sem uma instância ativa vai resultar em um erro.
+Essas funções de registro de gatilhos de ciclo de vida somente podem ser usadas de forma síncrona durante o [`setup()`](#setup), já que elas dependem do estado global para localizar a instância ativa atual (a instância do componente onde o `setup()` está sendo chamado agora). Chamá-los sem uma instância ativa resultará em um erro.
 
+O contexto da instância do componente também é definido durante a execução síncrona dos gatilhos de ciclo de vida. Como resultado, os observadores e os dados computados criados de forma síncrona dentro dos gatilhos de ciclo de vida também são destruídos automaticamente quando o componente é desmontado.
 
-O contexto da instância também é definido durante a execução síncrona dos gatilhos de ciclo de vida.
-Como resultado, os observadores e os dados computados criados de forma síncrona dentro dos gatilhos de ciclo de vida também são desativados quando o componente é desmontado.
-
-- **Mapeamento dos ciclos de vida entre a API de opções e API de composição**
+- **Mapeamento das Opções de Ciclo de Vida entre a API de Opções e API de Composição**
   - ~~`beforeCreate`~~ -> use `setup()`
   - ~~`created`~~ -> use `setup()`
   - `beforeMount` -> `onBeforeMount`
@@ -120,11 +117,11 @@ Como resultado, os observadores e os dados computados criados de forma síncrona
   - `renderTracked` -> `onRenderTracked`
   - `renderTriggered` -> `onRenderTriggered`
 
-- **Veja também**: [Gatilhos de ciclo de vida da API de composição](../guide/composition-api-lifecycle-hooks.html)
+- **Veja também**: [Gatilhos de ciclo de vida da API de Composição](../guide/composition-api-lifecycle-hooks.html)
 
-## Provide / Inject
+## Prover / Injetar
 
-`provide` e `inject` ativam a injeção de dependência. Ambos só podem ser chamados durante o [`setup()`](#setup) com a instância atual ativa.
+`provide` e `inject` ativam a injeção de dependência. Ambos só podem ser chamados durante o [`setup()`](#setup) com uma instância atual ativa.
 
 - **Tipagem**:
 
@@ -133,37 +130,37 @@ interface InjectionKey<T> extends Symbol {}
 
 function provide<T>(key: InjectionKey<T> | string, value: T): void
 
-// Sem o valor padrão
+// Sem valor padrão
 function inject<T>(key: InjectionKey<T> | string): T | undefined
-// Com o valor padrão
+// Com valor padrão
 function inject<T>(key: InjectionKey<T> | string, defaultValue: T): T
 ```
 
-O Vue fornece uma interface `InjectionKey` que é um tipo genérico que estende de `Symbol`. Isso pode ser usado para sincronizar  o tipo do valor injetado entre o fornecedor e consumidor:
+O Vue fornece uma interface `InjectionKey` que é um tipo genérico que estende de `Symbol`. Isso pode ser usado para sincronizar o tipo do valor injetado entre o provedor e consumidor:
 
 ```ts
 import { InjectionKey, provide, inject } from 'vue'
 
 const key: InjectionKey<string> = Symbol()
 
-provide(key, 'foo') // Fornecer um valor diferente de string resultará em um erro.
+provide(key, 'foo') // Prover um valor que não seja string resultará em um erro.
 
-const foo = inject(key) // type of foo: string | undefined
+const foo = inject(key) // tipo de foo: string | undefined
 ```
 
-Se estiver usando chaves do tipo *string* ou *symbols* não tipados, o tipo do valor injetado precisará ser declarado explicitamente:
+Se estiver usando chaves do tipo String ou Symbols não tipados, o tipo do valor injetado precisará ser declarado explicitamente:
 
 ```ts
 const foo = inject<string>('foo') // string | undefined
 ```
 
 - **Veja também**:
-  - [Provide / Inject](../guide/component-provide-inject.html)
-  - [API de Composição Provide / Inject](../guide/composition-api-provide-inject.html)
+  - [Prover e Injetar Dados](../guide/component-provide-inject.html)
+  - [Prover e Injetar Dados na API de Composição](../guide/composition-api-provide-inject.html)
 
 ## `getCurrentInstance`
 
-O `getCurrentInstance` permite acesso a uma instância de componente interno, útil para usos mais avançados ou para criadores de bibliotecas.
+`getCurrentInstance` permite acesso a uma instância interna do componente, útil para usos mais avançados ou para criadores de bibliotecas.
 
 ```ts
 import { getCurrentInstance } from 'vue'
@@ -172,14 +169,14 @@ const MyComponent = {
   setup() {
     const internalInstance = getCurrentInstance()
 
-    internalInstance.appContext.config.globalProperties // acesso para globalProperties
+    internalInstance.appContext.config.globalProperties // acesso a globalProperties
   }
 }
 ```
 
-`getCurrentInstance` **apenas** funciona durante o [setup](#setup) ou [Gatilhos de Ciclo de vida](#lifecycle-hooks)
+`getCurrentInstance` funciona **apenas** durante o [setup](#setup) ou [Gatilhos de Ciclo de vida](#gatilhos-de-ciclo-de-vida)
 
-> Quando usado fora do [setup](#setup) ou [Gatilhos de Ciclo de vida](#lifecycle-hooks), chame o `getCurrentInstance()` no `setup` e use a instância em seu lugar.
+> Quando usado fora do [setup](#setup) ou [Gatilhos de Ciclo de vida](#gatilhos-de-ciclo-de-vida), chame o `getCurrentInstance()` no `setup` e use a instância em seu lugar.
 
 ```ts
 const MyComponent = {
