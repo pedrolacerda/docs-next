@@ -1,6 +1,6 @@
 ---
 badges:
-  - Urgente
+  - breaking
 ---
 
 # Diretivas Personalizadas <MigrationBadges :badges="$frontmatter.badges" />
@@ -14,15 +14,15 @@ Aqui está um rápido resumo do que mudou:
 
 Para mais informações, continue lendo!
 
-## Sintaxe 2.x
+## Sintaxe v2.x
 
-No Vue 2, as diretivas personalizadas foram criadas usando os ganchos listados abaixo para direcionar o ciclo de vida de um elemento, todos opcionais:
+No Vue 2, as diretivas personalizadas foram criadas usando os gatilhos listados abaixo para atingir um ciclo de vida de um elemento, todos opcionais:
 
 - **bind** - Ocorre quando a diretiva é vinculada ao elemento. Ocorre apenas uma vez.
 - **inserted** - Ocorre quando o elemento é inserido no DOM pai.
-- **update** - Este gancho é chamado quando o elemento é atualizado, mas os filhos ainda não foram atualizados.
-- **componentUpdated** - Este gancho é chamado assim que o componente e os filhos forem atualizados.
-- **unbind** - Este gancho é chamado assim que a diretiva é removida. Também chamado apenas uma vez.
+- **update** - Este gatilho é chamado quando o elemento é atualizado, mas os filhos ainda não foram atualizados.
+- **componentUpdated** - Este gatilho é chamado assim que o componente e os filhos forem atualizados.
+- **unbind** - Este gatilho é chamado assim que a diretiva é removida. Também chamado apenas uma vez.
 
 Aqui está um exemplo disso:
 
@@ -40,16 +40,16 @@ Vue.directive('highlight', {
 
 Aqui, na configuração inicial desse elemento, a diretiva vincula um estilo passando um valor, que pode ser atualizado para diferentes valores por meio da aplicação.
 
-## Sintaxe 3.x
+## Sintaxe v3.x
 
 No Vue 3, no entanto, criamos uma API mais coesa para diretivas personalizadas. Como você pode ver, eles diferem muito de nossos métodos de ciclo de vida de componentes, embora estejamos nos conectando a eventos semelhantes. Agora, nós os unificamos assim:
 
 - bind → **beforeMount**
 - inserted → **mounted**
-- **beforeUpdate**: novo! isso é chamado antes que o próprio elemento seja atualizado, de forma muito semelhante aos ganchos do ciclo de vida do componente.
-- update → removido! Havia muitas semelhanças para atualizar, então isso é redundante. Em vez disso, use "updated".
+- **beforeUpdate**: novo! É chamado antes que o próprio elemento seja atualizado, muito semelhante aos gatilhos de ciclo de vida do componente.
+- update → removido! Havia muitas semelhanças com "updated", então era redundante. Em vez disso, use "updated".
 - componentUpdated → **updated**
-- **beforeUnmount**: novo! semelhante aos ganchos do ciclo de vida do componente, isso será chamado logo antes de um elemento ser desmontado.
+- **beforeUnmount**: novo! Semelhante aos gatilhos de ciclo de vida do componente, será chamado logo antes de um elemento ser desmontado.
 - unbind -> **unmounted**
 
 A API final é a seguinte:
@@ -81,9 +81,9 @@ app.directive('highlight', {
 })
 ```
 
-Agora que os ganchos do ciclo de vida da diretiva personalizada espelham os dos próprios componentes, eles se tornam mais fáceis de raciocinar e lembrar!
+Agora que os gatilhos de ciclo de vida da diretiva personalizada espelham os dos próprios componentes, eles se tornam mais fáceis de raciocinar e lembrar!
 
-### Caso Isolado: Acessando a instância do componente
+### Caso Extremo: Acessando a instância do componente
 
 Geralmente, é recomendado manter as diretivas independentes da instância do componente em que são usadas. Acessar a instância a partir de uma diretiva personalizada costuma ser um sinal de que a diretiva deve ser um componente em si. No entanto, existem situações em que isso realmente faz sentido.
 
@@ -117,12 +117,12 @@ No Vue 3, agora oferecemos suporte a fragmentos, o que nos permite retornar mais
 
 Tão maravilhosamente flexível quanto isso é, podemos potencialmente encontrar um problema com uma diretiva personalizada que pode ter vários nós raiz.
 
-Como resultado, as diretivas personalizadas agora são incluídas como parte dos dados de um nó virtual do DOM. Quando uma diretiva personalizada é usada em um componente, ganchos são passados para o componente como props estranhos e acabam em `this.$attrs`.
+Como resultado, as diretivas personalizadas agora são incluídas como parte dos dados de um nó virtual do DOM. Quando uma diretiva personalizada é usada em um componente, gatilhos são passados para o componente como "props" alheios e acabam em `this.$attrs`.
 
-Isso também significa que é possível conectar-se diretamente ao ciclo de vida de um elemento como este modelo, o que pode ser útil quando uma diretiva personalizada está muito envolvida:
+Isso também significa que é possível conectar-se diretamente ao ciclo de vida de um elemento como neste *template*, o que pode ser útil quando uma diretiva personalizada está muito envolvida:
 
 ```html
 <div @vnodeMounted="myHook" />
 ```
 
-Isso é consistente com o comportamento de "fallthrough" do atributo, portanto, quando um componente filho usa `v-bind="$attrs"` em um elemento interno, ele também aplica todas as diretivas personalizadas usadas nele.
+Isso é consistente com o comportamento de "fallthrough" de atributos, portanto, quando um componente filho usa `v-bind="$attrs"` em um elemento interno, ele também aplicará todas as diretivas personalizadas usadas nele.
