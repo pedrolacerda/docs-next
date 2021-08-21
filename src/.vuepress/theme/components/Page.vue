@@ -28,4 +28,12 @@ export default {
   padding-bottom 2rem
   display block
 
+h1 em,
+h2 em,
+h3 em,
+h4 em,
+h5 em
+  margin 0 1.5%
+  display contents
+
 </style>
