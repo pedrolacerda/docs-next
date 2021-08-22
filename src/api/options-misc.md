@@ -1,49 +1,49 @@
-# Misc
+# Diversos
 
 ## name
 
-- **Type:** `string`
+- **Tipo:** `string`
 
-- **Details:**
+- **Detalhes:**
 
-  Allow the component to recursively invoke itself in its template. Note that when a component is registered globally with `Vue.createApp({}).component({})`, the global ID is automatically set as its name.
+  Permite que o componente invoque si mesmo recursivamente no *template*. Observe que quando um componente é registrado globalmente com `Vue.createApp({}).component({})`, o ID global é automaticamente definido como seu nome.
 
-  Another benefit of specifying a `name` option is debugging. Named components result in more helpful warning messages. Also, when inspecting an app in the [vue-devtools](https://github.com/vuejs/vue-devtools), unnamed components will show up as `<AnonymousComponent>`, which isn't very informative. By providing the `name` option, you will get a much more informative component tree.
+  Outro benefício de especificar a opção `name` é a depuração. Componentes nomeados resultam em mensagens de aviso mais úteis. Também, ao inspecionar um *app* no [vue-devtools](https://github.com/vuejs/vue-devtools), componentes sem nome serão exibidos como `<AnonymousComponent>`, o que não é muito informativo. Provendo a opção `name`, você terá uma árvore de componentes muito mais informativa.
 
 ## delimiters
 
-- **Type:** `Array<string>`
+- **Tipo:** `Array<string>`
 
-- **Default:** `{{ "['\u007b\u007b', '\u007d\u007d']" }}` 
+- **Predefinição:** `{{ "['\u007b\u007b', '\u007d\u007d']" }}` 
 
-- **Restrictions:** This option is only available in the full build, with in-browser template compilation.
+- **Restrições:** Essa opção só está disponível na distribuição (*build*) completa, com compilação de *template* no navegador.
 
-- **Details:**
+- **Detalhes:**
 
-  Sets the delimiters used for text interpolation within the template.
+  Define os delimitadores usados para interpolação de texto dentro do *template*.
 
-  Typically this is used to avoid conflicting with server-side frameworks that also use mustache syntax.
+  Tipicamente isso é usado para evitar conflito com frameworks do lado do servidor que também usam sintaxe *mustache*.
 
-- **Example:**
+- **Exemplo:**
 
   ```js
   Vue.createApp({
-    // Delimiters changed to ES6 template string style
+    // Delimitadores alterados para o estilo "template string" do ES6 
     delimiters: ['${', '}']
   })
   ```
 
 ## inheritAttrs
 
-- **Type:** `boolean`
+- **Tipo:** `boolean`
 
-- **Default:** `true`
+- **Predefinição:** `true`
 
-- **Details:**
+- **Detalhes:**
 
-  By default, parent scope attribute bindings that are not recognized as props will "fallthrough". This means that when we have a single-root component, these bindings will be applied to the root element of the child component as normal HTML attributes. When authoring a component that wraps a target element or another component, this may not always be the desired behavior. By setting `inheritAttrs` to `false`, this default behavior can be disabled. The attributes are available via the `$attrs` instance property and can be explicitly bound to a non-root element using `v-bind`.
+  Por padrão, vínculos de atributos do escopo pai irreconhecíveis como props vão "cair" (*fallthrough*). Isso signifca que quando nós temos um componente de raiz única, esses vínculos serão aplicados ao elemento raiz do componente filho como atributos normais do HTML. Ao criar um componente que envolve um elemento alvo ou outro componente, nem sempre este será o comportamento desejado. Configurando `inheritAttrs` para `false`, esse comportamento padrão pode ser desabilitado. Os atributos estarão disponíveis via a propriedade de instância `$attrs` que pode ser explicitamente vinculada a um elemento que não esteja na raiz usando `v-bind`.
 
-- **Usage:**
+- **Uso:**
 
   ```js
   app.component('base-input', {
@@ -63,4 +63,4 @@
   })
   ```
 
-- **See also:** [Disabling Attribute Inheritance](../guide/component-attrs.html#disabling-attribute-inheritance)
+- **Veja também:** [Desativando a Herança de Atributos](../guide/component-attrs.html#desativando-a-heranca-de-atributos)
