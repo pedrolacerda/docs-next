@@ -21,7 +21,7 @@
   const data = { a: 1 }
 
   // O objeto é adicionado a uma instância do componente
-  const vm = Vue.createApp({
+  const vm = createApp({
     data() {
       return data
     }
@@ -59,7 +59,7 @@
 - **Exemplo:**
 
   ```js
-  const app = Vue.createApp({})
+  const app = createApp({})
 
   // sintaxe simples
   app.component('props-demo-simple', {
@@ -107,7 +107,7 @@
 - **Exemplo:**
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     data() {
       return { a: 1 }
     },
@@ -152,7 +152,7 @@
 - **Exemplo:**
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     data() {
       return { a: 1 }
     },
@@ -182,7 +182,7 @@
 - **Exemplo:**
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     data() {
       return {
         a: 1,
@@ -190,11 +190,12 @@
         c: {
           d: 4
         },
-        e: 'teste',
-        f: 5
+        e: 5,
+        f: 6
       }
     },
     watch: {
+      // watching top-level property
       a(val, oldVal) {
         console.log(`new: ${val}, old: ${oldVal}`)
       },
@@ -207,6 +208,10 @@
           console.log('c mudou')
         },
         deep: true
+      },
+      // watching a single nested property:
+      'c.d': function (val, oldVal) {
+        // do something
       },
       // o callback será chamado imediatamente após o início da observação
       e: {
@@ -263,7 +268,7 @@
 - **Uso:**
 
   ```js
-  const app = Vue.createApp({})
+  const app = createApp({})
 
   // Sintaxe de Array
   app.component('todo-item', {

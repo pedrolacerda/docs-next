@@ -9,9 +9,10 @@
   Um conjunto de diretivas que será disponibilizado para a instância do componente.
 
 - **Exemplo:**
+
   ```js
-  const app = Vue.createApp({})
-  
+  const app = createApp({})
+
   app.component('focused-input', {
     directives: {
       focus: {
@@ -35,12 +36,13 @@
   Um conjunto de componentes que será disponibilizado para a instância do componente.
 
 - **Exemplo:**
+
   ```js
   const Foo = {
     template: `<div>Foo</div>`
   }
-  
-  const app = Vue.createApp({
+
+  const app = createApp({
     components: {
       Foo
     },

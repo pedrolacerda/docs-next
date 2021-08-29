@@ -6,7 +6,7 @@ Não há escopo estritamente definido para um _plugin_, mas os cenários comuns 
 
 1. Adicionar alguns métodos e propriedades globais (Ex.: [vue-custom-element](https://github.com/karol-f/vue-custom-element)).
 
-2. Adicionar um ou mais recursos globais: diretivas/filtros/transições etc. (Ex.: [vue-touch](https://github.com/vuejs/vue-touch)).
+2. Adicionar um ou mais recursos globais: diretivas/transições etc. (Ex.: [vue-touch](https://github.com/vuejs/vue-touch)).
 
 3. Adicionar algumas opções de componente via _mixin_ global. (Ex.: [vue-router](https://github.com/vuejs/vue-router)).
 
@@ -42,7 +42,7 @@ export default {
     app.config.globalProperties.$translate = key => {
       return key.split('.').reduce((o, i) => {
         if (o) return o[i]
-      }, i18n)
+      }, options)
     }
   }
 }
@@ -67,7 +67,7 @@ export default {
     app.config.globalProperties.$translate = key => {
       return key.split('.').reduce((o, i) => {
         if (o) return o[i]
-      }, i18n)
+      }, options)
     }
 
     app.provide('i18n', options)
@@ -85,7 +85,7 @@ export default {
   install: (app, options) => {
     app.config.globalProperties.$translate = (key) => {
       return key.split('.')
-        .reduce((o, i) => { if (o) return o[i] }, i18n)
+        .reduce((o, i) => { if (o) return o[i] }, options)
     }
 
     app.provide('i18n', options)

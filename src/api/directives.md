@@ -237,7 +237,7 @@
 
 ## v-bind
 
-- **Forma abreviada:** `:`
+- **Forma abreviada:** `:` ou `.` (quando usando o modificador `.prop`)
 
 - **Espera:** `any (com argumento) | Object (sem argumento)`
 
@@ -246,6 +246,8 @@
 - **Modificadores:**
 
   - `.camel` - transforma o nome do atributo de *kebab-case* para *camelCase*.
+  - `.prop` - força um vínculo a ser definido como uma propriedade do DOM.  <Badge text="3.2+"/>
+  - `.attr` - força um vínculo a ser definido como um atributo do DOM. <Badge text="3.2+"/>
 
 - **Uso:**
 
@@ -278,23 +280,33 @@
   <!-- vinculando classes -->
   <div :class="{ red: isRed }"></div>
   <div :class="[classA, classB]"></div>
-  <div :class="[classA, { classB: isB, classC: isC }]">
-    <!-- vinculando estilos -->
-    <div :style="{ fontSize: size + 'px' }"></div>
-    <div :style="[styleObjectA, styleObjectB]"></div>
+  <div :class="[classA, { classB: isB, classC: isC }]"></div>
+  <!-- vinculando estilos -->
+  <div :style="{ fontSize: size + 'px' }"></div>
+  <div :style="[styleObjectA, styleObjectB]"></div>
 
-    <!-- vinculando um objeto com atributos -->
-    <div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
+  <!-- vinculando um objeto com atributos -->
+  <div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
 
-    <!-- vinculando propriedade. "prop" deve estar declarado em my-component -->
-    <my-component :prop="someThing"></my-component>
+  <!-- vinculando propriedade. "prop" deve estar declarado em my-component -->
+  <my-component :prop="someThing"></my-component>
 
-    <!-- transmite todas as props do pai em comum com o componente-filho -->
-    <child-component v-bind="$props"></child-component>
+  <!-- transmite todas as props do pai em comum com o componente-filho -->
+  <child-component v-bind="$props"></child-component>
 
-    <!-- XLink -->
-    <svg><a :xlink:special="foo"></a></svg>
-  </div>
+  <!-- XLink -->
+  <svg><a :xlink:special="foo"></a></svg>
+  ```
+
+  When setting a binding on an element, Vue by default checks whether the element has the key defined as a property using an `in` operator check. If the property is defined, Vue will set the value as a DOM property instead of an attribute. This should work in most cases, but you can override this behavior by explicitly using `.prop` or `.attr` modifiers. This is sometimes necessary, especially when [working with custom elements](/guide/web-components.html#passing-dom-properties).
+
+  The `.prop` modifier also has a dedicated shorthand, `.`:
+
+  ```html
+  <div :someProperty.prop="someObject"></div>
+
+  <!-- equivalent to -->
+  <div .someProperty="someObject"></div>
   ```
 
   O modificador `.camel` permite colocar na notação *camelCase* (*camelizing*) um nome do atributo `v-bind` quando usado em *templates* no DOM, por exemplo, o atributo `viewBox` de um SVG:
@@ -451,34 +463,52 @@
   </ul>
   ```
 
+  Since 3.2, you can also memoize part of the template with invalidation conditions using [`v-memo`](#v-memo).
+
 - **Ver também:**
   - [Sintaxe de Templates - Interpolações](../guide/template-syntax.html#texto)
+  - [v-memo](#v-memo)
 
-## v-is
+## v-memo <Badge text="3.2+" />
 
-> Note: esta seção afeta apenas os casos em que os *templates* Vue são escritos diretamente no HTML da página.
+- **Expects:** `Array`
 
-- **Espera:** string literal
+- **Details:**
 
-- **Limitado a:** elementos HTML nativos
+  Memoize a sub-tree of the template. Can be used on both elements and components. The directive expects a fixed-length array of dependency values to compare for the memoization. If every value in the array was the same as last render, then updates for the entire sub-tree will be skipped. For example:
 
-- **Uso:** Ao usar *templates* no DOM, o *template* está sujeito às regras de análise nativas de HTML. Alguns elementos HTML, como `<ul>`, `<ol>`, `<table>` e `<select>` têm restrições sobre quais elementos podem aparecer dentro deles, e alguns elementos como `<li>`, `<tr>`, e `<option>` só podem aparecer dentro de alguns determinados elementos. Como solução alternativa, podemos usar a diretiva `v-is` nestes elementos:
+  ```html
+  <div v-memo="[valueA, valueB]">
+    ...
+  </div>
+  ```
 
-```html
-<table>
-  <tr v-is="'blog-post-row'"></tr>
-</table>
-```
+  When the component re-renders, if both `valueA` and `valueB` remain the same, all updates for this `<div>` and its children will be skipped. In fact, even the Virtual DOM VNode creation will also be skipped since the memoized copy of the sub-tree can be reused.
 
-:::warning AVISO
-`v-is` funciona como o vínculo dinâmico `:is` da v2.x - então, para renderizar um componente por seu nome registrado, seu valor deve ser um string literal de JavaScript:
+  It is important to specify the memoization array correctly, otherwise we may skip updates that should indeed be applied. `v-memo` with an empty dependency array (`v-memo="[]"`) would be functionally equivalent to `v-once`.
 
-```html
-<!-- Incorreto, nada será renderizado -->
-<tr v-is="blog-post-row"></tr>
+  **Usage with `v-for`**
 
-<!-- Correto -->
-<tr v-is="'blog-post-row'"></tr>
-```
+  `v-memo` is provided solely for micro optimizations in performance-critical scenarios and should be rarely needed. The most common case where this may prove helpful is when rendering large `v-for` lists (where `length > 1000`):
 
-:::
+  ```html
+  <div v-for="item in list" :key="item.id" v-memo="[item.id === selected]">
+    <p>ID: {{ item.id }} - selected: {{ item.id === selected }}</p>
+    <p>...more child nodes</p>
+  </div>
+  ```
+
+  When the component's `selected` state changes, a large amount of VNodes will be created even though most of the items remained exactly the same. The `v-memo` usage here is essentially saying "only update this item if it went from non-selected to selected, or the other way around". This allows every unaffected item to reuse its previous VNode and skip diffing entirely. Note we don't need to include `item.id` in the memo dependency array here since Vue automatically infers it from the item's `:key`.
+
+  :::warning
+  When using `v-memo` with `v-for`, make sure they are used on the same element. **`v-memo` does not work inside `v-for`.**
+  :::
+
+  `v-memo` can also be used on components to manually prevent unwanted updates in certain edge cases where the child component update check has been de-optimized. But again, it is the developer's responsibility to specify correct dependency arrays to avoid skipping necessary updates.
+
+- **See also:**
+  - [v-once](#v-once)
+
+## v-is <Badge text="deprecated" type="warning" />
+
+Deprecated in 3.1.0. Use [`is` attribute with `vue:` prefix](/api/special-attributes.html#is) instead.

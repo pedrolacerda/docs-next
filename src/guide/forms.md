@@ -1,5 +1,7 @@
 # Interligações em Formulários
 
+<VideoLesson href="https://vueschool.io/lessons/user-inputs-vue-devtools-in-vue-3?friend=vuejs" title="Learn how to handle form inputs on Vue School">Learn how to work with form inputs with a free Vue School lesson</VideoLesson>
+
 ## Uso Básico
 
 Você pode usar a diretiva `v-model` para criar interligações de dados de mão dupla _(two-way data binding)_ em elementos _input_, _textarea_ e _select_ de formulários. Ela, automaticamente, escolhe a maneira correta de atualizar o elemento baseado no tipo do _input_. Embora um pouco mágica, `v-model` é, essencialmente, uma forma simplificada _(syntax sugar)_ para atualizar dados nos eventos de entrada do usuário, além de cuidado especial com casos extremos.
@@ -16,7 +18,7 @@ Você pode usar a diretiva `v-model` para criar interligações de dados de mão
 
 <span id="vmodel-ime-tip"></span>
 ::: tip Nota
-Você pode notar que `v-model` não é atualizada durante a composição através de um editor de método de entrada ([IME](https://en.wikipedia.org/wiki/Input_method)), como em Chinês, Japonês, Coreano, etc. Se você também quiser atender a essas atualizações, use diretamente o evento de `input` ao invés da `v-model`.
+Você pode notar que `v-model` não é atualizada durante a composição através de um editor de método de entrada ([IME](https://en.wikipedia.org/wiki/Input_method)), como em Chinês, Japonês, Coreano, etc. Se você também quiser responder a essas atualizações, use diretamente um evento de `input` e `value` vinculado ao invés da `v-model`.
 :::
 
 ### Input
@@ -26,12 +28,7 @@ Você pode notar que `v-model` não é atualizada durante a composição atravé
 <p>A mensagem é: {{ message }}</p>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="vuejs-br" data-slug-hash="rNeqvjd" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Lidando com formulários: v-model simples">
-  <span>Veja o <i>Pen</i> <a href="https://codepen.io/vuejs-br/pen/rNeqvjd">
-  Lidando com Fomulários: v-model simples</a> Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Lidando com Fomulários: v-model simples" slug="rNeqvjd" :preview="false" />
 
 ### Textarea
 
@@ -42,12 +39,7 @@ Você pode notar que `v-model` não é atualizada durante a composição atravé
 <textarea v-model="message" placeholder="Escreva bastante"></textarea>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="vuejs-br" data-slug-hash="bGpmMqw" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Lidando com Formulários: textarea">
-  <span>Veja o <i>Pen</i> <a href="https://codepen.io/vuejs-br/pen/bGpmMqw">
-  Lidando com Formulários: textarea</a> Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Lidando com Formulários: textarea" slug="bGpmMqw" :preview="false" />
 
 Interpolação em _textareas_ (`<textarea>{{text}}</textarea>`) não funcionará. Em vez disso, use `v-model`.
 
@@ -68,12 +60,7 @@ Caixa de seleção única, valor do tipo _boolean_:
 <label for="checkbox">{{ checked }}</label>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="vuejs-br" data-slug-hash="KKzGRWq" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Lidando com Formulários: checkbox">
-  <span>Veja o <i>Pen</i> <a href="https://codepen.io/vuejs-br/details/KKzGRWq">
-  Lidando com Formulários: checkbox</a> Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Lidando com Formulários: checkbox" slug="KKzGRWq" :preview="false" />
 
 Múltiplos _checkboxes_, associados ao mesmo _array_:
 
@@ -100,12 +87,7 @@ Vue.createApp({
 }).mount('#v-model-multiple-checkboxes')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="vuejs-br" data-slug-hash="ExKdLWp" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Lidando com Formulários: múltiplos checkboxes">
-  <span>Veja o <i>Pen</i> <a href="https://codepen.io/vuejs-br/pen/ExKdLWp">
-  Lidando com Formulários: múltiplos <i>checkboxes</i></a> Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Lidando com Formulários: múltiplos checkboxes" slug="ExKdLWp" :preview="false" />
 
 ### Radio
 
@@ -131,12 +113,7 @@ Vue.createApp({
 }).mount('#v-model-radiobutton')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="vuejs-br" data-slug-hash="dyMgeRE" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Lidando com Formulários: radiobutton">
-  <span>Veja o <i>Pen</i> <a href="https://codepen.io/vuejs-br/pen/dyMgeRE">
-  Lidando com Formulários: radiobutton</a> Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Lidando com Formulários: radiobutton" slug="dyMgeRE" :preview="false" />
 
 ### Select
 
@@ -164,12 +141,7 @@ Vue.createApp({
 }).mount('#v-model-select')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="vuejs-br" data-slug-hash="VwaExpO" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Lidando com Formulários: select">
-  <span>Veja o <i>Pen</i> <a href="https://codepen.io/vuejs-br/pen/VwaExpO">
-  Lidando com Formulários: select</a> Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Lidando com Formulários: select" slug="VwaExpO" :preview="false" />
 
 :::tip Nota
 Se o valor inicial da expressão `v-model` não corresponder a nenhuma das opções, o elemento `<select>` será renderizado em um estado "não selecionado". No iOS, isso impedirá o usuário de selecionar o primeiro item, já que, neste caso, não há disparo do evento `change`. Portanto, é recomendado fornecer uma opção desabilitada com um valor vazio, como demonstrado no exemplo acima.
@@ -187,12 +159,7 @@ Seleção de múltiplos itens (vinculando a um _array_):
 <span>Selecionado: {{ selected }}</span>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="vuejs-br" data-slug-hash="abNRGWR" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Lidando com Formulários: seleção de múltiplos itens (vinculando a um Array)">
-  <span>Veja o <i>Pen</i> <a href="https://codepen.io/vuejs-br/pen/abNRGWR">
-  Lidando com Formulários: seleção de múltiplos itens (vinculando a um array)</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Lidando com Formulários: seleção de múltiplos itens (vinculando a um array)" slug="abNRGWR" tab="result" :preview="false" />
 
 Renderização dinâmica de _options_ com `v-for`:
 
@@ -222,12 +189,7 @@ Vue.createApp({
 }).mount('#v-model-select-dynamic')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="vuejs-br" data-slug-hash="BaKqxRK" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Lidando com Formulários: select com opções dinâmicas">
-  <span>Veja o <i>Pen</i> <a href="https://codepen.io/vuejs-br/pen/BaKqxRK">
-  Lidando com Formulários: select com opções dinâmicas</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Lidando com Formulários: select com opções dinâmicas" slug="BaKqxRK" :preview="false" />
 
 ## Interligação de Valores
 

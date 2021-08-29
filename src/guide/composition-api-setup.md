@@ -33,7 +33,7 @@ export default {
 No entanto, porque os `props` são reativos, você **não pode usar a desestruturação de objetos do ES6** porque isso vai remover sua reatividade.
 :::
 
-Se você precisa desestruturar seus props, você o pode fazer seguramente usando o [toRefs](reactivity-fundamentals.html#desestruturar-estado-reativo) dentro da função `setup`.
+Se você precisa desestruturar seus props, você pode fazer isso usando o [toRefs](reactivity-fundamentals.html#desestruturar-estado-reativo) dentro da função `setup`:
 
 ```js
 // MyBook.vue
@@ -41,9 +41,23 @@ Se você precisa desestruturar seus props, você o pode fazer seguramente usando
 import { toRefs } from 'vue'
 
 setup(props) {
-	const { title } = toRefs(props)
+  const { title } = toRefs(props)
 
-	console.log(title.value)
+  console.log(title.value)
+}
+```
+
+If `title` is an optional prop, it could be missing from `props`. In that case, `toRefs` won't create a ref for `title`. Instead you'd need to use `toRef`:
+
+```js
+// MyBook.vue
+
+import { toRef } from 'vue'
+
+setup(props) {
+  const title = toRef(props, 'title')
+
+  console.log(title.value)
 }
 ```
 
@@ -127,8 +141,8 @@ Se `setup` retorna um objeto, as propriedades no objeto podem ser acessadas no _
 </script>
 ```
 
-Note que o [refs](../api/refs-api.html#ref) que é retornado do `setup` é [automaticamente desempacotado](/guide/reactivity-fundamentals.html#ref-desempacotada) quando acessado no _template_, portanto você não deveria usar `.value` nos _templates_.
-
+Note que o [refs](../api/refs-api.html#ref) que é retornado do `setup` é [automaticamente desempacotado superficialmente](/guide/reactivity-fundamentals.html#ref-desempacotada) quando acessado no _template_, portanto você não deveria usar `.value` nos _templates_.
+  
 ## Uso com Funções de Renderização
 
 `setup` pode, inclusive, retornar uma função de renderização que pode diretamente fazer uso do estado reativo declarado no mesmo escopo:

@@ -16,7 +16,7 @@ count.value++
 console.log(count.value) // 1
 ```
 
-Se um objeto for atribuído como um valor de `ref`, o objeto se tornará profundamente reativo pelo método [`reactive`](./basic-reactivity.html#reactive).
+Se um objeto for atribuído como um valor de `ref`, o objeto se tornará profundamente reativo pela função [`reactive`](./basic-reactivity.html#reactive).
 
 **Tipando:**
 
@@ -38,7 +38,7 @@ foo.value = 123 // ok!
 
 Se o tipo do genérico for desconhecido, é recomendado converter `ref` em ` Ref<T>`:
 
-```js
+```ts
 function useState<State extends string>(initial: State) {
   const state = ref(initial) as Ref<State> // state.value -> State estende string
   return state
@@ -49,7 +49,7 @@ function useState<State extends string>(initial: State) {
 
 Retorna o valor interno se o argumento for um [`ref`](#ref), caso contrário, retorna o próprio argumento. Esta é uma _sugar function_ para `val = isRef(val) ? val.value : val`.
 
-```js
+```ts
 function useFoo(x: number | Ref<number>) {
   const unwrapped = unref(x) // unwrapped é garantido ser número agora
 }
@@ -83,6 +83,8 @@ export default {
   }
 }
 ```
+
+`toRef` will return a usable ref even if the source property doesn't currently exist. This makes it especially useful when working with optional props, which wouldn't be picked up by [`toRefs`](#torefs).
 
 ## `toRefs`
 
@@ -139,6 +141,8 @@ export default {
   }
 }
 ```
+
+`toRefs` will only generate refs for properties that are included in the source object. To create a ref for a specific property use [`toRef`](#toref) instead.
 
 ## `isRef`
 

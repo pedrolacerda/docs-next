@@ -47,6 +47,9 @@ Uma vez que [`KeyboardEvent.keyCode` virou obsoleto](https://developer.mozilla.o
 ```html
 <!-- Modificador de tecla do Vue 3 no v-on -->
 <input v-on:keyup.delete="confirmDelete" />
+
+<!-- Corresponde ambos q e Q -->
+<input v-on:keypress.q="quit">
 ```
 
 Como um resultado, isso significa que `config.keyCodes` também está obsoleto e não será mais suportado.
@@ -54,3 +57,16 @@ Como um resultado, isso significa que `config.keyCodes` também está obsoleto e
 ## Estratégia de Migração
 
 Para aqueles que utilizam `keyCode` em sua base de código, nós recomendamos convertê-los para os nomes kebab-cased equivalentes.
+
+The keys for some punctuation marks can just be included literally. e.g. For the `,` key:
+
+```html
+<input v-on:keypress.,="commaPress">
+```
+
+Limitations of the syntax prevent certain characters from being matched, such as `"`, `'`, `/`, `=`, `>`, and `.`. For those characters you should check `event.key` inside the listener instead.
+
+[Migration build flags:](migration-build.html#compat-configuration)
+
+- `CONFIG_KEY_CODES`
+- `V_ON_KEYCODE_MODIFIER`

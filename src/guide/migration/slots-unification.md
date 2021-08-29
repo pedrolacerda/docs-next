@@ -63,3 +63,5 @@ A maioria das alterações já estão presentes na versão 2.6. Desta forma, a m
 
 1. Susbstitua todas as ocorrências de `this.$scopedSlots` por `this.$slots` na v3.x.
 2. Susbstitua todas as ocorrências de `this.$slots.mySlot` por `this.$slots.mySlot()`.
+
+[Migration build flag: `INSTANCE_SCOPED_SLOTS`](migration-build.html#compat-configuration)

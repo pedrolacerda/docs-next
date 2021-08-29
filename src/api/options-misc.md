@@ -6,32 +6,9 @@
 
 - **Detalhes:**
 
-  Permite que o componente invoque si mesmo recursivamente no *template*. Observe que quando um componente é registrado globalmente com `Vue.createApp({}).component({})`, o ID global é automaticamente definido como seu nome.
+  Permite que o componente invoque si mesmo recursivamente no *template*. Observe que quando um componente é registrado globalmente com [`app.component`](/api/application-api.html#component), o ID global é automaticamente definido como seu nome.
 
   Outro benefício de especificar a opção `name` é a depuração. Componentes nomeados resultam em mensagens de aviso mais úteis. Também, ao inspecionar um *app* no [vue-devtools](https://github.com/vuejs/vue-devtools), componentes sem nome serão exibidos como `<AnonymousComponent>`, o que não é muito informativo. Provendo a opção `name`, você terá uma árvore de componentes muito mais informativa.
-
-## delimiters
-
-- **Tipo:** `Array<string>`
-
-- **Predefinição:** `{{ "['\u007b\u007b', '\u007d\u007d']" }}` 
-
-- **Restrições:** Essa opção só está disponível na distribuição (*build*) completa, com compilação de *template* no navegador.
-
-- **Detalhes:**
-
-  Define os delimitadores usados para interpolação de texto dentro do *template*.
-
-  Tipicamente isso é usado para evitar conflito com frameworks do lado do servidor que também usam sintaxe *mustache*.
-
-- **Exemplo:**
-
-  ```js
-  Vue.createApp({
-    // Delimitadores alterados para o estilo "template string" do ES6 
-    delimiters: ['${', '}']
-  })
-  ```
 
 ## inheritAttrs
 
@@ -64,3 +41,31 @@
   ```
 
 - **Veja também:** [Desativando a Herança de Atributos](../guide/component-attrs.html#desativando-a-heranca-de-atributos)
+
+## compilerOptions <Badge text="3.1+" />
+
+- **Tipo:** `Object`
+
+- **Detalhes:**
+
+  Este é o equivalente em nível de componente da [configuração em nível de aplicativo `compilerOptions`](/api/application-config.html#compileroptions).
+
+- **Uso:**
+
+  ```js
+  const Foo = {
+    // ...
+    compilerOptions: {
+      delimiters: ['${', '}'],
+      comments: true
+    }
+  }
+  ```
+
+  ::: tip Importante
+  Semelhante à configuração `compilerOptions` em nível de aplicativo, esta opção só é respeitada ao usar a distribuição completa com a compilação de *template* no navegador.
+  :::
+
+## delimiters <Badge text="deprecated" type="warning" />
+
+Obsoleto na v3.1.0. Use `compilerOptions.delimiters` em vez disso.

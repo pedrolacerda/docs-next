@@ -7,12 +7,9 @@ badges:
 
 ## Visão Geral
 
-Aqui está um rápido resumo do que mudou:
+As funções de gatilho para diretivas foram renomeadas para se alinhar melhor com o ciclo de vida do componente.
 
-- API foi renomeada para se alinhar melhor com o ciclo de vida do componente
-- As diretivas personalizadas serão controladas pelo componente filho via `v-bind="$attrs"`
-
-Para mais informações, continue lendo!
+Além disso, a string `expression` não é mais passada como parte do objeto `binding`.
 
 ## Sintaxe v2.x
 
@@ -27,7 +24,7 @@ No Vue 2, as diretivas personalizadas foram criadas usando os gatilhos listados 
 Aqui está um exemplo disso:
 
 ```html
-<p v-highlight="yellow">Destaque este texto em amarelo claro</p>
+<p v-highlight="'yellow'">Destaque este texto em amarelo claro</p>
 ```
 
 ```js
@@ -44,6 +41,7 @@ Aqui, na configuração inicial desse elemento, a diretiva vincula um estilo pas
 
 No Vue 3, no entanto, criamos uma API mais coesa para diretivas personalizadas. Como você pode ver, eles diferem muito de nossos métodos de ciclo de vida de componentes, embora estejamos nos conectando a eventos semelhantes. Agora, nós os unificamos assim:
 
+- **created** - novo! É chamado antes que os atributos do elemento ou escutas de evento sejam aplicados.
 - bind → **beforeMount**
 - inserted → **mounted**
 - **beforeUpdate**: novo! É chamado antes que o próprio elemento seja atualizado, muito semelhante aos gatilhos de ciclo de vida do componente.
@@ -56,9 +54,10 @@ A API final é a seguinte:
 
 ```js
 const MyDirective = {
-  beforeMount(el, binding, vnode, prevVnode) {},
+  created(el, binding, vnode, prevVnode) {}, // new
+  beforeMount() {},
   mounted() {},
-  beforeUpdate() {},
+  beforeUpdate() {}, // new
   updated() {},
   beforeUnmount() {}, // novo
   unmounted() {}
@@ -68,7 +67,7 @@ const MyDirective = {
 A API resultante poderia ser usada assim, espelhando o exemplo anterior:
 
 ```html
-<p v-highlight="yellow">Destaque este texto em amarelo claro</p>
+<p v-highlight="'yellow'">Destaque este texto em amarelo claro</p>
 ```
 
 ```js
@@ -89,7 +88,7 @@ Geralmente, é recomendado manter as diretivas independentes da instância do co
 
 No Vue 2, a instância do componente tinha que ser acessada por meio do argumento `vnode`:
 
-```javascript
+```js
 bind(el, binding, vnode) {
   const vm = vnode.context
 }
@@ -97,32 +96,16 @@ bind(el, binding, vnode) {
 
 No Vue 3, a instância agora faz parte do `binding`:
 
-```javascript
+```js
 mounted(el, binding, vnode) {
   const vm = binding.instance
 }
 ```
 
-## Detalhes de Implementação
+:::warning Aviso
+Com o suporte à [fragmentos](/guide/migration/fragments.html#overview), os componentes podem ter mais de um nó raiz. Quando aplicada a um componente de múltiplas raízes, uma diretiva personalizada será ignorada e um aviso será lançado.
+:::
 
-No Vue 3, agora oferecemos suporte a fragmentos, o que nos permite retornar mais de um nó DOM por componente. Você pode imaginar como isso é útil para algo como um componente com vários elementos `<li>` ou os elementos filhos de uma tabela:
+## Migration Strategy
 
-```html
-<template>
-  <li>Olá</li>
-  <li>Desenvolvedores</li>
-  <li>Vue!</li>
-</template>
-```
-
-Tão maravilhosamente flexível quanto isso é, podemos potencialmente encontrar um problema com uma diretiva personalizada que pode ter vários nós raiz.
-
-Como resultado, as diretivas personalizadas agora são incluídas como parte dos dados de um nó virtual do DOM. Quando uma diretiva personalizada é usada em um componente, gatilhos são passados para o componente como "props" alheios e acabam em `this.$attrs`.
-
-Isso também significa que é possível conectar-se diretamente ao ciclo de vida de um elemento como neste *template*, o que pode ser útil quando uma diretiva personalizada está muito envolvida:
-
-```html
-<div @vnodeMounted="myHook" />
-```
-
-Isso é consistente com o comportamento de "fallthrough" de atributos, portanto, quando um componente filho usa `v-bind="$attrs"` em um elemento interno, ele também aplicará todas as diretivas personalizadas usadas nele.
+[Migration build flag: `CUSTOM_DIR`](migration-build.html#compat-configuration)

@@ -34,10 +34,10 @@ A tabela a seguir descreve como o Vue coage os "atributos enumerados" de maneira
 
 | Expressão de vinculação  | `foo` <sup>normal</sup> | `draggable` <sup>enumerado</sup> |
 | ------------------- | ----------------------- | --------------------------------- |
-| `:attr="null"`      | /                       | `draggable="false"`               |
-| `:attr="undefined"` | /                       | /                                 |
+| `:attr="null"`      | -                       | `draggable="false"`               |
+| `:attr="undefined"` | -                       | -                                 |
 | `:attr="true"`      | `foo="true"`            | `draggable="true"`                |
-| `:attr="false"`     | /                       | `draggable="false"`               |
+| `:attr="false"`     | -                       | `draggable="false"`               |
 | `:attr="0"`         | `foo="0"`               | `draggable="true"`                |
 | `attr=""`           | `foo=""`                | `draggable="true"`                |
 | `attr="foo"`        | `foo="foo"`             | `draggable="true"`                |
@@ -60,16 +60,16 @@ A tabela a seguir descreve o novo comportamento:
 
 | Expressão de vinculação  | `foo` <sup>normal</sup>    | `draggable` <sup>enumerado</sup> |
 | ------------------- | -------------------------- | --------------------------------- |
-| `:attr="null"`      | /                          | / <sup>†</sup>                    |
-| `:attr="undefined"` | /                          | /                                 |
+| `:attr="null"`      | -                          | - <sup>*</sup>                    |
+| `:attr="undefined"` | -                          | -                                 |
 | `:attr="true"`      | `foo="true"`               | `draggable="true"`                |
-| `:attr="false"`     | `foo="false"` <sup>†</sup> | `draggable="false"`               |
-| `:attr="0"`         | `foo="0"`                  | `draggable="0"` <sup>†</sup>      |
-| `attr=""`           | `foo=""`                   | `draggable=""` <sup>†</sup>       |
-| `attr="foo"`        | `foo="foo"`                | `draggable="foo"` <sup>†</sup>    |
-| `attr`              | `foo=""`                   | `draggable=""` <sup>†</sup>       |
+| `:attr="false"`     | `foo="false"` <sup>*</sup> | `draggable="false"`               |
+| `:attr="0"`         | `foo="0"`                  | `draggable="0"` <sup>*</sup>      |
+| `attr=""`           | `foo=""`                   | `draggable=""` <sup>*</sup>       |
+| `attr="foo"`        | `foo="foo"`                | `draggable="foo"` <sup>*</sup>    |
+| `attr`              | `foo=""`                   | `draggable=""` <sup>*</sup>       |
 
-<small>†: modificado</small>
+<small>*: modificado</small>
 
 A coerção para atributos booleanos não foi alterada.
 
@@ -86,6 +86,8 @@ A ausência de um atributo enumerado e `attr="false"` pode produzir diferentes v
 | `spellcheck`           | `spellcheck` &rarr; `true`           |
 
 Para manter o comportamento antigo funcionando, e como estaremos coagindo `false` para `'false'`, na v3.x, os desenvolvedores Vue precisam fazer com que a expressão `v-bind` seja resolvida para `false` ou `'false'` para `contenteditable` e `spellcheck`.
+
+Uma vez que não forçamos mais `null` para `'false'` em "propriedades enumeradas" na v3.x, no caso de `contenteditable` e` spellcheck`, os desenvolvedores precisarão alterar as expressões `v-bind` que costumavam resolver para `null` para resolverem para `false` ou `'false'`, a fim de manter o mesmo comportamento da v2.x.
 
 Na v2.x, os valores inválidos eram coagidos para `'true'` em atributos enumerados. Isso geralmente não era intencional e improvável de ser confiável em grande escala. Na v3.x `true` ou `'true'` devem ser explicitamente especificados.
 
@@ -107,7 +109,7 @@ Na v3.x, `null` ou `undefined` devem ser usados para remover explicitamente um a
   <tbody>
     <tr>
       <td rowspan="3">“Atributos enumerados” na v2.x<br><small>ou seja: <code>contenteditable</code>, <code>draggable</code> e <code>spellcheck</code>.</small></td>
-      <td><code>undefined</code>, <code>false</code></td>
+      <td><code>undefined</code></td>
       <td><code>undefined</code>, <code>null</code></td>
       <td><i>removido</i></td>
     </tr>
@@ -120,7 +122,7 @@ Na v3.x, `null` ou `undefined` devem ser usados para remover explicitamente um a
       <td><code>"true"</code></td>
     </tr>
     <tr>
-      <td><code>null</code>, <code>'false'</code></td>
+      <td><code>null</code>, <code>false</code>, <code>'false'</code></td>
       <td><code>false</code>, <code>'false'</code></td>
       <td><code>"false"</code></td>
     </tr>
@@ -137,3 +139,8 @@ Na v3.x, `null` ou `undefined` devem ser usados para remover explicitamente um a
     </tr>
   </tbody>
 </table>
+
+[Migration build flags:](migration-build.html#compat-configuration)
+
+- `ATTR_FALSE_VALUE`
+- `ATTR_ENUMERATED_COERSION`

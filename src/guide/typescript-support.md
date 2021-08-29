@@ -26,6 +26,31 @@ Observe que você precisa incluir `strict: true` (ou ao menos `noImplicitThis: t
 
 Veja a [documentação das opções do compilador TypeScript](https://www.typescriptlang.org/docs/handbook/compiler-options.html) para mais detalhes.
 
+## Configuração do Webpack
+
+Se você estiver usando uma configuração do Webpack personalizada, o `ts-loader` precisa ser configurado para poder analisar os blocos `<script lang="ts">` em arquivos` .vue`:
+
+```js{10}
+// webpack.config.js
+module.exports = {
+  ...
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      }
+      ...
+```
+
 ## Ferramentas de Desenvolvimento
 
 ### Criação de Projeto
@@ -51,9 +76,17 @@ Certifique-se que a parte `script` do componente tem o TypeScript definido como 
 </script>
 ```
 
+Ou, se você deseja combinar TypeScript com uma [função `render` do JSX](/guide/render-function.html#jsx):
+
+```html
+<script lang="tsx">
+  ...
+</script>
+```
+
 ### Suporte do Editor
 
-Para o desenvolvimento de aplicações Vue com TypeScript, nós recomendamos fortemente o uso do [Visual Studio Code](https://code.visualstudio.com/), que fornece um excelente suporte para o TypeScript. Se você está usando [componentes Single File](./single-file-component.html) (SFCs), obtenha a incrível [extensão Vetur](https://github.com/vuejs/vetur), que provê a inferência do TypeScript dentro de SFCs e muitos outros ótimos recursos.
+Para o desenvolvimento de aplicações Vue com TypeScript, nós recomendamos fortemente o uso do [Visual Studio Code](https://code.visualstudio.com/), que fornece um excelente suporte para o TypeScript. Se você está usando [componentes Single File](./single-file-component.html) (SFCs), obtenha a incrível [extensão Volar](https://github.com/johnsoncodehk/volar), que provê a inferência do TypeScript dentro de SFCs e muitos outros ótimos recursos.
 
 O [WebStorm](https://www.jetbrains.com/webstorm/) também fornece um suporte pronto para uso de ambos, TypeScript e Vue.
 
@@ -69,7 +102,19 @@ const Component = defineComponent({
 })
 ```
 
-## Usando a API de Opções
+Se você estiver usando [componentes single-file](/guide/single-file-component.html), isso normalmente seria escrito assim:
+
+```vue
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  // inferência de tipo habilitada
+})
+</script>
+```
+
+## Usando com a API de Opções
 
 O TypeScript deve ser capaz de inferir a maioria dos tipos sem defini-los explicitamente. Por exemplo, se você tem um componente com uma propriedade numérica `count`, você receberá um erro se tentar chamar um método específico de _string_ nela.
 
@@ -99,14 +144,60 @@ const Component = defineComponent({
   data() {
     return {
       book: {
-        title: 'Vue 3 Guide',
-        author: 'Vue Team',
+        title: 'Guia do Vue 3',
+        author: 'Time do Vue',
         year: 2020
       } as Book
     }
   }
 })
 ```
+
+### Augmenting Types for `globalProperties`
+
+Vue 3 provides a [`globalProperties` object](../api/application-config.html#globalproperties) that can be used to add a global property that can be accessed in any component instance. For example, a [plugin](./plugins.html#writing-a-plugin) might want to inject a shared global object or function.
+
+```ts
+// User Definition
+import axios from 'axios'
+
+const app = Vue.createApp({})
+app.config.globalProperties.$http = axios
+
+// Plugin for validating some data
+export default {
+  install(app, options) {
+    app.config.globalProperties.$validate = (data: object, rule: object) => {
+      // check whether the object meets certain rules
+    }
+  }
+}
+```
+
+In order to tell TypeScript about these new properties, we can use [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+
+In the above example, we could add the following type declaration:
+
+```ts
+import axios from 'axios'
+
+declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    $http: typeof axios
+    $validate: (data: object, rule: object) => boolean
+  }
+}
+```
+
+We can put this type declaration in the same file, or in a project-wide `*.d.ts` file (for example, in the `src/typings` folder that is automatically loaded by TypeScript). For library/plugin authors, this file should be specified in the `types` property in `package.json`.
+
+::: warning Make sure the declaration file is a TypeScript module
+In order to take advantage of module augmentation, you will need to ensure there is at least one top-level `import` or `export` in your file, even if it is just `export {}`.
+
+[In TypeScript](https://www.typescriptlang.org/docs/handbook/modules.html), any file containing a top-level `import` or `export` is considered a 'module'. If type declaration is made outside of a module, it will overwrite the original types rather than augmenting them.
+:::
+
+For more information about the `ComponentCustomProperties` type, see its [definition in `@vue/runtime-core`](https://github.com/vuejs/vue-next/blob/2587f36fe311359e2e34f40e8e47d2eebfab7f42/packages/runtime-core/src/componentOptions.ts#L64-L80) and [the TypeScript unit tests](https://github.com/vuejs/vue-next/blob/master/test-dts/componentTypeExtensions.test-d.tsx) to learn more.
 
 ### Anotando Tipos de Retorno
 
@@ -125,17 +216,17 @@ const Component = defineComponent({
     // precisa de uma anotação
     greeting(): string {
       return this.message + '!'
-    }
+    },
 
     // em uma computada com um setter, o getter precisa ser anotado
     greetingUppercased: {
       get(): string {
-        return this.greeting.toUpperCase();
+        return this.greeting.toUpperCase()
       },
       set(newValue: string) {
-        this.message = newValue.toUpperCase();
-      },
-    },
+        this.message = newValue.toUpperCase()
+      }
+    }
   }
 })
 ```
@@ -147,30 +238,93 @@ O Vue faz uma validação em runtime em propriedades com um `type` definido. Par
 ```ts
 import { defineComponent, PropType } from 'vue'
 
-interface ComplexMessage {
+interface Book {
   title: string
-  okMessage: string
-  cancelMessage: string
+  author: string
+  year: number
 }
+
 const Component = defineComponent({
   props: {
     name: String,
+    id: [Number, String],
     success: { type: String },
     callback: {
       type: Function as PropType<() => void>
     },
-    message: {
-      type: Object as PropType<ComplexMessage>,
-      required: true,
-      validator(message: ComplexMessage) {
-        return !!message.title
+    book: {
+      type: Object as PropType<Book>,
+      required: true
+    },
+    metadata: {
+      type: null // metadata is typed as any
+    }
+  }
+})
+```
+
+::: warning
+Because of a [design limitation](https://github.com/microsoft/TypeScript/issues/38845) in TypeScript when it comes
+to type inference of function expressions, you have to be careful with `validator` and `default` values for objects and arrays:
+:::
+
+```ts
+import { defineComponent, PropType } from 'vue'
+
+interface Book {
+  title: string
+  year?: number
+}
+
+const Component = defineComponent({
+  props: {
+    bookA: {
+      type: Object as PropType<Book>,
+      // Make sure to use arrow functions
+      default: () => ({
+        title: 'Arrow Function Expression'
+      }),
+      validator: (book: Book) => !!book.title
+    },
+    bookB: {
+      type: Object as PropType<Book>,
+      // Or provide an explicit this parameter
+      default(this: void) {
+        return {
+          title: 'Function Expression'
+        }
+      },
+      validator(this: void, book: Book) {
+        return !!book.title
       }
     }
   }
 })
 ```
 
-Se você descobrir que o validador não está obtendo a inferência de tipo ou a conclusão do membro não está funcionando, anotar o argumento com o tipo esperado pode ajudar a resolver esse problema.
+### Anotando Tipos de Eventos Emitidos
+
+Podemos anotar o tipo do *payload* de um evento emitido. Além disso, todos os eventos emitidos não declarados lançarão um erro de tipo quando chamados:
+
+```ts
+const Component = defineComponent({
+  emits: {
+    addBook(payload: { bookName: string }) {
+      // executa validação em tempo de execução
+      return payload.bookName.length > 0
+    }
+  },
+  methods: {
+    onSubmit() {
+      this.$emit('addBook', {
+        bookName: 123 // Erro de tipo!
+      })
+
+      this.$emit('non-declared-event') // Erro de tipo!
+    }
+  }
+})
+```
 
 ## Usando com a API de Composição
 
@@ -194,7 +348,7 @@ const Component = defineComponent({
 })
 ```
 
-### Tipando `ref`s
+### Tipando `refs`
 
 Refs inferem o tipo do valor inicial:
 
@@ -221,6 +375,77 @@ year.value = 2020 // ok!
 ::: tip Nota
 Se o tipo do genérico é desconhecido, é recomendado converter `ref` para `Ref<T>`.
 :::
+
+### Typing Template Refs
+
+Sometimes you might need to annotate a template ref for a child component in order to call its public method. For example, we have a `MyModal` child component with a method that opens the modal:
+
+```ts
+import { defineComponent, ref } from 'vue'
+
+const MyModal = defineComponent({
+  setup() {
+    const isContentShown = ref(false)
+    const open = () => (isContentShown.value = true)
+
+    return {
+      isContentShown,
+      open
+    }
+  }
+})
+```
+
+We want to call this method via a template ref from the parent component:
+
+```ts
+import { defineComponent, ref } from 'vue'
+
+const MyModal = defineComponent({
+  setup() {
+    const isContentShown = ref(false)
+    const open = () => (isContentShown.value = true)
+
+    return {
+      isContentShown,
+      open
+    }
+  }
+})
+
+const app = defineComponent({
+  components: {
+    MyModal
+  },
+  template: `
+    <button @click="openModal">Open from parent</button>
+    <my-modal ref="modal" />
+  `,
+  setup() {
+    const modal = ref()
+    const openModal = () => {
+      modal.value.open()
+    }
+
+    return { modal, openModal }
+  }
+})
+```
+
+While this will work, there is no type information about `MyModal` and its available methods. To fix this, you should use `InstanceType` when creating a ref:
+
+```ts
+setup() {
+  const modal = ref<InstanceType<typeof MyModal>>()
+  const openModal = () => {
+    modal.value?.open()
+  }
+
+  return { modal, openModal }
+}
+```
+
+Please note that you would also need to use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) or any other way to check that `modal.value` is not undefined.
 
 ### Tipando `reactive`
 
@@ -264,4 +489,37 @@ export default defineComponent({
     const result = doubleCount.value.split('') // => Propriedade 'split' não existe no tipo 'number'
   }
 })
+```
+
+### Typing Event Handlers
+
+When dealing with native DOM events, it might be useful to type the argument we pass to the handler correctly. Let's take a look at this example:
+
+```vue
+<template>
+  <input type="text" @change="handleChange" />
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    // `evt` will be of type `any`
+    const handleChange = evt => {
+      console.log(evt.target.value) // TS will throw an error here
+    }
+
+    return { handleChange }
+  }
+})
+</script>
+```
+
+As you can see, without annotating the `evt` argument correctly, TypeScript will throw an error when we try to access the value of the `<input>` element. The solution is to cast the event target with a correct type:
+
+```ts
+const handleChange = (evt: Event) => {
+  console.log((evt.target as HTMLInputElement).value)
+}
 ```

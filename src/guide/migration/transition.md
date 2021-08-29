@@ -60,3 +60,8 @@ Os nomes de propriedades do componente `<transition>` relacionadas também foram
 1. Substitua instâncias de `.v-enter` por `.v-enter-from`
 2. Substitua instâncias de `.v-leave` por `.v-leave-from`
 3. Substitua instâncias de nomes de propriedades relacionadas, como acima.
+
+## See also
+
+- [`<Transition>` as a root can no longer be toggled from the outside](/guide/migration/transition-as-root.html)
+- [`<TransitionGroup>` now renders no wrapper element by default](/guide/migration/transition-group.html)

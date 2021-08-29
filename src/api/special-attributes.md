@@ -56,15 +56,27 @@
 
 - **Espera:** `string | Object (objeto de opções do componente)`
 
-Usado para [componentes dinâmicos](../guide/component-dynamic-async.html).
+  Usado para [componentes dinâmicos](../guide/component-dynamic-async.html).
 
-Por exemplo:
+  Por exemplo:
 
-```html
-<!-- componente muda quando currentView muda -->
-<component :is="currentView"></component>
-```
+  ```html
+  <!-- componente muda quando currentView muda -->
+  <component :is="currentView"></component>
+  ```
+
+- **Usage on native elements** <Badge text="3.1+" />
+
+  When the `is` attribute is used on a native HTML element, it will be interpreted as a [Customized built-in element](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example), which is a native web platform feature.
+
+  There is, however, a use case where you may need Vue to replace a native element with a Vue component, as explained in [DOM Template Parsing Caveats](/guide/component-basics.html#dom-template-parsing-caveats). You can prefix the value of the `is` attribute with `vue:` so that Vue will render the element as a Vue component instead:
+
+  ```html
+  <table>
+    <tr is="vue:my-row-component"></tr>
+  </table>
+  ```
 
 - **Veja também:**
   - [Componentes Dinâmicos](../guide/component-dynamic-async.html)
-  - [Ressalvas na Análise do *template* DOM](../guide/component-basics.html#ressalvas-na-analise-do-template-dom)
+  - [RFC explicando a mudança desde o Vue 2](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0027-custom-elements-interop.md#customized-built-in-elements)

@@ -45,12 +45,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#animated-number-demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="22903bc3b53eb5b7817378ecb985ce96" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transitioning State 1">
-  <span>Veja o exemplo <a href="https://codepen.io/team/Vue/pen/22903bc3b53eb5b7817378ecb985ce96">
-  Transição de Estado 1</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transição de Estado 1" slug="22903bc3b53eb5b7817378ecb985ce96" tab="js,result" :editable="false" :preview="false" />
 
 Quando você atualiza o número, a mudança é animada abaixo do `input`.
 
@@ -58,12 +53,7 @@ Quando você atualiza o número, a mudança é animada abaixo do `input`.
 
 Tal como acontece com os componentes de transição do Vue, os dados nos quais as transições de estado se baseiam podem ser atualizados em tempo real, o que é especialmente útil para prototipagem! Mesmo usando um polígono SVG simples, você pode obter muitos efeitos que seriam difíceis de conceber até que você brincasse um pouco com as variáveis.
 
-<p class="codepen" data-height="500" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="a8e00648d4df6baa1b19fb6c31c8d17e" data-preview="true" style="height: 493px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Updating SVG">
-  <span>Veja o exemplo<a href="https://codepen.io/team/Vue/pen/a8e00648d4df6baa1b19fb6c31c8d17e">
-  Atualizando SVG</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Atualizando SVG" slug="a8e00648d4df6baa1b19fb6c31c8d17e" :height="500" tab="js,result" :editable="false" />
 
 ## Organizando Transições em Componentes
 
@@ -138,12 +128,7 @@ app.component('animated-integer', {
 app.mount('#app')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="e9ef8ac7e32e0d0337e03d20949b4d17" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="State Transition Components">
-  <span>Veja o exemplo <a href="https://codepen.io/team/Vue/pen/e9ef8ac7e32e0d0337e03d20949b4d17">
-  Componentes de Transição de Estado</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Componentes de Transição de Estado" slug="e9ef8ac7e32e0d0337e03d20949b4d17" tab="js,result" :editable="false" />
 
 Agora podemos compor vários estados com esses componentes filhos. É empolgante - podemos usar qualquer combinação de estratégias de transição que foram abordadas nesta página, junto com as oferecidas pelo [sistema de transição integrado](transitions-enterleave.html) do Vue. Juntos, existem poucos limites para o que pode ser realizado.
 
@@ -157,5 +142,4 @@ O Vue pode ajudar. Como os SVGs são apenas dados, precisamos apenas de exemplos
 
 Sarah Drasner demonstra isso abaixo, usando uma combinação de mudanças de estado cronometradas e orientadas à interatividade:
 
-<p data-height="400" data-theme-id="light" data-slug-hash="YZBGNp" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Vue-controlled Wall-E" class="codepen">Veja o exemplo <a href="https://codepen.io/sdras/pen/YZBGNp/">Wall-E controlado via Vue</a> por Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) no <a href="https://codepen.io">CodePen</a>.</p>
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Wall-E controlado via Vue" slug="YZBGNp" :height="400" :team="false" user="sdras" name="Sarah Drasner" :editable="false" :preview="false" version="2" theme="light" />

@@ -60,7 +60,7 @@ Usando nosso componente `MyMap`, nossos valores providos podem ser refatorados d
 
 <script>
 import { provide } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -123,7 +123,7 @@ Usando nosso componente `MyMap`, nosso código pode ser atualizado da seguinte f
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -159,7 +159,7 @@ Por exemplo, no caso de precisarmos alterar a localização do usuário, o ideal
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -198,7 +198,7 @@ No entanto, há momentos em que precisamos atualizar os dados dentro do componen
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -254,7 +254,7 @@ Por fim, recomendamos o uso de `readonly` na propriedade provida, se você quise
 
 <script>
 import { provide, reactive, readonly, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {

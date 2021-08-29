@@ -18,7 +18,7 @@ Primeiro, vamos criar uma pasta para todos os ícones, e nomeá-los de forma pad
 
 Eis um exemplo de repositório, onde pode ver toda a configuração: [https://github.com/sdras/vue-sample-svg-icons/](https://github.com/sdras/vue-sample-svg-icons/)
 
-![Documentation site](https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/screendocs.jpg 'Docs demo')
+![Documentation site](/images/editable-svg-icons.jpg 'Docs demo')
 
 Vamos criar um componente de ícone base (`IconBase.vue`) que usa um `slot`.
 
@@ -88,7 +88,7 @@ Agora, se quisermos fazer vários tamanhos para o ícone, podemos fazer isso fac
 </p>
 ```
 
-<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/Screen%20Shot%202018-01-01%20at%204.51.40%20PM.png" width="450" />
+<img src="/images/editable-svg-icons-sizes.png" width="450" />
 
 ## Ícones Animáveis
 
@@ -143,7 +143,7 @@ export default {
 
 Estamos aplicando `refs` aos grupos de caminhos que precisamos mover e, como ambos os lados da tesoura devem mover-se em conjunto, criamos uma função que permite a reutilização em ambas as `refs`. O uso da biblioteca GreenSock ajuda a resolver questões de suporte às animações e problemas de `transform-origin` entre os navegadores.
 
-<p data-height="300" data-theme-id="0" data-slug-hash="dJRpgY" data-default-tab="result" data-user="Vue" data-embed-version="2" data-pen-title="Editable SVG Icon System: Animated icon" class="codepen">Veja o Exemplo <a href="https://codepen.io/team/Vue/pen/dJRpgY/">Sistema de Ícones SVG Editáveis: Ícone Animado</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>) no <a href="https://codepen.io">CodePen</a>.</p><script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Sistema de Ícones SVG Editáveis: Ícone Animado" slug="dJRpgY" :preview="false" :editable="false" version="2" theme="0" />
 
 Um resultado atingido facilmente! E fácil de se atualizar sempre que necessário.
 

@@ -246,7 +246,7 @@ app.component('todo-list', {
 })
 ```
 
-Podemos desejar personalizar o _slot_ diretamente no componente pai _(parent component)_:
+Podemos desejar substituir o <span v-pre>`{{ item }}`</span> com um `<slot>` para customizá-lo no componente pai:
 
 ```html
 <todo-list>
@@ -263,6 +263,16 @@ Para fazer com que `item` esteja disponível para uso no conteúdo do _slot_ def
 <ul>
   <li v-for="( item, index ) in items">
     <slot :item="item"></slot>
+  </li>
+</ul>
+```
+
+Você pode vincular quantos atributos precisar no `slot`:
+
+```html
+<ul>
+  <li v-for="( item, index ) in items">
+    <slot :item="item" :index="index" :another-attribute="anotherAttribute"></slot>
   </li>
 </ul>
 ```
@@ -307,10 +317,9 @@ Podemos deixar isto ainda mais simples, já que, assim como não especificar um 
 ```html
 <!-- INVÁLIDO, resultará em um aviso -->
 <todo-list v-slot="slotProps">
-  <todo-list v-slot:default="slotProps">
-    <i class="fas fa-check"></i>
-    <span class="green">{{ slotProps.item }}</span>
-  </todo-list>
+  <i class="fas fa-check"></i>
+  <span class="green">{{ slotProps.item }}</span>
+
   <template v-slot:other="otherSlotProps">
     slotProps NÃO está disponível aqui
   </template>

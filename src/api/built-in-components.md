@@ -1,5 +1,21 @@
 # Componentes Integrados
 
+Built-in components can be used directly in templates without needing to be registered.
+
+The `<keep-alive>`, `<transition>`, `<transition-group>`, and `<teleport>` components can all be tree-shaken by bundlers, so that they are only included in the build if they're used. They can also be imported explicitly if you need direct access to the component itself:
+
+```js
+// CDN build of Vue
+const { KeepAlive, Teleport, Transition, TransitionGroup } = Vue
+```
+
+```js
+// ESM build of Vue
+import { KeepAlive, Teleport, Transition, TransitionGroup } from 'vue'
+```
+
+`<component>` and `<slot>` are component-like features of template syntax. They are not true components and they can't be imported like the components shown above.
+
 ## component
 
 - **Propriedades:**
@@ -9,8 +25,6 @@
 - **Uso:**
 
   Um "meta componente" para renderizar componentes dinâmicos. O componente real a ser renderizado é determinado pela propriedade `is`. Uma propriedade `is` como string pode ser um nome de tag HTML ou um nome de componente.
-
-- **Exemplo:**
 
   ```html
   <!-- um componente dinâmico controlado -->
@@ -27,6 +41,27 @@
   <component :is="href ? 'a' : 'span'"></component>
   ```
 
+  The built-in components `KeepAlive`, `Transition`, `TransitionGroup`, and `Teleport` can all be passed to `is`, but you must register them if you want to pass them by name. For example:
+
+  ```js
+  const { Transition, TransitionGroup } = Vue
+
+  const Component = {
+    components: {
+      Transition,
+      TransitionGroup
+    },
+
+    template: `
+      <component :is="isGroup ? 'TransitionGroup' : 'Transition'">
+        ...
+      </component>
+    `
+  }
+  ```
+
+  Registration is not required if you pass the component itself to `is` rather than its name.
+
 - **Ver também:** [Componentes Dinâmicos](../guide/component-dynamic-async.html)
 
 ## transition
@@ -39,7 +74,7 @@
   - `css` - `boolean`. Aplicar ou não classes de transição CSS. Por padrão é `true`. Se configurado para `false`, apenas acionará gatilhos registrados no JavaScript por meio de eventos de componentes.
   - `type` - `string`. Especifica o tipo de eventos de transição a serem aguardados para determinar o tempo de término da transição. Os valores disponíveis são `"transition"` and `"animation"`. Por padrão, será detectado automaticamente o tipo que tenha uma duração mais longa.
   - `mode` - `string`. Controla a sequência de temporização das transições de saída/entrada. Modos disponíveis são  `"out-in"` e `"in-out"`; o padrão é simultâneo.
-  - `duration` - `number | {`enter`: number,`leave`: number }`. Especifica a duração da transição. Por padrão, o Vue aguarda o primeiro evento de `transitionend` ou `animationend` no elemento de transição raiz.
+  - `duration` - `number | { enter: number, leave: number }`. Especifica a duração da transição. Por padrão, o Vue aguarda o primeiro evento de `transitionend` ou `animationend` no elemento de transição raiz.
   - `enter-from-class` - `string`
   - `leave-from-class` - `string`
   - `appear-class` - `string`
@@ -88,7 +123,7 @@
   ```
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     ...
     methods: {
       transitionComplete (el) {
@@ -107,7 +142,7 @@
 
 - **Propriedades:**
 
-  - `tag` - `string`, `span` como padrão.
+  - `tag` - `string`, se não definido, renderiza sem um elemento raiz.
   - `move-class` - substitui a classe CSS aplicada durante a transição em movimento.
   - expõe as mesmas propriedades que `<transition>` exceto `mode`.
 
@@ -117,7 +152,7 @@
 
 - **Uso:**
 
-  `<transition-group>` serve como efeito de transição para **múltiplos** elementos/componentes. O `<transition-group>` renderiza um elemento DOM real. Por padrão renderiza um `<span>`, e você pode configurar qual elemento deverá ser renderizado através do atributo `tag`.
+  `<transition-group>` fornece efeitos de transição para **múltiplos** elementos/componentes. Por padrão, ele não renderiza um elemento *wrapper* no DOM, mas um pode ser definido por meio do atributo `tag`.
 
   Note que cada filho em um `<transition-group>` deve ser identificado com [**chave única**](./special-attributes.html#key) para as animações funcionarem corretamente.
 
@@ -145,7 +180,7 @@
 
   Quando *wrapped* (envolvido) em torno de um componente dinâmico, `<keep-alive>` coloca as instâncias dos componentes inativos em cache sem os destruir. Semelhante a `<transition>`, `<keep-alive>` é um componente abstrato: ele não renderiza um elemento DOM em si, e não aparece na cadeia pai do componente.
 
-  Quando um componente é alternado dentro de `<keep-alive>`, seus gatilhos de ciclo de vida `activated` e` deactivated` serão invocados de acordo.
+  Quando um componente é alternado dentro de `<keep-alive>`, seus gatilhos de ciclo de vida `activated` e `deactivated` serão invocados de acordo, fornecendo uma alternativa para `mounted` e `unmounted`, que não são chamados. (Isso se aplica ao filho direto de `<keep-alive>`, bem como a todos os seus descendentes.)
 
   Usado principalmente para preservar o estado do componente ou evitar re-renderização.
 

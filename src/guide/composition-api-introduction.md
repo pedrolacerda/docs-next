@@ -18,7 +18,10 @@ Vamos imaginar que em nossa aplicação temos uma tela (_view_) para mostrar uma
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {
@@ -54,7 +57,7 @@ Este componente tem várias responsabilidades:
 
 Organizar lógicas com as opções de componentes (`data`, `computed`, `methods`, `watch`) funciona na maioria dos casos. No entanto, quando nossos componentes ficam maiores, a lista de **preocupações lógicas** também aumenta. Isso pode levar a componentes que são difíceis de ler e entender, especialmente para pessoas que não os escreveram.
 
-![Vue Option API: código agrupado por tipo de opção](https://user-images.githubusercontent.com/499550/62783021-7ce24400-ba89-11e9-9dd3-36f4f6b1fae2.png)
+![API de Opções do Vue: Código agrupado por tipo de opção](/images/options-api.png)
 
 Exemplo apresentando um grande componente em que suas **preocupações lógicas** são agrupadas por cores.
 
@@ -73,7 +76,7 @@ Agora que já sabemos o **porquê**, podemos chegar ao **como**. Para começar a
 A nova opção de componente `setup` é executada **antes** do componente ser criado, uma vez que as `props` estão resolvidas, e serve como ponto de entrada para APIs de composição.
 
 ::: warning Aviso
-Como a instância do componente ainda não foi criada quando `setup` é executado, não há `this` dentro da opção `setup`. Isso significa que, com exceção de `props`, você não poderá acessar nenhuma propriedade declarada no componente – **estado local**, **dados computados** ou **métodos**.
+You should avoid using `this` inside `setup` as it won't refer to the component instance. `setup` is called before `data` properties, `computed` properties or `methods` are resolved, so they won't be available within `setup`.
 :::
 
 A opção `setup` deve ser uma função que aceita `props` e `context`, sobre os quais falaremos [depois](composition-api-setup.html#argumentos). Além disso, tudo o que retornamos de `setup` será exposto ao resto do nosso componente (dados computados, métodos, gatilhos de ciclo de vida e assim por diante), bem como ao _template_ do componente.
@@ -86,7 +89,10 @@ Vamos adicionar `setup` ao nosso componente:
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup(props) {
     console.log(props) // { user: '' }
@@ -192,7 +198,10 @@ import { ref } from 'vue'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup (props) {
     const repositories = ref([])
@@ -449,7 +458,10 @@ import { toRefs } from 'vue'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup (props) {
     const { user } = toRefs(props)
@@ -495,7 +507,10 @@ import useRepositoryFilters from '@/composables/useRepositoryFilters'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup(props) {
     const { user } = toRefs(props)

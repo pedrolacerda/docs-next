@@ -21,12 +21,7 @@ Labels são tipicamente posicionadas no topo ou à esquerda dos campos do formul
 </form>
 ```
 
-<p class="codepen" data-height="368" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="oNLxKxj" style="height: 368px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Simples formulário">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/YzwpPYZ">
-  Simples formulário</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Simples formulário" slug="oNLxKxj" :height="368" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 Observe como você pode incluir o atributo `autocomplete='on'` no elemento formulário e ele irá aplicar a todos os _inputs_ do seu formulário. Você também pode definir diferentes [valores para o atributo _autocomplete_](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) para cada _input_.
 
@@ -39,12 +34,7 @@ Forneça labels para descrever o propósito de todos os controles do formulário
 <input type="text" name="name" id="name" v-model="name" />
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="rNLeXeR" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Label">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/rNLeXeR">
-  Form Label</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form com Label" slug="rNLeXeR" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 Se você inspecionar este elemento em suas ferramentas de desenvolvedor do Chrome e abrir a guia Acessibilidade dentro da guia Elementos, verá como o _input_ obtém seu nome a partir da _label_:
 
@@ -78,12 +68,7 @@ Você também pode dar ao _input_ um nome acessível com [`aria-label`](https://
 />
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="Vwjaoja" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form ARIA label">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/Vwjaoja">
-  Form ARIA label</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form com ARIA label" slug="Vwjaoja" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 Sinta-se à vontade para inspecionar este elemento nas ferramentas de desenvolvedor do Chrome para ver como o nome acessível mudou:
 
@@ -115,18 +100,13 @@ Usar [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibil
 </form>
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="ZEOWgOV" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form ARIA labelledby">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/ZEOWgOV">
-  Form ARIA labelledby</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form com ARIA labelledby" slug="ZEOWgOV" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 ![Ferramentas de Desenvolvedor do Chrome mostrando um nome acessível para o input usando aria-labelledby](/images/AccessibleARIAlabelledbyDevTools.png)
 
 #### aria-describedby
 
-[aria-describedby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) é usado da mesma maneira que `aria-labelledby` e fornece uma descrição com informações adicionais que o usuário pode precisar. Pode ser usado para descrever os critérios para qualquer _input_:
+[aria-describedby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) é usado da mesma maneira que `aria-labelledby`, exceto que fornece uma descrição com informações adicionais que o usuário pode precisar. Pode ser usado para descrever os critérios para qualquer _input_:
 
 ```html
 <form
@@ -152,12 +132,7 @@ Usar [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibil
 </form>
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="PozNMGj" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form ARIA describedby">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/PozNMGj">
-  Form ARIA describedby</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form com ARIA describedby" slug="PozNMGj" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 Você pode ver a descrição inspecionando nas ferramentas de desenvolvedor do Chrome:
 
@@ -169,12 +144,7 @@ Evite usar _placeholders_, pois eles podem confundir muitos usuários.
 
 Um dos problemas com os _placeholders_ é que eles não atendem aos [critérios de contraste de cor](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) por padrão; corrigir o contraste da cor faz com que o _placeholder_ se pareça com dados pré-preenchidos nos _inputs_. Olhando para o exemplo a seguir, você pode ver que o _placeholder_ para Sobrenome que atende aos critérios de contraste de cor, parece um dado pré-preenchido:
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="MWeyNjZ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Placeholder">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/MWeyNjZ">
-  Form Placeholder</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form com placeholder" slug="MWeyNjZ" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 É melhor fornecer todas as informações que o usuário precisa para preencher formulários fora de qualquer _input_.
 
@@ -208,12 +178,7 @@ Alternativamente, você pode anexar intruções ao _input_ com [`aria-describedb
 </fieldset>
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="qBNZeqd" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Instructions">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/qBNZeqd">
-  Form Instructions</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form com instruções" slug="qBNZeqd" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 ### Escondendo Conteúdo
 
@@ -247,12 +212,7 @@ Podemos usar CSS para ocultar elementos visualmente, mas mantê-los disponíveis
 }
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="gOMrVLR" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Search">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/gOMrVLR">
-  Form Search</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form de pesquisa" slug="gOMrVLR" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 #### aria-hidden="true"
 
@@ -280,12 +240,7 @@ Você também pode usar _inputs_ para criar botões:
 </form>
 ```
 
-<p class="codepen" data-height="467" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="pobyMNx" style="height: 467px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Buttons">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/pobyMNx">
-  Form Buttons</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form com botões" slug="pobyMNx" :height="467" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />
 
 #### Imagens Funcionais
 
@@ -321,9 +276,4 @@ Você pode usar esta técnica para criar imagens funcionais.
 </form>
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="qBNZeRd" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Imagens funcionais">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/qBNZeRd">
-  Imagens funcionais</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Imagens funcionais" slug="qBNZeRd" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" user="emanuelgsouza" name="Emanuel Gonçalves" />

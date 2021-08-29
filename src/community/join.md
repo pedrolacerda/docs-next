@@ -48,11 +48,13 @@ Além de responder à questões e compartilhar coisas no fórum ou nos canais de
 
 ### Traduzindo a Documentação
 
-Vue já se espalhou pelo globo, até mesmo com o time principal ao menos em meia dúzia de fusos-horário diferentes. O [fórum](https://forum.vuejs.org/) atualmente contempla 7 línguas e subindo, e nossa documentação possui [traduções mantidas ativamente](https://github.com/vuejs?utf8=%E2%9C%93&q=vuejs.org), como esta daqui em português. Nós estamos muito orgulhosos pela expansão internacional do Vue, mas podemos fazer ainda melhor.
-
 Esperamos que agora mesmo você esteja lendo esta frase em sua língua preferida e que tenha encontrado este guia com a qualidade ideal. Se não for o caso, gostaria de nos ajudar a chegar lá?
 
-Se quiser, sinta-se à vontade para fazer um _fork_ do repositório [desta documentação](https://github.com/vuejs/vuejs.org/) para iniciar uma tradução para uma nova língua, ou se junte à alguma das traduções em andamento. Depois de fazer algum progresso, abra uma _issue_ ou solicitação de _pull request_ no repositório principal e chamaremos mais colaboradores para ajudá-lo. Esta tradução em português brasileiro é um destes casos, mantido exclusivamente por um grupo de desenvolvedores apaixonados pelo Vue. Para começar à colaborar conosco, visite [nosso repositório no Github](https://github.com/vuejs-br/docs-next).
+Veja o [Guia de Traduções](/guide/contributing/translations.html) para mais detalhes sobre como você pode se envolver.
+
+::: tip Nota
+Esta tradução em português brasileiro é uma das mantidas ativamente e exclusivamente por um grupo de desenvolvedores apaixonados pelo Vue. Colaboradores são bem vindos ao [nosso repositório no Github](https://github.com/vuejs-br/docs-next).
+:::
 
 ### Tornando-se Líder de Comunidade
 

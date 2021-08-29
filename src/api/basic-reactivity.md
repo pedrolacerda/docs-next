@@ -18,6 +18,44 @@ A conversão reativa é "profunda" - ela afeta todas as propriedades aninhadas. 
 function reactive<T extends object>(target: T): UnwrapNestedRefs<T>
 ```
 
+::: tip Note
+`reactive` will unwrap all the deep [refs](./refs-api.html#ref), while maintaining the ref reactivity
+
+```ts
+const count = ref(1)
+const obj = reactive({ count })
+
+// ref will be unwrapped
+console.log(obj.count === count.value) // true
+
+// it will update `obj.count`
+count.value++
+console.log(count.value) // 2
+console.log(obj.count) // 2
+
+// it will also update `count` ref
+obj.count++
+console.log(obj.count) // 3
+console.log(count.value) // 3
+```
+
+:::
+
+::: warning Important
+When assigning a [ref](./refs-api.html#ref) to a `reactive` property, that ref will be automatically unwrapped.
+
+```ts
+const count = ref(1)
+const obj = reactive({})
+
+obj.count = count
+
+console.log(obj.count) // 1
+console.log(obj.count === count.value) // true
+```
+
+:::
+
 ## `readonly`
 
 Captura um objeto (reativo ou simples) ou um [ref](./refs-api.html#ref) e retorna um *proxy* somente leitura para o original. Um *proxy* somente leitura é profundo: qualquer propriedade aninhada acessada também será somente leitura.
@@ -37,6 +75,19 @@ original.count++
 
 // a mutação da cópia falhará e resultará em um aviso
 copy.count++ // aviso!
+```
+
+As with [`reactive`](#reactive), if any property uses a `ref` it will be automatically unwrapped when it is accessed via the proxy:
+
+```js
+const raw = {
+  count: ref(123)
+}
+
+const copy = readonly(raw)
+
+console.log(raw.count.value) // 123
+console.log(copy.count) // 123
 ```
 
 ## `isProxy`
@@ -153,6 +204,8 @@ isReactive(state.nested) // false
 state.nested.bar++ // não reativo
 ```
 
+Unlike [`reactive`](#reactive), any property that uses a [`ref`](/api/refs-api.html#ref) will **not** be automatically unwrapped by the proxy.
+
 ## `shallowReadonly`
 
 Cria um *proxy* que torna suas próprias propriedades em somente leitura, mas não executa a conversão somente leitura profunda de objetos aninhados (expõe valores brutos).
@@ -171,3 +224,5 @@ state.foo++
 isReadonly(state.nested) // false
 state.nested.bar++ // funciona
 ```
+
+Unlike [`readonly`](#readonly), any property that uses a [`ref`](/api/refs-api.html#ref) will **not** be automatically unwrapped by the proxy.

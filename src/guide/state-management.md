@@ -2,7 +2,7 @@
 
 ## Implementação Oficial Estilo Flux
 
-Grandes aplicações podem frequentemente crescer em complexidade, devido à múltiplas partes do estado da aplicação espalhadas em vários componentes e em interações entre eles. Para resolver esse problema, Vue oferece o [Vuex](https://github.com/vuejs/vuex), nossa própria biblioteca de gerenciamento de estado inspirada na arquitetura Elm. Ele é também integrado ao [vue-devtools](https://github.com/vuejs/vue-devtools), permitindo uma [navegação pelo histórico de mudanças de estado](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif) (_time travel debugging_) sem qualquer configuração inicial.
+Grandes aplicações podem frequentemente crescer em complexidade, devido à múltiplas partes do estado da aplicação espalhadas em vários componentes e em interações entre eles. Para resolver esse problema, Vue oferece o [Vuex](https://next.vuex.vuejs.org/), nossa própria biblioteca de gerenciamento de estado inspirada na arquitetura Elm. Ele é também integrado ao [vue-devtools](https://github.com/vuejs/vue-devtools), permitindo uma [navegação pelo histórico de mudanças de estado](https://raw.githubusercontent.com/vuejs/vue-devtools/legacy/media/demo.gif) (_time travel debugging_) sem qualquer configuração inicial.
 
 ### Informação para Desenvolvedores React
 
@@ -13,17 +13,19 @@ Se você vem do React, deve estar se perguntando como o Vuex se compara ao [Redu
 Frequentemente as pessoas esquecem que a fonte de verdade de aplicações Vue são os objetos reativos `data` - uma instância Vue apenas direciona acesso à eles. Portanto, se você possui uma parte do estado que deveria ser compartilhado entre instâncias múltiplas, você pode usar um método [`reactive`](/guide/reactivity-fundamentals.html#declaring-reactive-state) para tornar um objeto reativo.
 
 ```js
-const sourceOfTruth = Vue.reactive({
+const { createApp, reactive } = Vue
+
+const sourceOfTruth = reactive({
   message: 'Olá'
 })
 
-const appA = Vue.createApp({
+const appA = createApp({
   data() {
     return sourceOfTruth
   }
 }).mount('#app-a')
 
-const appB = Vue.createApp({
+const appB = createApp({
   data() {
     return sourceOfTruth
   }
@@ -39,7 +41,7 @@ const appB = Vue.createApp({
 Agora, sempre que `sourceOfTruth` mudar, tanto `appA` e `appB` irão atualizar suas _views_ automaticamente. Possuímos uma única fonte de verdade agora, porém a depuração vira um pesadelo. Qualquer dado pode ser modificado em qualquer parte de nossa aplicação a qualquer momento, sem deixar rastro algum.
 
 ```js
-const appB = Vue.createApp({
+const appB = createApp({
   data() {
     return sourceOfTruth
   },
@@ -55,7 +57,7 @@ Para ajudar a resolver esse problema, podemos adotar o padrão **store**:
 const store = {
   debug: true,
 
-  state: Vue.reactive({
+  state: reactive({
     message: 'Olá!'
   }),
 
@@ -88,7 +90,7 @@ Além disso, cada instância/componente pode ainda possuir e gerenciar seu estad
 ```
 
 ```js
-const appA = Vue.createApp({
+const appA = createApp({
   data() {
     return {
       privateState: {},
@@ -100,7 +102,7 @@ const appA = Vue.createApp({
   }
 }).mount('#app-a')
 
-const appB = Vue.createApp({
+const appB = createApp({
   data() {
     return {
       privateState: {},
@@ -118,4 +120,4 @@ Você jamais deve substituir o objeto `state` original - os componentes e a stor
 
 Ao desenvolvermos uma convenção em que componentes não devem modificar diretamente o estado pertencente à store, mas sim disparar eventos que comuniquem a store à realizar ações, nós chegamos na arquitetura [Flux](https://facebook.github.io/flux/). A vantagem dessa convenção é que podemos registrar todas as mudanças de estado e implementar auxiliares avançados de depuração, tais como _logs_ de mutação, _snapshots_ e repetição de histórico (_history re-rolls_) / navegação de histórico (_time travel_).
 
-O que nos leva totalmente de volta ao [Vuex](https://github.com/vuejs/vuex), então se você leu até aqui, provavelmente é hora de testá-lo!
+O que nos leva totalmente de volta ao [Vuex](https://next.vuex.vuejs.org/), então se você leu até aqui, provavelmente é hora de testá-lo!

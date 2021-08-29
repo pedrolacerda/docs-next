@@ -11,9 +11,9 @@
     :data-pen-title="title"
     :data-embed-version="version"
     :style="`height: ${height}px`">
-    <span>See the Pen <a :href="href">{{ title }}</a>
-    by {{ name || user }} (<a :href="`https://codepen.io/${user}`">@{{user}}</a>)
-    on <a href="https://codepen.io">CodePen</a>.</span>
+    <span>Veja o exemplo <a :href="href">{{ title }}</a>
+    por {{ name || user }} (<a :href="`https://codepen.io/${user}`">@{{user}}</a>)
+    no <a href="https://codepen.io">CodePen</a>.</span>
   </p>
 </template>
 
@@ -44,7 +44,7 @@ export default {
 
     user: {
       type: String,
-      default: 'Vue',
+      default: 'vuejs-br',
     },
 
     name: {

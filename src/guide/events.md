@@ -1,5 +1,7 @@
 # Manipulação de Eventos
 
+<VideoLesson href="https://vueschool.io/lessons/user-events-in-vue-3?friend=vuejs" title="Learn how to handle events on Vue School">Learn how to handle events in a free Vue School lesson</VideoLesson>
+
 ## Escutando Eventos
 
 Podemos usar a diretiva `v-on`, que normalmente abreviamos para o símbolo `@`, para escutar eventos do DOM e rodar algum JavaScript quando tal evento for disparado. A maneira de usar seria `v-on:click="nomeDoMétodo"` ou com o atalho, `@click="nomeDoMétodo"`
@@ -17,7 +19,7 @@ Por exemplo:
 Vue.createApp({
   data() {
     return {
-      counter: 1
+      counter: 0
     }
   }
 }).mount('#basic-event')
@@ -25,7 +27,7 @@ Vue.createApp({
 
 Resultado:
 
-<common-codepen-snippet title="Exemplo básico de manipulação de eventos" slug="YzqMRBW" />
+<common-codepen-snippet title="Exemplo básico de manipulação de eventos" slug="YzqMRBW" tab="result" :preview="false" />
 
 ## Métodos em Manipuladores
 
@@ -62,7 +64,7 @@ Vue.createApp({
 
 Resultado:
 
-<common-codepen-snippet title="Exemplo de manipulação de eventos com um método" slug="RwaOqvo" />
+<common-codepen-snippet title="Exemplo de manipulação de eventos com um método" slug="RwaOqvo" tab="result" :preview="false" />
 
 ## Chamada Direta de Métodos
 
@@ -87,7 +89,7 @@ Vue.createApp({
 
 Resultado:
 
-<common-codepen-snippet title="Exemplo de evento com chamada direta de métodoo" slug="mdPgQvR" />
+<common-codepen-snippet title="Exemplo de evento com chamada direta de métodoo" slug="mdPgQvR" tab="result" :preview="false" />
 
 Às vezes, também precisamos acessar o evento original do DOM em um manipulador. Você pode passá-lo à um método usando a variável especial `$event`:
 

@@ -42,9 +42,9 @@ Todos os gatilhos de ciclo de vida têm seu contexto `this` vinculado automatica
 
 - **Detalhes:**
 
-  Invocado após a instância ser montada, onde `el`, passado para o `Vue.createApp({}).mount()`, é substituído pelo recém criado `vm.$el`. Se a instância raiz for montada em um elemento presente no documento, `vm.$el` também estará no documento quando o `mounted` for invocado.
+  Invocado após a instância ser montada, onde `el`, passado para o [`app.mount`](/api/application-api.html#mount), é substituído pelo recém criado `vm.$el`. Se a instância raiz for montada em um elemento presente no documento, `vm.$el` também estará no documento quando o `mounted` for invocado.
 
-  Perceba que o `mounted` **não** garante que todos componentes filhos também foram montados. Se você quiser esperar até que toda a _view_ tenha sido renderizada, você pode usar o [vm.\$nextTick](../api/instance-methods.html#nexttick) dentro do `mounted`:
+  Perceba que o `mounted` **não** garante que todos componentes filhos também foram montados. Se você quiser esperar até que toda a _view_ tenha sido renderizada, você pode usar o [vm.$nextTick](../api/instance-methods.html#nexttick) dentro do `mounted`:
 
   ```js
   mounted() {
@@ -81,7 +81,7 @@ Todos os gatilhos de ciclo de vida têm seu contexto `this` vinculado automatica
 
   O DOM do componente terá sido atualizado quando esse gatilho for invocado, de forma que você pode realizar operações dependentes do DOM neste gatilho. Entretanto, na maioria dos casos você deve evitar mudanças de estado dentro do gatilho. Para reagir à mudanças de estado, normalmente é melhor usar uma [dado computado](./options-data.html#computed) ou um [observador](./options-data.html#watch).
 
-  Perceba que o `updated` **não** garante que todos componentes filhos foram também re-renderizados. Se você quiser esperar até que toda _view_ tenha sido re-renderizada, você pode usar o [vm.\$nextTick](../api/instance-methods.html#nexttick) dentro do `updated`:
+  Perceba que o `updated` **não** garante que todos componentes filhos foram também re-renderizados. Se você quiser esperar até que toda _view_ tenha sido re-renderizada, você pode usar o [vm.$nextTick](../api/instance-methods.html#nexttick) dentro do `updated`:
 
   ```js
   updated() {
@@ -186,7 +186,7 @@ Todos os gatilhos de ciclo de vida têm seu contexto `this` vinculado automatica
   ```
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     data() {
       return {
         cart: 0
@@ -232,7 +232,7 @@ Todos os gatilhos de ciclo de vida têm seu contexto `this` vinculado automatica
   ```
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     data() {
       return {
         cart: 0
