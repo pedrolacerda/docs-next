@@ -1,6 +1,6 @@
 # Renderização de Listas
 
-<VideoLesson href="https://vueschool.io/lessons/list-rendering-in-vue-3?friend=vuejs" title="Learn how to render lists on Vue School">Learn how to render list with a free Vue School lesson</VideoLesson>
+<VideoLesson href="https://vueschool.io/lessons/list-rendering-in-vue-3?friend=vuejs" title="Aprenda a renderizar listas na Vue School">Aprenda como renderizar uma lista com uma aula gratuita da Vue School</VideoLesson>
 
 ## Mapeando um Array de Elementos com `v-for`
 
