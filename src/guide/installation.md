@@ -19,7 +19,7 @@ Notas de lançamento detalhadas para cada versão estão disponíveis no [GitHub
 
 > Atualmente em versão Beta - integração com Vuex e Router ainda em andamento
 
-<VideoLesson href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3?friend=vuejs" title="Learn how to install Vue Devtools on Vue School">Learn how to install and use Vue Devtools in a free Vue School lesson</VideoLesson>
+<VideoLesson href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3?friend=vuejs" title="Aprenda a instalar o Vue Devtools na Vue School">Aprenda como instalar e usar o Vue Devtools em uma aula gratuita da Vue School</VideoLesson>
 
 Ao utilizar o Vue, recomendamos também instalar a extensão [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) no seu navegador, que lhe permite inspecionar e realizar _debug_ de suas aplicações Vue através de uma interface mais amigável.
 

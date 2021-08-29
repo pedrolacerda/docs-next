@@ -1,6 +1,6 @@
 # Renderização Condicional
 
-<VideoLesson href="https://vueschool.io/lessons/conditional-rendering-in-vue-3?friend=vuejs" title="Learn how conditional rendering works with Vue School">Learn how conditional rendering works with a free lesson on Vue School</VideoLesson>
+<VideoLesson href="https://vueschool.io/lessons/conditional-rendering-in-vue-3?friend=vuejs" title="Aprenda como a renderização condicional funciona com a Vue School">Aprenda como a renderização condicional funciona com uma aula gratuita na Vue School</VideoLesson>
 
 ## `v-if`
 

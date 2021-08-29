@@ -4,7 +4,7 @@ Uma necessidade comum de interligação de dados é manipular as classes dos ele
 
 ## Interligando Classes HTML
 
-<VideoLesson href="https://vueschool.io/lessons/dynamic-css-classes-with-vue-3?friend=vuejs" title="Free Vue.js Dynamic Classes Lesson">Watch a free video lesson on Vue School</VideoLesson>
+<VideoLesson href="https://vueschool.io/lessons/dynamic-css-classes-with-vue-3?friend=vuejs" title="Aula grátis sobre classes dinâmicas no Vue.js">Assista a uma vídeo aula gratuita sobre classes dinâmicas na Vue School</VideoLesson>
 
 ### Sintaxe de Objeto
 

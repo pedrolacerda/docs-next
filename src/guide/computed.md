@@ -4,7 +4,7 @@
 
 > Originalmente, Propriedades Computadas _(Computed Properties)_. Entretanto, a adaptação "Dados Computados" foi eleita devido suas utilizações em _templates_ serem efetivamente similares às utilizações de `data`.
 
-<VideoLesson href="https://vueschool.io/lessons/computed-properties-in-vue-3?friend=vuejs" title="Learn how computed properties work with Vue School">Learn how computed properties work with a free lesson on Vue School</VideoLesson>
+<VideoLesson href="https://vueschool.io/lessons/computed-properties-in-vue-3?friend=vuejs" title="Aprenda como dados computados funcionam com a Vue School">Aprenda como dados computados funcionam com uma aula gratuita na Vue School</VideoLesson>
 
 Expressões dentro de _templates_ são muito convenientes, mas são destinadas à realização de operações simples. Adicionar muita lógica em seus _templates_ podem torná-los abarrotados de código e dificultar a manutenção. Vamos tomar como exemplo o seguinte objeto, com um vetor _(array)_ incluso:
 

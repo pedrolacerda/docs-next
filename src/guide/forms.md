@@ -1,6 +1,6 @@
 # Interligações em Formulários
 
-<VideoLesson href="https://vueschool.io/lessons/user-inputs-vue-devtools-in-vue-3?friend=vuejs" title="Learn how to handle form inputs on Vue School">Learn how to work with form inputs with a free Vue School lesson</VideoLesson>
+<VideoLesson href="https://vueschool.io/lessons/user-inputs-vue-devtools-in-vue-3?friend=vuejs" title="Aprenda a manipular os inputs de formulários na Vue School">Aprenda a trabalhar com inputs de formulário com uma aula gratuita da Vue School</VideoLesson>
 
 ## Uso Básico
 
