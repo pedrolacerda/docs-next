@@ -160,15 +160,15 @@ const sidebar = {
     },
     '/api/composition-api',
     {
-      title: 'Single File Components',
+      title: 'Componentes Single-File',
       collapsable: false,
       children: [
         {
-          title: 'Spec',
+          title: 'Especificação',
           path: '/api/sfc-spec'
         },
         {
-          title: 'Tooling',
+          title: 'Ferramentas',
           path: '/api/sfc-tooling'
         },
         {
@@ -176,7 +176,7 @@ const sidebar = {
           path: '/api/sfc-script-setup'
         },
         {
-          title: '<style> Features',
+          title: 'Recursos do <style>',
           path: '/api/sfc-style'
         }
       ]
@@ -203,7 +203,7 @@ const sidebar = {
     '/guide/migration/introduction',
     '/guide/migration/migration-build',
     {
-      title: 'Details',
+      title: 'Detalhes',
       collapsable: false,
       children: [
         '/guide/migration/array-refs',
@@ -255,7 +255,7 @@ const sidebar = {
   ],
   contributing: [
     {
-      title: 'Contribute to the Docs',
+      title: 'Contribua com a Documentação',
       collapsable: false,
       children: [
         '/guide/contributing/writing-guide',
@@ -353,11 +353,11 @@ module.exports = {
             link: '/examples/markdown'
           },
           {
-            text: 'Contribute',
+            text: 'Contribua',
             link: '/guide/contributing/writing-guide'
           },
           {
-            text: 'Migration from Vue 2',
+            text: 'Migração do Vue 2',
             link: '/guide/migration/introduction'
           }
         ]
@@ -445,15 +445,15 @@ module.exports = {
         ]
       },
       {
-        text: 'Translations',
+        text: 'Traduções',
         link: '#',
         items: [
           // Translation maintainers: Please include the link below to the English documentation
-          // {
-          //   text: 'English',
-          //   link: 'https://v3.vuejs.org/',
-          //   isTranslation: true
-          // },
+          {
+            text: 'English',
+            link: 'https://v3.vuejs.org/',
+            isTranslation: true
+          },
           {
             text: '中文',
             link: 'https://v3.cn.vuejs.org/',
@@ -475,7 +475,7 @@ module.exports = {
             isTranslation: true
           },
           {
-            text: 'More Translations',
+            text: 'Mais Traduções',
             link: '/guide/contributing/translations#community-translations'
           }
         ]
