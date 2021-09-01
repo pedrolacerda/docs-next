@@ -2,12 +2,12 @@
   <footer class="page-edit">
     <div class="container">
       <p>
-        Deployed on
+        Deploy feito via
         <a href="https://url.netlify.com/HJ8X2mxP8">Netlify</a>.
         <template v-if="editLink">
           <br />
           <span class="edit-link">
-          Caught a mistake or want to contribute to the documentation?
+          Encontrou um erro ou deseja contribuir com a documentação?
             <a
               :href="editLink"
               target="_blank"
@@ -37,7 +37,7 @@ export default {
 
   computed: {
     lastUpdated() {
-      return this.$page.lastUpdated
+      return new Date(this.$page.lastUpdated).toLocaleString()
     },
 
     lastUpdatedText() {
