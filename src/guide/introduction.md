@@ -313,11 +313,11 @@ Em uma aplicação grande, é essencial dividir todo o aplicativo em componentes
 
 ### Relação com Elementos Customizados
 
-Você pode ter notado que componentes Vue são similares aos **Elementos Customizados**, parte da [Especificação de Web Components](https://www.w3.org/wiki/WebComponents/). Indeed, parts of Vue's component design (for example the slot API) were influenced by the spec before it was natively implemented in browsers.
+Você pode ter notado que componentes Vue são similares aos **Elementos Customizados**, parte da [Especificação de Web Components](https://www.w3.org/wiki/WebComponents/). Na verdade, partes do design de componentes do Vue (por exemplo, o slot de API) foram influenciados pela especificação antes de serem implementados nativamente nos navegadores.
 
-The main difference is that Vue's component model is designed as a part of a coherent framework that provides many additional features necessary for building non-trivial applications, for example reactive templating and state management - both of which the spec does not cover.
+A principal diferença é que o modelo de componentes do Vue é projetado como parte de uma estrutura coerente, que fornece muitos recursos adicionais necessários para a construção de aplicativos não triviais, por exemplo, modelagem reativa e gerenciamento de estado - ambos os quais a especificação não cobre.
 
-Vue also provides great support for both consuming and creating custom elements. For more details, check out the [Vue and Web Components](/guide/web-components.html) section.
+O Vue também oferece um ótimo suporte para consumir e criar elementos personalizados. Para obter mais detalhes, verifique a seção [Vue e Web Components](/guide/web-components.html).
 
 ## Pronto para Mais?
 
