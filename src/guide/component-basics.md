@@ -406,10 +406,10 @@ Isso é tudo que você precisa saber sobre componentes dinâmicos por hora mas, 
 
 ## Ressalvas na Análise do _template_ DOM
 
-If you are writing your Vue templates directly in the DOM, Vue will have to retrieve the template string from the DOM. This leads to some caveats due to browsers' native HTML parsing behavior.
+Se você estiver escrevendo seus modelos Vue diretamente no DOM, o Vue terá que recuperar a string do modelo do DOM. Isso leva a algumas advertências devido ao comportamento de análise de HTML nativo dos navegadores.
 
-:::tip
-It should be noted that the limitations discussed below only apply if you are writing your templates directly in the DOM. They do NOT apply if you are using string templates from the following sources:
+:::Dica
+Deve-se observar que as limitações discutidas abaixo se aplicam apenas se você estiver escrevendo seus modelos diretamente no DOM. Eles NÃO se aplicam se você estiver usando modelos de string das seguintes fontes:
 
 - String templates (e.g. `template: '...'`)
 - [Single-file (`.vue`) components](single-file-component.html)
@@ -436,8 +436,8 @@ O componente `<blog-post-row>` será removido como um conteúdo inválido, causa
 </table>
 ```
 
-:::tip
-When used on native HTML elements, the value of `is` must be prefixed with `vue:` in order to be interpreted as a Vue component. This is required to avoid confusion with native [customized built-in elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example).
+:::Dica
+Quando usado em elementos HTML nativos, o valor de `is` deve ser prefixado com `vue:` para ser interpretado como um componente Vue. Isso é necessário para evitar confusão com [elementos integrados personalizados](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example) nativos.
 :::
 
 ### Insensibilidade entre Maiúsculas e Minúsculas
