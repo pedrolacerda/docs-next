@@ -18,22 +18,22 @@ A conversão reativa é "profunda" - ela afeta todas as propriedades aninhadas. 
 function reactive<T extends object>(target: T): UnwrapNestedRefs<T>
 ```
 
-::: tip Note
-`reactive` will unwrap all the deep [refs](./refs-api.html#ref), while maintaining the ref reactivity
+::: tip Nota
+`reactive` irá desempacotar profundamente todas as [refs](./refs-api.html#ref), enquanto mantém a reativida da ref
 
 ```ts
 const count = ref(1)
 const obj = reactive({ count })
 
-// ref will be unwrapped
+// A ref será desempacotada
 console.log(obj.count === count.value) // true
 
-// it will update `obj.count`
+// Isto vai atualizar `obj.count`
 count.value++
 console.log(count.value) // 2
 console.log(obj.count) // 2
 
-// it will also update `count` ref
+// Isto vai apenas atualizar a ref `count`
 obj.count++
 console.log(obj.count) // 3
 console.log(count.value) // 3
@@ -41,8 +41,8 @@ console.log(count.value) // 3
 
 :::
 
-::: warning Important
-When assigning a [ref](./refs-api.html#ref) to a `reactive` property, that ref will be automatically unwrapped.
+::: warning Importante
+Ao atribuir um [ref](./refs-api.html#ref) a uma propriedade `reactive`, este ref será automaticamente desempacotado.
 
 ```ts
 const count = ref(1)
@@ -77,7 +77,7 @@ original.count++
 copy.count++ // aviso!
 ```
 
-As with [`reactive`](#reactive), if any property uses a `ref` it will be automatically unwrapped when it is accessed via the proxy:
+Assim como acontece com [`reactive`](#reactive), se alguma propriedade usar `ref`, este será automaticamente desempacotado quando for acessado pelo proxy:
 
 ```js
 const raw = {
