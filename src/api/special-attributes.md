@@ -65,11 +65,11 @@
   <component :is="currentView"></component>
   ```
 
-- **Usage on native elements** <Badge text="3.1+" />
+- **Uso em elementos nativos** <Badge text="3.1+" />
 
-  When the `is` attribute is used on a native HTML element, it will be interpreted as a [Customized built-in element](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example), which is a native web platform feature.
+  Quando o atributo `is` é usado em um elemento HTML nativo, ele será interpretado como um [Customized built-in element](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example), que é um recurso nativo da plataforma web.
 
-  There is, however, a use case where you may need Vue to replace a native element with a Vue component, as explained in [DOM Template Parsing Caveats](/guide/component-basics.html#dom-template-parsing-caveats). You can prefix the value of the `is` attribute with `vue:` so that Vue will render the element as a Vue component instead:
+  No entanto, há um caso de uso em que você pode precisar do Vue para substituir um elemento nativo por um componente Vue, conforme explicado em [DOM Template Parsing Caveats](/guide/component-basics.html#dom-template-parsing-caveats). Você pode prefixar o valor do atributo `is` com `vue:` para que o Vue renderize o elemento como um componente do Vue: 
 
   ```html
   <table>
