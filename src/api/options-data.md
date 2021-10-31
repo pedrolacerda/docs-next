@@ -177,7 +177,7 @@
 
 - **Detalhes:**
 
-  Um objeto onde as chaves são expressões para observar e os valores são os *callbacks* correspondentes. O valor também pode ser uma string de um nome de método ou um Object que contém opções adicionais. A instância do componente chamará `$watch()` para cada entrada no objeto na inicialização. Veja [$watch](instance-methods.html#watch) para mais informações sobre as opções `deep`, `immediate` e `flush`.
+  Um objeto onde as chaves são propriedades reativas para observar — exemplos incluem as propriedades [data](/api/options-data.html#data-2) ou [computed](/api/options-data.html#computed) — e os valores são os *callbacks* correspondentes. O valor também pode ser uma string de um nome de método ou um Object que contém opções adicionais. A instância do componente chamará `$watch()` para cada entrada no objeto na inicialização. Veja [$watch](instance-methods.html#watch) para mais informações sobre as opções `deep`, `immediate` e `flush`.
 
 - **Exemplo:**
 
