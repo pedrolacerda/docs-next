@@ -1,27 +1,28 @@
-# Diretivas customizadas (Custom Directives)
+# Diretivas Customizadas
 
 ## Introdução
 
-Fora o conjunto de diretivas padrão existente por padrão no core (tipo `v-model` ou `v-show`), o Vue também possibilita registrar diretivas customizadas. Note que no Vue, a forma primária de reuso e abstração de código são os componentes. No entanto, pode haver casos em que você precise um acesso de nível mais baixo aos elementos no DOM, e é aqui que as diretivas customizadas são úteis. Um exemplo seria acionar o foco em um elemento de input, como esse:
+Em adição ao conjunto de diretivas existente por padrão em seu núcleo (como `v-model` ou `v-show`), o Vue te possibilita registrar diretivas customizadas. Note que no Vue, a forma primária de reuso e abstração de código são os componentes - no entanto, pode haver casos em que você precise um acesso de nível mais baixo aos elementos no DOM, e é aqui que as diretivas customizadas são úteis. Um exemplo seria acionar o foco em um elemento `input`, como esse:
 
 <common-codepen-snippet title="Diretivas customizadas: exemplo básico" slug="JjdxaJW" :preview="false" />
 
-Quando a página carregar , o elemento é focado (nota: o `autofocus` não funciona no Safari de mobile). Na verdade, se você não clicou em nada desde que visitou essa página, o input acima deve estar focado agora. Além disso, você pode clicar no botão`Rerun` e o input vai ganhar foco.
+Quando a página carrega, o elemento ganha o foco (nota: o atributo nativo autofocus não funciona no Safari para dispositivos móveis). Na verdade, se você não clicou em nada desde que visitou essa página, o input acima deve estar focado agora. Além disso, você pode clicar no botão `Rerun` e o input vai ganhar foco.
 
 Agora vamos construir a diretiva que faz isso:
 
 ```js
 const app = Vue.createApp({})
-// Registar uma diretiva customizada e global chamada `v-focus`
+// Registra uma diretiva customizada global chamada `v-focus`
 app.directive('focus', {
-  // Quando o elemento é montado ao DOM
+  // Quando o elemento vinculado é inserido no DOM
   mounted(el) {
     // Foca o elemento
     el.focus()
   }
 })
 ```
-Se você quer registrar uma diretiva local, os componentes também aceitam a opção `directives`:
+
+Se você deseja registrar uma diretiva local em vez disso, os componentes também aceitam a opção `directives`:
 
 ```js
 directives: {
@@ -34,43 +35,44 @@ directives: {
 }
 ```
 
-Então no template, você pode usar o novo atributo `v-focus` em qualquer elemento, tipo assim:
+Então no *template*, você pode usar o novo atributo `v-focus` em qualquer elemento, por exemplo:
 
 ```html
 <input v-focus />
 ```
 
-## Funções de hook (Hook Functions)
+## Funções de Gatilhos (Hook Functions)
 
 As funções de hook são as funções que são executadas conforme o estado da diretiva e há uma variedade disponível para uso (todas opcionais):
 
-- `created`: called before the bound element's attributes or event listeners are applied. This is useful in cases where the directive needs to attach event listeners that must be called before normal `v-on` event listeners.
+- `created`: Executa antes que os atributos do elemento vinculado ou ouvintes de evento sejam aplicados. Isso é útil nos casos em que a diretiva precisa anexar ouvintes de eventos que devem ser chamados antes dos ouvintes de eventos `v-on` normais.
 
 - `beforeMount`: Executa quando a diretiva é ligada pela primeira vez ao elemento e antes que o componente pai seja montado. Aí é onde você pode fazer o trabalho de configuração inicial.
 
 - `mounted`: Executa quando o componente pai do elemento ligado é montado.
 
-- `beforeUpdate`: Executa antes que os VNode contido no componente são atualizados.
+- `beforeUpdate`: Executa antes que o VNode contido no componente seja atualizado.
 
-> Nota:
-> Vamos cobrir VNodes com mais detalhes [depois](render-function.html#the-virtual-dom-tree), quando discutirmos as funções de renderização (render functions).
+:::tip Nota
+Vamos cobrir VNodes com mais detalhes [depois](render-function.html#the-virtual-dom-tree), quando discutirmos as funções de renderização (render functions).
+:::
 
-- `updated`: Executado após os VNodes contidos no componente **e os filhos desses VNodes** terem sido atualizados.
+- `updated`: Executado após o VNode contido no componente **e os VNodes de seus filhos** terem sido atualizados.
 
 - `beforeUnmount`: Executado antes do pai dos elementos ligados sejam desmontados.
 
 - `unmounted`: Executado apenas uma vez, quando a diretiva é desligada do elemento e o componente pai é desmontado
 
-Você pode checar os argumentos que foram passados para esses hooks (ex: `el`, `binding`, `vnode` e `prevNode`) em [API de diretivas customizadas](../api/application-api.html#directive)
+Você pode checar os argumentos que foram passados para esses hooks (ex: `el`, `binding`, `vnode` e `prevNode`) em [API de Diretivas Customizadas](../api/application-api.html#directive)
 
-### Argumentos dinâmicos da diretiva
+### Argumentos Dinâmicos de Diretiva
 
-Os argumentos da diretiva podem ser dinâmicos. Por exemplo, em `v-minhadiretiva:[argumento]="valor"`, o `argumento` pode ser atualizado baseada nas propriedades de dados na nossa instância do componente! Isso faz nossas diretivas customizadas flexíveis para utilizar na aplicação.
+Os argumentos da diretiva podem ser dinâmicos. Por exemplo, em `v-mydirective:[argument]="value"`, o `argument` pode ser atualizado baseada nas propriedades de dados na nossa instância do componente! Isso faz nossas diretivas customizadas flexíveis para utilizar na aplicação.
 
 Digamos que você queira fazer uma diretiva customizada que permite "pregar" elementos na sua página utilizando posicionamento fixo. Nós poderiamos criar uma diretiva customizada onde o valor atualiza a posição vertical em pixels, desse jeito:
 
 ```vue-html
-<div id="exemplo-argumentos-dinamicos" class="demo">
+<div id="dynamic-arguments-example" class="demo">
   <p>Role para baixo</p>
   <p v-pin="200">Me pregue 200px do topo da página</p>
 </div>
@@ -87,15 +89,15 @@ app.directive('pin', {
   }
 })
 
-app.mount('#exemplo-argumentos-dinamicos')
+app.mount('#dynamic-arguments-example')
 ```
 
-Isso iria pregar o elemento 200 px do topo da página. Mas o que acontece quando encontramos um cenário que precisamos pregar um elemento da esquerda, ao invés do topo? É aqui que os argumentos dinâmicos que podem ser atualizados por instância de componente são úteis:
+Isso iria pregar o elemento 200px do topo da página. Mas o que acontece quando encontramos um cenário que precisamos pregar um elemento da esquerda, ao invés do topo? É aqui que os argumentos dinâmicos que podem ser atualizados por instância de componente são úteis:
 
 ```vue-html
-<div id="exemplodinamico">
+<div id="dynamicexample">
   <h3>Role para baixo nessa seção ↓</h3>
-  <p v-pin:[direction]="200">Estou pregado na página a 200 px para a esquerda.</p>
+  <p v-pin:[direction]="200">Estou pregado na página 200px à esquerda.</p>
 </div>
 ```
 
@@ -124,10 +126,10 @@ Resultado:
 
 <common-codepen-snippet title="Diretivas customizadas: argumentos dinâmicos" slug="YzXgGmv" :preview="false" />
 
-A nossa diretiva customizada agora está flexível o suficiente para atender a vários casos diferentes. Para deixá-lo mais dinâmico, podemos possibilitar alterar um valor ligado. Vamos criar uma propriedade adicional `pinPadding` e ligar ao `<input type="range">`
+A nossa diretiva customizada agora está flexível o suficiente para atender a vários casos diferentes. Para deixá-lo mais dinâmico, podemos possibilitar alterar um valor vinculado. Vamos criar uma propriedade adicional `pinPadding` e vincular ao `<input type="range">`
 
 ```vue-html{4}
-<div id="exemplodinamico">
+<div id="dynamicexample">
   <h2>Role a página para baixo</h2>
   <input type="range" min="0" max="500" v-model="pinPadding">
   <p v-pin:[direction]="pinPadding">Me pregue {{ pinPadding + 'px' }} da {{ direction || 'top' }} da página</p>
@@ -165,9 +167,9 @@ Resultado:
 
 <common-codepen-snippet title="Diretivas customizadas: argumentos dinâmicos + vínculo dinâmico" slug="rNOaZpj" :preview="false" />
 
-## Atalho de função (Function Shorthand)
+## Atalho da Função (Function Shorthand)
 
-No exemplo anterior, você pode querer o mesmo comportamento no `mounted` e `updated`, mas não liga para os outros hooks. Você pode fazer isso passando a callback para a diretiva:
+No exemplo anterior, você pode desejar o mesmo comportamento no `mounted` e `updated`, mas não liga para os outros gatilhos. Você pode fazer isso passando a *callback* para a diretiva:
 
 ```js
 app.directive('pin', (el, binding) => {
@@ -177,24 +179,24 @@ app.directive('pin', (el, binding) => {
 })
 ```
 
-## Objetos literais (Object Literals)
+## Objetos Literais (Object Literals)
 
-Se a sua diretiva precisa de múltiplos valores, você também pode passar um objeto literal do javascript. Lembre-se que as diretivas pode receber qualquer expressão válida em javascript.
+Se a sua diretiva precisa de múltiplos valores, você também pode passar um objeto literal do javascript. Lembre-se que as diretivas pode receber qualquer expressão Javascript válida.
 
 ```vue-html
-<div v-demo="{ color: 'white', text: 'ola!!' }"></div>
+<div v-demo="{ color: 'white', text: 'olá!!' }"></div>
 ```
 
 ```js
 app.directive('demo', (el, binding) => {
   console.log(binding.value.color) // => "white"
-  console.log(binding.value.text) // => "ola!"
+  console.log(binding.value.text) // => "olá!"
 })
 ```
 
-## Utilização nos componentes
+## Uso em Componentes
 
-When used on components, custom directive will always apply to component's root node, similarly to [non-prop attributes](component-attrs.html).
+Quando usada em componentes, a diretiva customizada sempre se aplicará ao nó raiz do componente, de forma semelhante a [atributos não-prop](component-attrs.html).
 
 ```vue-html
 <my-component v-demo="test"></my-component>
@@ -203,13 +205,13 @@ When used on components, custom directive will always apply to component's root 
 ```js
 app.component('my-component', {
   template: `
-    <div> // v-demo directive will be applied here
-      <span>My component content</span>
+    <div> // a diretiva v-demo será aplicada aqui
+      <span>Conteúdo do meu componente</span>
     </div>
   `
 })
 ```
 
-Unlike attributes, directives can't be passed to a different element with `v-bind="$attrs"`.
+Ao contrário dos atributos, as diretivas não podem ser passadas para um elemento diferente com `v-bind="$attrs"`.
 
-With [fragments](/guide/migration/fragments.html#overview) support, components can potentially have more than one root nodes. When applied to a multi-root component, directive will be ignored and the warning will be thrown.
+Com o suporte de [fragmentos](/guide/migration/fragments.html#visao-geral), os componentes podem ter potencialmente mais de um nó raiz. Quando aplicada a um componente de múltiplas raízes, a diretiva será ignorada e o aviso será lançado.
