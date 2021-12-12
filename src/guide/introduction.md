@@ -10,6 +10,8 @@ Vue (pronuncia-se /vjuː/, como **view**, em inglês) é um **framework progress
 
 Se você gostaria de saber mais sobre Vue antes de mergulhar nele, nós <a id="modal-player" class="vuemastery-trigger" href="#">criamos um vídeo</a> (em inglês) passeando pelos princípios básicos e um exemplo de projeto.
 
+<VideoLesson href="https://www.vuemastery.com/courses/intro-to-vue-3/intro-to-vue3" title="Watch a free video course on Vue Mastery">Watch a free video course on Vue Mastery</VideoLesson>
+
 <common-vuemastery-video-modal/>
 
 ## Primeiros Passos
@@ -53,7 +55,7 @@ Vue.createApp(Counter).mount('#counter')
 Acabamos de criar nosso primeiro aplicativo Vue! Isso parece muito similar a renderizar uma _template string_, mas o Vue fez bastante trabalho interno. Os dados e o DOM estão agora interligados e tudo se tornou **reativo**. Como podemos ter certeza? Dê uma olhada no exemplo a seguir, onde a propriedade `counter` incrementa a cada segundo, e você verá como o DOM renderizado muda:
 
 ```js{8-10}
-const CounterApp = {
+const Counter = {
   data() {
     return {
       counter: 0
@@ -179,7 +181,7 @@ Este exemplo demonstra que nós podemos interligar dados não apenas ao texto e 
 
 Você pode alterar `seen` de `true` para `false` no exemplo abaixo para ver em ação:
 
-<common-codepen-snippet title="Renderização condicional" slug="yLOGzVK" />
+<common-codepen-snippet title="Renderização condicional" slug="yLOGzVK" tab="js,result" />
 
 Existem mais algumas diretivas, cada uma com sua própria funcionalidade. Por exemplo, a diretiva `v-for` pode ser usada para exibir uma lista de itens usando dados de um Array:
 
@@ -297,7 +299,7 @@ app.mount('#todo-list-app')
 
 Este é um exemplo fictício, mas conseguimos separar nossa aplicação em duas pequenas unidades, sendo que o componente filho está razoavelmente bem desacoplado do componente pai graças à funcionalidade de `props`. Podemos agora melhorar nosso componente `<todo-item>` com _template_ e lógica mais complexos, sem afetar o restante.
 
-Em uma aplicação grande, é essencial dividir todo o aplicativo em componentes para tornar o desenvolvimento gerenciável. Falaremos mais sobre componentes [futuramente neste guia](component-basics.md), mas aqui está um exemplo (imaginário) da aparência que o _template_ de um aplicativo poderia ter com o uso de componentes:
+Em uma aplicação grande, é essencial dividir todo o aplicativo em componentes para tornar o desenvolvimento gerenciável. Falaremos mais sobre componentes [futuramente neste guia](component-basics.html), mas aqui está um exemplo (imaginário) da aparência que o _template_ de um aplicativo poderia ter com o uso de componentes:
 
 ```html
 <div id="app">
@@ -311,15 +313,11 @@ Em uma aplicação grande, é essencial dividir todo o aplicativo em componentes
 
 ### Relação com Elementos Customizados
 
-Você pode ter notado que componentes Vue são similares aos **Elementos Customizados**, parte da [Especificação de Web Components](https://www.w3.org/wiki/WebComponents/). Isto ocorre pois a sintaxe de componentes Vue foi vagamente modelada a partir da especificação. Por exemplo, implementamos a [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) e o atributo especial `is`. Entretanto, existem algumas diferenças fundamentais:
+Você pode ter notado que componentes Vue são similares aos **Elementos Customizados**, parte da [Especificação de Web Components](https://www.w3.org/wiki/WebComponents/). Indeed, parts of Vue's component design (for example the slot API) were influenced by the spec before it was natively implemented in browsers.
 
-1. A Especificação de Web Components foi finalizada, mas não está nativamente implementada em todos os navegadores. O Safari 10.1+, Chrome 54+ e Firefox 63+ suportam nativamente os componentes da Web. Em comparação, componentes Vue funcionam consistentemente em todos os navegadores suportados (IE11 com o _build_ de compatibilidade e superiores). Quando necessário, componentes Vue também podem ser envolvidos dentro de um elemento customizado nativo.
+The main difference is that Vue's component model is designed as a part of a coherent framework that provides many additional features necessary for building non-trivial applications, for example reactive templating and state management - both of which the spec does not cover.
 
-[//]: # 'TODO: vincular a _build_ de compatibilidade'
-
-2. Componentes Vue oferecem importantes recursos não disponíveis em elementos customizados tradicionais, mais notavelmente: fluxo de dados entre componentes, comunicação com eventos customizados e integração com ferramentas de _build_.
-
-Embora o Vue não use elementos personalizados internamente, há [ótima interoperabilidade](https://custom-elements-everywhere.com/#vue) quando se trata de consumir ou distribuir como elementos personalizados. O Vue CLI também suporta a criação de componentes Vue que se registram como elementos personalizados nativos.
+Vue also provides great support for both consuming and creating custom elements. For more details, check out the [Vue and Web Components](/guide/web-components.html) section.
 
 ## Pronto para Mais?
 

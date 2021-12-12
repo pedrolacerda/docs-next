@@ -4,6 +4,8 @@
 
 > Originalmente, Propriedades Computadas _(Computed Properties)_. Entretanto, a adaptação "Dados Computados" foi eleita devido suas utilizações em _templates_ serem efetivamente similares às utilizações de `data`.
 
+<VideoLesson href="https://vueschool.io/lessons/computed-properties-in-vue-3?friend=vuejs" title="Aprenda como dados computados funcionam com a Vue School">Aprenda como dados computados funcionam com uma aula gratuita na Vue School</VideoLesson>
+
 Expressões dentro de _templates_ são muito convenientes, mas são destinadas à realização de operações simples. Adicionar muita lógica em seus _templates_ podem torná-los abarrotados de código e dificultar a manutenção. Vamos tomar como exemplo o seguinte objeto, com um vetor _(array)_ incluso:
 
 ```js
@@ -71,12 +73,7 @@ Vue.createApp({
 
 Resultado:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="vuejs-br" data-slug-hash="vYGVjaO" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo básico de Dados Computados">
-  <span>Veja o exemplo <a href="https://codepen.io/vuejs-br/pen/vYGVjaO">
-  Exemplo básico de Dados Computados</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Exemplo básico de Dados Computados" slug="vYGVjaO" tab="js,result" :preview="false" />
 
 Aqui declaramos um dado computado _(computed property)_ chamado `publishedBooksMessage`.
 
@@ -202,16 +199,11 @@ Por exemplo:
 
 Resultado:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="vuejs-br" data-slug-hash="XWdxqYx" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo básico de Observadores">
-  <span>Veja o exemplo <a href="https://codepen.io/vuejs-br/pen/XWdxqYx">
-  Exemplo básico de Observadores</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Exemplo básico de Observadores" slug="XWdxqYx" tab="result" :preview="false" />
 
 Neste caso, ao usarmos `watch`, podemos executar uma operação assíncrona — como adquirir informações de uma _API_ — e, até mesmo, condições para executá-la. Isto não seria possível através da utilização de dados computados _(computed properties)_.
 
-Além da opção `watch`, também é possível utilizar, de maneira imperativa, a [API vm.\$watch](../api/instance-methods.html#watch).
+In addition to the `watch` option, you can also use the imperative [vm.$watch API](../api/instance-methods.html#watch).
 
 ### Dados Computados vs Observadores
 

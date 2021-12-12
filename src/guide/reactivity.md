@@ -1,77 +1,112 @@
-# Reactivity in Depth
+# Aprofundando-se na Reatividade
 
-Now it’s time to take a deep dive! One of Vue’s most distinct features is the unobtrusive reactivity system. Models are proxied JavaScript objects. When you modify them, the view updates. It makes state management simple and intuitive, but it’s also important to understand how it works to avoid some common gotchas. In this section, we are going to dig into some of the lower-level details of Vue’s reactivity system.
+Agora é o momento de mergulhar fundo! Uma das características mais distintas do Vue é o seu discreto sistema de reatividade. Os modelos de dados são _proxies_ de objetos JavaScript. Quando você os modifica, a _view_ é atualizada. Isso faz com que a administração de estado seja simples e intuitiva, mas também é importante entender como isso funciona para evitar algumas pegadinhas. Nesta seção, vamos nos aprofundar em alguns dos detalhes de baixo nível do sistema de reatividade do Vue.
 
-<VideoLesson href="https://www.vuemastery.com/courses/vue-3-reactivity/vue3-reactivity" title="Learn how how reactivity works in depth with Vue Mastery">Watch a free video on Reactivity in Depth on Vue Mastery</VideoLesson>
+<VideoLesson href="https://www.vuemastery.com/courses/vue-3-reactivity/vue3-reactivity" title="Aprenda a fundo como a reatividade funciona com o Vue Mastery">Assista um vídeo gratuito sobre Aprofundando-se na Reatividade no Vue Mastery</VideoLesson>
 
-## What is Reactivity?
+## O Que é Reatividade?
 
-This term comes up in programming quite a bit these days, but what do people mean when they say it? Reactivity is a programming paradigm that allows us to adjust to changes in a declarative manner. The canonical example that people usually show, because it’s a great one, is an excel spreadsheet.
+Esse termo aparece na programação com uma certa frequência atualmente, mas o que realmente significa quando as pessoas o dizem? Reatividade é um paradigma da programação que permite nos ajustarmos à mudanças de uma maneira declarativa. O exemplo canônico geralmente mostrado, por ser ótimo, é uma planilha do Excel.
 
 <video width="550" height="400" controls>
   <source src="/images/reactivity-spreadsheet.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+  Seu navegador não possui suporte para a tag video.
 </video>
 
-If you put the number two in the first cell, and the number 3 in the second and asked for the SUM, the spreadsheet would give it to you. No surprises there. But if you update that first number, the SUM automagically updates too.
+Se você colocar o número 2 na primeira célula, e o número 3 na segunda e então utilizar o SUM, a planilha te dará o resultado. Até aqui nada demais. Mas se você atualizar o primeiro número, o SUM é automagicamente atualizado.
 
-JavaScript doesn’t usually work like this -- If we were to write something comparable in JavaScript:
+O JavaScript, geralmente, não funciona assim. Se escrevêssemos algo semelhante em Javascript:
 
 ```js
-var val1 = 2
-var val2 = 3
-var sum = val1 + val2
+let val1 = 2
+let val2 = 3
+let sum = val1 + val2
 
-// sum
-// 5
+console.log(sum) // 5
 
 val1 = 3
 
-// sum
-// 5
+console.log(sum) // Still 5
 ```
 
-If we update the first value, the sum is not adjusted.
+Ao atualizarmos o primeiro valor, a soma não é ajustada.
 
-So how would we do this in JavaScript?
+Então, como faríamos isso em JavaScript?
 
-- Detect when there’s a change in one of the values
-- Track the function that changes it
-- Trigger the function so it can update the final value
+Como uma visão geral de alto nível, existem algumas coisas que precisamos ser capazes de fazer:
 
-## How Vue Tracks These Changes
+1. **Rastrear quando um valor é lido.** ex: `val1 + val2` lê `val1` e `val2`.
+2. **Detectar quando um valor muda.** ex: Quando atribuímos `val1 = 3`.
+3. **Execute novamente o código que leu o valor originalmente.** ex: Execute `sum = val1 + val2` novamente para atualizar o valor de `sum`.
 
-When you pass a plain JavaScript object to an application or component instance as its `data` option, Vue will walk through all of its properties and convert them to [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) using a handler with getters and setters. This is an ES6-only feature, but we offer a version of Vue 3 that uses the older `Object.defineProperty` to support IE browsers. Both have the same surface API, but the Proxy version is slimmer and offers improved performance.
+Não podemos fazer isso diretamente usando o código do exemplo anterior, mas voltaremos a este exemplo mais tarde para ver como adaptá-lo para ser compatível com o sistema de reatividade do Vue.
+
+Primeiro, vamos nos aprofundar um pouco mais em como o Vue implementa os requisitos básicos de reatividade descritos acima.
+
+## Como Vue Sabe o Código Executando
+
+Para poder executar nossa soma sempre que os valores mudarem, a primeira coisa que precisamos fazer é envolvê-la em uma função:
+
+```js
+const updateSum = () => {
+  sum = val1 + val2
+}
+```
+
+But how do we tell Vue about this function?
+
+Vue keeps track of which function is currently running by using an *effect*. An effect is a wrapper around the function that initiates tracking just before the function is called. Vue knows which effect is running at any given point and can run it again when required.
+
+To understand that better, let's try to implement something similar ourselves, without Vue, to see how it might work.
+
+What we need is something that can wrap our sum, like this:
+
+```js
+createEffect(() => {
+  sum = val1 + val2
+})
+```
+
+We need `createEffect` to keep track of when the sum is running. We might implement it something like this:
+
+```js
+// Maintain a stack of running effects
+const runningEffects = []
+
+const createEffect = fn => {
+  // Wrap the passed fn in an effect function
+  const effect = () => {
+    runningEffects.push(effect)
+    fn()
+    runningEffects.pop()
+  }
+
+  // Automatically run the effect immediately
+  effect()
+}
+```
+
+When our effect is called it pushes itself onto the `runningEffects` array, before calling `fn`. Anything that needs to know which effect is currently running can check that array.
+
+Effects act as the starting point for many key features. For example, both component rendering and computed properties use effects internally. Any time something magically responds to data changes you can be pretty sure it has been wrapped in an effect.
+
+While Vue's public API doesn't include any way to create an effect directly, it does expose a function called `watchEffect` that behaves a lot like the `createEffect` function from our example. We'll discuss that in more detail [later in the guide](/guide/reactivity-computed-watchers.html#watcheffect).
+
+But knowing what code is running is just one part of the puzzle. How does Vue know what values the effect uses and how does it know when they change?
+
+## Como o Vue Rastreia Essas Mudanças
+
+Não podemos rastrear reatribuições de variáveis ​​locais como aquelas em nossos exemplos anteriores, simplesmente não há mecanismo para fazer isso em JavaScript. O que podemos rastrear são as mudanças nas propriedades do objeto.
+
+Quando retornamos um objeto JavaScript simples da função de `data` de um componente, O Vue envolverá esse objeto em um [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) com manipuladores para `get` e `set`. Os proxies foram introduzidos no ES6 e permitem que o Vue 3 evite algumas das limitações de reatividade que existiam nas versões anteriores do Vue.
 
 <div class="reactivecontent">
-  <iframe height="500" style="width: 100%;" scrolling="no" title="Proxies and Vue's Reactivity Explained Visually" src="https://codepen.io/sdras/embed/zYYzjBg?height=500&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-    See the Pen <a href='https://codepen.io/sdras/pen/zYYzjBg'>Proxies and Vue's Reactivity Explained Visually</a> by Sarah Drasner
-    (<a href='https://codepen.io/sdras'>@sdras</a>) on <a href='https://codepen.io'>CodePen</a>.
-  </iframe>
+  <common-codepen-snippet title="Proxies e a Reatividade do Vue Explicados Visualmente" slug="VwmxZXJ" tab="result" theme="light" :height="500" :editable="false" :preview="false" />
 </div>
 
-That was rather quick and requires some knowledge of [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) to understand! So let’s dive in a bit. There’s a lot of literature on Proxies, but what you really need to know is that a **Proxy is an object that encases another object or function and allows you to intercept it.**
+A explicação anterior foi breve e requer algum conhecimento de [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) para ser entendida! Então vamos nos aprofundar um pouco. Há muita literatura sobre Proxies, mas o que você realmente precisa saber é que um **Proxy é um objeto que encapsula um outro objeto ou função e permite que você o intercepte.**
 
-We use it like this: `new Proxy(target, handler)`
-
-```js
-const dinner = {
-  meal: 'tacos'
-}
-
-const handler = {
-  get(target, prop) {
-    return target[prop]
-  }
-}
-
-const proxy = new Proxy(dinner, handler)
-console.log(proxy.meal)
-
-// tacos
-```
-
-Ok, so far, we’re just wrapping that object and returning it. Cool, but not that useful yet. But watch this, we can also intercept this object while we wrap it in the Proxy. This interception is called a trap.
+Nós o utilizamos assim: `new Proxy(target, handler)`
 
 ```js
 const dinner = {
@@ -79,22 +114,24 @@ const dinner = {
 }
 
 const handler = {
-  get(target, prop) {
-    console.log(‘intercepted!’)
-    return target[prop]
+  get(target, property) {
+    console.log('interceptado!')
+    return target[property]
   }
 }
 
 const proxy = new Proxy(dinner, handler)
 console.log(proxy.meal)
 
-// intercepted!
+// interceptado!
 // tacos
 ```
 
-Beyond a console log, we could do anything here we wish. We could even _not_ return the real value if we wanted to. This is what makes Proxies so powerful for creating APIs.
+Aqui, interceptamos tentativas de ler propriedades do objeto-alvo. Uma função manipuladora como essa também é conhecida como *armadilha* (*trap*). Existem muitos tipos diferentes de armadilhas disponíveis, cada uma lidando com um tipo diferente de interação.
 
-Furthermore, there’s another feature Proxies offer us. Rather than just returning the value like this: `target[prop]`, we could take this a step further and use a feature called `Reflect`, which allows us to do proper `this` binding. It looks like this:
+Indo além de um `console.log`, nós poderíamos fazer aqui qualquer coisa que desejássemos. Poderíamos até mesmo _não_ retornar o valor real se quiséssemos. Isso é o que torna os Proxies tão poderosos para a criação de APIs.
+
+Um desafio de usar um proxy é a vinculação de `this`. Gostaríamos que qualquer método fosse vinculado ao Proxy, em vez do objeto-alvo, para que também possamos interceptá-los. Felizmente, o ES6 introduziu outro novo recurso, chamado `Reflect`, que nos permite fazer esse problema desaparecer com o mínimo de esforço:
 
 ```js{7}
 const dinner = {
@@ -102,7 +139,7 @@ const dinner = {
 }
 
 const handler = {
-  get(target, prop, receiver) {
+  get(target, property, receiver) {
     return Reflect.get(...arguments)
   }
 }
@@ -110,11 +147,11 @@ const handler = {
 const proxy = new Proxy(dinner, handler)
 console.log(proxy.meal)
 
-// intercepted!
+// interceptado!
 // tacos
 ```
 
-We mentioned before that in order to have an API that updates a final value when something changes, we’re going to have to set new values when something changes. We do this in the handler, in a function called `track`, where we pass in the `target` and `key`.
+A primeira etapa para implementar reatividade com um proxy é controlar quando uma propriedade é lida. Fazemos isso no manipulador, em uma função chamada `track`, onde passamos `target` e `property`:
 
 ```js{7}
 const dinner = {
@@ -122,8 +159,8 @@ const dinner = {
 }
 
 const handler = {
-  get(target, prop, receiver) {
-    track(target, prop)
+  get(target, property, receiver) {
+    track(target, property)
     return Reflect.get(...arguments)
   }
 }
@@ -131,11 +168,13 @@ const handler = {
 const proxy = new Proxy(dinner, handler)
 console.log(proxy.meal)
 
-// intercepted!
+// interceptado!
 // tacos
 ```
 
-Finally, we also set new values when something changes. For this, we’re going to set the changes on our new proxy, by triggering those changes:
+A implementação de `track` não é mostrada aqui. Ele verificará qual *efeito* está sendo executado e registrará junto de `target` e `property`. É assim que Vue sabe que a propriedade é uma dependência do efeito.
+
+Finalmente, precisamos executar novamente o efeito quando o valor da propriedade mudar. Para isso, vamos precisar de um manipulador `set` em nosso *proxy*:
 
 ```js
 const dinner = {
@@ -143,12 +182,12 @@ const dinner = {
 }
 
 const handler = {
-  get(target, prop, receiver) {
-    track(target, prop)
+  get(target, property, receiver) {
+    track(target, property)
     return Reflect.get(...arguments)
   },
-  set(target, key, value, receiver) {
-    trigger(target, key)
+  set(target, property, value, receiver) {
+    trigger(target, property)
     return Reflect.set(...arguments)
   }
 }
@@ -156,30 +195,70 @@ const handler = {
 const proxy = new Proxy(dinner, handler)
 console.log(proxy.meal)
 
-// intercepted!
+// interceptado!
 // tacos
 ```
 
-Remember this list from a few paragraphs ago? Now we have some answers to how Vue handles these changes:
+Lembra desta lista de anteriormente? Agora temos algumas respostas sobre como o Vue implementa essas etapas principais:
 
-- <strike>Detect when there’s a change in one of the values</strike>: we no longer have to do this, as Proxies allow us to intercept it
-- **Track the function that changes it**: We do this in a getter within the proxy, called `effect`
-- **Trigger the function so it can update the final value**: We do in a setter within the proxy, called `trigger`
+1. **Rastrear quando um valor for lido**: a função `track` no manipulador `get` do *proxy* registra a propriedade e o efeito atual.
+2. **Detectar quando esse valor mudar**: o manipulador `set` é chamado no *proxy*.
+3. **Execute novamente o código que leu o valor originalmente:** a função `trigger` procura quais efeitos dependem da propriedade e os executa.
 
-The proxied object is invisible to the user, but under the hood they enable Vue to perform dependency-tracking and change-notification when properties are accessed or modified. As of Vue 3, our reactivity is now available in a [separate package](https://github.com/vuejs/vue-next/tree/master/packages/reactivity). One caveat is that browser consoles format differently when converted data objects are logged, so you may want to install [vue-devtools](https://github.com/vuejs/vue-devtools) for a more inspection-friendly interface.
+O objeto com o _proxy_ aplicado é invisível para o usuário, mas por baixo dos panos ele possibilita que o Vue faça o rastreamento-de-dependência (_dependency-tracking_) e a notificação-de-mudança (_change-notification_) quando propriedades são acessadas ou modificadas. Um problema é que o _console_ de navegadores formatam diferentemente quando objetos de dados convertidos são registrados no _log_, então pode ser que você queria instalar o [vue-devtools](https://github.com/vuejs/vue-devtools) para uma interface mais amigável à inspeção.
 
-### Proxied Objects
-
-Vue internally tracks all objects that have been made reactive, so it always returns the same proxy for the same object.
-
-When a nested object is accessed from a reactive proxy, that object is _also_ converted into a proxy before being returned:
+Se tivéssemos de reescrever nosso exemplo original usando um componente, poderíamos fazer algo assim:
 
 ```js
+const vm = createApp({
+  data() {
+    return {
+      val1: 2,
+      val2: 3
+    }
+  },
+  computed: {
+    sum() {
+      return this.val1 + this.val2
+    }
+  }
+}).mount('#app')
+
+console.log(vm.sum) // 5
+
+vm.val1 = 3
+
+console.log(vm.sum) // 6
+```
+
+The object returned by `data` will be wrapped in a reactive proxy and stored as `this.$data`. The properties `this.val1` and `this.val2` are aliases for `this.$data.val1` and `this.$data.val2` respectively, so they go through the same proxy.
+
+Vue will wrap the function for `sum` in an effect. When we try to access `this.sum`, it will run that effect to calculate the value. The reactive proxy around `$data` will track that the properties `val1` and `val2` were read while that effect is running.
+
+As of Vue 3, our reactivity is now available in a [separate package](https://github.com/vuejs/vue-next/tree/master/packages/reactivity). The function that wraps `$data` in a proxy is called [`reactive`](/api/basic-reactivity.html#reactive). We can call this directly ourselves, allowing us to wrap an object in a reactive proxy without needing to use a component:
+
+```js
+const proxy = reactive({
+  val1: 2,
+  val2: 3
+})
+```
+
+We'll explore the functionality exposed by the reactivity package over the course of the next few pages of this guide. That includes functions like `reactive` and `watchEffect` that we've already met, as well as ways to use other reactivity features, such as `computed` and `watch`, without needing to create a component.
+
+### Objetos com Proxy Aplicado
+
+O Vue rastreia internamente todos os objetos que foram transformados em reativos, então ele sempre retorna o mesmo proxy de um mesmo objeto.
+
+Quando um objeto aninhado é acessado através de um proxy reativo, esse objeto é _também_ convertido em um proxy antes de ser retornado:
+
+```js{6-7}
 const handler = {
-  get(target, prop, receiver) {
-    track(target, prop)
+  get(target, property, receiver) {
+    track(target, property)
     const value = Reflect.get(...arguments)
     if (isObject(value)) {
+      // Envolve o objeto aninhado em seu próprio proxy reativo
       return reactive(value)
     } else {
       return value
@@ -189,9 +268,9 @@ const handler = {
 }
 ```
 
-### Proxy vs. original identity
+### Proxy vs. Identidade Original
 
-The use of Proxy does introduce a new caveat to be aware with: the proxied object is not equal to the original object in terms of identity comparison (`===`). For example:
+O uso do Proxy de fato introduz um novo empecilho a ser considerado: o objeto com o *proxy* aplicado não é igual ao objeto original em termos de comparação de identidade (`===`). Por exemplo:
 
 ```js
 const obj = {}
@@ -200,32 +279,40 @@ const wrapped = new Proxy(obj, handlers)
 console.log(obj === wrapped) // false
 ```
 
-The original and the wrapped version will behave the same in most cases, but be aware that they will fail
-operations that rely on strong identity comparisons, such as `.filter()` or `.map()`. This caveat is unlikely to come up when using the options API, because all reactive state is accessed from `this` and guaranteed to already be proxies.
+Outras operações que dependem de comparações de igualdade estritas também podem ser afetadas, como `.includes()` ou `.indexOf()`.
 
-However, when using the composition API to explicitly create reactive objects, the best practice is to never hold a reference to the original raw object and only work with the reactive version:
+A prática recomendada aqui é nunca manter uma referência ao objeto bruto original e trabalhar apenas com a versão reativa:
 
 ```js
 const obj = reactive({
   count: 0
-}) // no reference to original
+}) // nenhuma referência ao original
 ```
 
-## Watchers
+Isso garante que as comparações de igualdade e reatividade se comportem conforme o esperado.
 
-Every component instance has a corresponding watcher instance, which records any properties "touched" during the component’s render as dependencies. Later on when a dependency’s setter is triggered, it notifies the watcher, which in turn causes the component to re-render.
+Observe que o Vue não envolve valores primitivos, como números ou strings em um *proxy*, então você ainda pode usar `===` diretamente com esses valores:
+
+```js
+const obj = reactive({
+  count: 0
+})
+
+console.log(obj.count === 0) // true
+```
+
+## Observadores
+
+Toda instância de componente tem uma instância de observador correspondente, que registra quaisquer propriedades "tocadas" durante a renderização do componente como dependências. Depois, quando um setter de uma dependência é disparado, ele notifica o observador, que por sua vez faz o componente re-renderizar.
+
+## How Rendering Reacts to Changes
+
+The template for a component is compiled down into a [`render`](/guide/render-function.html) function. The `render` function creates the [VNodes](/guide/render-function.html#the-virtual-dom-tree) that describe how the component should be rendered. It is wrapped in an effect, allowing Vue to track the properties that are 'touched' while it is running.
+
+A `render` function is conceptually very similar to a `computed` property. Vue doesn't track exactly how dependencies are used, it only knows that they were used at some point while the function was running. If any of those properties subsequently changes, it will trigger the effect to run again, re-running the `render` function to generate new VNodes. These are then used to make the necessary changes to the DOM.
 
 <div class="reactivecontent">
-  <iframe height="500" style="width: 100%;" scrolling="no" title="Second Reactivity with Proxies in Vue 3 Explainer" src="https://codepen.io/sdras/embed/GRJZddR?height=500&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-    See the Pen <a href='https://codepen.io/sdras/pen/GRJZddR'>Second Reactivity with Proxies in Vue 3 Explainer</a> by Sarah Drasner
-    (<a href='https://codepen.io/sdras'>@sdras</a>) on <a href='https://codepen.io'>CodePen</a>.
-  </iframe>
+  <common-codepen-snippet title="Second Reactivity with Proxies in Vue 3 Explainer" slug="wvgqyJK" tab="result" theme="light" :height="500" :editable="false" :preview="false" />
 </div>
 
-When you pass an object to a component instance as data, Vue converts it to a proxy. This proxy enables Vue to perform dependency-tracking and change-notification when properties are accessed or modified. Each property is considered a dependency.
-
-After the first render, a component would have tracked a list of dependencies &mdash; the properties it accessed during the render. Conversely, the component becomes a subscriber to each of these properties. When a proxy intercepts a set operation, the property will notify all of its subscribed components to re-render.
-
-[//]: # 'TODO: Insert diagram'
-
-> If you are using Vue 2.x and below, you may be interested in some of the change detection caveats that exist for those versions, [explored in more detail here](change-detection.md).
+> Se você está utilizando Vue v2.x ou mais antigo, pode estar interessado em alguns empecilhos da detecção de mudanças que existem nessas versões, [explorados em mais detalhes aqui](change-detection.md).

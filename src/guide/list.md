@@ -1,5 +1,7 @@
 # Renderização de Listas
 
+<VideoLesson href="https://vueschool.io/lessons/list-rendering-in-vue-3?friend=vuejs" title="Aprenda a renderizar listas na Vue School">Aprenda como renderizar uma lista com uma aula gratuita da Vue School</VideoLesson>
+
 ## Mapeando um Array de Elementos com `v-for`
 
 Podemos utilizar a diretiva `v-for` para renderizar uma lista de elementos com base nos dados de um Array. A diretiva `v-for` requer uma sintaxe especial na forma de `item in items`, onde `items` é a fonte de dados e `item` é um **apelido** para o elemento que estiver sendo iterado:
@@ -24,12 +26,7 @@ Vue.createApp({
 
 Resultado:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="vuejs-br" data-slug-hash="WNwPbmx" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de v-for com Array">
-  <span>Veja o <a href="https://codepen.io/vuejs-br/pen/WNwPbmx">
-  Exemplo de v-for com Array</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for com Array" slug="WNwPbmx" tab="js,result" :preview="false" />
 
 Dentro de blocos `v-for` temos acesso completo às propriedades do escopo pai. `v-for` também suporta um segundo argumento opcional para o índice do item atual.
 
@@ -53,12 +50,8 @@ Vue.createApp({
 ```
 
 Resultado:
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="css,result" data-user="vuejs-br" data-slug-hash="wvGNBOK" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de v-for com Array e índice">
-   <span>Veja o <a href="https://codepen.io/vuejs-br/pen/wvGNBOK">
-  Exemplo de v-for com Array e índice</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<common-codepen-snippet title="v-for com Array e índice" slug="wvGNBOK" tab="js,result" :preview="false" />
 
 Também é possível utilizar `of` como delimitador em vez de `in`, de forma que fique mais próximo da sintaxe de iteradores do JavaScript:
 
@@ -94,12 +87,7 @@ Vue.createApp({
 
 Resultado:
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="vuejs-br" data-slug-hash="wvGNBNa" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de v-for com objeto">
-   <span>Veja o <a href="https://codepen.io/vuejs-br/pen/wvGNBNa">
-  Exemplo de v-for com objeto</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for com objeto" slug="wvGNBNa" tab="js,result" :preview="false" />
 
 Você também pode fornecer um segundo argumento para o nome da propriedade (também conhecido como chave):
 
@@ -109,12 +97,7 @@ Você também pode fornecer um segundo argumento para o nome da propriedade (tam
 </li>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="vuejs-br" data-slug-hash="RwavNvm" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de v-for com objeto e chave">
-  <span>Veja o <a href="https://codepen.io/vuejs-br/pen/RwavNvm">
-  Exemplo de v-for com objeto e chave</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for com objeto e chave" slug="RwavNvm" tab="js,result" :preview="false" />
 
 E ainda um terceiro para o índice:
 
@@ -124,12 +107,7 @@ E ainda um terceiro para o índice:
 </li>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="vuejs-br" data-slug-hash="qBZgEgM" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de v-for com objeto, chave e índice">
-  <span>Veja o <a href="https://codepen.io/vuejs-br/pen/qBZgEgM">
-  Exemplo de v-for com objeto, chave e índice</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for com objeto, chave e índice" slug="qBZgEgM" tab="js,result" :preview="false" />
 
 :::tip
 Quando estiver iterando sobre um objeto, a ordem é baseada na ordem de enumeração do `Object.keys()`, que não tem garantia de consistência entre implementações distintas de motores JavaScript.
@@ -149,7 +127,7 @@ Para dar ao Vue uma dica de modo que ele possa rastrear a identidade de cada nó
 </div>
 ```
 
-É recomendado oferecer um atributo `key` para `v-for` sempre que possível, a menos que esteja iterando sobre um conteúdo DOM simples, ou esteja intencionalmente se apoiando no comportamento padrão para ganho de desempenho.
+[É recomendado](/style-guide/#keyed-v-for-essential) oferecer um atributo `key` para `v-for` sempre que possível, a menos que esteja iterando sobre um conteúdo DOM simples, ou esteja intencionalmente se apoiando no comportamento padrão para ganho de desempenho.
 
 Por ser um mecanismo genérico do Vue para identificar nós, `key` também tem outras utilidades não especificamente associadas ao `v-for`, como veremos futuramente neste guia.
 
@@ -192,7 +170,7 @@ Você pode pensar que isto fará o Vue jogar fora todo o DOM existente e "re-ren
 Por exemplo:
 
 ```html
-<li v-for="n in evenNumbers">{{ n }}</li>
+<li v-for="n in evenNumbers" :key="n">{{ n }}</li>
 ```
 
 ```js
@@ -212,7 +190,7 @@ Em situações onde dados computados não são factíveis (por exemplo, em repet
 
 ```html
 <ul v-for="numbers in sets">
-  <li v-for="n in even(numbers)">{{ n }}</li>
+  <li v-for="n in even(numbers)" :key="n">{{ n }}</li>
 </ul>
 ```
 
@@ -235,18 +213,13 @@ O `v-for` pode aceitar um número inteiro. Nesse caso, o _template_ se repetirá
 
 ```html
 <div id="range" class="demo">
-  <span v-for="n in 10">{{ n }} </span>
+  <span v-for="n in 10" :key="n">{{ n }} </span>
 </div>
 ```
 
 Resultado:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="vuejs-br" data-slug-hash="ExKrarE" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de v-for com intervalo numérico">
-  <span>Veja o <a href="https://codepen.io/vuejs-br/pen/ExKrarE">
-  Exemplo de v-for com intervalo numérico</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for com intervalo numérico" slug="ExKrarE" tab="html,result" />
 
 
 ## Utilizando `<template>` com `v-for`
@@ -255,7 +228,7 @@ Similar ao uso de _template_ com `v-if`, você também pode usar a tag `<templat
 
 ```html
 <ul>
-  <template v-for="item in items">
+  <template v-for="item in items" :key="item.msg">
     <li>{{ item.msg }}</li>
     <li class="divider" role="presentation"></li>
   </template>
@@ -274,16 +247,16 @@ Quando presentes em um mesmo nó, `v-if` tem maior prioridade que `v-for`. Isto 
 <!-- Um erro será lançado pois o dado "todo" não está definido nesta instância. -->
 
 <li v-for="todo in todos" v-if="!todo.isComplete">
-  {{ todo }}
+  {{ todo.name }}
 </li>
 ```
 
 Isto pode ser resolvido envolvendo-se o `v-for` em uma _tag_ `<template>`:
 
 ```html
-<template v-for="todo in todos">
+<template v-for="todo in todos" :key="todo.name">
   <li v-if="!todo.isComplete">
-    {{ todo }}
+    {{ todo.name }}
   </li>
 </template>
 ```
@@ -375,15 +348,11 @@ app.component('todo-item', {
       <button @click="$emit('remove')">Remover</button>
     </li>
   `,
-  props: ['title']
+  props: ['title'],
+  emits: ['remove']
 })
 
 app.mount('#todo-list-example')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="vuejs-br" data-slug-hash="KKzJwYa" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de v-for com componentes">
-  <span>Veja o <a href="https://codepen.io/vuejs-br/pen/KKzJwYa">
-  Exemplo de v-for com componentes</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for com componentes" slug="KKzJwYa" tab="js,result" :preview="false" />

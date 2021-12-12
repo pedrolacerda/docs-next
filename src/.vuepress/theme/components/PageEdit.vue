@@ -2,19 +2,22 @@
   <footer class="page-edit">
     <div class="container">
       <p>
-        Deployed on
+        Deploy feito via
         <a href="https://url.netlify.com/HJ8X2mxP8">Netlify</a>.
-        <span v-if="editLink" class="edit-link">
-          Caught a mistake or want to contribute to the documentation?
-          <a
-            :href="editLink"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ editLinkText }}
-            <OutboundLink />
-          </a>
-        </span>
+        <template v-if="editLink">
+          <br />
+          <span class="edit-link">
+          Encontrou um erro ou deseja contribuir com a documentação?
+            <a
+              :href="editLink"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ editLinkText }}
+              <OutboundLink />
+            </a>
+          </span>
+        </template>
         <template v-if="lastUpdated" class="last-updated">
           <br />
           <span class="prefix">{{ lastUpdatedText }}:</span>
@@ -34,7 +37,7 @@ export default {
 
   computed: {
     lastUpdated() {
-      return this.$page.lastUpdated
+      return new Date(this.$page.lastUpdated).toLocaleString()
     },
 
     lastUpdatedText() {

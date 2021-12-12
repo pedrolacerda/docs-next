@@ -1,14 +1,19 @@
 const sidebar = {
   cookbook: [
     {
-      title: 'Cookbook',
+      title: 'Livro de Receitas',
       collapsable: false,
-      children: ['/cookbook/', '/cookbook/editable-svg-icons']
+      children: [
+        '/cookbook/',
+        '/cookbook/editable-svg-icons',
+        '/cookbook/debugging-in-vscode',
+        '/cookbook/automatic-global-registration-of-base-components'
+      ]
     }
   ],
   guide: [
     {
-      title: 'Essentials',
+      title: 'Essenciais',
       collapsable: false,
       children: [
         '/guide/installation',
@@ -26,7 +31,7 @@ const sidebar = {
       ]
     },
     {
-      title: 'Components In-Depth',
+      title: 'Componentes em Detalhes',
       collapsable: false,
       children: [
         '/guide/component-registration',
@@ -41,7 +46,7 @@ const sidebar = {
       ]
     },
     {
-      title: 'Transitions & Animation',
+      title: 'Transições & Animações',
       collapsable: false,
       children: [
         '/guide/transitions-overview',
@@ -51,30 +56,11 @@ const sidebar = {
       ]
     },
     {
-      title: 'Reusability & Composition',
-      collapsable: false,
-      children: [
-        '/guide/mixins',
-        '/guide/custom-directive',
-        '/guide/teleport',
-        '/guide/render-function',
-        '/guide/plugins'
-      ]
-    },
-    {
-      title: 'Advanced Guides',
+      title: 'Reuso & Composição',
       collapsable: false,
       children: [
         {
-          title: 'Reactivity',
-          children: [
-            '/guide/reactivity',
-            '/guide/reactivity-fundamentals',
-            '/guide/reactivity-computed-watchers'
-          ]
-        },
-        {
-          title: 'Composition API',
+          title: 'API de Composição',
           children: [
             '/guide/composition-api-introduction',
             '/guide/composition-api-setup',
@@ -83,71 +69,59 @@ const sidebar = {
             '/guide/composition-api-template-refs'
           ]
         },
+        '/guide/mixins',
+        '/guide/custom-directive',
+        '/guide/teleport',
+        '/guide/render-function',
+        '/guide/plugins'
+      ]
+    },
+    {
+      title: 'Guias Avançados',
+      collapsable: false,
+      children: [
+        '/guide/web-components',
+        {
+          title: 'Reatividade',
+          children: [
+            '/guide/reactivity',
+            '/guide/reactivity-fundamentals',
+            '/guide/reactivity-computed-watchers'
+          ]
+        },
         '/guide/optimizations',
         '/guide/change-detection'
       ]
     },
     {
-      title: 'Tooling',
+      title: 'Ferramentas',
       collapsable: false,
       children: [
         '/guide/single-file-component',
         '/guide/testing',
         '/guide/typescript-support',
-        '/guide/mobile'
+        '/guide/mobile',
+        '/guide/tooling/deployment'
       ]
     },
     {
-      title: 'Scaling Up',
+      title: 'Escalonando',
       collapsable: false,
-      children: ['/guide/routing', '/guide/state-management', '/guide/ssr']
+      children: [
+        '/guide/routing',
+        '/guide/state-management',
+        '/guide/ssr',
+        '/guide/security'
+      ]
     },
     {
-      title: 'Accessibility',
+      title: 'Acessibilidade',
       collapsable: false,
       children: [
         '/guide/a11y-basics',
         '/guide/a11y-semantics',
         '/guide/a11y-standards',
         '/guide/a11y-resources'
-      ]
-    },
-    {
-      title: 'Migration Guide',
-      collapsable: true,
-      children: [
-        '/guide/migration/introduction',
-        '/guide/migration/array-refs',
-        '/guide/migration/async-components',
-        '/guide/migration/attribute-coercion',
-        '/guide/migration/custom-directives',
-        '/guide/migration/custom-elements-interop',
-        '/guide/migration/data-option',
-        '/guide/migration/events-api',
-        '/guide/migration/filters',
-        '/guide/migration/fragments',
-        '/guide/migration/functional-components',
-        '/guide/migration/global-api',
-        '/guide/migration/global-api-treeshaking',
-        '/guide/migration/inline-template-attribute',
-        '/guide/migration/key-attribute',
-        '/guide/migration/keycode-modifiers',
-        '/guide/migration/props-default-this',
-        '/guide/migration/render-function-api',
-        '/guide/migration/slots-unification',
-        '/guide/migration/transition',
-        '/guide/migration/v-model',
-        '/guide/migration/v-if-v-for',
-        '/guide/migration/v-bind'
-      ]
-    },
-    {
-      title: 'Contribute to the Docs',
-      collapsable: true,
-      children: [
-        '/guide/contributing/writing-guide',
-        '/guide/contributing/doc-style-guide',
-        '/guide/contributing/translations'
       ]
     }
   ],
@@ -156,7 +130,8 @@ const sidebar = {
     '/api/application-api',
     '/api/global-api',
     {
-      title: 'Options',
+      title: 'Opções',
+      path: '/api/options-api',
       collapsable: false,
       children: [
         '/api/options-data',
@@ -173,19 +148,43 @@ const sidebar = {
     '/api/special-attributes',
     '/api/built-in-components.md',
     {
-      title: 'Reactivity API',
+      title: 'API de Reatividade',
+      path: '/api/reactivity-api',
       collapsable: false,
       children: [
         '/api/basic-reactivity',
         '/api/refs-api',
-        '/api/computed-watch-api'
+        '/api/computed-watch-api',
+        '/api/effect-scope',
       ]
     },
-    '/api/composition-api'
+    '/api/composition-api',
+    {
+      title: 'Componentes Single-File',
+      collapsable: false,
+      children: [
+        {
+          title: 'Especificação',
+          path: '/api/sfc-spec'
+        },
+        {
+          title: 'Ferramentas',
+          path: '/api/sfc-tooling'
+        },
+        {
+          title: '<script setup>',
+          path: '/api/sfc-script-setup'
+        },
+        {
+          title: 'Recursos do <style>',
+          path: '/api/sfc-style'
+        }
+      ]
+    }
   ],
   examples: [
     {
-      title: 'Examples',
+      title: 'Exemplos',
       collapsable: false,
       children: [
         '/examples/markdown',
@@ -199,12 +198,77 @@ const sidebar = {
         '/examples/todomvc'
       ]
     }
+  ],
+  migration: [
+    '/guide/migration/introduction',
+    '/guide/migration/migration-build',
+    {
+      title: 'Detalhes',
+      collapsable: false,
+      children: [
+        '/guide/migration/array-refs',
+        '/guide/migration/async-components',
+        '/guide/migration/attribute-coercion',
+        '/guide/migration/attrs-includes-class-style',
+        '/guide/migration/children',
+        '/guide/migration/custom-directives',
+        '/guide/migration/custom-elements-interop',
+        '/guide/migration/data-option',
+        '/guide/migration/emits-option',
+        '/guide/migration/events-api',
+        '/guide/migration/filters',
+        '/guide/migration/fragments',
+        '/guide/migration/functional-components',
+        '/guide/migration/global-api',
+        '/guide/migration/global-api-treeshaking',
+        '/guide/migration/inline-template-attribute',
+        '/guide/migration/key-attribute',
+        '/guide/migration/keycode-modifiers',
+        '/guide/migration/listeners-removed',
+        '/guide/migration/mount-changes',
+        '/guide/migration/props-data',
+        '/guide/migration/props-default-this',
+        '/guide/migration/render-function-api',
+        '/guide/migration/slots-unification',
+        '/guide/migration/suspense',
+        '/guide/migration/transition',
+        '/guide/migration/transition-as-root',
+        '/guide/migration/transition-group',
+        '/guide/migration/v-on-native-modifier-removed',
+        '/guide/migration/v-model',
+        '/guide/migration/v-if-v-for',
+        '/guide/migration/v-bind',
+        '/guide/migration/vnode-lifecycle-events',
+        '/guide/migration/watch'
+      ]
+    }
+  ],
+  ssr: [
+    ['/guide/ssr/introduction', 'Introduction'],
+    '/guide/ssr/getting-started',
+    '/guide/ssr/universal',
+    '/guide/ssr/structure',
+    '/guide/ssr/build-config',
+    '/guide/ssr/server',
+    '/guide/ssr/routing',
+    '/guide/ssr/hydration'
+  ],
+  contributing: [
+    {
+      title: 'Contribua com a Documentação',
+      collapsable: false,
+      children: [
+        '/guide/contributing/writing-guide',
+        '/guide/contributing/doc-style-guide',
+        '/guide/contributing/translations'
+      ]
+    }
   ]
 }
 
 module.exports = {
   title: 'Vue.js',
-  description: 'Vue.js - The Progressive JavaScript Framework',
+  description: 'Vue.js - O Framework JavaScript Progressivo',
   head: [
     [
       'link',
@@ -252,10 +316,10 @@ module.exports = {
     ],
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
     [
-      ('script',
+      'script',
       {
         src: 'https://player.vimeo.com/api/player.js'
-      })
+      }
     ],
     [
       'script',
@@ -269,62 +333,66 @@ module.exports = {
     logo: '/logo.png',
     nav: [
       {
-        text: 'Docs',
-        ariaLabel: 'Documentation Menu',
+        text: 'Documentação',
+        ariaLabel: 'Menu de Documentação',
         items: [
           {
-            text: 'Guide',
+            text: 'Guia',
             link: '/guide/introduction'
           },
           {
-            text: 'Migration Guide',
-            link: '/guide/migration/introduction'
-          },
-          {
-            text: 'Style Guide',
+            text: 'Guia de Estilos',
             link: '/style-guide/'
           },
           {
-            text: 'Cookbook',
+            text: 'Livro de Receitas',
             link: '/cookbook/'
           },
           {
-            text: 'Examples',
+            text: 'Exemplos',
             link: '/examples/markdown'
+          },
+          {
+            text: 'Contribua',
+            link: '/guide/contributing/writing-guide'
+          },
+          {
+            text: 'Migração do Vue 2',
+            link: '/guide/migration/introduction'
           }
         ]
       },
       {
-        text: 'API Reference',
-        link: '/api/application-config'
+        text: 'Referência da API',
+        link: '/api/'
       },
       {
-        text: 'Ecosystem',
+        text: 'Ecossistema',
         items: [
           {
-            text: 'Community',
-            ariaLabel: 'Community Menu',
+            text: 'Comunidade',
+            ariaLabel: 'Menu de Comunidade',
             items: [
               {
-                text: 'Team',
+                text: 'Equipe',
                 link: '/community/team/'
               },
               {
-                text: 'Partners',
+                text: 'Parceiros',
                 link: '/community/partners'
               },
               {
-                text: 'Join',
+                text: 'Junte-se',
                 link: '/community/join/'
               },
               {
-                text: 'Themes',
+                text: 'Temas',
                 link: '/community/themes/'
               }
             ]
           },
           {
-            text: 'Official Projects',
+            text: 'Projetos Oficiais',
             items: [
               {
                 text: 'Vue Router',
@@ -332,7 +400,7 @@ module.exports = {
               },
               {
                 text: 'Vuex',
-                link: 'https://vuex.vuejs.org/'
+                link: 'https://next.vuex.vuejs.org/'
               },
               {
                 text: 'Vue CLI',
@@ -340,48 +408,90 @@ module.exports = {
               },
               {
                 text: 'Vue Test Utils',
-                link:
-                  'https://vuejs.github.io/vue-test-utils-next-docs/guide/introduction.html'
+                link: 'https://next.vue-test-utils.vuejs.org/guide/'
               },
               {
                 text: 'Devtools',
-                link: 'https://github.com/vuejs/vue-devtools'
+                link: 'https://devtools.vuejs.org'
               },
               {
-                text: 'Weekly news',
+                text: 'Notícias semanais',
                 link: 'https://news.vuejs.org/'
+              },
+              {
+                text: 'Blog',
+                link: 'https://blog.vuejs.org/'
               }
             ]
           }
         ]
       },
       {
-        text: 'Support Vue',
+        text: 'Patrocine',
         link: '/support-vuejs/',
         items: [
           {
-            text: 'One-time Donations',
+            text: 'Doações Únicas',
             link: '/support-vuejs/#one-time-donations'
           },
           {
-            text: 'Recurring Pledges',
+            text: 'Ajuda Recorrente',
             link: '/support-vuejs/#recurring-pledges'
           },
           {
-            text: 'T-Shirt Shop',
+            text: 'Loja de Camisetas',
             link: 'https://vue.threadless.com/'
+          }
+        ]
+      },
+      {
+        text: 'Traduções',
+        link: '#',
+        items: [
+          // Translation maintainers: Please include the link below to the English documentation
+          {
+            text: 'English',
+            link: 'https://v3.vuejs.org/',
+            isTranslation: true
+          },
+          {
+            text: '中文',
+            link: 'https://v3.cn.vuejs.org/',
+            isTranslation: true
+          },
+          {
+            text: '한국어',
+            link: 'https://v3.ko.vuejs.org/',
+            isTranslation: true
+          },
+          {
+            text: '日本語',
+            link: 'https://v3.ja.vuejs.org/',
+            isTranslation: true
+          },
+          {
+            text: 'Русский',
+            link: 'https://v3.ru.vuejs.org/ru/',
+            isTranslation: true
+          },
+          {
+            text: 'Mais Traduções',
+            link: '/guide/contributing/translations#community-translations'
           }
         ]
       }
     ],
-    repo: 'vuejs/docs-next',
-    editLinks: false,
-    editLinkText: 'Edit this on GitHub!',
-    lastUpdated: 'Last updated',
+    repo: 'vuejs-br/docs-next',
+    editLinks: true,
+    editLinkText: 'Edite isto no GitHub!',
+    lastUpdated: 'Atualizado pela última vez',
     docsDir: 'src',
     sidebarDepth: 2,
     sidebar: {
       collapsable: false,
+      '/guide/migration/': sidebar.migration,
+      '/guide/contributing/': sidebar.contributing,
+      '/guide/ssr/': sidebar.ssr,
       '/guide/': sidebar.guide,
       '/community/': sidebar.guide,
       '/cookbook/': sidebar.cookbook,
@@ -391,18 +501,48 @@ module.exports = {
     smoothScroll: false,
     algolia: {
       indexName: 'vuejs-v3',
-      apiKey: 'bc6e8acb44ed4179c30d0a45d6140d3f'
-    }
+      appId: 'BH4D9OD16A',      
+      apiKey: 'bc6e8acb44ed4179c30d0a45d6140d3f',
+      placeholder: 'Buscar na documentação'
+    },
+    carbonAds: {
+      carbon: 'CEBDT27Y',
+      custom: 'CKYD62QM',
+      placement: 'vuejsorg'
+    },
+    topBanner: false
   },
   plugins: [
+    [
+      '@vuepress/last-updated',
+      {
+        transformer(timestamp) {
+          const date = new Date(timestamp)
+
+          const digits = [
+            date.getUTCFullYear(),
+            date.getUTCMonth() + 1,
+            date.getUTCDate(),
+            date.getUTCHours(),
+            date.getUTCMinutes(),
+            date.getUTCSeconds()
+          ].map(num => String(num).padStart(2, '0'))
+
+          return '{0}-{1}-{2}, {3}:{4}:{5} UTC'.replace(
+            /{(\d)}/g,
+            (_, num) => digits[num]
+          )
+        }
+      }
+    ],
     [
       '@vuepress/pwa',
       {
         serviceWorker: true,
         updatePopup: {
           '/': {
-            message: 'New content is available.',
-            buttonText: 'Refresh'
+            message: 'Novo conteúdo disponível.',
+            buttonText: 'Atualizar'
           }
         }
       }

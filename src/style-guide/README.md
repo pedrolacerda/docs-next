@@ -38,18 +38,18 @@ Some features of Vue exist to accommodate rare edge cases or smoother migrations
 
 **Component names should always be multi-word, except for root `App` components, and built-in components provided by Vue, such as `<transition>` or `<component>`.**
 
-This [prevents conflicts](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name) with existing and future HTML elements, since all HTML elements are a single word.
+This [prevents conflicts](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name) with existing and future HTML elements, since all HTML elements are a single word.
 
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 app.component('todo', {
   // ...
 })
 ```
 
-``` js
+```js
 export default {
   name: 'Todo',
   // ...
@@ -60,13 +60,13 @@ export default {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 app.component('todo-item', {
   // ...
 })
 ```
 
-``` js
+```js
 export default {
   name: 'TodoItem',
   // ...
@@ -81,7 +81,7 @@ export default {
 In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
 
 ::: details Detailed Explanation
-Detailed [prop definitions](https://vuejs.org/v2/guide/components.html#Prop-Validation) have two advantages:
+Detailed [prop definitions](/guide/component-props.html#prop-validation) have two advantages:
 
 - They document the API of the component, so that it's easy to see how the component is meant to be used.
 - In development, Vue will warn you if a component is ever provided incorrectly formatted props, helping you catch potential sources of error.
@@ -90,7 +90,7 @@ Detailed [prop definitions](https://vuejs.org/v2/guide/components.html#Prop-Vali
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 // This is only OK when prototyping
 props: ['status']
 ```
@@ -99,13 +99,13 @@ props: ['status']
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 props: {
   status: String
 }
 ```
 
-``` js
+```js
 // Even better!
 props: {
   status: {
@@ -134,7 +134,7 @@ props: {
 ::: details Detailed Explanation
 Let's say you have a list of todos:
 
-``` js
+```js
 data() {
   return {
     todos: [
@@ -161,7 +161,7 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <ul>
   <li v-for="todo in todos">
     {{ todo.text }}
@@ -173,7 +173,7 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="todo in todos"
@@ -198,7 +198,7 @@ There are two common cases where this can be tempting:
 ::: details Detailed Explanation
 When Vue processes directives, `v-if` has a higher priority than `v-for`, so that this template:
 
-``` html
+```html
 <ul>
   <li
     v-for="user in users"
@@ -214,7 +214,7 @@ Will throw an error, because the `v-if` directive will be evaluated first and th
 
 This could be fixed by iterating over a computed property instead, like this:
 
-``` js
+```js
 computed: {
   activeUsers() {
     return this.users.filter(user => user.isActive)
@@ -222,7 +222,7 @@ computed: {
 }
 ```
 
-``` html
+```html
 <ul>
   <li
     v-for="user in activeUsers"
@@ -250,7 +250,7 @@ Alternatively, we can use a `<template>` tag with `v-for` to wrap the `<li>` ele
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="user in users"
@@ -266,7 +266,7 @@ Alternatively, we can use a `<template>` tag with `v-for` to wrap the `<li>` ele
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="user in activeUsers"
@@ -307,7 +307,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <template>
   <button class="btn btn-close">×</button>
 </template>
@@ -323,7 +323,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <template>
   <button class="button button-close">×</button>
 </template>
@@ -341,7 +341,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 </style>
 ```
 
-``` html
+```html
 <template>
   <button :class="[$style.button, $style.buttonClose]">×</button>
 </template>
@@ -359,7 +359,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 </style>
 ```
 
-``` html
+```html
 <template>
   <button class="c-Button c-Button--close">×</button>
 </template>
@@ -393,7 +393,7 @@ Instead, we recommend combining the two prefixes into `$_`, as a convention for 
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -404,7 +404,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -415,7 +415,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -426,7 +426,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -442,7 +442,7 @@ const myGreatMixin = {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -453,7 +453,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 // Even better!
 const myGreatMixin = {
   // ...
@@ -484,7 +484,7 @@ This helps you to more quickly find a component when you need to edit it or revi
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 app.component('TodoList', {
   // ...
 })
@@ -568,7 +568,7 @@ Some advantages of this convention:
 
 - Since these components are so frequently used, you may want to simply make them global instead of importing them everywhere. A prefix makes this possible with Webpack:
 
-  ``` js
+  ```js
   const requireComponent = require.context("./src", true, /Base[A-Z]\w+\.(vue|js)$/)
   requireComponent.keys().forEach(function (fileName) {
     let baseComponentConfig = requireComponent(fileName)
@@ -794,7 +794,7 @@ components/
 
 ### Self-closing components <sup data-p="b">strongly recommended</sup>
 
-**Components with no content should be self-closing in [single-file components](../guide/single-file-component.html), string templates, and [JSX](../guide/render-function.html#JSX) - but never in DOM templates.**
+**Components with no content should be self-closing in [single-file components](../guide/single-file-component.html), string templates, and [JSX](../guide/render-function.html#jsx) - but never in DOM templates.**
 
 Components that self-close communicate that they not only have no content, but are **meant** to have no content. It's the difference between a blank page in a book and one labeled "This page intentionally left blank." Your code is also cleaner without the unnecessary closing tag.
 
@@ -803,12 +803,12 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <!-- In single-file components, string templates, and JSX -->
 <MyComponent></MyComponent>
 ```
 
-``` html
+```html
 <!-- In DOM templates -->
 <my-component/>
 ```
@@ -817,12 +817,12 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <!-- In single-file components, string templates, and JSX -->
 <MyComponent/>
 ```
 
-``` html
+```html
 <!-- In DOM templates -->
 <my-component></my-component>
 ```
@@ -845,17 +845,17 @@ Also note that if you've already invested heavily in kebab-case, consistency wit
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <!-- In single-file components and string templates -->
 <mycomponent/>
 ```
 
-``` html
+```html
 <!-- In single-file components and string templates -->
 <myComponent/>
 ```
 
-``` html
+```html
 <!-- In DOM templates -->
 <MyComponent></MyComponent>
 ```
@@ -864,19 +864,19 @@ Also note that if you've already invested heavily in kebab-case, consistency wit
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <!-- In single-file components and string templates -->
 <MyComponent/>
 ```
 
-``` html
+```html
 <!-- In DOM templates -->
 <my-component></my-component>
 ```
 
 OR
 
-``` html
+```html
 <!-- Everywhere -->
 <my-component></my-component>
 ```
@@ -884,7 +884,7 @@ OR
 
 ### Component name casing in JS/JSX <sup data-p="b">strongly recommended</sup>
 
-**Component names in JS/[JSX](../guide/render-function.html#JSX) should always be PascalCase, though they may be kebab-case inside strings for simpler applications that only use global component registration through `app.component`.**
+**Component names in JS/[JSX](../guide/render-function.html#jsx) should always be PascalCase, though they may be kebab-case inside strings for simpler applications that only use global component registration through `app.component`.**
 
 ::: details Detailed Explanation
 In JavaScript, PascalCase is the convention for classes and prototype constructors - essentially, anything that can have distinct instances. Vue components also have instances, so it makes sense to also use PascalCase. As an added benefit, using PascalCase within JSX (and templates) allows readers of the code to more easily distinguish between components and HTML elements.
@@ -892,30 +892,30 @@ In JavaScript, PascalCase is the convention for classes and prototype constructo
 However, for applications that use **only** global component definitions via `app.component`, we recommend kebab-case instead. The reasons are:
 
 - It's rare that global components are ever referenced in JavaScript, so following a convention for JavaScript makes less sense.
-- These applications always include many in-DOM templates, where [kebab-case **must** be used](#Component-name-casing-in-templates-strongly-recommended).
+- These applications always include many in-DOM templates, where [kebab-case **must** be used](#component-name-casing-in-templates-strongly-recommended).
 :::
 
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 app.component('myComponent', {
   // ...
 })
 ```
 
-``` js
+```js
 import myComponent from './MyComponent.vue'
 ```
 
-``` js
+```js
 export default {
   name: 'myComponent',
   // ...
 }
 ```
 
-``` js
+```js
 export default {
   name: 'my-component',
   // ...
@@ -926,23 +926,23 @@ export default {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 app.component('MyComponent', {
   // ...
 })
 ```
 
-``` js
+```js
 app.component('my-component', {
   // ...
 })
 ```
 
-``` js
+```js
 import MyComponent from './MyComponent.vue'
 ```
 
-``` js
+```js
 export default {
   name: 'MyComponent',
   // ...
@@ -978,20 +978,20 @@ components/
 
 ### Prop name casing <sup data-p="b">strongly recommended</sup>
 
-**Prop names should always use camelCase during declaration, but kebab-case in templates and [JSX](../guide/render-function.html#JSX).**
+**Prop names should always use camelCase during declaration, but kebab-case in templates and [JSX](../guide/render-function.html#jsx).**
 
 We're simply following the conventions of each language. Within JavaScript, camelCase is more natural. Within HTML, kebab-case is.
 
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 props: {
   'greeting-text': String
 }
 ```
 
-``` html
+```html
 <WelcomeMessage greetingText="hi"/>
 ```
 </div>
@@ -999,13 +999,13 @@ props: {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 props: {
   greetingText: String
 }
 ```
 
-``` html
+```html
 <WelcomeMessage greeting-text="hi"/>
 ```
 </div>
@@ -1014,16 +1014,16 @@ props: {
 
 **Elements with multiple attributes should span multiple lines, with one attribute per line.**
 
-In JavaScript, splitting objects with multiple properties over multiple lines is widely considered a good convention, because it's much easier to read. Our templates and [JSX](../guide/render-function.html#JSX) deserve the same consideration.
+In JavaScript, splitting objects with multiple properties over multiple lines is widely considered a good convention, because it's much easier to read. Our templates and [JSX](../guide/render-function.html#jsx) deserve the same consideration.
 
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <img src="https://vuejs.org/images/logo.png" alt="Vue Logo">
 ```
 
-``` html
+```html
 <MyComponent foo="a" bar="b" baz="c"/>
 ```
 </div>
@@ -1031,14 +1031,14 @@ In JavaScript, splitting objects with multiple properties over multiple lines is
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <img
   src="https://vuejs.org/images/logo.png"
   alt="Vue Logo"
 >
 ```
 
-``` html
+```html
 <MyComponent
   foo="a"
   bar="b"
@@ -1056,7 +1056,7 @@ Complex expressions in your templates make them less declarative. We should stri
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 {{
   fullName.split(' ').map((word) => {
     return word[0].toUpperCase() + word.slice(1)
@@ -1068,12 +1068,12 @@ Complex expressions in your templates make them less declarative. We should stri
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <!-- In a template -->
 {{ normalizedFullName }}
 ```
 
-``` js
+```js
 // The complex expression has been moved to a computed property
 computed: {
   normalizedFullName() {
@@ -1110,7 +1110,7 @@ Simpler, well-named computed properties are:
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 computed: {
   price() {
     const basePrice = this.manufactureCost / (1 - this.profitMargin)
@@ -1126,7 +1126,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 computed: {
   basePrice() {
     return this.manufactureCost / (1 - this.profitMargin)
@@ -1152,11 +1152,11 @@ While attribute values without any spaces are not required to have quotes in HTM
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <input type=text>
 ```
 
-``` html
+```html
 <AppSidebar :style={width:sidebarWidth+'px'}>
 ```
 </div>
@@ -1164,11 +1164,11 @@ While attribute values without any spaces are not required to have quotes in HTM
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <input type="text">
 ```
 
-``` html
+```html
 <AppSidebar :style="{ width: sidebarWidth + 'px' }">
 ```
 </div>
@@ -1180,21 +1180,21 @@ While attribute values without any spaces are not required to have quotes in HTM
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <input
   v-bind:value="newTodoText"
   :placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   v-on:input="onInput"
   @focus="onFocus"
 >
 ```
 
-``` html
+```html
 <template v-slot:header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1208,35 +1208,35 @@ While attribute values without any spaces are not required to have quotes in HTM
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <input
   :value="newTodoText"
   :placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   v-bind:value="newTodoText"
   v-bind:placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   @input="onInput"
   @focus="onFocus"
 >
 ```
 
-``` html
+```html
 <input
   v-on:input="onInput"
   v-on:focus="onFocus"
 >
 ```
 
-``` html
+```html
 <template v-slot:header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1246,7 +1246,7 @@ While attribute values without any spaces are not required to have quotes in HTM
 </template>
 ```
 
-``` html
+```html
 <template #header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1256,7 +1256,6 @@ While attribute values without any spaces are not required to have quotes in HTM
 </template>
 ```
 </div>
-
 
 ## Priority C Rules: Recommended <span class="hide-from-sidebar">(Minimizing Arbitrary Choices and Cognitive Overhead)</span>
 
@@ -1269,8 +1268,8 @@ This is the default order we recommend for component options. They're split into
 1. **Global Awareness** (requires knowledge beyond the component)
     - `name`
 
-2. **Template Modifiers** (changes the way templates are compiled)
-    - `delimiters`
+2. **Template Compiler Options** (changes the way templates are compiled)
+    - `compilerOptions`
 
 3. **Template Dependencies** (assets used in the template)
     - `components`
@@ -1367,7 +1366,7 @@ When components begin to feel cramped or difficult to read, adding spaces betwee
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 props: {
   value: {
     type: String,
@@ -1394,7 +1393,7 @@ computed: {
 }
 ```
 
-``` js
+```js
 // No spaces are also fine, as long as the component
 // is still easy to read and navigate.
 props: {
@@ -1427,13 +1426,13 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <style>/* ... */</style>
 <script>/* ... */</script>
 <template>...</template>
 ```
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <script>/* ... */</script>
 <template>...</template>
@@ -1449,7 +1448,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <script>/* ... */</script>
 <template>...</template>
@@ -1461,7 +1460,7 @@ computed: {
 <style>/* ... */</style>
 ```
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <template>...</template>
 <script>/* ... */</script>
@@ -1491,7 +1490,7 @@ The problem is that large numbers of [element-attribute selectors](http://steves
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <template>
   <button>×</button>
 </template>
@@ -1507,7 +1506,7 @@ button {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <template>
   <button class="btn btn-close">×</button>
 </template>
@@ -1531,7 +1530,7 @@ The problem is, there are also many _simple_ cases where these patterns may offe
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1544,7 +1543,7 @@ app.component('TodoItem', {
 })
 ```
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1574,7 +1573,7 @@ app.component('TodoItem', {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1582,6 +1581,8 @@ app.component('TodoItem', {
       required: true
     }
   },
+
+  emits: ['input'],
 
   template: `
     <input
@@ -1592,7 +1593,7 @@ app.component('TodoItem', {
 })
 ```
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1600,6 +1601,8 @@ app.component('TodoItem', {
       required: true
     }
   },
+
+  emits: ['delete'],
 
   template: `
     <span>
@@ -1615,16 +1618,16 @@ app.component('TodoItem', {
 
 ### Non-flux state management <sup data-p="d">use with caution</sup>
 
-**[Vuex](https://github.com/vuejs/vuex) should be preferred for global state management, instead of `this.$root` or a global event bus.**
+**[Vuex](https://next.vuex.vuejs.org/) should be preferred for global state management, instead of `this.$root` or a global event bus.**
 
-Managing state on `this.$root` and/or using a [global event bus](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) can be convenient for very simple cases, but it is not appropriate for most applications.
+Managing state on `this.$root` and/or using a global event bus can be convenient for very simple cases, but it is not appropriate for most applications.
 
-Vuex is the [official flux-like implementation](https://vuejs.org/v2/guide/state-management.html#Official-Flux-Like-Implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](https://vuejs.org/v2/guide/installation.html#Vue-Devtools) support).
+Vuex is the [official flux-like implementation](/guide/state-management.html#official-flux-like-implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](/guide/installation.html#vue-devtools) support).
 
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 // main.js
 import { createApp } from 'vue'
 import mitt from 'mitt'
@@ -1653,7 +1656,7 @@ const app = createApp({
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 // store/modules/todos.js
 export default {
   state: {
@@ -1674,7 +1677,7 @@ export default {
 }
 ```
 
-``` html
+```html
 <!-- TodoItem.vue -->
 <template>
   <span>
