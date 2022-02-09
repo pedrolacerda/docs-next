@@ -38,18 +38,18 @@ Algumas funcionalidades do Vue existem para lidar com casos extremos ou migraç�
 
 **Nomes de componente sempre devem ser multipalavras, exceto para componentes raiz `App`, e componentes internos fornecidos pelo Vue, como `<transition>`, ou `<component>`.**
 
-Isto [previne conflitos](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name) com elementos HTML existentes e futuros, visto que todos os elementos HTML são formados por apenas uma palavra.
+Isto [previne conflitos](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name) com elementos HTML existentes e futuros, visto que todos os elementos HTML são formados por apenas uma palavra.
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 app.component('todo', {
   // ...
 })
 ```
 
-``` js
+```js
 export default {
   name: 'Todo',
   // ...
@@ -60,13 +60,13 @@ export default {
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 app.component('todo-item', {
   // ...
 })
 ```
 
-``` js
+```js
 export default {
   name: 'TodoItem',
   // ...
@@ -81,7 +81,7 @@ export default {
 No código desenvolvido, definições de propriedades devem ser tão detalhadas quanto possível, especificando ao menos os seus tipos.
 
 ::: details Explicação Detalhada
-[Definições de propriedades](https://vuejs.org/v2/guide/components.html#Prop-Validation) detalhadas possuem duas vantagens:
+[Definições de propriedades](/guide/component-props.html#prop-validation) detalhadas possuem duas vantagens:
 
 - Elas documentam a API do componente, para que seja fácil ver como o componente deve ser usado.
 - No desenvolvimento, o Vue irá lhe avisar se um componente receber propriedades formatadas incorretamente, ajudando-o a capturar potenciais causas de erro.
@@ -90,7 +90,7 @@ No código desenvolvido, definições de propriedades devem ser tão detalhadas 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 // Isto é aceitável apenas ao prototipar
 props: ['status']
 ```
@@ -99,13 +99,13 @@ props: ['status']
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 props: {
   status: String
 }
 ```
 
-``` js
+```js
 // Ainda melhor!
 props: {
   status: {
@@ -134,7 +134,7 @@ props: {
 ::: details Explicação Detalhada
 Digamos que você tenha uma lista de tarefas:
 
-``` js
+```js
 data() {
   return {
     todos: [
@@ -161,7 +161,7 @@ Em nossa experiência, o melhor é _sempre_ adicionar uma chave única, para que
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 <ul>
   <li v-for="todo in todos">
     {{ todo.text }}
@@ -173,7 +173,7 @@ Em nossa experiência, o melhor é _sempre_ adicionar uma chave única, para que
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="todo in todos"
@@ -198,7 +198,7 @@ Geralmente existem dois casos onde isso pode ser tentador:
 ::: details Explicação Detalhada
 Quando o Vue processa diretrizes, o `v-if` tem uma prioridade maior do que o `v-for`, então para este template:
 
-``` html
+```html
 <ul>
   <li
     v-for="user in users"
@@ -214,7 +214,7 @@ Acontecerá um erro, porque a diretriz `v-if` deve ser examinada primeiro e a va
 
 Isto pode ser arrumado ao iterar sobre um dado computado, assim:
 
-``` js
+```js
 computed: {
   activeUsers() {
     return this.users.filter(user => user.isActive)
@@ -222,7 +222,7 @@ computed: {
 }
 ```
 
-``` html
+```html
 <ul>
   <li
     v-for="user in activeUsers"
@@ -250,7 +250,7 @@ Alternativamente, podemos usar uma tag `<template>` com `v-for` para envolver o 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="user in users"
@@ -266,7 +266,7 @@ Alternativamente, podemos usar uma tag `<template>` com `v-for` para envolver o 
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="user in activeUsers"
@@ -306,7 +306,7 @@ Além do atributo `scoped`, usar nomes de classe únicos podem ajudar a garantir
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 <template>
   <button class="btn btn-close">×</button>
 </template>
@@ -322,7 +322,7 @@ Além do atributo `scoped`, usar nomes de classe únicos podem ajudar a garantir
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <template>
   <button class="button button-close">×</button>
 </template>
@@ -340,7 +340,7 @@ Além do atributo `scoped`, usar nomes de classe únicos podem ajudar a garantir
 </style>
 ```
 
-``` html
+```html
 <template>
   <button :class="[$style.button, $style.buttonClose]">×</button>
 </template>
@@ -358,7 +358,7 @@ Além do atributo `scoped`, usar nomes de classe únicos podem ajudar a garantir
 </style>
 ```
 
-``` html
+```html
 <template>
   <button class="c-Button c-Button--close">×</button>
 </template>
@@ -392,7 +392,7 @@ Ao invés disso, recomendamos combinar os dois prefixos no `$_`, como convençã
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -403,7 +403,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -414,7 +414,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -425,7 +425,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -441,7 +441,7 @@ const myGreatMixin = {
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -452,7 +452,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 // Ainda melhor!
 const myGreatMixin = {
   // ...
@@ -483,7 +483,7 @@ Isto ajuda você a encontrar mais rapidamente um componente quando precisar edit
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 app.component('TodoList', {
   // ...
 })
@@ -567,7 +567,7 @@ Algumas vantagens desta convenção:
 
 - Como estes componentes são frequentemente usados, você pode simplesmente torná-los globais ao invés de importá-los em todos os lugares. Um prefixo torna isto possível com o Webpack:
 
-  ``` js
+  ```js
   const requireComponent = require.context("./src", true, /Base[A-Z]\w+\.(vue|js)$/)
   requireComponent.keys().forEach(function (fileName) {
     let baseComponentConfig = requireComponent(fileName)
@@ -802,12 +802,12 @@ Infelizmente, HTML não permite que elementos customizados tenham fechamento pr�
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
-<!-- Em componentes single file, templates string, e JSX -->
+```html
+<!-- Em componentes single-file, templates string, e JSX -->
 <MyComponent></MyComponent>
 ```
 
-``` html
+```html
 <!-- Em templates DOM -->
 <my-component/>
 ```
@@ -816,12 +816,12 @@ Infelizmente, HTML não permite que elementos customizados tenham fechamento pr�
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
-<!-- Em componentes single file, templates string, e JSX -->
+```html
+<!-- Em componentes single-file, templates string, e JSX -->
 <MyComponent/>
 ```
 
-``` html
+```html
 <!-- Em templates DOM -->
 <my-component></my-component>
 ```
@@ -844,17 +844,17 @@ Também note que se você já investiu bastante em kebab-case, a consistência c
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
-<!-- Em componentes single file e templates string -->
+```html
+<!-- Em componentes single-file e templates string -->
 <mycomponent/>
 ```
 
-``` html
-<!-- Em componentes single file e templates string -->
+```html
+<!-- Em componentes single-file e templates string -->
 <myComponent/>
 ```
 
-``` html
+```html
 <!-- Em templates DOM -->
 <MyComponent></MyComponent>
 ```
@@ -863,19 +863,19 @@ Também note que se você já investiu bastante em kebab-case, a consistência c
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
-<!-- Em componentes single file e templates string -->
+```html
+<!-- Em componentes single-file e templates string -->
 <MyComponent/>
 ```
 
-``` html
+```html
 <!-- Em templates DOM -->
 <my-component></my-component>
 ```
 
 OU
 
-``` html
+```html
 <!-- Em qualquer lugar -->
 <my-component></my-component>
 ```
@@ -897,24 +897,24 @@ Entretanto, para aplicações que usam **apenas** definições globais de compon
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 app.component('myComponent', {
   // ...
 })
 ```
 
-``` js
+```js
 import myComponent from './MyComponent.vue'
 ```
 
-``` js
+```js
 export default {
   name: 'myComponent',
   // ...
 }
 ```
 
-``` js
+```js
 export default {
   name: 'my-component',
   // ...
@@ -925,23 +925,23 @@ export default {
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 app.component('MyComponent', {
   // ...
 })
 ```
 
-``` js
+```js
 app.component('my-component', {
   // ...
 })
 ```
 
-``` js
+```js
 import MyComponent from './MyComponent.vue'
 ```
 
-``` js
+```js
 export default {
   name: 'MyComponent',
   // ...
@@ -984,13 +984,13 @@ Estamos simplesmente seguindo as convenções de cada linguagem. Dentro do JavaS
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 props: {
   'greeting-text': String
 }
 ```
 
-``` html
+```html
 <WelcomeMessage greetingText="hi"/>
 ```
 </div>
@@ -998,13 +998,13 @@ props: {
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 props: {
   greetingText: String
 }
 ```
 
-``` html
+```html
 <WelcomeMessage greeting-text="hi"/>
 ```
 </div>
@@ -1018,11 +1018,11 @@ No JavaScript, dividir objetos com múltiplas propriedades por múltiplas linhas
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 <img src="https://vuejs.org/images/logo.png" alt="Vue Logo">
 ```
 
-``` html
+```html
 <MyComponent foo="a" bar="b" baz="c"/>
 ```
 </div>
@@ -1030,14 +1030,14 @@ No JavaScript, dividir objetos com múltiplas propriedades por múltiplas linhas
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <img
   src="https://vuejs.org/images/logo.png"
   alt="Vue Logo"
 >
 ```
 
-``` html
+```html
 <MyComponent
   foo="a"
   bar="b"
@@ -1055,7 +1055,7 @@ Expressões complexas em seus templates os tornam menos declarativos. Devemos no
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 {{
   fullName.split(' ').map((word) => {
     return word[0].toUpperCase() + word.slice(1)
@@ -1067,13 +1067,13 @@ Expressões complexas em seus templates os tornam menos declarativos. Devemos no
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <!-- Em um template -->
 {{ normalizedFullName }}
 ```
 
-``` js
-// Esta expressão complexa foi movida para uma propriedade computada
+```js
+// A expressão complexa foi movida para uma propriedade computada
 computed: {
   normalizedFullName() {
     return this.fullName.split(' ')
@@ -1109,7 +1109,7 @@ Dados computados mais simples e bem nomeados são:
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 computed: {
   price() {
     const basePrice = this.manufactureCost / (1 - this.profitMargin)
@@ -1125,7 +1125,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 computed: {
   basePrice() {
     return this.manufactureCost / (1 - this.profitMargin)
@@ -1151,11 +1151,11 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 <input type=text>
 ```
 
-``` html
+```html
 <AppSidebar :style={width:sidebarWidth+'px'}>
 ```
 </div>
@@ -1163,11 +1163,11 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <input type="text">
 ```
 
-``` html
+```html
 <AppSidebar :style="{ width: sidebarWidth + 'px' }">
 ```
 </div>
@@ -1179,21 +1179,21 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 <input
   v-bind:value="newTodoText"
   :placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   v-on:input="onInput"
   @focus="onFocus"
 >
 ```
 
-``` html
+```html
 <template v-slot:header>
   <h1>Aqui pode ser um título de página</h1>
 </template>
@@ -1207,35 +1207,35 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <input
   :value="newTodoText"
   :placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   v-bind:value="newTodoText"
   v-bind:placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   @input="onInput"
   @focus="onFocus"
 >
 ```
 
-``` html
+```html
 <input
   v-on:input="onInput"
   v-on:focus="onFocus"
 >
 ```
 
-``` html
+```html
 <template v-slot:header>
   <h1>>Aqui pode ser um título de página</h1>
 </template>
@@ -1245,7 +1245,7 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 </template>
 ```
 
-``` html
+```html
 <template #header>
   <h1>Aqui pode ser um título de página</h1>
 </template>
@@ -1255,7 +1255,6 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 </template>
 ```
 </div>
-
 
 ## Regras Prioridade C: Recomendadas <span class="hide-from-sidebar">(Minimizam Escolhas Arbitrárias e Sobrecarga Cognitiva)</span>
 
@@ -1268,8 +1267,8 @@ Esta é a ordem padrão que recomendamos para opções de componente. Elas são 
 1. **Consciência Global** (exige conhecimento além do componente)
     - `name`
 
-2. **Modificadores de Template** (mudam a maneira que templates são compilados)
-    - `delimiters`
+2. **Opções do Compilador de Template** (mudam a maneira que templates são compilados)
+    - `compilerOptions`
 
 3. **Dependências de Template** (recursos usados no template)
     - `components`
@@ -1366,7 +1365,7 @@ Quando os componentes começam a parecer abarrotados ou difíceis de ler, adicio
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 props: {
   value: {
     type: String,
@@ -1393,7 +1392,7 @@ computed: {
 }
 ```
 
-``` js
+```js
 // Também é bom não ter espaços, desde que o componente
 // seja fácil de ler e de navegar.
 props: {
@@ -1426,13 +1425,13 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 <style>/* ... */</style>
 <script>/* ... */</script>
 <template>...</template>
 ```
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <script>/* ... */</script>
 <template>...</template>
@@ -1448,7 +1447,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <script>/* ... */</script>
 <template>...</template>
@@ -1460,7 +1459,7 @@ computed: {
 <style>/* ... */</style>
 ```
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <template>...</template>
 <script>/* ... */</script>
@@ -1489,7 +1488,7 @@ O problema é que um grande número de [seletores atribuídos por elementos](htt
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` html
+```html
 <template>
   <button>×</button>
 </template>
@@ -1505,7 +1504,7 @@ button {
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` html
+```html
 <template>
   <button class="btn btn-close">×</button>
 </template>
@@ -1529,7 +1528,7 @@ O problema é que existem também muitos casos _simples_ onde estes padrões pod
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1542,7 +1541,7 @@ app.component('TodoItem', {
 })
 ```
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1572,7 +1571,7 @@ app.component('TodoItem', {
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1580,6 +1579,8 @@ app.component('TodoItem', {
       required: true
     }
   },
+
+  emits: ['input'],
 
   template: `
     <input
@@ -1590,7 +1591,7 @@ app.component('TodoItem', {
 })
 ```
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1598,6 +1599,8 @@ app.component('TodoItem', {
       required: true
     }
   },
+
+  emits: ['delete'],
 
   template: `
     <span>
@@ -1613,16 +1616,16 @@ app.component('TodoItem', {
 
 ### Gerenciamento de estado sem fluxo <sup data-p="d">use com cautela</sup>
 
-**[Vuex](https://github.com/vuejs/vuex) deve ser preferido para o gerenciamento de estado global, ao invés de `this.$root` ou um barreamento de eventos global.**
+**[Vuex](https://next.vuex.vuejs.org/) deve ser preferido para o gerenciamento de estado global, ao invés de `this.$root` ou um _event bus_ global.**
 
-Gerenciar o estado em `this.$root` e/ou usando um [barramento de eventos global](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) pode ser conveniente para casos muito simples, mas é inapropriado para a maioria das aplicações.
+Gerenciar o estado em `this.$root` e/ou usando um _event bus_ global pode ser conveniente para casos muito simples, mas é inapropriado para a maioria das aplicações.
 
-Vuex é a [implementação oficial estilo flux](https://vuejs.org/v2/guide/state-management.html#Official-Flux-Like-Implementation) para o Vue, e oferece não apenas um local central para gerenciar o estado, mas também ferramentas para organizar, rastrear, e depurar alterações de estado. Ele integra bem o ecossistema Vue (incluindo o completo suporte [Vue DevTools](https://vuejs.org/v2/guide/installation.html#Vue-Devtools) ).
+Vuex é a [implementação oficial estilo flux](/guide/state-management.html#official-flux-like-implementation) para o Vue, e oferece não apenas um local central para gerenciar o estado, mas também ferramentas para organizar, rastrear, e depurar alterações de estado. Ele integra bem o ecossistema Vue (incluindo o completo suporte a [Vue DevTools](/guide/installation.html#vue-devtools)).
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
 
-``` js
+```js
 // main.js
 import { createApp } from 'vue'
 import mitt from 'mitt'
@@ -1651,7 +1654,7 @@ const app = createApp({
 <div class="style-example style-example-good">
 <h4>Bom</h4>
 
-``` js
+```js
 // store/modules/todos.js
 export default {
   state: {
@@ -1672,7 +1675,7 @@ export default {
 }
 ```
 
-``` html
+```html
 <!-- TodoItem.vue -->
 <template>
   <span>

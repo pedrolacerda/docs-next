@@ -1,7 +1,7 @@
 ---
 title: Array Refs no v-for
 badges:
-- breaking
+  - breaking
 ---
 
 # {{ $frontmatter.title }} <MigrationBadges :badges="$frontmatter.badges" />
@@ -25,7 +25,9 @@ export default {
   },
   methods: {
     setItemRef(el) {
-      this.itemRefs.push(el)
+      if (el) {
+        this.itemRefs.push(el)
+      }
     }
   },
   beforeUpdate() {
@@ -40,13 +42,15 @@ export default {
 Com API de Composição:
 
 ```js
-import { ref, onBeforeUpdate, onUpdated } from 'vue'
+import { onBeforeUpdate, onUpdated } from 'vue'
 
 export default {
   setup() {
     let itemRefs = []
     const setItemRef = el => {
-      itemRefs.push(el)
+      if (el) {
+        itemRefs.push(el)
+      }
     }
     onBeforeUpdate(() => {
       itemRefs = []
@@ -55,7 +59,6 @@ export default {
       console.log(itemRefs)
     })
     return {
-      itemRefs,
       setItemRef
     }
   }
@@ -67,3 +70,10 @@ Observe que:
 - `itemRefs` não precisa ser um Array: também pode ser um objeto onde as referências são definidas por suas chaves de iteração.
 
 - Isso também permite que `itemRefs` sejam reativos e observados, se necessário.
+
+## Migration Strategy
+
+[Migration build flags:](migration-build.html#compat-configuration)
+
+- `V_FOR_REF`
+- `COMPILER_V_FOR_REF`

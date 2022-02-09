@@ -145,7 +145,7 @@ data() {
 ```js
 props: ['size'],
 computed: {
-  normalizedSize: function () {
+  normalizedSize() {
     return this.size.trim().toLowerCase()
   }
 }
@@ -183,22 +183,22 @@ app.component('my-component', {
       type: Object,
       // Object ou Array padrões devem ser retornados
       // de uma função construtora
-      default: function() {
+      default() {
         return { message: 'hello' }
       }
     },
     // Função validadora customizada
     propF: {
-      validator: function(value) {
+      validator(value) {
         // O valor passado deve bater com alguma destas Strings
-        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+        return ['success', 'warning', 'danger'].includes(value)
       }
     },
     // Função com valor padrão
     propG: {
       type: Function,
-      // Diferente de um Object ou Array padrão, isto não é uma função construtora - isto é uma função para servir de valor padrão
-      default: function() {
+      // Diferente de um Object ou Array padrão, isto não é uma função construtora - é uma função para servir de valor padrão
+      default() {
         return 'Função padrão'
       }
     }

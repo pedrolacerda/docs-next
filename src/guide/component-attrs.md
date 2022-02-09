@@ -12,13 +12,13 @@ Quando um componente retorna um único nó raiz, atributos não-propriedade ser�
 app.component('date-picker', {
   template: `
     <div class="date-picker">
-      <input type="datetime" />
+      <input type="datetime-local" />
     </div>
   `
 })
 ```
 
-No caso de precisarmos definir o status do componente _date-picker_ por meio de uma propriedade `data-status`, ele será aplicado ao nó raiz (ou seja, `div.date-picker`).
+No caso de precisarmos definir o status do componente _date-picker_ por meio de um atributo `data-status`, ele será aplicado ao nó raiz (ou seja, `div.date-picker`).
 
 ```html
 <!-- Componente date-picker com um atributo não-propriedade -->
@@ -26,7 +26,7 @@ No caso de precisarmos definir o status do componente _date-picker_ por meio de 
 
 <!-- Componente date-picker renderizado -->
 <div class="date-picker" data-status="activated">
-  <input type="datetime" />
+  <input type="datetime-local" />
 </div>
 ```
 
@@ -91,7 +91,7 @@ app.component('date-picker', {
   inheritAttrs: false,
   template: `
     <div class="date-picker">
-      <input type="datetime" v-bind="$attrs" />
+      <input type="datetime-local" v-bind="$attrs" />
     </div>
   `
 })
@@ -105,7 +105,7 @@ Com esta nova configuração, nosso atributo `data-status` será aplicado ao nos
 
 <!-- Componente date-picker renderizado -->
 <div class="date-picker">
-  <input type="datetime" data-status="activated" />
+  <input type="datetime-local" data-status="activated" />
 </div>
 ```
 

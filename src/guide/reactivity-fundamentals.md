@@ -45,13 +45,14 @@ console.log(count.value) // 1
 
 ### Ref Desempacotada
 
-Quando um `ref` é retornado como uma propriedade no contexto de renderização (o objeto retornado de [setup()](composition-api-setup.html)) e acessado no _template_, ele se desempacota automaticamente para o valor interno. Não há necessidade de anexar `.value` no _template_:
+Quando um `ref` é retornado como uma propriedade no contexto de renderização (o objeto retornado de [setup()](composition-api-setup.html)) e acessado no _template_, ele automaticamente se desempacota rasamente para o valor interno. Apenas o ref aninhado exigirá `.value` no _template_:
 
 ```vue-html
 <template>
   <div>
     <span>{{ count }}</span>
     <button @click="count++">Incrementar contador</button>
+    <button @click="nested.count.value ++">Incrementar contador aninhado</button>
   </div>
 </template>
 
@@ -61,12 +62,26 @@ Quando um `ref` é retornado como uma propriedade no contexto de renderização 
     setup() {
       const count = ref(0)
       return {
-        count
+        count,
+
+        nested: {
+          count
+        }
       }
     }
   }
 </script>
 ```
+
+:::tip Dica
+Se você não quiser acessar a instância do objeto real, pode envolvê-lo em um `reactive`:
+
+```js
+nested: reactive({
+  count
+})
+```
+:::
 
 ### Acesso em Objetos Reativos
 

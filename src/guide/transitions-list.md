@@ -7,8 +7,8 @@ Até agora, gerenciamos transições para:
 
 E quando tivermos toda uma lista de itens que queremos renderizar simultâneamente, com `v-for` por exemplo? Neste caso, usaremos o componente `<transition-group>`. Antes de entramos em um exemplo, existem algumas coisas que são importantes saber sobre esse componente:
 
-- Ao contrário do `<transition>`, ele renderiza um elemento real: um `<span>` por padrão. Você pode alterar o elemento que é renderizado com o atributo `tag`.
-- Os [modos de transição](/guide/transitions-enterleave#transition-modes) não estão disponíveis, porque não estamos mais alternando entre elementos mutuamente exclusivos.
+- Por padrão, ele não renderiza um elemento *wrapper*, mas você pode especificar um elemento a ser renderizado com o atributo `tag`.
+- Os [modos de transição](/guide/transitions-enterleave.html#transition-modes) não estão disponíveis, porque não estamos mais alternando entre elementos mutuamente exclusivos.
 - Os elementos internos **sempre precisam** ter um atributo `key` único.
 - As classes de transições CSS serão aplicadas aos elementos internos e não ao grupo/contêiner em si.
 
@@ -68,16 +68,11 @@ Vue.createApp(Demo).mount('#list-demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="e1cea580e91d6952eb0ae17bfb7c379d" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition List">
-  <span>Veja o Pen <a href="https://codepen.io/team/Vue/pen/e1cea580e91d6952eb0ae17bfb7c379d">
-  Transição de Listas</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transição de Listas" slug="e1cea580e91d6952eb0ae17bfb7c379d" tab="js,result" :editable="false" :preview="false" />
 
 Existe um problema com esse exemplo. Quando você adiciona ou remove um item, os que estão ao redor se encaixam instantaneamente em seu novo lugar, em vez de realizarem uma transição suave. Corrigiremos isso depois.
 
-### Transições de Movimento em Listas
+## Transições de Movimento em Listas
 
 O componente `<transition-group>` tem outro truque na manga. Ele não apenas anima entrada e saída, como também anima mudanças nas posições. O único conceito novo que você precisa saber para usar esse recurso é a adição da **classe `v-move`**, que é adicionada quando os items estão mudando de posição. Assim como as outras classes, esse prefixo irá corresponder ao valor do atributo `name` fornecido e você pode especificar manualmente uma classe com o atributo `move-class`.
 
@@ -119,12 +114,7 @@ Vue.createApp(Demo).mount('#flip-list-demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="049211673d3c185fde6b6eceb8baebec" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition-group example">
-  <span>Veja o Pen <a href="https://codepen.io/team/Vue/pen/049211673d3c185fde6b6eceb8baebec">
-  Exemplo de transition-group</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Exemplo de transition-group" slug="049211673d3c185fde6b6eceb8baebec" tab="html,result" :editable="false" :preview="false" />
 
 Isso pode parecer mágica, mas por baixo dos panos, o Vue está usando uma técnica de animação chamada [FLIP](https://aerotwist.com/blog/flip-your-animations/) para transicionar suavemente os elementos de sua antiga posição para a nova posição usando transformações.
 
@@ -190,12 +180,7 @@ Vue.createApp(Demo).mount('#list-complete-demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="373b4429eb5769ae2e6d097fd954fd08" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition-group example">
-  <span>Veja o Pen <a href="https://codepen.io/team/Vue/pen/373b4429eb5769ae2e6d097fd954fd08">
-  Exemplo transition-group</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Exemplo transition-group" slug="373b4429eb5769ae2e6d097fd954fd08" tab="js,result" :editable="false" :preview="false" />
 
 ::: tip Nota
 É importante notar que essas transições FLIP não funcionam com elementos configurados com `display: inline`. Alternativamente, você pode usar `display: inline-block` ou posicionar os elementos em um contexto _flex_.
@@ -205,7 +190,7 @@ Essas animações FLIP não são limitadas à um único eixo. Itens em um _grid_
 
 TODO: exemplo
 
-### Escalonando Transições de Listas
+## Escalonando Transições de Listas
 
 Comunicando-se com transições JavaScript por meio de atributos de dados, também é possível escalonar as transições em uma lista:
 
@@ -282,12 +267,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="c2fc5107bd3025ceadea049b3ee44ec0" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Staggered Lists">
-  <span>Veja o Pen <a href="https://codepen.io/team/Vue/pen/c2fc5107bd3025ceadea049b3ee44ec0">
-  Listas Escalonadas</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Listas Escalonadas" slug="c2fc5107bd3025ceadea049b3ee44ec0" tab="js,result" :editable="false" :preview="false" />
 
 ## Transições Reutilizáveis
 
@@ -320,7 +300,7 @@ Vue.component('my-special-transition', {
 })
 ```
 
-[Componentes funcionais](render-function.html#Functional-Components) são especialmente adequados para esta tarefa:
+[Componentes funcionais](render-function.html#functional-components) são especialmente adequados para esta tarefa:
 
 ```js
 Vue.component('my-special-transition', {
