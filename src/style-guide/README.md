@@ -81,7 +81,7 @@ export default {
 No código desenvolvido, definições de propriedades sempre devem ser tão detalhadas quanto possível, especificando ao menos os seus tipos.
 
 ::: details Explicação Detalhada
-[Definições de propriedades](/guide/component-props.html#prop-validation) detalhadas possuem duas vantagens:
+[Definições de propriedades](/guide/component-props.html#validacao-de-propriedades) detalhadas possuem duas vantagens:
 
 - Elas documentam a API do componente, para que seja fácil ver como o componente deve ser usado.
 - No desenvolvimento, o Vue irá lhe avisar se um componente receber propriedades formatadas incorretamente, ajudando-o a capturar potenciais causas de erro.
@@ -892,7 +892,7 @@ No JavaScript, PascalCase é a convenção para classes e construtores de _proto
 Entretanto, para aplicações que usam **apenas** definições globais de componente via `app.component`, recomendamos que kebab-case seja usado. Os motivos são:
 
 - É raro que componentes globais sejam referenciados no JavaScript, então seguir a convenção para o JavaScript faz menos sentido.
-- Essas aplicações sempre incluem muito _templates_ dentro do DOM, onde [kebab-case **deve** ser usado](#component-name-casing-in-templates-strongly-recommended).
+- Essas aplicações sempre incluem muito _templates_ dentro do DOM, onde [kebab-case **deve** ser usado](#notacao-de-nomes-de-componente-em-templates-fortemente-recomendado).
 :::
 
 <div class="style-example style-example-bad">
@@ -1618,11 +1618,11 @@ app.component('TodoItem', {
 
 ### Gerenciamento de estado sem Flux <sup data-p="d">use com cautela</sup>
 
-**[Vuex](https://next.vuex.vuejs.org/) deve ser preferido para o gerenciamento de estado global, ao invés de `this.$root` ou um _event bus_ global.**
+**[Vuex](https://vuex.vuejs.org/ptbr) deve ser preferido para o gerenciamento de estado global, ao invés de `this.$root` ou um _event bus_ global.**
 
 Gerenciar o estado em `this.$root` e/ou usando um _event bus_ global pode ser conveniente para casos muito simples, mas é inapropriado para a maioria das aplicações.
 
-Vuex é a [implementação oficial no estilo Flux](/guide/state-management.html#official-flux-like-implementation) para o Vue, e oferece não apenas um local central para gerenciar o estado, mas também ferramentas para organizar, rastrear, e depurar alterações de estado. Ele integra bem o ecossistema Vue (incluindo o completo suporte a [Vue DevTools](/guide/installation.html#vue-devtools)).
+Vuex é a [implementação oficial no estilo Flux](/guide/state-management.html#implementacao-oficial-estilo-flux) para o Vue, e oferece não apenas um local central para gerenciar o estado, mas também ferramentas para organizar, rastrear, e depurar alterações de estado. Ele integra bem o ecossistema Vue (incluindo o completo suporte a [Vue DevTools](/guide/installation.html#vue-devtools)).
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
