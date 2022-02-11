@@ -2,35 +2,35 @@
 sidebar: auto
 ---
 
-# Guia de Estilo
+# Guia de Estilos
 
-Este é o guia de estilo oficial para código específico do Vue. Se você usa Vue em um projeto, esta é uma ótima referência para evitar erros, trivialidades e antipadrões. Entretanto, não acreditamos que exista um guia de estilo ideal para todos os times ou projetos, então variações conscientes são incentivadas com base em experiências passadas, tecnologias do ambiente, e valores pessoais.
+Este é o guia oficial de estilos para código em Vue. Se você usa Vue em um projeto, esta é uma ótima referência para evitar erros, perda de tempo com trivialidades e antipadrões. Entretanto, não acreditamos que exista um guia de estilo ideal para todos os times ou projetos, então variações conscientes são incentivadas com base em suas experiências passadas, tecnologias do ambiente e valores pessoais.
 
-Para a maior parte, evitamos também sugestões sobre JavaScript ou HTML em geral. Não ligamos se você usa ponto e vírgula ou vírgulas. Não ligamos se seu HTML usa aspas simples ou aspas duplas para valores de atributos. Algumas exceções existem, entretanto, onde achamos que um padrão em particular é útil no contexto do Vue.
+Para a maior parte, evitamos também sugestões sobre JavaScript ou HTML em geral. Não nos importamos se você usa ponto e vírgula ou vírgulas à direita (_trailing_). Nem se seu HTML usa aspas simples ou duplas para valores de atributos. Entretanto, algumas exceções podem existir onde achamos que um padrão em particular seria útil no contexto do Vue.
 
 Finalmente, separamos as regras em quatro categorias:
 
-## Categorias
+## Categorias de Regras
 
 ### Prioridade A: Essencial
 
-Estas regras ajudam a prevenir erros, então aprenda e siga-as a qualquer custo. Exceções podem existir, mas devem ser muito raras e feitas somente por aqueles com conhecimento especializado em JavaScript e Vue. 
+Estas regras ajudam a prevenir erros, então aprenda e respeite-as a todo custo. Exceções podem existir, mas devem ser muito raras e feitas somente por aqueles com conhecimento avançado em JavaScript e Vue.
 
 ### Prioridade B: Fortemente Recomendado
 
-Estas regras foram verificadas para melhorar a legibilidade e/ou a experiência do desenvolvedor na maioria dos projetos. Seu código ainda funcionará se você violá-las, mas as violações devem ser raras e bem justificadas.
+Descobriu-se que essas regras melhoram a legibilidade e/ou a experiência do desenvolvedor na maioria dos projetos. Seu código ainda funcionará se você violá-las, mas as violações devem ser raras e bem justificadas.
 
 ### Prioridade C: Recomendado
 
-Onde opções múltiplas e igualmente boas existem, uma escolha arbitrária pode ser feita para garantir consistência. Nestas regras, descrevemos cada opção aceitável e sugerimos uma escolha padrão. Isso significa que você pode ficar à vontade para realizar uma escolha diferente em seu próprio código, desde que você seja consistente e tenha um bom motivo. Mas por favor, tenha um bom motivo! Ao adotar o padrão da comunidade, você irá:
+Onde múltiplas opções igualmente boas existem, uma escolha arbitrária pode ser feita para garantir consistência. Nestas regras, descrevemos cada opção aceitável e sugerimos uma escolha padrão. Isso significa que você pode ficar à vontade para realizar uma escolha diferente em seu próprio código, desde que você seja consistente e tenha um bom motivo. Mas por favor, tenha um bom motivo! Ao adotar o padrão da comunidade, você irá:
 
-1. treinar seu cérebro para analisar a maior parte do código da comunidade que encontrar
-2. ser capaz de copiar e colar a maior parte dos exemplos de código da comunidade sem modificações
-3. frequentemente encontrar novos parceiros que já estão acostumados ao seu estilo de código preferido, ao menos no âmbito Vue.
+1. Treinar seu cérebro para analisar mais facilmente a maior parte do código da comunidade que encontrar.
+2. Ser capaz de copiar e colar a maior parte dos exemplos de código da comunidade sem modificações.
+3. Frequentemente encontrar novos parceiros que já estão acostumados ao seu estilo de código preferido, ao menos no âmbito Vue.
 
-### Prioridade D: Use com Cautela
+### Prioridade D: Use Cautelosamente
 
-Algumas funcionalidades do Vue existem para lidar com casos extremos ou migrações mais suaves de um código legado. Quando usadas em excesso, entretanto, podem tornar o seu código mais difícil de manter ou até mesmo tornar o seu código em um reduto de bugs. Estas regras esclarecem funcionalidades potencialmente arriscadas, descrevendo quando e porque elas devem ser evitadas.
+Alguns recursos do Vue existem para lidar com casos extremos ou migrações mais suaves de um código legado. Entretanto, quando usados em excesso, podem tornar o seu código mais difícil de manter ou até mesmo torná-lo um reduto de bugs. Estas regras ilustram recursos potencialmente arriscados, descrevendo quando e porque eles devem ser evitados.
 
 ## Regras Prioridade A: Essencial <span class="hide-from-sidebar">(Prevenção de Erros)</span>
 
@@ -78,7 +78,7 @@ export default {
 
 **Definições de propriedades devem ser as mais detalhadas possíveis.**
 
-No código desenvolvido, definições de propriedades devem ser tão detalhadas quanto possível, especificando ao menos os seus tipos.
+No código desenvolvido, definições de propriedades sempre devem ser tão detalhadas quanto possível, especificando ao menos os seus tipos.
 
 ::: details Explicação Detalhada
 [Definições de propriedades](/guide/component-props.html#prop-validation) detalhadas possuem duas vantagens:
@@ -129,7 +129,7 @@ props: {
 
 **Sempre use `key` com `v-for`.**
 
-`key` com `v-for` é _sempre_ exigido em componentes, de forma a manter o estado do componente interno até a subárvore. E mesmo para elementos, é uma boa prática manter o comportamento previsível, como a [constância de objetos](https://bost.ocks.org/mike/constancy/) em animações.
+`key` com `v-for` é _sempre_ exigido em componentes, de forma a manter o estado do componente interno até a subárvore. E mesmo para elementos, é uma boa prática manter o comportamento previsível, como a [constância de objetos (inglês)](https://bost.ocks.org/mike/constancy/) em animações.
 
 ::: details Explicação Detalhada
 Digamos que você tenha uma lista de tarefas:
@@ -151,9 +151,9 @@ data() {
 }
 ```
 
-E então você as separa alfabeticamente. Ao atualizar o DOM, o Vue irá aperfeiçoar a renderização para desempenhar o menor número possível de mutações no DOM. Isto pode significar apagar o primeiro elemento de tarefa, e então adicioná-lo novamente ao final da lista.
+E então você as ordena alfabeticamente. Ao atualizar o DOM, o Vue irá aperfeiçoar a renderização para desempenhar o menor número possível de mutações no DOM. Isto pode significar apagar o primeiro elemento de tarefa, e então adicioná-lo novamente ao final da lista.
 
-O problema é que há casos em que é importante não apagar qualquer elemento que permanecerá no DOM. Por exemplo, você pode querer usar `<transition-group>` para animar a ordenação da lista, ou manter o foco se o elemento renderizado é um `<input>`. Nestes casos, adicionar uma chave única para cada item (ex.: `:key="todo.id"`) irá dizer ao Vue como se comportar de forma mais previsível.
+O problema é que há casos em que é importante não apagar elementos que permanecerão no DOM. Por exemplo, você pode querer usar `<transition-group>` para animar a ordenação da lista, ou manter o foco se o elemento renderizado é um `<input>`. Nestes casos, adicionar uma chave única para cada item (ex.: `:key="todo.id"`) irá dizer ao Vue como se comportar de forma mais previsível.
 
 Em nossa experiência, o melhor é _sempre_ adicionar uma chave única, para que você e seu time nunca precisem se preocupar com esses casos extremos. Então, em raros cenários com questões críticas de desempenho onde a constância de objetos não é necessária, você pode fazer uma exceção de forma consciente.
 :::
@@ -196,7 +196,7 @@ Geralmente existem dois casos onde isso pode ser tentador:
 - Para evitar renderizar uma lista se ela deverá ser escondida (ex.: `v-for="user in users" v-if="shouldShowUsers"`). Nestes casos, mova o `v-if` para o elemento pai. (ex.: `ul`, `ol`).
 
 ::: details Explicação Detalhada
-Quando o Vue processa diretrizes, o `v-if` tem uma prioridade maior do que o `v-for`, então para este template:
+Quando o Vue processa diretrizes, o `v-if` tem uma prioridade maior do que o `v-for`, então para este _template_:
 
 ```html
 <ul>
@@ -210,7 +210,7 @@ Quando o Vue processa diretrizes, o `v-if` tem uma prioridade maior do que o `v-
 </ul>
 ```
 
-Acontecerá um erro, porque a diretriz `v-if` deve ser examinada primeiro e a variável de iteração `user` não existe neste momento.
+Acontecerá um erro, porque a diretriz `v-if` será avaliada primeiro e a variável de iteração `user` não existe neste momento.
 
 Isto pode ser arrumado ao iterar sobre um dado computado, assim:
 
@@ -288,13 +288,13 @@ Alternativamente, podemos usar uma tag `<template>` com `v-for` para envolver o 
 ```
 </div>
 
-### Estilos de componente em escopo <sup data-p="a">essencial</sup>
+### Escopo de estilos do componente <sup data-p="a">essencial</sup>
 
-**Para aplicações, estilos em um componente de nível maior `App` e em componentes de layout podem ser globais, mas todos os outros componentes devem utilizar estilo em escopo.**
+**Para aplicativos, estilos em um componente `App` de nível superior e em componentes de _layout_ podem ser globais, mas todos os outros componentes devem ter seu próprio escopo de estilos.**
 
-Isto é relevante apenas para [componentes single file](../guide/single-file-component.html). _Não_ é exigido que o [atributo `scoped`](https://vue-loader.vuejs.org/en/features/scoped-css.html) seja usado. O escopo pode ser realizado através de [módulos CSS](https://vue-loader.vuejs.org/en/features/css-modules.html), uma estratégia baseada em classes como [BEM](http://getbem.com/), ou outra biblioteca/convenção.
+Isto é relevante apenas para [componentes single-file](../guide/single-file-component.html). _Não_ é exigido que o [atributo `scoped`](https://vue-loader.vuejs.org/en/features/scoped-css.html) seja usado. O escopo pode ser realizado através de [módulos CSS](https://vue-loader.vuejs.org/en/features/css-modules.html), uma estratégia baseada em classes como [BEM](http://getbem.com/), ou outra biblioteca/convenção.
 
-**Bibliotecas de componente, entretanto, devem preferir uma estratégia baseada em classes ao invés de usar o atributo `scoped`.**
+**Bibliotecas de componentes, entretanto, devem preferir uma estratégia baseada em classes ao invés de usar o atributo `scoped`.**
 
 Isto torna mais fácil a sobreposição de estilos internos, com nomes de classes de fácil leitura que não possuem especificidade muito alta, e que são muito improváveis de resultarem em conflito.
 
@@ -302,6 +302,7 @@ Isto torna mais fácil a sobreposição de estilos internos, com nomes de classe
 Se você está desenvolvendo um projeto grande, trabalhando com outros desenvolvedores, ou às vezes incluindo algum HTML/CSS de terceiros (ex.: do Auth0), um escopo consistente irá garantir que seus estilos se apliquem somente aos componentes para que foram designados.
 
 Além do atributo `scoped`, usar nomes de classe únicos podem ajudar a garantir que o CSS de terceiros não se apliquem em seu próprio HTML. Por exemplo, muitos projetos usam nomes de classe `button`, `btn`, ou `icon`, então mesmo ao não usar uma estratégia como o BEM, adicionar um prefixo específico do app e/ou específico do componente (ex.: `ButtonClose-Icon`) pode fornecer alguma proteção.
+:::
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -379,12 +380,12 @@ Além do atributo `scoped`, usar nomes de classe únicos podem ajudar a garantir
 
 ### Nomes de propriedades privadas <sup data-p="a">essencial</sup>
 
-**Use o módulo de escopo para manter funções privadas inacessíveis do exterior. Se isto não for possível, sempre use o prefixo `$_` para propriedades privadas customizadas em um plugin, mixin, e afim, que não deva ser considerado como uma API pública. Para evitar conflitos com o código de outros autores, também inclua um nome de escopo (ex.: `$_nomeDoSeuPlugin_`).**
+**Use o escopo do módulo para manter funções privadas inacessíveis pelo exterior. Se isto não for possível, sempre use o prefixo `$_` para propriedades privadas customizadas em um plugin, mixin, etc, que não deva ser considerado como API pública. Então para evitar conflitos com o código de outros autores, também inclua um nome de escopo (ex.: `$_nomeDoSeuPlugin_`).**
 
 ::: details Explicação Detalhada
-Vue usa o prefixo `_` para definir suas próprias propriedades privadas, então usar o mesmo prefixo (ex.: `_update`) pode sobrescrever uma propriedade da instância. Mesmo que você tenha conferido e que o Vue não esteja atualmente usando um nome de propriedade privada, não há garantias de que um conflito não acontecerá em uma versão posterior.
+Vue usa o prefixo `_` para definir suas próprias propriedades privadas, então usar o mesmo prefixo (ex.: `_update`) pode sobrescrever uma propriedade da instância. Mesmo que você tenha conferido e o Vue não esteja atualmente usando um nome de propriedade privada, não há garantias de que um conflito não acontecerá em uma versão posterior.
 
-O propósito do prefixo `$` dentro do ecossistema Vue é uma instância especial de propriedades que estão expostas ao usuário, então usá-las em propriedades _privadas_ não seria apropriado.
+Quanto ao prefixo `$`, seu propósito dentro do ecossistema Vue são propriedades de instâncias especiais que são expostas ao usuário, então usá-las em propriedades _privadas_ não seria apropriado.
 
 Ao invés disso, recomendamos combinar os dois prefixos no `$_`, como convenção para propriedades privadas definidas pelo usuário que garantem que não haja conflitos com o Vue.
 :::
@@ -472,11 +473,11 @@ export default myGreatMixin
 ```
 </div>
 
-## Regras da Prioridade B: Fortemente Recomendadas <span class="hide-from-sidebar">(Aprimoram Legibilidade)</span>
+## Regras Prioridade B: Fortemente Recomendadas <span class="hide-from-sidebar">(Aprimoram Legibilidade)</span>
 
 ### Arquivos de componente <sup data-p="b">fortemente recomendado</sup>
 
-**Quando houver um sistema compilado disponível para concatenar arquivos, cada componente deve estar em seu próprio arquivo.**
+**Sempre que um sistema de compilação estiver disponível para concatenar arquivos, cada componente deve estar em seu próprio arquivo.**
 
 Isto ajuda você a encontrar mais rapidamente um componente quando precisar editá-lo ou verificar como usá-lo.
 
@@ -510,11 +511,11 @@ components/
 ```
 </div>
 
-### Notação de nomes de Componentes Single File <sup data-p="b">fortemente recomendado</sup>
+### Notação de nomes de Componentes Single-File <sup data-p="b">fortemente recomendado</sup>
 
-**Nomes de arquivo de [componentes single file](../guide/single-file-component.html) devem ser sempre PascalCase ou kebab-case.**
+**Nomes de arquivo de [componentes single-file](../guide/single-file-component.html) devem ser sempre PascalCase ou kebab-case.**
 
-A notação com PascalCase funciona melhor com o preenchimento automático de editores de código, pois é consistente com a forma que referenciamos componentes em JS(X) e templates, onde possível. Entretanto, diferentes tipos de nomes de arquivo podem às vezes causar problemas em sistemas de arquivo insensíveis a maiúsculas e minúsculas, é a razão de o kebab-case ser perfeitamente aceitável.
+PascalCase funciona melhor com o autocompletar em editores de código onde possível, pois é consistente com a forma que referenciamos componentes em JS(X) e _templates_. Entretanto, diferentes tipos de nomes de arquivo podem às vezes causar problemas em sistemas de arquivos insensíveis a maiúsculas e minúsculas, é a razão de o kebab-case ser perfeitamente aceitável.
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -546,7 +547,7 @@ components/
 
 ### Nomes de componentes base <sup data-p="b">fortemente recomendado</sup>
 
-**Componentes base (também conhecidos como componentes de apresentação, burros, ou puros) que aplicam estilos e convenções específicos da aplicação devem começar com um prefixo específico, como `Base`, `App` ou `V`.**
+**Componentes base (ex.: de apresentação, sem lógica ou puros) que aplicam estilos e convenções específicos do aplicativo devem começar com um prefixo específico, como `Base`, `App` ou `V`.**
 
 ::: details Explicação Detalhada
 Estes componentes estabelecem a base para o estilo e o comportamento consistente na sua aplicação. Eles podem conter **somente**:
@@ -555,7 +556,7 @@ Estes componentes estabelecem a base para o estilo e o comportamento consistente
 - outros componentes base, e
 - componentes UI de terceiros.
 
-Mas eles **nunca** irão conter um estado global (ex.: de um Vuex store).
+Mas eles **nunca** irão conter estado global (ex.: de um _store_ Vuex).
 
 Seus nomes frequentemente incluem o nome do elemento que eles envolvem (ex.: `BaseButton`, `BaseTable`), a não ser que nenhum elemento exista para seu propósito específico (ex.: `BaseIcon`). Se você construir componentes similares para um contexto mais específico, eles quase sempre consumirão estes componentes (ex.: `BaseButton` será usado em `ButtonSubmit`).
 
@@ -563,7 +564,7 @@ Algumas vantagens desta convenção:
 
 - Quando organizado alfabeticamente em editores, os componentes base da aplicação serão listados em conjunto, tornando-os mais fáceis de identificar.
 
-- Como nomes de componente sempre possuem multipalavras, esta convenção previne que você tenha que escolher um prefixo arbitrário para simples componentes envoltórios (ex.: `MyButton`, `VueButton`).
+- Como nomes de componente sempre devems ser multipalavras, esta convenção previne que você tenha que escolher um prefixo arbitrário para simples componentes _wrapper_ (ex.: `MyButton`, `VueButton`).
 
 - Como estes componentes são frequentemente usados, você pode simplesmente torná-los globais ao invés de importá-los em todos os lugares. Um prefixo torna isto possível com o Webpack:
 
@@ -622,7 +623,7 @@ components/
 
 **Componentes que devem ter somente uma única instância ativa devem começar com o prefixo `The`, para denotar que poderá existir somente um.**
 
-Isto não significa que o componente é usado apenas em uma única página, mas que será usado uma vez _por página_. Estes componentes nunca aceitam quaisquer propriedades, pois são específicos à sua aplicação, e não ao contexto dentro da sua aplicação. Se você encontrar a necessidade de adicionar propriedades, é uma boa indicação de que este na verdade é um componente reutilizável que é usado uma vez por página _por hora_.
+Isto não significa que o componente é usado apenas em uma única página, mas que será usado uma vez _por página_. Estes componentes nunca aceitam quaisquer propriedades, pois são específicos à sua aplicação, e não ao contexto dentro da sua aplicação. Se você encontrar a necessidade de adicionar propriedades, é uma boa indicação de que este na verdade é um componente reutilizável que é usado uma vez por página _por enquanto_.
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -648,10 +649,10 @@ components/
 
 **Componentes filho que são estreitamente acoplados com seus pais devem incluir o nome do componente pai como prefixo.**
 
-Se um componente fizer sentido apenas no contexto de um único componente pai, este relacionamento deve ser evidente em seu nome. Como editores tipicamente organizam os arquivos alfabeticamente, isto irá ajudar a mantes estes arquivos relacionados próximos uns dos outros.
+Se um componente fizer sentido apenas no contexto de um único componente pai, este relacionamento deve ser evidente em seu nome. Como editores tipicamente organizam os arquivos alfabeticamente, isto irá ajudar a manter estes arquivos relacionados próximos uns dos outros.
 
 ::: details Explicação Detalhada
-Você pode ser atraído a resolver este problema aninhando componentes filho em diretórios nomeados com base em seu pai. Por exemplo:
+Você pode ficar tentado a resolver este problema aninhando componentes filhos em diretórios nomeados com base em seu pai. Por exemplo:
 
 ```
 components/
@@ -715,14 +716,14 @@ components/
 
 ### Ordem das palavras em nomes de componente <sup data-p="b">fortemente recomendado</sup>
 
-**Nomes de componente devem começar com palavras de nível mais alto (muitas vezes a mais geral) e terminar com palavras modificadoras descritivas.**
+**Nomes de componentes devem começar com palavras de nível mais alto (muitas vezes a mais geral) e terminar com palavras modificadoras descritivas.**
 
 ::: details Explicação Detalhada
 Você pode estar se perguntando:
 
 > "Por que forçamos nomes de componentes a usar uma linguagem menos natural?"
 
-No inglês natural, adjetivos e outros descritores aparecem geralmente antes dos substantivos, enquanto exceções exigem palavras conectoras. Por exemplo:
+No inglês natural, adjetivos e outros descritores geralmente aparecem antes dos substantivos, enquanto exceções exigem palavras conectoras. Por exemplo:
 
 - Café _com_ leite
 - Sopa _do_ dia
@@ -756,7 +757,7 @@ components/
 
 Como editores tipicamente organizam os arquivos alfabeticamente, todas as relações importantes entre componentes agora estão evidentes à vista.
 
-Você pode ser atraído a resolver este problema diferentemente, aninhando todos os componentes de busca em um diretório "search", e todos os componentes de configuração em um diretório "settings". Recomendamos considerar esta abordagem apenas em aplicações muito grandes (ex.: mais de 100 componentes), pelas seguintes razões:
+Você pode ficar tentado a resolver este problema diferentemente, aninhando todos os componentes de busca em um diretório "search", e todos os componentes de configuração em um diretório "settings". Recomendamos considerar esta abordagem apenas em aplicações muito grandes (ex.: mais de 100 componentes), pelas seguintes razões:
 
 - Geralmente leva mais tempo navegar por subdiretórios aninhados, do que percorrer um único diretório `components`.
 - Conflitos com nomes (ex.: múltiplos componentes `ButtonDelete.vue`) tornam mais difícil navegar rapidamente para um componente específico no editor de código.
@@ -793,11 +794,11 @@ components/
 
 ### Componentes com autofechamento <sup data-p="b">fortemente recomendado</sup>
 
-**Componentes sem conteúdo devem ser autofechados em [componentes single file](../guide/single-file-component.html), templates string, e [JSX](../guide/render-function.html#jsx) - mas nunca em templates DOM.**
+**Componentes sem conteúdo devem ser autofechados em [componentes single-file](../guide/single-file-component.html), _templates_ string, e [JSX](../guide/render-function.html#jsx) - mas nunca em _templates_ DOM.**
 
 Componentes autofechados informam não apenas que não têm conteúdo, mas **garantem** que não devem ter conteúdo. É a diferença entre uma página em branco em um livro e uma rotulada "Esta página foi intencionalmente deixada em branco". Seu código também é mais limpo sem a tag de fechamento desnecessária.
 
-Infelizmente, HTML não permite que elementos customizados tenham fechamento próprio - somente [elementos "void" oficiais](https://www.w3.org/TR/html/syntax.html#void-elements). É por isso que a estratégia só é possível quando o compilador de template do Vue pode alcançar o template antes do DOM, e então servir o HTML conforme especificado ao DOM.
+Infelizmente, HTML não permite que elementos customizados tenham fechamento próprio - somente [elementos "void" oficiais](https://www.w3.org/TR/html/syntax.html#void-elements). É por isso que a estratégia só é possível quando o compilador de _template_ do Vue pode alcançar o _template_ antes do DOM, e então servir o HTML conforme especificado ao DOM.
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -829,15 +830,15 @@ Infelizmente, HTML não permite que elementos customizados tenham fechamento pr�
 
 ### Notação de nomes de componente em templates <sup data-p="b">fortemente recomendado</sup>
 
-**Na maioria dos projetos, os nomes de componente devem ser sempre PascalCase em [componentes single file](../guide/single-file-component.html) e templates de string - e kebab-case em templates DOM.**
+**Na maioria dos projetos, os nomes de componente devem ser sempre PascalCase em [componentes single-file](../guide/single-file-component.html) e _templates_ de string - e kebab-case em _templates_ DOM.**
 
 PascalCase possui algumas vantagens sobre kebab-case:
 
-- Editores podem autocompletar nomes de componentes em templates, pois o PascalCase também é utilizado no JavaScript.
-- `<MyComponent>` é mais distintivo visualmente do que um simples elemento HTML de palavra única como `<my-component>`, pois há duas diferenças em caracteres (duas maiúsculas), ao invés de só uma (um hífen).
-- Se você usar qualquer elemento personalizado em seus templates que não do Vue, como um web component, PascalCase garante que seus componentes Vue permaneçam distintamente visíveis.
+- Editores podem autocompletar nomes de componentes em _templates_, pois o PascalCase também é utilizado no JavaScript.
+- `<MyComponent>` é mais distintivo visualmente de um elemento HTML de palavra única do que `<my-component>`, pois há duas diferenças em caracteres (duas maiúsculas), ao invés de só uma (um hífen).
+- Se você usar qualquer elemento personalizado em seus _templates_ que não do Vue, como um _web component_, PascalCase garante que seus componentes Vue permaneçam distintamente visíveis.
 
-Infelizmente, devido à insensibilidade do HTML quanto a maiúsculas e minúsculas, templates DOM ainda precisam utilizar kebab-case.
+Infelizmente, devido à insensibilidade do HTML quanto a maiúsculas e minúsculas, _templates_ DOM ainda precisam utilizar kebab-case.
 
 Também note que se você já investiu bastante em kebab-case, a consistência com convenções HTML e ser capaz de usar o mesmo padrão pelos seus projetos pode ser mais importante do que as vantagens listadas acima. Nestes casos, **utilizar kebab-case em todo lugar também é aceitável.**
 
@@ -883,15 +884,15 @@ OU
 
 ### Notação de nomes de componentes em JS/JSX <sup data-p="b">fortemente recomendado</sup>
 
-**Nomes de componentes em JS/[JSX](../guide/render-function.html#jsx) devem ser sempre PascalCase, apesar de que podem ser kebab-case dentro de strings para aplicações mais simples, que usam apenas registros globais de componentes  através de `app.component`.**
+**Nomes de componentes em JS/[JSX](../guide/render-function.html#jsx) devem ser sempre PascalCase, apesar de que podem ser kebab-case dentro de strings para aplicações mais simples, que usam apenas registros globais de componentes através de `app.component`.**
 
 ::: details Explicação Detalhada
-No JavaScript, PascalCase é a convenção para classes e construtores - essencialmente, qualquer coisa que possa ter instâncias diferentes. Componentes Vue também possuem instâncias, então faz sentido também usar PascalCase. Como um benefício extra, usar PascalCase com JSX (e templates) permite que os leitores do código consigam distinguir mais facilmente entre componentes e elementos HTML. 
+No JavaScript, PascalCase é a convenção para classes e construtores de _prototype_ - essencialmente, qualquer coisa que possa ter instâncias diferentes. Componentes Vue também possuem instâncias, então faz sentido também usar PascalCase. Como um benefício extra, usar PascalCase com JSX (e _templates_) permite que os leitores do código consigam distinguir mais facilmente entre componentes e elementos HTML.
 
 Entretanto, para aplicações que usam **apenas** definições globais de componente via `app.component`, recomendamos que kebab-case seja usado. Os motivos são:
 
 - É raro que componentes globais sejam referenciados no JavaScript, então seguir a convenção para o JavaScript faz menos sentido.
-- Essas aplicações sempre incluem muito templates dentro do DOM, onde [kebab-case **deve** ser usado](#component-name-casing-in-templates-strongly-recommended).
+- Essas aplicações sempre incluem muito _templates_ dentro do DOM, onde [kebab-case **deve** ser usado](#component-name-casing-in-templates-strongly-recommended).
 :::
 
 <div class="style-example style-example-bad">
@@ -977,7 +978,7 @@ components/
 
 ### Notação do nome de propriedades <sup data-p="b">fortemente recomendado</sup>
 
-**Nomes de propriedades devem sempre usar camelCase em sua declaração, e kebab-case em templates e [JSX](../guide/render-function.html#jsx).**
+**Nomes de propriedades devem sempre usar camelCase em sua declaração, e kebab-case em _templates_ e [JSX](../guide/render-function.html#jsx).**
 
 Estamos simplesmente seguindo as convenções de cada linguagem. Dentro do JavaScript, camelCase é mais natural. Dentro do HTML é o kebab-case.
 
@@ -1013,7 +1014,7 @@ props: {
 
 **Elementos com vários atributos devem sempre ocupar múltiplas linhas, com um atributo por linha.**
 
-No JavaScript, dividir objetos com múltiplas propriedades por múltiplas linhas é considerada uma boa convenção, pois é muito mais fácil de se ler. Nossos templates e [JSX](../guide/render-function.html#jsx) merecem a mesma consideração.
+No JavaScript, dividir objetos com múltiplas propriedades por múltiplas linhas é considerada uma boa convenção, pois é muito mais fácil de se ler. Nossos _templates_ e [JSX](../guide/render-function.html#jsx) merecem a mesma consideração.
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -1048,9 +1049,9 @@ No JavaScript, dividir objetos com múltiplas propriedades por múltiplas linhas
 
 ### Expressões simples em templates <sup data-p="b">fortemente recomendado</sup>
 
-**Templates de componentes devem incluir apenas expressões simples, com expressões mais complexas sendo refatoradas em dados computados ou métodos.**
+**_Templates_ de componentes devem incluir apenas expressões simples, com expressões mais complexas sendo refatoradas em dados computados ou métodos.**
 
-Expressões complexas em seus templates os tornam menos declarativos. Devemos nos esforçar para descrever _o quê_ deve aparecer, não _como_ estamos computando aquele valor. Dados computados e métodos também permitem que o código seja reutilizado.
+Expressões complexas em seus _templates_ os tornam menos declarativos. Devemos nos esforçar para descrever _o quê_ deve aparecer, não _como_ estamos computando aquele valor. Dados computados e métodos também permitem que o código seja reutilizado.
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -1086,7 +1087,7 @@ computed: {
 
 ### Dados computados simples <sup data-p="b">fortemente recomendado</sup>
 
-**Dados computados complexos devem ser divididos em dados computados mais simples sempre que possível.**
+**Dados computados complexos devem ser divididos em quantos dados computados simples forem possíveis.**
 
 ::: details Explicação Detalhada
 Dados computados mais simples e bem nomeados são:
@@ -1097,13 +1098,13 @@ Dados computados mais simples e bem nomeados são:
 
 - __Mais fáceis de ler__
 
-  Simplificar dados computados força você a dar a cada valor um nome descritivo, mesmo que não seja reutilizado. Isso torna mais fácil para outros desenvolvedores (e você no futuro) a focarem no código que manipulam  e no que está acontecendo.
+  Simplificar dados computados força você a dar a cada valor um nome descritivo, mesmo que não seja reutilizado. Isso torna mais fácil para outros desenvolvedores (e você no futuro) a focarem no código que manipulam e no que está acontecendo.
 
-- __Mais adaptáveis a novas exigências__
+- __Mais adaptáveis a mudanças de requisitos__
 
-  Qualquer valor que possa ser nomeado pode ser útil para a view. Por exemplo, podemos decidir mostrar a mensagem informando ao usuário quanto dinheiro ele economizou. Também podemos decidir como calcular taxas das vendas, mas talvez mostrá-los separadamente, ao invés de uma parte do preço final.
+  Qualquer valor que possa ser nomeado pode ser útil para a _view_. Por exemplo, podemos decidir mostrar a mensagem informando ao usuário quanto dinheiro ele economizou. Também podemos decidir como calcular as taxas das vendas, mas talvez mostrá-las separadamente, ao invés de como parte do preço final.
 
-  Dados computados pequenos e orientados trazem menos suposições sobre como a informação será usada, e exigem menos refatoração conforme as exigências mudam.
+  Dados computados pequenos e focados trazem menos suposições sobre como a informação será usada, e exigem menos refatoração conforme os requisitos mudam.
 :::
 
 <div class="style-example style-example-bad">
@@ -1172,9 +1173,9 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 ```
 </div>
 
-### Abreviação de diretrizes <sup data-p="b">fortemente recomendado</sup>
+### Abreviação de diretivas <sup data-p="b">fortemente recomendado</sup>
 
-**Abreviações de diretrizes (`:` para `v-bind:`, `@` para `v-on:` e `#` para `v-slot`) devem ser usadas sempre ou nunca.**
+**Abreviações de diretivas (`:` para `v-bind:`, `@` para `v-on:` e `#` para `v-slot`) devem ser usadas sempre ou nunca.**
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -1237,7 +1238,7 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 
 ```html
 <template v-slot:header>
-  <h1>>Aqui pode ser um título de página</h1>
+  <h1>Aqui pode ser um título de página</h1>
 </template>
 
 <template v-slot:footer>
@@ -1258,19 +1259,19 @@ Enquanto valores de atributo sem qualquer espaço não exigem aspas no HTML, est
 
 ## Regras Prioridade C: Recomendadas <span class="hide-from-sidebar">(Minimizam Escolhas Arbitrárias e Sobrecarga Cognitiva)</span>
 
-### Ordenamento das opções de componente/instância <sup data-p="c">recomendado</sup>
+### Ordem das opções de componente/instância <sup data-p="c">recomendado</sup>
 
 **As opções de componente/instância devem ser sempre ordenadas consistentemente.**
 
-Esta é a ordem padrão que recomendamos para opções de componente. Elas são divididas em categorias, então você irá saber onde adicionar novas propriedades para plugins.
+Esta é a ordem padrão que recomendamos para opções de componente. Elas são divididas em categorias, então você saberá onde adicionar novas propriedades de plugins.
 
 1. **Consciência Global** (exige conhecimento além do componente)
     - `name`
 
-2. **Opções do Compilador de Template** (mudam a maneira que templates são compilados)
+2. **Opções do Compilador de Template** (mudam a maneira que _templates_ são compilados)
     - `compilerOptions`
 
-3. **Dependências de Template** (recursos usados no template)
+3. **Dependências de Template** (recursos usados no _template_)
     - `components`
     - `directives`
 
@@ -1284,7 +1285,7 @@ Esta é a ordem padrão que recomendamos para opções de componente. Elas são 
     - `props`
     - `emits`
 
-6. **Composition API** (ponto de entrada para usar a Composition API)
+6. **API de Composição** (ponto de entrada para usar a API de Composição)
     - `setup`
 
 7. **Estado Local** (propriedades locais reativas)
@@ -1318,7 +1319,7 @@ Esta é a ordem padrão que recomendamos para opções de componente. Elas são 
 
 **Os atributos dos elementos (incluindo componentes) devem ser ordenados consistentemente.**
 
-Está é a ordenação padrão que recomendamos para os atributos de componentes. Eles são divididos em categorias, então você saberá onde adicionar atributos e diretrizes personalizadas.
+Esta é a ordenação padrão que recomendamos para os atributos de componentes. Eles são divididos em categorias, então você saberá onde adicionar atributos e diretrizes personalizadas.
 
 1. **Definição** (fornece as opções do componente)
     - `is`
@@ -1393,7 +1394,7 @@ computed: {
 ```
 
 ```js
-// Também é bom não ter espaços, desde que o componente
+// Não ter espaços também é bom, desde que o componente
 // seja fácil de ler e de navegar.
 props: {
   value: {
@@ -1418,9 +1419,9 @@ computed: {
 ```
 </div>
 
-### Ordem dos elementos de nível superior de componentes single file <sup data-p="c">recomendado</sup>
+### Ordem dos elementos de nível superior de componentes single-file <sup data-p="c">recomendado</sup>
 
-**[Componentes Single File](../guide/single-file-component.html) devem sempre ordenar as tags `<script>`, `<template>`, e `<style>` consistentemente, com a `<style>` por último, porque ao menos uma das outras duas é sempre necessária.**
+**[Componentes Single-File](../guide/single-file-component.html) devem sempre ordenar as tags `<script>`, `<template>`, e `<style>` consistentemente, com a `<style>` por último, porque ao menos uma das outras duas é sempre necessária.**
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -1478,12 +1479,13 @@ computed: {
 
 **Seletores de elemento devem ser evitados com o `scoped`.**
 
-Prefira seletores de classe sobre seletores de elemento em estilos `scoped`, pois um grande número de seletores de elemento são lentos.
+Prefira seletores de classe ao invés de seletores de elemento em estilos `scoped`, pois um grande número de seletores de elemento são lentos.
 
 ::: details Explicação Detalhada
-Para usar o escopo em estilos, o Vue adiciona um atributo único aos elementos componentes, como um `data-v-f3f3eg9`. Os seletores então são modificados para que apenas os elementos correspondentes com este atributo sejam selecionados. (ex.: `button[data-v-f3f3eg9]`).
+Para usar o escopo em estilos, o Vue adiciona um atributo único aos elementos de componente, como um `data-v-f3f3eg9`. Então os seletores são modificados para que apenas os elementos correspondentes com este atributo sejam selecionados. (ex.: `button[data-v-f3f3eg9]`).
 
-O problema é que um grande número de [seletores atribuídos por elementos](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (ex.: `button[data-v-f3f3eg9]`) serão consideravelmente mais lentos do que [seletores atribuídos por classe](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (ex.: `.btn-close[data-v-f3f3eg9]`), então seletores de classe devem ser preferidos sempre que possível.
+O problema é que um grande número de [seletores de elemento](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (ex.: `button[data-v-f3f3eg9]`) serão consideravelmente mais lentos do que [seletores de classe](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (ex.: `.btn-close[data-v-f3f3eg9]`), então seletores de classe devem ser preferidos sempre que possível.
+:::
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -1519,11 +1521,11 @@ button {
 
 ### Comunicação implícita entre componentes pai-filho <sup data-p="d">use com cautela</sup>
 
-**Propriedades e eventos devem ser preferidos para a comunicação entre componentes pai-filho, ao invés de `this.$parent` ou propriedades mutantes.**
+**Propriedades e eventos devem ser preferidos para a comunicação entre componentes pai-filho, ao invés de `this.$parent` ou mutação de propriedades.**
 
-Uma aplicação Vue ideal passa propriedades para baixo, e eventos para cima. Ater-se a esta convenção irá tornar os seus componentes muito mais fáceis de entender. Entretanto, há casos extremos onde a mutação da propriedade ou o `this.$parent` poderá simplificar dois componentes que já estão profundamente atrelados.
+Uma aplicação Vue ideal passa propriedades para baixo, e eventos para cima. Ater-se a esta convenção irá tornar os seus componentes muito mais fáceis de entender. Entretanto, há casos extremos onde a mutação de propriedade ou o `this.$parent` poderá simplificar dois componentes que já estão profundamente atrelados.
 
-O problema é que existem também muitos casos _simples_ onde estes padrões podem oferecer conveniência. Cuidado: não se deixe atrair por trocar simplicidade (ser capaz de entender o fluxo do seu estado) pela conveniência em curto prazo (escrever menos código).
+O problema é que existem também muitos casos _simples_ onde estes padrões podem oferecer conveniência. Cuidado: não seja seduzido a trocar simplicidade (ser capaz de entender o fluxo do seu estado) pela conveniência em curto prazo (escrever menos código).
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
@@ -1614,13 +1616,13 @@ app.component('TodoItem', {
 ```
 </div>
 
-### Gerenciamento de estado sem fluxo <sup data-p="d">use com cautela</sup>
+### Gerenciamento de estado sem Flux <sup data-p="d">use com cautela</sup>
 
 **[Vuex](https://next.vuex.vuejs.org/) deve ser preferido para o gerenciamento de estado global, ao invés de `this.$root` ou um _event bus_ global.**
 
 Gerenciar o estado em `this.$root` e/ou usando um _event bus_ global pode ser conveniente para casos muito simples, mas é inapropriado para a maioria das aplicações.
 
-Vuex é a [implementação oficial estilo flux](/guide/state-management.html#official-flux-like-implementation) para o Vue, e oferece não apenas um local central para gerenciar o estado, mas também ferramentas para organizar, rastrear, e depurar alterações de estado. Ele integra bem o ecossistema Vue (incluindo o completo suporte a [Vue DevTools](/guide/installation.html#vue-devtools)).
+Vuex é a [implementação oficial no estilo Flux](/guide/state-management.html#official-flux-like-implementation) para o Vue, e oferece não apenas um local central para gerenciar o estado, mas também ferramentas para organizar, rastrear, e depurar alterações de estado. Ele integra bem o ecossistema Vue (incluindo o completo suporte a [Vue DevTools](/guide/installation.html#vue-devtools)).
 
 <div class="style-example style-example-bad">
 <h4>Ruim</h4>
