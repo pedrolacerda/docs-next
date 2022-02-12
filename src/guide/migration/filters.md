@@ -73,13 +73,18 @@ Utilizando o exemplo acima, aqui está um exemplo de como isso pode ser implemen
 
 Ao invés de utilizar filtros, recomendamos substituí-los por propriedades computadas ou métodos.
 
+[Migration build flags:](migration-build.html#compat-configuration)
+
+- `FILTERS`
+- `COMPILER_FILTERS`
+
 ### Filtros Globais
 
 Se você estiver usando filtros que foram registrados globalmente e usados em todo o seu aplicativo, provavelmente não é conveniente substituí-los por propriedades computadas ou métodos em cada componente individual.
 
 Em vez disso, você pode disponibilizar seus filtros globais para todos os componentes por meio de [propriedades globais](../../api/application-config.html#globalproperties):
 
-```javascript
+```js
 // main.js
 const app = createApp(App)
 

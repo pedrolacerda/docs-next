@@ -20,4 +20,4 @@ Embora Vue.js não suporte o desenvolvimento de aplicativos mobile nativamente, 
 
 **Recursos**
 
-- [Guia para NativeScript + Vue.js](https://nativescript.org/vue/)
+- [Guia para NativeScript + Vue.js](https://nativescript-vue.org/)

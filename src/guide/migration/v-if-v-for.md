@@ -27,3 +27,10 @@ Na v3.x, `v-if` terá sempre uma maior precedência do que `v-for`.
 Recomenda-se evitar o uso de ambos no mesmo elemento devido à ambiguidade da sintaxe.
 
 Em vez de gerenciar isso à nível de _template_, um método para realizar isso é criar um dado computado (computed property) que filtre uma lista para os elementos visíveis.
+
+[Migration build flag: `COMPILER_V_IF_V_FOR_PRECEDENCE`](migration-build.html#compat-configuration)
+
+## See also
+
+- [List Rendering - Displaying Filtered/Sorted Results](/guide/list.html#displaying-filtered-sorted-results)
+- [List Rendering - `v-for` with `v-if`](/guide/list.html#v-for-with-v-if)

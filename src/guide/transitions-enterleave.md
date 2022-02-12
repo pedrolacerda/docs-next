@@ -7,7 +7,7 @@ O Vue fornece uma variedade de maneiras de aplicar efeitos de transição quando
 - usar o JavaScript para manipular diretamente o DOM durante os hooks de transição
 - integrar bibliotecas de animação JavaScript de terceiros
 
-Nesta página, cobriremos apenas as transições de entrada, saída e listagem, mas você pode ver a próxima seção para [gerenciamento de transições de estado](transitions-state.html).
+Nesta página, cobriremos apenas as transições de entrada e saída, mas você pode ver nas próximas seções sobre [transições de listas](transitions-list.html) e [gerenciamento de transições de estado](transitions-state.html).
 
 ## Transição de Elementos/Componentes Únicos
 
@@ -56,12 +56,7 @@ Vue.createApp(Demo).mount('#demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="3466d06fb252a53c5bc0a0edb0f1588a" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Componente de Transição Simples">
-  <span>Veja um exemplo de <a href="https://codepen.io/team/Vue/pen/3466d06fb252a53c5bc0a0edb0f1588a">
-  Componente de Transição Simples</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Componente de Transição Simples" slug="3466d06fb252a53c5bc0a0edb0f1588a" tab="html,result" :editable="false" />
 
 Quando um elemento envolvido em um componente `transition` é inserido ou removido, isso acontece:
 
@@ -139,12 +134,7 @@ Vue.createApp(Demo).mount('#demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028"  data-preview="true" data-default-tab="css,result" data-user="Vue" data-slug-hash="0dfa7869450ef43d6f7bd99022bc53e2" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Diferentes Transições de Entrada e Saída">
-  <span>Veja um exemplo de <a href="https://codepen.io/team/Vue/pen/0dfa7869450ef43d6f7bd99022bc53e2">
-  Diferentes Transições de Entrada e Saída</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Diferentes Transições de Entrada e Saída" slug="0dfa7869450ef43d6f7bd99022bc53e2" tab="css,result" :editable="false" />
 
 ### Animações CSS
 
@@ -197,12 +187,7 @@ Vue.createApp(Demo).mount('#demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028"  data-preview="true" data-default-tab="html,result" data-user="Vue" data-slug-hash="8627c50c5514752acd73d19f5e33a781" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de Transição de Animação CSS">
-  <span>Veja um exemplo de <a href="https://codepen.io/team/Vue/pen/8627c50c5514752acd73d19f5e33a781">
-  Exemplo de Transição de Animação CSS</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Exemplo de Transição de Animação CSS" slug="8627c50c5514752acd73d19f5e33a781" tab="html,result" :editable="false" />
 
 ### Classes de Transição Personalizadas
 
@@ -417,12 +402,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028"  data-preview="true" data-default-tab="js,result" data-user="Vue" data-slug-hash="68ce1b8c41d0a6e71ff58df80fd85ae5" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transição de Gatilhos JavaScript">
-  <span> Veja um exemplo de <a href="https://codepen.io/team/Vue/pen/68ce1b8c41d0a6e71ff58df80fd85ae5">
-  Transição de Gatilhos JavaScript</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transição de Gatilhos JavaScript" slug="68ce1b8c41d0a6e71ff58df80fd85ae5" tab="js,result" :editable="false" />
 
 ## Transições na Renderização Inicial
 
@@ -447,7 +427,7 @@ Nós discutiremos [transição entre componentes](#transicao-entre-componentes) 
 </transition>
 ```
 
-Na verdade, é possível fazer a transição entre qualquer número de elementos, usando vários `v-if` ou vinculando um único elemento a uma propriedade dinâmica. Por exemplo:
+Na verdade, é possível fazer a transição entre qualquer número de elementos, seja usando `v-if`/`v-else-if`/`v-else` ou vinculando um único elemento a uma propriedade dinâmica. Por exemplo:
 
 <!-- TODO: reescrever o exemplo e colocar no codepen -->
 
@@ -456,10 +436,10 @@ Na verdade, é possível fazer a transição entre qualquer número de elementos
   <button v-if="docState === 'saved'" key="saved">
     Editar
   </button>
-  <button v-if="docState === 'edited'" key="edited">
+  <button v-else-if="docState === 'edited'" key="edited">
     Salvar
   </button>
-  <button v-if="docState === 'editing'" key="editing">
+  <button v-else-if="docState === 'editing'" key="editing">
     Cancelar
   </button>
 </transition>
@@ -492,23 +472,13 @@ computed: {
 
 Ainda há um problema. Experimente clicar no botão abaixo:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="Rwrqzpr" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Problema do Botão dos Modos de Transição">
-  <span>Veja um exemplo de <a href="https://codepen.io/team/Vue/pen/Rwrqzpr">
-  Problema do Botão dos Modos de Transição</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Problema do Botão dos Modos de Transição" slug="Rwrqzpr" :editable="false" />
 
 À medida que faz a transição entre o botão "on" e o botão "off", os dois botões são renderizados - um faz a transição para fora e o outro para dentro. Este é o comportamento padrão do `<transition>` - entrada e saída acontecem simultaneamente.
 
 Às vezes, isso funciona muito bem, como quando os itens em transição são absolutamente posicionados um sobre o outro:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="abdQgLr" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Problema do Botão dos Modos de Transição - Posicionamento">
-  <span>Veja um exemplo de <a href="https://codepen.io/team/Vue/pen/abdQgLr">
-  Problema do Botão dos Modos de Transição - Posicionamento </a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Problema do Botão dos Modos de Transição - Posicionamento" slug="abdQgLr" :editable="false" />
 
 Às vezes, isso não é uma opção, ou estamos lidando com um movimento mais complexo onde os estados de entrada e saída precisam ser coordenados, então o Vue oferece um utilitário extremamente útil chamado **modos de transição**:
 
@@ -527,23 +497,13 @@ Agora vamos atualizar a transição para nossos botões on/off com `out-in`:
 </transition>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="ZEQmdvq" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Problema do Botão dos Modos de Transição - resolvido">
-  <span>Veja um exemplo de <a href="https://codepen.io/team/Vue/pen/ZEQmdvq">
-  Problema do Botão dos Modos de Transição - resolvido</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Problema do Botão dos Modos de Transição - resolvido" slug="ZEQmdvq" :editable="false" />
 
 Com a adição de um atributo, corrigimos a transição original sem precisar adicionar nenhum estilo especial.
 
 Podemos usar isso para coordenar movimentos mais expressivos, como um cartão dobrável, conforme demonstrado a seguir. Na verdade, são dois elementos em transição entre si, mas como os estados inicial e final estão na mesma escala: horizontalmente para 0, parece um movimento fluido. Este tipo de prestidigitação pode ser muito útil para microinterações de IU realistas:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="76e344bf057bd58b5936bba260b787a8" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Modos de Transição Flip Cards">
-  <span>Veja um exemplo de  <a href="https://codepen.io/team/Vue/pen/76e344bf057bd58b5936bba260b787a8">
-  Modos de Transição Flip Cards</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Modos de Transição Flip Cards" slug="76e344bf057bd58b5936bba260b787a8" :editable="false" />
 
 ## Transição Entre Componentes
 
@@ -591,9 +551,4 @@ Vue.createApp(Demo).mount('#demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="WNwVxZw" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transição Entre Componentes">
-  <span>Veja o exemplo <a href="https://codepen.io/team/Vue/pen/WNwVxZw">
-  Transição Entre Componentes</a> do Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transição Entre Componentes" slug="WNwVxZw" tab="html,result" theme="39028" />

@@ -77,7 +77,7 @@ Vue.createApp(Demo).mount('#demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-# Transições com Ligações de Estilo
+## Transições com Ligações de Estilo
 
 Alguns efeitos de transições podem ser aplicados pela interpolação de valores, por exemplo, ao ligar um estilo com um elemento enquanto ocorre uma interação. Veja o seguinte exemplo:
 
@@ -117,12 +117,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="JjGezQY" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Interpolação com ligações por estilo">
-  <span>Veja o Pen <a href="https://codepen.io/team/Vue/pen/JjGezQY">
-  Interpolação com ligações por estilo</a> por Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Interpolação com ligações por estilo" slug="JjGezQY" :editable="false" user="Vue" />
 
 Neste exemplo, estamos criando uma animação por meio do uso de interpolação, adjunto ao movimento do mouse. A transição CSS é aplicada ao elemento também, permitindo que o elemento saiba que tipo de atenuação é usada ao se atualizar.
 
@@ -162,7 +157,7 @@ Você também pode se dar conta de que entradas têm uma aparência melhor com u
 
 ## Atenuação
 
-A atenuação é um modo importante de transmitir profundidade em uma animação. Um dos erros mais comuns que novatos em animação é usar `ease-in` para entradas, e `ease-out` para saídas. Quando, na verdade, você vai precisar do oposto.
+Easing is an important way to convey depth in an animation. One of the most common mistakes newcomers to animation make is to use `ease-in` for entrances, and `ease-out` for exits. You'll actually need the opposite.
 
 Se tivéssemos que aplicar estes estados a uma transição, ela ficaria algo assim:
 
@@ -180,21 +175,11 @@ Se tivéssemos que aplicar estes estados a uma transição, ela ficaria algo ass
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="css,result" data-user="Vue" data-slug-hash="996a9665131e7902327d350ca8a655ac" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Exemplo de transição atenuada">
-  <span>Veja o Pen <a href="https://codepen.io/team/Vue/pen/996a9665131e7902327d350ca8a655ac">
-  Exemplo de transição atenuada</a> por Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Exemplo de transição atenuada" slug="996a9665131e7902327d350ca8a655ac" tab="css,result" :editable="false" :preview="false" user="Vue" />
 
 A atenuação pode inclusive transmitir a qualidade do material sendo animado. Olhe este pen, por exemplo, qual bola você acha que é rígida e qual é macia?
 
-<p class="codepen" data-height="500" data-theme-id="39028" data-default-tab="result" data-user="sdras" data-slug-hash="zxJWBJ" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Demo de bola quicando">
-  <span>Veja o Pen <a href="https://codepen.io/sdras/pen/zxJWBJ">
- Demo de Bola Quicando</a> por Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Demo de Bola Quicando" slug="wvgqyyW" :height="500" :editable="false" user="Vue"/>
 
 Você pode obter muitos efeitos únicos e fazer sua animação bem estilosa ajustando sua atenuação. O CSS lhe permite modificar isso ajustando uma propriedade bezier cúbica, [este playground](https://cubic-bezier.com/#.17,.67,.83,.67) por Lea Verou é muito útil para explorar isso.
 

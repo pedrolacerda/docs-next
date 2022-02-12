@@ -20,14 +20,14 @@ Para uma explicação mais aprofundada, continue lendo!
 Anteriormente, componentes assíncronos eram criados simplesmente definindo um componente como uma função que retornava uma Promise, tal como:
 
 ```js
-const asyncPage = () => import('./NextPage.vue')
+const asyncModal = () => import('./Modal.vue')
 ```
 
 Ou, para os componentes com sintaxe mais avançada com opções:
 
 ```js
-const asyncPage = {
-  component: () => import('./NextPage.vue'),
+const asyncModal = {
+  component: () => import('./Modal.vue'),
   delay: 200,
   timeout: 3000,
   error: ErrorComponent,
@@ -45,11 +45,11 @@ import ErrorComponent from './components/ErrorComponent.vue'
 import LoadingComponent from './components/LoadingComponent.vue'
 
 // Componente Assíncrono sem opções
-const asyncPage = defineAsyncComponent(() => import('./NextPage.vue'))
+const asyncModal = defineAsyncComponent(() => import('./Modal.vue'))
 
 // Componente Assíncrono com opções
-const asyncPageWithOptions = defineAsyncComponent({
-  loader: () => import('./NextPage.vue'),
+const asyncModalWithOptions = defineAsyncComponent({
+  loader: () => import('./Modal.vue'),
   delay: 200,
   timeout: 3000,
   errorComponent: ErrorComponent,
@@ -57,17 +57,21 @@ const asyncPageWithOptions = defineAsyncComponent({
 })
 ```
 
+::: tip NOTE
+Vue Router supports a similar mechanism for asynchronously loading route components, known as *lazy loading*. Despite the similarities, this feature is distinct from Vue's support for async components. You should **not** use `defineAsyncComponent` when configuring route components with Vue Router. You can read more about this in the [Lazy Loading Routes](https://next.router.vuejs.org/guide/advanced/lazy-loading.html) section of the Vue Router documentation.
+:::
+
 Outra mudança em relação a v2.x é a de que a opção `component` foi renomeada para `loader` a fim de comunicar com precisão que uma definição de componente não pode ser fornecida diretamente.
 
 ```js{4}
 import { defineAsyncComponent } from 'vue'
 
-const asyncPageWithOptions = defineAsyncComponent({
-  loader: () => import('./NextPage.vue'),
+const asyncModalWithOptions = defineAsyncComponent({
+  loader: () => import('./Modal.vue'),
   delay: 200,
   timeout: 3000,
-  error: ErrorComponent,
-  loading: LoadingComponent
+  errorComponent: ErrorComponent,
+  loadingComponent: LoadingComponent
 })
 ```
 
@@ -91,3 +95,4 @@ const asyncComponent = defineAsyncComponent(
 Para mais informações sobre o uso de componentes assincronos, leia:
 
 - [Guia: Componentes Dinâmicos & Assíncronos](/guide/component-dynamic-async.html#componentes-dinamicos-com-keep-alive)
+- [Migration build flag: `COMPONENT_ASYNC`](migration-build.html#compat-configuration)

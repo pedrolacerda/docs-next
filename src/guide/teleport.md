@@ -1,6 +1,6 @@
 # Teleporte
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/vue-3-teleport?friend=vuejs" target="_blank" rel="sponsored noopener" title="Aprenda a usar o teleport com Vue School">Aprenda como usar o teleporte em uma aula grátis do Vue School</a></div>
+<VideoLesson href="https://vueschool.io/lessons/vue-3-teleport?friend=vuejs" title="Aprenda a usar o teleport com Vue School">Aprenda como usar o teleporte em uma aula grátis do Vue School</VideoLesson>
 
 O Vue nos encoraja à construir nossas interfaces de usuário (UIs) encapsulando a UI e seu respectivo comportamento em componentes. Podemos aninhar componentes dentro de outros componentes e montar uma árvore que constitui a UI da aplicação.
 
@@ -44,7 +44,7 @@ app.component('modal-button', {
     </div>
   `,
   data() {
-    return { 
+    return {
       modalOpen: false
     }
   }
@@ -55,7 +55,7 @@ Ao usar esse componente dentro da estrutura HTML inicial, podemos ver um problem
 
 O Teleporte fornece uma maneira limpa para nos permitir controlar sob que elemento pai no DOM nós queremos que uma parte do HTML seja rederizada, sem ter que recorrer ao estado global ou dividí-lo em dois componentes.
 
-Vamos modificar nosso `modal-button` para usar o `<teleport>` e dizer ao Vue que "**teleporte** esse HTML **para** a _tag_ '**body**'". 
+Vamos modificar nosso `modal-button` para usar o `<teleport>` e dizer ao Vue que "**teleporte** esse HTML **para** a _tag_ '**body**'".
 
 ```js
 app.component('modal-button', {
@@ -77,7 +77,7 @@ app.component('modal-button', {
     </teleport>
   `,
   data() {
-    return { 
+    return {
       modalOpen: false
     }
   }
@@ -86,12 +86,7 @@ app.component('modal-button', {
 
 Como resultado, uma vez que clicamos no botão para abrir o modal, o Vue irá renderizar corretamente o conteúdo como um filho da _tag_ `body`.
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="gOPNvjR" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Vue 3 Teleport">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/gOPNvjR">
-  Vue 3 Teleport</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Vue 3 Teleport" slug="gOPNvjR" tab="js,result" />
 
 ## Usando com Componentes Vue
 
@@ -145,4 +140,4 @@ Um cenário de caso de uso comum pode ser um componente `<Modal>` reutilizável,
 </div>
 ```
 
-Você pode checar as opções do componente `<teleport>` nas [referências da API](../api/built-in-components.html#teleport)
+Você pode checar as opções do componente `<teleport>` nas [referências da API](../api/built-in-components.html#teleport).

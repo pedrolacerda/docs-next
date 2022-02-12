@@ -94,9 +94,9 @@ No Vue 2.x, a `$data` resultante seria:
 
 ```json
 {
-  user: {
-    id: 2,
-    name: 'Jack'
+  "user": {
+    "id": 2,
+    "name": "Jack"
   }
 }
 ```
@@ -105,11 +105,13 @@ Na v3.0, o resultado será:
 
 ```json
 {
-  user: {
-    id: 2
+  "user": {
+    "id": 2
   }
 }
 ```
+
+[Migration build flag: `OPTIONS_DATA_FN`](migration-build.html#compat-configuration)
 
 ## Estratégias de Migração
 
@@ -119,3 +121,8 @@ Para usuários que dependem da declaração em objeto, é recomendado:
 - Reescrever as referências à informação compartilhada apontando para um novo objeto compartilhado
 
 Para usuários que dependem do comportamento de mesclagem profunda dos _mixins_, é recomendado refatorar seu código para evitar tal dependência completamente, já que mesclagens profundas de _mixins_ são muito implícitas e podem fazer a lógica do código ser mais difícil de entender e depurar.
+
+[Migration build flags:](migration-build.html#compat-configuration)
+
+- `OPTIONS_DATA_FN`
+- `OPTIONS_DATA_MERGE`

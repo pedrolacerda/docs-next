@@ -27,7 +27,7 @@ Você pode ver outras recomendações para nomes de componentes no [Guia de Esti
 
 ### Padrão de Nomeação
 
-Ao definir componentes em um template string ou um componente single file, você tem duas opções ao definir os nomes dos componentes:
+Ao definir componentes em um *template string* ou um componente single-file, você tem duas formas de nomeá-los:
 
 #### Com kebab-case
 

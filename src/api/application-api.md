@@ -22,7 +22,7 @@ Além disso, uma vez que o método `createApp` retorna a própria instância da 
 - **Retorna:**
 
   - A instância da aplicação se o argumento `definition` é passado
-  - A definição da diretiva se o argumento `definition` não é passado
+  - A definição do componente se o argumento `definition` não é passado
 
 - **Uso:**
 
@@ -87,7 +87,9 @@ const app = createApp({})
 
 // registro
 app.directive('my-directive', {
-  // A diretiva tem um conjunto de hooks de ciclo de vida:
+  // A diretiva tem um conjunto de gatilhos de ciclo de vida:
+  // chamado antes que os atributos do elemento vinculado ou escutas de evento sejam aplicados
+  created() {},
   // chamado antes que o componente pai do elemento vinculado (bound) seja montado
   beforeMount() {},
   // chamado quando o componente pai do elemento vinculado é montado
@@ -189,7 +191,7 @@ Além de `el`, você deve tratar esses argumentos como somente leitura e nunca m
 
 - **Uso:**
 
-  Monta um componente raiz da instância da aplicação no elemento DOM fornecido.
+  O `innerHTML` do elemento DOM fornecido será substituído pelo modelo renderizado do componente raiz do aplicativo.
 
 - **Exemplo:**
 
@@ -223,11 +225,11 @@ app.mount('#my-app')
 
 - **Uso:**
 
-  Define um valor que pode ser injetado em todos componentes dentro da aplicação. Componentes devem usar `inject` para receber os valores fornecidos.
-   
+  Define um valor que pode ser injetado em todos os componentes dentro da aplicação. Componentes devem usar `inject` para receber os valores fornecidos.
+
   De uma perspectiva `provide`/`inject`, a aplicação pode ser considerada como um ancestral do nível raiz, com o componente raiz como seu filho único.
 
-  Este método não pode ser confundido com o  [componente de opção provide](options-composition.html#provide-inject) ou a [função provide](composition-api.html#provide-inject) da API de composição. Embora também façam parte do mesmo mecanismo  `provide`/`inject`, eles são usados para configurar valores fornecidos por um componente ao invés da aplicação.
+  Este método não pode ser confundido com a [opção `provide` de componente](options-composition.html#provide-inject) ou a [função `provide`](composition-api.html#prover-injetar) da API de composição. Embora também façam parte do mesmo mecanismo `provide`/`inject`, eles são usados para configurar valores fornecidos por um componente ao invés da aplicação.
 
   Fornecer valores por meio da aplicação é especialmente útil quando ao escrever plugins, pois os plugins normalmente não seriam capazes de fornecer valores usando componentes. É uma alternativa ao uso de [globalProperties](application-config.html#globalproperties).
 
@@ -259,13 +261,9 @@ app.provide('user', 'administrator')
 
 ## unmount
 
-- **Argumentos:**
-
-  - `{Element | string} rootContainer`
-
 - **Uso:**
 
-  Desmonta um componente raiz da instância da aplicação no elemento DOM fornecido.
+  Desmonta um componente raiz da instância da aplicação.
 
 - **Exemplo:**
 
@@ -283,7 +281,7 @@ const app = createApp({})
 app.mount('#my-app')
 
 // Aplicação será desmontada 5 segundos após a montagem
-setTimeout(() => app.unmount('#my-app'), 5000)
+setTimeout(() => app.unmount(), 5000)
 ```
 
 ## use
@@ -299,10 +297,46 @@ setTimeout(() => app.unmount('#my-app'), 5000)
 
 - **Uso:**
 
-  Instalar um Vue.js plugin. Se o plugin é um objeto, deve expor um método `install`. Se for uma função em si, será tratado como método de instalação.
-  
+  Instalar um plugin Vue.js. Se o plugin é um objeto, deve expor um método `install`. Se for uma função em si, será tratado como o método de instalação.
+
   O método de instalação será chamado com a aplicação como seu primeiro argumento. Quaisquer `options` passadas para `use` serão passadas em argumentos subsequentes.
 
   Quando esse método é chamado no mesmo plugin várias vezes, o plugin será instalado apenas uma vez.
 
+- **Exemplo:**
+
+  ```js
+  import { createApp } from 'vue'
+  import MyPlugin from './plugins/MyPlugin'
+
+  const app = createApp({})
+
+  app.use(MyPlugin)
+  app.mount('#app')
+  ```
+
 - **Ver também:** [Plugins](../guide/plugins.html)
+
+## version
+
+- **Uso:**
+
+  Fornece a versão instalada do Vue como uma string. Isso é especialmente útil para [plugins](/guide/plugins.html) da comunidade, onde você pode usar estratégias diferentes para versões diferentes.
+
+- **Exemplo:**
+
+  ```js
+  export default {
+    install(app) {
+      const version = Number(app.version.split('.')[0])
+
+      if (version < 3) {
+        console.warn('Este plugin requer o Vue 3')
+      }
+
+      // ...
+    }
+  }
+  ```
+
+- **See also**: [Global API - version](/api/global-api.html#version)

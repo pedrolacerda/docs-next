@@ -31,7 +31,7 @@ app.mount('#mixins-basic') // => "olá do mixin!"
 
 Quando um _mixin_ e o próprio componente contêm opções se sobrepondo, elas serão "mescladas" usando estratégias apropriadas.
 
-Por exemplo, objetos de dados passam por uma mesclagem recursiva, com os dados do componente tendo prioridade em casos de conflito.
+For example, each mixin can have its own `data` function. Each of them will be called, with the returned objects being merged. Properties from the component's own data will take priority in cases of conflicts.
 
 ```js
 const myMixin = {
@@ -213,12 +213,14 @@ app.mixin({
 })
 ```
 
-## Precauções
+## Desvantagens
 
 No Vue 2, os _mixins_ eram a principal ferramenta para abstrair partes da lógica de componentes em blocos reutilizáveis. No entanto, eles têm alguns problemas:
 
-- _Mixins_ são propensos à conflitos: como as propriedades de cada recurso são mescladas no mesmo componente, você ainda precisa conhecer todos os outros recursos para evitar conflitos de nome de propriedade e para depuração.
+- _Mixins_ são propensos à conflitos: como as propriedades de cada _mixin_ são mescladas no mesmo componente, você ainda precisa conhecer todos os outros _mixins_ para evitar conflitos de nome de propriedade e para depuração.
 
-- Reutilização é limitada: não podemos passar nenhum parâmetro ao _mixin_ para alterar sua lógica, o que reduz sua flexibilidade em termos de abstração da lógica
+- Properties seem to appear from nowhere: If a component uses multiple mixins it isn't necessarily obvious which properties came from which mixin.
+
+- Reutilização é limitada: não podemos passar nenhum parâmetro ao _mixin_ para alterar sua lógica, o que reduz sua flexibilidade em termos de abstração da lógica.
 
 Para resolver esses problemas, adicionamos uma nova maneira de organizar o código por questões lógicas: A [API de Composição](composition-api-introduction.html).

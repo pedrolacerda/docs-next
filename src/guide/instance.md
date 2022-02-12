@@ -5,7 +5,9 @@
 Toda aplicação Vue começa com a criação de uma nova **instância** com a função `createApp`:
 
 ```js
-const app = Vue.createApp({ /* opções */ })
+const app = Vue.createApp({
+  /* opções */
+})
 ```
 
 A instância da aplicação é usada para registrar 'globais' que podem ser usados pelos componentes dentro da aplicação. Discutiremos isso em detalhes posteriormente no guia, mas como um exemplo rápido:
@@ -35,7 +37,9 @@ As opções passadas para `createApp` são usadas para configurar o  **component
 Uma aplicação precisa ser montada em um elemento DOM. Por exemplo, se quisermos montar um aplicação Vue em `<div id="app"></div>`, devemos passar `#app`:
 
 ```js
-const RootComponent = { /* opções */ }
+const RootComponent = {
+  /* opções */
+}
 const app = Vue.createApp(RootComponent)
 const vm = app.mount('#app')
 ```
@@ -109,4 +113,4 @@ Não utilize [_arrow functions_](https://developer.mozilla.org/pt-BR/docs/Web/Ja
 
 Abaixo está um diagrama para o ciclo de vida da instância. Neste momento você não precisa entender completamente tudo o que está acontecendo, mas conforme você for aprendendo e construindo mais coisas, este diagrama se tornará uma referência útil.
 
-<img src="/images/lifecycle.png" width="840" height="auto" style="margin: 0px auto; display: block; max-width: 100%;" loading="lazy" alt="Diagrama do ciclo de vida">
+<img src="/images/lifecycle.svg" width="840" height="auto" style="margin: 0px auto; display: block; max-width: 100%;" loading="lazy" alt="Diagrama dos gatilhos de ciclo de vida da instância">

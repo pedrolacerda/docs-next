@@ -21,6 +21,8 @@ A tabela a seguir contém como os gatilhos de ciclo de vida são chamados dentro
 | `errorCaptured`   | `onErrorCaptured`          |
 | `renderTracked`   | `onRenderTracked`          |
 | `renderTriggered` | `onRenderTriggered`        |
+| `activated`       | `onActivated`              |
+| `deactivated`     | `onDeactivated`            |
 
 :::tip Nota
 Visto que `setup` é executado em torno dos gatilhos de ciclo de vida `beforeCreate` e `created`, você não precisa defini-los explicitamente. Em outras palavras, qualquer código que seria escrito dentro desses gatilhos deve ser escrito diretamente na função `setup`.

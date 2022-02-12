@@ -44,8 +44,8 @@ export default {
 
 Ou, para aqueles que preferem a tag `<template>` em um componente single-file:
 
-```js
-// Exemplo de Componente Funcional com tag <template> no Vue 2
+```vue
+<!-- Exemplo de Componente Funcional com tag <template> no Vue 2 -->
 <template functional>
   <component
     :is="`h${props.level}`"
@@ -91,7 +91,7 @@ Na v3.x, a diferença de performance entre componentes funcionais e de estado fo
 
 Usando o exemplo `<dynamic-heading>` de antes, aqui está como ficaria agora:
 
-```js{1}
+```vue{1,3,4}
 <template>
   <component
     v-bind:is="`h${$props.level}`"
@@ -117,3 +117,4 @@ Para mais informação sobre o uso dos novos componentes funcionais e as mudanç
 
 - [Migração: API da Função de Renderização](/guide/migration/render-function-api.html)
 - [Guia: Funções de Renderização](/guide/render-function.html)
+- [Migration build flag: `COMPONENT_FUNCTIONAL`](migration-build.html#compat-configuration)

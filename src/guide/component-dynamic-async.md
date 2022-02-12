@@ -12,7 +12,7 @@ Anteriormente, usamos o atributo `is` para alternar entre os componentes em uma 
 
 Ao alternar entre esses componentes, às vezes, você desejará manter seu estado ou evitar uma nova renderização, por motivos de desempenho. Por exemplo, ao expandir nossa interface com guias um pouco:
 
-<common-codepen-snippet title="Componentes Dinâmicos: sem keep-alive" slug="jOPjZOe" />
+<common-codepen-snippet title="Componentes Dinâmicos: sem keep-alive" slug="jOPjZOe" tab="html,result" />
 
 Você notará que, se selecionar uma postagem, alternar para a guia _Arquivo_ e, em seguida, voltar para _Postagens_, ela não estará mais mostrando a postagem selecionada. Isso acontece pois, cada vez que você muda para uma nova guia, o Vue cria uma nova instância do componente `currentTabComponent`.
 
@@ -27,7 +27,7 @@ Recriar componentes dinâmicos normalmente é um comportamento útil, mas, nesse
 
 Confira o resultado abaixo:
 
-<common-codepen-snippet title="Componentes Dinâmicos: com keep-alive" slug="VwLJQvP" />
+<common-codepen-snippet title="Componentes Dinâmicos: com keep-alive" slug="VwLJQvP" tab="html,result" />
 
 Agora, a guia _Postagens_ mantém seu estado (a postagem selecionada) mesmo quando não é renderizada.
 
@@ -38,9 +38,11 @@ Confira mais detalhes sobre `<keep-alive>` em [Referências de API](../api/built
 Em aplicativos grandes, talvez seja necessário dividí-lo em partes menores e carregar apenas um componente do servidor quando necessário.. Para tornar isso possível, o Vue tem o método `defineAsyncComponent`:
 
 ```js
-const app = Vue.createApp({})
+const { createApp, defineAsyncComponent } = Vue
 
-const AsyncComp = Vue.defineAsyncComponent(
+const app = createApp({})
+
+const AsyncComp = defineAsyncComponent(
   () =>
     new Promise((resolve, reject) => {
       resolve({

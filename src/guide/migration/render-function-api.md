@@ -180,6 +180,8 @@ Para mais informações, veja [O RFC* das mudanças da API da Função de Render
 
 ## Estratégia de Migração
 
+[Migration build flag: `RENDER_FUNCTION`](migration-build.html#compat-configuration)
+
 ### Autores de Biblioteca
 
 A importação global do `h` significa que qualquer biblioteca que contenha componentes Vue vão incluir `import { h } from 'vue'` em algum lugar. Como resultado, isso cria um pouco de sobrecarga, pois requer que os autores de biblioteca configurem corretamente a externalização do Vue em suas configurações de compilação:

@@ -2,11 +2,12 @@
 
 Vue.js foi projetado propositalmente para ser incrementalmente adotável. Isto significa que pode ser integrado em um projeto de várias formas, dependendo de suas necessidades.
 
-Há três formas principais de adicionar Vue.js a um projeto:
+Há quatro formas principais de adicionar Vue.js a um projeto:
 
 1. Importar [a partir de CDN](#cdn) na página desejada
-2. Instalar usando [npm](#npm)
-3. Usar a ferramenta [CLI](#cli) oficial para criar o projeto, usando configurações previamente ajustadas para o desenvolvimento _frontend_ moderno (com _hot-reload_, _lint-on-save_ e muito mais)
+2. Baixe os arquivos JavaScript e [hospede-os você mesmo](#download-and-self-host)
+3. Instalar usando [npm](#npm)
+4. Usar a ferramenta [CLI](#cli) oficial para criar o projeto, usando configurações previamente ajustadas para o desenvolvimento _frontend_ moderno (com _hot-reload_, _lint-on-save_ e muito mais)
 
 ## Notas de Lançamento
 
@@ -17,6 +18,8 @@ Notas de lançamento detalhadas para cada versão estão disponíveis no [GitHub
 ## Vue Devtools
 
 > Atualmente em versão Beta - integração com Vuex e Router ainda em andamento
+
+<VideoLesson href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3?friend=vuejs" title="Aprenda a instalar o Vue Devtools na Vue School">Aprenda como instalar e usar o Vue Devtools em uma aula gratuita da Vue School</VideoLesson>
 
 Ao utilizar o Vue, recomendamos também instalar a extensão [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) no seu navegador, que lhe permite inspecionar e realizar _debug_ de suas aplicações Vue através de uma interface mais amigável.
 
@@ -36,14 +39,32 @@ Para prototipação ou aprendizagem, você pode utilizar a última versão com:
 
 Para produção, recomendamos vinculá-lo a uma versão e uma distribuição (_build_) específicas, a fim de evitar incompatibilidade de funcionalidades devido a uma nova versão.
 
+## Download and Self Host
+
+If you want to avoid using build tools but can't use a CDN in production then you can download the relevant `.js` file and host it using your own web server. You can then include it using a `<script>` tag, just like with the CDN approach.
+
+The files can be browsed and downloaded from a CDN such as [unpkg](https://unpkg.com/browse/vue@next/dist/) or [jsDelivr](https://cdn.jsdelivr.net/npm/vue@next/dist/). The various different files are [explained later](#explanation-of-different-builds) but you would typically want to download both a development build and a production build.
+
 ## npm
 
-O método de instalação através do npm é o que recomendamos ao construir aplicações de larga escala com o Vue. Ele combina perfeitamente com empacotadores de módulos (_module bundlers_), como o [Webpack](https://webpack.js.org/) ou o [Rollup](https://rollupjs.org/). Vue também oferece ferramentas que auxiliam na criação de [Componentes _Single File_](../guide/single-file-component.html).
+O método de instalação através do npm é o que recomendamos ao construir aplicações de larga escala com o Vue. Ele combina perfeitamente com empacotadores de módulos (_module bundlers_), como o [webpack](https://webpack.js.org/) ou o [Rollup](https://rollupjs.org/).
 
 ```bash
 # última versão estável
 $ npm install vue@next
 ```
+
+Vue also provides accompanying tools for authoring [Single File Components](../guide/single-file-component.html) (SFCs). If you want to use SFCs then you'll also need to install `@vue/compiler-sfc`:
+
+```bash
+$ npm install -D @vue/compiler-sfc
+```
+
+If you're coming from Vue 2 then note that `@vue/compiler-sfc` replaces `vue-template-compiler`.
+
+In addition to `@vue/compiler-sfc`, you'll also need a suitable SFC loader or plugin for your chosen bundler. See the [SFC documentation](../guide/single-file-component.html) for more information.
+
+In most cases, the preferred way to create a webpack build with minimal configuration is to use Vue CLI.
 
 ## CLI
 
@@ -76,7 +97,12 @@ Projetos Vue podem ser rapidamente inicializados com Vite ao executar os seguint
 Com npm:
 
 ```bash
-$ npm init vite-app <nome-do-projeto>
+# npm 6.x
+$ npm init vite@latest <nome-do-projeto> --template vue
+
+# npm 7+, é necessário um traço duplo extra:
+$ npm init vite@latest <nome-do-projeto> -- --template vue
+
 $ cd <nome-do-projeto>
 $ npm install
 $ npm run dev
@@ -85,6 +111,7 @@ $ npm run dev
 Ou com Yarn:
 
 ```bash
+$ yarn create vite <nome-do-projeto> --template vue
 $ yarn create vite-app <nome-do-projeto>
 $ cd <nome-do-projeto>
 $ yarn
@@ -93,7 +120,7 @@ $ yarn dev
 
 ## Esclarecimento sobre as diferentes Distribuições
 
-No [diretório `dist/` do pacote npm](https://cdn.jsdelivr.net/npm/vue@3.0.0-rc.1/dist/), você encontrará diversas distribuições (_builds_) do Vue.js. A seguir, temos uma visão geral de qual arquivo de `dist` você deve utilizar, dependendo do seu caso de uso:
+No [diretório `dist/` do pacote npm](https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/), você encontrará diversas distribuições (_builds_) do Vue.js. A seguir, temos uma visão geral de qual arquivo de `dist` você deve utilizar, dependendo do seu caso de uso:
 
 ### Utilizando a partir de uma CDN ou sem um Empacotador
 
@@ -110,14 +137,14 @@ No [diretório `dist/` do pacote npm](https://cdn.jsdelivr.net/npm/vue@3.0.0-rc.
 Distribuições globais (_global builds_) não são distribuições [UMD](https://github.com/umdjs/umd). Elas são geradas como [IIFEs](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) e são destinadas apenas para uso direto através de `<script src="...">`.
 :::
 
-#### vue(.runtime).esm-browser(.prod).js:
+#### `vue(.runtime).esm-browser(.prod).js`:
 
 - Para uso através de importação _ES modules_ nativa (no navegador, através de `<script type="module">`).
 - Compartilha o mesmo _runtime_ de compilação, o mesmo _inlining_ de dependências e o mesmo comportamento de produção/desenvolvimento, _hard-coded_, com a distribuição (_build_) global.
 
 ### Utilizando a partir de um Empacotador
 
-#### vue(.runtime).esm-bundler.js:
+#### `vue(.runtime).esm-bundler.js`:
 
 - Para uso de empacotadores, como `webpack`, `rollup` e `parcel`.
 - Gera distribuições de produção e desenvolvimento a partir de `process.env.NODE_ENV guards` (deve ser substituído pelo empacotador)

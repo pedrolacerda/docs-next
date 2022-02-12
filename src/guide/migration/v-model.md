@@ -173,6 +173,7 @@ Nós recomendamos:
     props: {
       modelValue: String // anteriormente era `value: String`
     },
+    emits: ['update:modelValue'],
     methods: {
       changePageTitle(title) {
         this.$emit('update:modelValue', title) // anteriormente era `this.$emit('input', title)`
@@ -181,10 +182,15 @@ Nós recomendamos:
   }
   ```
 
+[Migration build flags:](migration-build.html#compat-configuration)
+
+- `COMPONENT_V_MODEL`
+- `COMPILER_V_BIND_SYNC`
+
 ## Próximos Passos
 
 Para mais informações na nova sintaxe do `v-model`, veja:
 
 - [Utilizando `v-model` em Componentes](../component-basics.html#using-v-model-on-components)
 - [Argumentos do `v-model`](../component-custom-events.html#v-model-arguments)
-- [Tratando modificadores do `v-model`](../component-custom-events.html#v-model-arguments)
+- [Tratando modificadores do `v-model`](../component-custom-events.html#handling-v-model-modifiers)

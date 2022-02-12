@@ -107,6 +107,13 @@ app.component('todo-list', {
     }
   }
 })
+
+app.component('todo-list-statistics', {
+  inject: ['todoLength'],
+  created() {
+    console.log(`Propriedade injetada: ${this.todoLength.value}`) // > Propriedade injetada: 5
+  }
+})
 ```
 
-Assim, qualquer alteração em `todos.length` será refletida corretamente nos componentes, onde `todoLength` é injetado. Leia mais sobre prover e injetar dados usando `reactive` na [seção da API de Composição](composition-api-provide-inject.html#injection-reactivity).
+Assim, qualquer alteração em `todos.length` será refletida corretamente nos componentes, onde `todoLength` é injetado. Leia mais sobre `computed` na [seção Dados Computados e Observadores](reactivity-computed-watchers.html#computed-values) e prover e injetar dados usando `reactive` na [seção da API de Composição](composition-api-provide-inject.html#injection-reactivity).

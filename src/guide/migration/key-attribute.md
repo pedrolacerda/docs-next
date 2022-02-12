@@ -59,8 +59,8 @@ No Vue 2.x, uma tag `<template>` não poderia ter uma `key`. Em vez disso, você
 ```html
 <!-- Vue 2.x -->
 <template v-for="item in list">
-  <div :key="item.id">...</div>
-  <span :key="item.id">...</span>
+  <div :key="'heading-' + item.id">...</div>
+  <span :key="'content-' + item.id">...</span>
 </template>
 ```
 

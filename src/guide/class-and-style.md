@@ -4,6 +4,8 @@ Uma necessidade comum de interligação de dados é manipular as classes dos ele
 
 ## Interligando Classes HTML
 
+<VideoLesson href="https://vueschool.io/lessons/dynamic-css-classes-with-vue-3?friend=vuejs" title="Aula grátis sobre classes dinâmicas no Vue.js">Assista a uma vídeo aula gratuita sobre classes dinâmicas na Vue School</VideoLesson>
+
 ### Sintaxe de Objeto
 
 Podemos passar um objeto para `:class` (abreviação de `v-bind:class`) para alternar classes dinamicamente:
@@ -111,7 +113,7 @@ Se você preferir também alternar entre uma classe na lista condicionalmente, u
 <div :class="[isActive ? activeClass : '', errorClass]"></div>
 ```
 
-Isso sempre aplicará `errorClass`, mas somente aplicará `activeClass` quando `isActive` for verdadeiro.
+Isso sempre aplicará `errorClass`, mas `activeClass` somente será aplicado quando `isActive` for verdadeiro.
 
 No entanto, isso pode ser um tanto prolixo se você tiver várias classes condicionais. Por isso também é possível usar a sintaxe de objeto dentro da sintaxe de Array:
 
@@ -230,7 +232,7 @@ A sintaxe Array para `:style` permite que você aplique múltiplos objetos de es
 
 ### Auto-Prefixação
 
-Quando você usa uma propriedade CSS que requer [prefixos de fabricantes](https://developer.mozilla.org/pt-BR/docs/Glossary/Vendor_Prefix) em `:style`, por exemplo `transform`, Vue irá automaticamente detectar e adicionar os prefixos apropriados para os estilos aplicados.
+Quando você usa uma propriedade CSS que requer um [prefixo de fabricante](https://developer.mozilla.org/pt-BR/docs/Glossary/Vendor_Prefix) em `:style`, Vue adicionará automaticamente os prefixos apropriados. O Vue faz isso verificando no tempo de execução quais propriedades de estilo são compatíveis com o navegador atual. Se o navegador não suportar uma propriedade específica, várias variantes prefixadas serão testadas para tentar encontrar uma que seja compatível.
 
 ### Valores Múltiplos
 

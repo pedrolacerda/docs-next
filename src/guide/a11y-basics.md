@@ -12,7 +12,7 @@ Você deve adicionar um link na parte superior de cada página que vai diretamen
 
 Normalmente, isso é feito no topo do `App.vue` pois será o primeiro elemento focável em todas as suas páginas:
 
-``` html
+```html
 <ul class="skip-links">
   <li>
     <a href="#main" ref="skipLink">Pular para o conteúdo principal</a>
@@ -22,7 +22,7 @@ Normalmente, isso é feito no topo do `App.vue` pois será o primeiro elemento f
 
 Para esconder o link a menos que ele esteja focado, você pode adicionar o seguinte estilo:
 
-``` css
+```css
 .skipLink {
   white-space: nowrap;
   margin: 1em auto;
@@ -42,7 +42,7 @@ Para esconder o link a menos que ele esteja focado, você pode adicionar o segui
 
 Depois que um usuário muda de rota, traga o foco de volta para o link de pular. Isso pode ser feito chamando a função _focus_ para a `ref` do elemento como exemplificado abaixo:
 
-``` vue
+```vue
 <script>
 export default {
   watch: {
@@ -54,12 +54,7 @@ export default {
 </script>
 ```
 
-<p class="codepen" data-height="350" data-theme-id="light" data-default-tab="js,result" data-user="emanuelgsouza" data-slug-hash="GRqZbeq" style="height: 350px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Pular para o conteúdo principal">
-  <span>Veja o exemplo <a href="https://codepen.io/emanuelgsouza/pen/GRqZbeq">
-  Pular para o conteúdo principal</a> por Emanuel Gonçalves (<a href="https://codepen.io/emanuelgsouza">@emanuelgsouza</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Pular para o conteúdo principal" user="emanuelgsouza" name="Emanuel Gonçalves" slug="GRqZbeq" :height="350" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 [Leia a documentação sobre pular para o conteúdo principal](https://www.w3.org/WAI/WCAG21/Techniques/general/G1.html)
 
@@ -99,16 +94,16 @@ Os usuários podem navegar em uma aplicação por meio de títulos. Ter títulos
 
 _Landmarks_ fornecem acesso programável às seções de uma aplicação. Os usuários que dependem de tecnologias assistivas podem navegar para cada seção da aplicação e pular seu conteúdo. Você pode usar [_ARIA roles_](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) para te ajudar à atingir isso.
 
-| HTML            | _ARIA Role_                                                         | Propósito da _Landmark_                                                                       |
-| --------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| header          | role="banner"                                                     | Título principal: título da página                                                       |
-| nav             | role="navigation"                                                 | Coleção de links adequados para uso ao navegar no documento ou documentos relacionados |
-| main            | role="main"                                                       | O conteúdo principal ou central do documento.                                           |
-| footer          | role="contentinfo"                                                | Informações sobre o documento principal: notas de rodapé/direitos autorais/links para declaração de privacidade |
-| aside           | role="complementary"                                              | Suporta o conteúdo principal, mas é separado e significativo em seu próprio conteúdo            |
-| _Não disponível_ | role="search"                                                     | Esta seção contém a funcionalidade de pesquisa para a aplicação                     |
-| form            | role="form"                                                       | Coleção de elementos associados à formulários                                                 |
-| section         | role="region"  | Conteúdo relevante e para o qual os usuários provavelmente desejam navegar. Um rótulo deve ser fornecido para este elemento                |
+| HTML             | _ARIA Role_          | Propósito da _Landmark_                                                                                                      |
+| ---------------- | ---------------------| ---------------------------------------------------------------------------------------------------------------------------- |
+| header           | role="banner"        | Título principal: título da página                                                                                           |
+| nav              | role="navigation"    | Coleção de links adequados para uso ao navegar no documento ou documentos relacionados                                       |
+| main             | role="main"          | O conteúdo principal ou central do documento.                                                                                |
+| footer           | role="contentinfo"   | Informações sobre o documento principal: notas de rodapé/direitos autorais/links para declaração de privacidade              |
+| aside            | role="complementary" | Suporta o conteúdo principal, mas é separado e significativo em seu próprio conteúdo                                         |
+| _Não disponível_ | role="search"        | Esta seção contém a funcionalidade de pesquisa para a aplicação                                                              |
+| form             | role="form"          | Coleção de elementos associados à formulários                                                                                |
+| section          | role="region"        | Conteúdo relevante e para o qual os usuários provavelmente desejam navegar. Um rótulo deve ser fornecido para este elemento  |
 
 :::tip Dica
 É recomendado o uso de elementos HTML com atributos _role_ de referência redundantes para maximizar a compatibilidade com navegadores legados [que não oferecem suporte à elementos semânticos do HTML5](https://caniuse.com/#feat=html5semantic).

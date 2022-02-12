@@ -1,14 +1,14 @@
-# Special Attributes
+# Atributos Especiais
 
 ## key
 
-- **Expects:** `number | string`
+- **Espera:** `number | string`
 
-  The `key` special attribute is primarily used as a hint for Vue's virtual DOM algorithm to identify VNodes when diffing the new list of nodes against the old list. Without keys, Vue uses an algorithm that minimizes element movement and tries to patch/reuse elements of the same type in-place as much as possible. With keys, it will reorder elements based on the order change of keys, and elements with keys that are no longer present will always be removed/destroyed.
+  O atributo especial `key` é usado principalmente como uma dica para o algoritmo de DOM virtual do Vue identificar VNodes quando comparar a nova lista de nós com a anterior. Sem as chaves (`key`), o Vue usa um algoritmo que minimiza a movimentação de elementos e tenta corrigir/reusar elementos do mesmo tipo no local, tanto quanto possível. Com as chaves, ele reordenará os elementos com base na alteração da ordem das chaves, e os elementos com chaves que não estão mais presentes sempre serão removidos/destruídos.
 
-  Children of the same common parent must have **unique keys**. Duplicate keys will cause render errors.
+  Filhos do mesmo pai comum devem ter **chaves únicas**. Chaves duplicadas causarão erros de renderização.
 
-  The most common use case is combined with `v-for`:
+  O caso de uso mais comum é combinado com `v-for`:
 
   ```html
   <ul>
@@ -16,12 +16,12 @@
   </ul>
   ```
 
-  It can also be used to force replacement of an element/component instead of reusing it. This can be useful when you want to:
+  Também pode ser usado para forçar a substituição de um elemento/componente em vez de reutilizá-lo. Isso pode ser útil quando você deseja:
 
-  - Properly trigger lifecycle hooks of a component
-  - Trigger transitions
+  - Acionar corretamente gatilhos de ciclo de vida de um componente
+  - Acionar transições
 
-  For example:
+  Por exemplo:
 
   ```html
   <transition>
@@ -29,42 +29,54 @@
   </transition>
   ```
 
-  When `text` changes, the `<span>` will always be replaced instead of patched, so a transition will be triggered.
+  Quando `text` mudar, o `<span>` sempre será substituído ao invés de alterado, então uma transição será acionada.
 
 ## ref
 
-- **Expects:** `string | Function`
+- **Espera:** `string | Function`
 
-  `ref` is used to register a reference to an element or a child component. The reference will be registered under the parent component's `$refs` object. If used on a plain DOM element, the reference will be that element; if used on a child component, the reference will be component instance:
+  `ref` é usado para registrar uma referência a um elemento ou componente filho. A referência será registrada no objeto `$refs` do componente pai. Se usado em um elemento DOM simples, a referência será esse elemento; se usado em um componente filho, a referência será a instância do componente:
 
   ```html
-  <!-- vm.$refs.p will be the DOM node -->
-  <p ref="p">hello</p>
+  <!-- vm.$refs.p será o nó DOM -->
+  <p ref="p">Olá</p>
 
-  <!-- vm.$refs.child will be the child component instance -->
+  <!-- vm.$refs.child será a instância do componente filho -->
   <child-component ref="child"></child-component>
 
-  <!-- When bound dynamically, we can define ref as a callback function, passing the element or component instance explicitly -->
+  <!-- Quando vinculado dinamicamente, podemos definir "ref" como uma função "callback", passando o elemento ou instância do componente explicitamente -->
   <child-component :ref="(el) => child = el"></child-component>
   ```
 
-  An important note about the ref registration timing: because the refs themselves are created as a result of the render function, you cannot access them on the initial render - they don't exist yet! `$refs` is also non-reactive, therefore you should not attempt to use it in templates for data-binding.
+  Uma observação importante sobre o tempo de registro de uma "ref": como as próprias refs são criadas como resultado da função de renderização, você não pode acessá-las na renderização inicial - eles ainda não existem! `$refs` também não é reativo, portanto, você não deve tentar usá-lo em *templates* para vinculação de dados.
 
-- **See also:** [Child Component Refs](../guide/component-template-refs.html)
+- **Veja também:** [Refs de Componente Filho](../guide/component-template-refs.html)
 
 ## is
 
-- **Expects:** `string | Object (component’s options object)`
+- **Espera:** `string | Object (objeto de opções do componente)`
 
-Used for [dynamic components](../guide/component-dynamic-async.html).
+  Usado para [componentes dinâmicos](../guide/component-dynamic-async.html).
 
-For example:
+  Por exemplo:
 
-```html
-<!-- component changes when currentView changes -->
-<component :is="currentView"></component>
-```
+  ```html
+  <!-- componente muda quando currentView muda -->
+  <component :is="currentView"></component>
+  ```
 
-- **See also:**
-  - [Dynamic Components](../guide/component-dynamic-async.html)
-  - [DOM Template Parsing Caveats](../guide/component-basics.html#dom-template-parsing-caveats)
+- **Usage on native elements** <Badge text="3.1+" />
+
+  When the `is` attribute is used on a native HTML element, it will be interpreted as a [Customized built-in element](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example), which is a native web platform feature.
+
+  There is, however, a use case where you may need Vue to replace a native element with a Vue component, as explained in [DOM Template Parsing Caveats](/guide/component-basics.html#dom-template-parsing-caveats). You can prefix the value of the `is` attribute with `vue:` so that Vue will render the element as a Vue component instead:
+
+  ```html
+  <table>
+    <tr is="vue:my-row-component"></tr>
+  </table>
+  ```
+
+- **Veja também:**
+  - [Componentes Dinâmicos](../guide/component-dynamic-async.html)
+  - [RFC explicando a mudança desde o Vue 2](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0027-custom-elements-interop.md#customized-built-in-elements)
