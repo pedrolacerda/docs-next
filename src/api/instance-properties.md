@@ -1,4 +1,4 @@
-# Propriedades de Instância
+# Propriedades da Instância
 
 ## $data
 
@@ -6,7 +6,7 @@
 
 - **Detalhes:**
 
-  O objeto de dados que a instância do componente está observando. As proxies da instância do componente acessam as propriedades deste objeto de dados.
+  O objeto de dados que a instância do componente está observando. A instância do componente faz _proxy_ de acesso às propriedades em seu objeto de dados.
 
 - **Ver também:** [Opções - Dados](./options-data.html#data-2)
 
@@ -16,7 +16,7 @@
 
 - **Detalhes:**
 
-  Um objeto representando a propriedade atual que o componente recebeu. As proxies de instância do componente acessam as propriedades em seu objeto de propriedades.
+  Um objeto representando as props atuais que o componente recebeu. A instância do componente faz _proxy_ de acesso às propriedades em seu objeto de props.
 
 ## $el
 
@@ -28,7 +28,7 @@
 
   O elemento raiz do DOM que a instância do componente está gerenciando.
 
-  For components using [fragments](../guide/migration/fragments), `$el` will be the placeholder DOM node that Vue uses to keep track of the component's position in the DOM. It is recommended to use [template refs](../guide/component-template-refs.html) for direct access to DOM elements instead of relying on `$el`.
+  Para componentes usando [fragmentos](../guide/migration/fragments), `$el` será o nó DOM _placeholder_ que o Vue usa para acompanhar a posição do componente no DOM. Recomenda-se usar [_refs_ de _template_](../guide/component-template-refs.html) para acesso direto aos elementos DOM em vez de depender de `$el`.
 
 ## $options
 
@@ -38,7 +38,7 @@
 
 - **Detalhes:**
 
-  As opções utilizadas pela atual instância do componente. Isto é útil quando você queira incluir propriedades customizadas nas opções:
+  As opções da instanciação usadas pela instância do componente atual. Isso é útil quando você deseja incluir propriedades personalizadas nas opções:
 
   ```js
   const app = createApp({
@@ -57,7 +57,7 @@
 
 - **Detalhes:**
 
-  A instância mãe, caso a instância atual possua uma.
+  A instância pai, se a instância atual tiver uma.
 
 ## $root
 
@@ -67,7 +67,7 @@
 
 - **Detalhes:**
 
-  A instância do componente raiz da árvore de componentes. Caso a instância atual não tenha pais, este valor será ele mesmo.
+  A instância do componente raiz da árvore de componentes atual. Caso a instância atual não tenha pais, este valor será ela mesmo.
 
 ## $slots
 
@@ -77,9 +77,9 @@
 
 - **Detalhes:**
 
-  Usado para o acesso de conteúdo [distribuído com slots](../guide/component-basics.html#content-distribution-with-slots) de forma programática. Cada [slot nomeado](../guide/component-slots.html#slots-nomeados) tem sua propriedade correspondente (e.g. o conteúdo de `v-slot:foo` será encontrado em `this.$slots.foo()`). A propriedade `default` contém os demais nós não incluídos nos slots nomeados ou conteúdos do `v-slot:default`.
+  Usado para o acesso de conteúdo [distribuído com slots](../guide/component-basics.html#distribuicao-de-conteudo-com-slots) de forma programática. Cada [slot nomeado](../guide/component-slots.html#slots-nomeados) tem sua propriedade correspondente (e.g. o conteúdo de `v-slot:foo` será encontrado em `this.$slots.foo()`). A propriedade `default` contém os outros nós não incluídos nos slots nomeados ou conteúdos do `v-slot:default`.
 
-  Acessar `this.$slots` é mais útil quando construir um componente com uma [função de renderização](../guide/render-function.html).
+  Acessar `this.$slots` é mais útil ao construir um componente com uma [função de renderização](../guide/render-function.html).
 
 - **Exemplo:**
 
@@ -118,7 +118,7 @@
 
 - **Ver também:**
   - [Componente `<slot>`](built-in-components.html#slot)
-  - [Distribuição de Conteúdo com Slots](../guide/component-basics.html#distribuição-de-conteúdo-com-slots)
+  - [Distribuição de Conteúdo com Slots](../guide/component-basics.html#distribuicao-de-conteudo-com-slots)
   - [Funções de Renderização - Slots](../guide/render-function.html#slots)
 
 ## $refs
@@ -129,11 +129,11 @@
 
 - **Detalhes:**
 
-  Um objeto dos elementos do DOM e as instâncias de componente, registrados com [atributos `ref`](../guide/component-template-refs.html)
+Um objeto dos elementos do DOM e as instâncias de componente, registrados com [atributos `ref`](../guide/component-template-refs.html)
 
-- **See also:**
-  - [_refs_ de Template ](../guide/component-template-refs.html)
-  - [Atributos especiais - ref](./special-attributes.md#ref)
+- **Ver também:**
+  - [_refs_ de _Template_](../guide/component-template-refs.html)
+  - [Atributos especiais - `ref`](./special-attributes.md#ref)
 
 ## $attrs
 
@@ -143,8 +143,8 @@
 
 - **Detalhes:**
 
-Contêm o atributo de escopo-pai e eventos que não são reconhecidos (e extraídos) como [propriedades](./options-data.html#props) do componente ou [eventos customizados](./options-data.html#emits). Quando um componente não possui nenhuma propriedade declarada ou eventos customizados, esse essencialmente contêm todos os bindings do escopo-pai, e podem ser passados abaixo para um componente interno via `v-bind="$attrs'"` - útil na criação de componentes de prioridade alta.
+Contém atributos vinculados do escopo-pai e eventos que não são reconhecidos (e extraídos) como [props](./options-data.html#props) de componentes ou [eventos personalizados](./options-data.html#emits). Quando um componente não possui nenhuma propriedade declarada ou eventos customizados, esse essencialmente contém todos os vínculos do escopo-pai, e pode ser passado abaixo para um componente interno via `v-bind="$attrs"` - útil ao criar componentes de ordem superior.
 
 - **Veja também:**
   - [Atributos Não-Propriedades](../guide/component-attrs.html)
-  - [Options / Misc - inheritAttrs](./options-misc.html#inheritattrs)
+  - [Opções / Diversos - inheritAttrs](./options-misc.html#inheritattrs)
