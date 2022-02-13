@@ -406,17 +406,17 @@ Isso é tudo que você precisa saber sobre componentes dinâmicos por hora mas, 
 
 ## Ressalvas na Análise do _template_ DOM
 
-Se você estiver escrevendo seus modelos Vue diretamente no DOM, o Vue terá que recuperar a string do modelo do DOM. Isso leva a algumas advertências devido ao comportamento de análise de HTML nativo dos navegadores.
+Se você estiver escrevendo seus _templates_ Vue diretamente no DOM, o Vue terá que recuperar a string do _template_ do DOM. Isso leva a algumas ressalvas devido ao comportamento da análise de HTML nativo dos navegadores.
 
-:::Dica
-Deve-se observar que as limitações discutidas abaixo se aplicam apenas se você estiver escrevendo seus modelos diretamente no DOM. Eles NÃO se aplicam se você estiver usando modelos de string das seguintes fontes:
+:::tip Nota
+Deve-se observar que as limitações discutidas abaixo se aplicam apenas se você estiver escrevendo seus _templates_ diretamente no DOM. Eles NÃO se aplicam se você estiver usando _templates_ em string das seguintes fontes:
 
-- String templates (e.g. `template: '...'`)
-- [Single-file (`.vue`) components](single-file-component.html)
+- _Templates_ String (e.g. `template: '...'`)
+- [Componentes Single-file (`.vue`)](single-file-component.html)
 - `<script type="text/x-template">`
 :::
 
-### Element Placement Restrictions
+### Restrições na Colocação de Elementos
 
 Alguns elementos HTML, como `<ul>`, `<ol>`, `<table>` e `<select>` têm restrições do que pode aparecer dentro deles, e alguns elementos como `<li>`, `<tr>`, e `<option>` podem aparecer apenas dentro de certos elementos.
 
@@ -436,7 +436,7 @@ O componente `<blog-post-row>` será removido como um conteúdo inválido, causa
 </table>
 ```
 
-:::Dica
+:::tip Nota
 Quando usado em elementos HTML nativos, o valor de `is` deve ser prefixado com `vue:` para ser interpretado como um componente Vue. Isso é necessário para evitar confusão com [elementos integrados personalizados](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example) nativos.
 :::
 
