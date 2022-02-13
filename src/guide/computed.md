@@ -203,7 +203,7 @@ Resultado:
 
 Neste caso, ao usarmos `watch`, podemos executar uma operação assíncrona — como adquirir informações de uma _API_ — e, até mesmo, condições para executá-la. Isto não seria possível através da utilização de dados computados _(computed properties)_.
 
-Além da opção de observação `watch`, você também pode usar a API imperativa [vm.$watch API](../api/instance-methods.html#watch).
+Além da opção de observação `watch`, você também pode usar a API imperativa [vm.$watch](../api/instance-methods.html#watch).
 
 ### Dados Computados vs Observadores
 
