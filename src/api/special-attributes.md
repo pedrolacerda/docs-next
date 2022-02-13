@@ -67,9 +67,9 @@
 
 - **Uso em elementos nativos** <Badge text="3.1+" />
 
-  Quando o atributo `is` é usado em um elemento HTML nativo, ele será interpretado como um [Customized built-in element](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example), que é um recurso nativo da plataforma web.
+  Quando o atributo `is` é usado em um elemento HTML nativo, ele será interpretado como um [Elemento integrado personalizado](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example), que é um recurso nativo da plataforma web.
 
-  No entanto, há um caso de uso em que você pode precisar do Vue para substituir um elemento nativo por um componente Vue, conforme explicado em [DOM Template Parsing Caveats](/guide/component-basics.html#dom-template-parsing-caveats). Você pode prefixar o valor do atributo `is` com `vue:` para que o Vue renderize o elemento como um componente do Vue: 
+  No entanto, há um caso de uso em que você pode precisar do Vue para substituir um elemento nativo por um componente Vue, conforme explicado em [Ressalvas na Análise do _template_ DOM](/guide/component-basics.html#ressalvas-na-analise-do-template-dom). Você pode prefixar o valor do atributo `is` com `vue:` para que o Vue renderize o elemento como um componente Vue:
 
   ```html
   <table>
