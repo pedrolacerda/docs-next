@@ -12,11 +12,11 @@ badges:
 
 ## Visão Geral
 
-Quando se está dinamicamente vinculando atributos em um elemento, um cenário comum envolve utilizar tanto a sintaxe `v-bind="object"` quanto as propriedades indiviuais no mesmo elemento. Contudo, isso gera questões tal como a prioridade na combinação.
+Quando se está dinamicamente vinculando atributos em um elemento, um cenário comum envolve utilizar tanto a sintaxe `v-bind="object"` quanto os atributos individuais no mesmo elemento. Contudo, isso gera questões tal como a prioridade na combinação.
 
 ## Sintaxe 2.x
 
-No 2.x, se um elemento tem tanto o `v-bind="object"` quanto uma propriedade individual idêntica definida, a propriedade individual sempre vai sobrescrever as vinculações do `object`. 
+No 2.x, se um elemento tem tanto o `v-bind="object"` quanto um atributo individual idêntico definido, o atributo individual sempre vai sobrescrever as vinculações do `object`.
 
 ```html
 <!-- template -->
@@ -27,7 +27,7 @@ No 2.x, se um elemento tem tanto o `v-bind="object"` quanto uma propriedade indi
 
 ## Sintaxe v3.x
 
-Na v3.x, se um elemento tem tanto o `v-bind="object"` quanto uma propriedade individual idêntica definida, a ordem de como as vinculações são declaradas determina como elas serão combinadas. Em outras palavras, em vez de assumir que os desenvolvedores querem que a propriedade individual sempre sobrescreva o que está definido no `object`, agora os desenvolvedores terão mais controle sobre qual o comportamento desejado na combinação.
+Na v3.x, se um elemento tem tanto o `v-bind="object"` quanto um atributo individual idêntico definido, a ordem de como as vinculações são declaradas determina como elas serão combinadas. Em outras palavras, em vez de assumir que os desenvolvedores querem que o atributo individual sempre sobrescreva o que está definido no `object`, agora os desenvolvedores terão mais controle sobre qual o comportamento desejado na combinação.
 
 ```html
 <!-- template -->
@@ -43,4 +43,6 @@ Na v3.x, se um elemento tem tanto o `v-bind="object"` quanto uma propriedade ind
 
 ## Estratégia de Migração
 
-Se você está confiando nessa funcionalidade de sobrescrita do `v-bind`, nós atualmente recomendamos você à garantir que seu atributo `v-bind` seja definido sempre antes das propriedades individuais.
+Se você está confiando nessa funcionalidade de sobrescrita do `v-bind`, nós atualmente recomendamos você à garantir que seu atributo `v-bind` seja definido sempre antes dos atributos individuais.
+
+[Migration build flag: `COMPILER_V_BIND_OBJECT_ORDER`](migration-build.html#compat-configuration)

@@ -33,12 +33,7 @@ As chaves duplas interpretam os dados como texto simples, não HTML. Para que vo
 <p>Diretiva v-html: <span v-html="rawHtml"></span></p>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="yLNEJJM" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Renderizando v-html">
-  <span>Veja o exemplo <a href="https://codepen.io/vuejs-br/pen/MWyZLyQ">
-  Renderizando v-html</a> por Vue.js Brasil (<a href="https://codepen.io/vuejs-br">@vuejs-br</a>)
-  no <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Renderizando v-html" slug="MWyZLyQ" :preview="false" />
 
 Os conteúdos do `span` serão substituídos pelo valor da propriedade `rawHtml`, interpretada como HTML puro - vínculos de dados são ignorados. Note que você não pode utilizar a diretiva `v-html` para compor templates parciais, porque o Vue não é uma _engine_ de _templates_ baseada em Strings. Ao invés disso, componentes são a maneira indicada como unidade fundamental de composição e reutilização de elementos de interface.
 
@@ -48,13 +43,15 @@ Renderizar dinamicamente HTML arbitrário no seu _site_ pode ser muito perigoso,
 
 ### Atributos
 
-Chaves duplas não podem ser usadas em atributos HTML. Para isso, utilize a [diretiva v-bind]((../api/#v-bind)):
+Chaves duplas não podem ser usadas em atributos HTML. Para isso, utilize a [diretiva `v-bind`](../api/directives.html#v-bind):
 
 ```html
 <div v-bind:id="dynamicId"></div>
 ```
 
-No caso de atributos _booleanos_, onde sua mera existência implica em `true`, `v-bind` funciona um pouco diferente. Neste exemplo:
+Se o valor vinculado for `null` ou` undefined`, o atributo não será incluído no elemento renderizado.
+
+No caso de atributos _booleanos_, onde sua mera existência implica em `true`, `v-bind` funciona um pouco diferente. Por exemplo:
 
 ```html
 <button v-bind:disabled="isButtonDisabled">Botão</button>
@@ -62,13 +59,18 @@ No caso de atributos _booleanos_, onde sua mera existência implica em `true`, `
 
 Se `isButtonDisabled` possui um valor `null` ou `undefined`, o atributo `disabled` nem mesmo será incluído no elemento `<button>` renderizado.
 
+O atributo `disabled` será incluído se` isButtonDisabled` tiver um valor verdadeiro. Também será incluído se o valor for uma string vazia, mantendo a consistência com `<button disabled="">`. Para outros valores falsos, o atributo será omitido.
+
 ### Usando Expressões JavaScript
 
 Até aqui nós apenas vinculamos valores a chaves simples em nossos _templates_. Mas o Vue.js suporta todo o poder das expressões JavaScript dentro de todo tipo de vinculação de dados:
 
 ```html
-{{ number + 1 }} {{ ok ? 'SIM' : 'NÃO' }} {{ message.split('').reverse().join('')
-}}
+{{ number + 1 }}
+
+{{ ok ? 'SIM' : 'NÃO' }}
+
+{{ message.split('').reverse().join('') }}
 
 <div v-bind:id="'list-' + id"></div>
 ```

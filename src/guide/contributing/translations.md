@@ -1,10 +1,18 @@
 # Traduzindo
 
-Vue se espalhou pelo globo, com a equipe principal em pelo menos meia dúzia de fusos horários diferentes. O [fórum oficial](https://forum.vuejs.org/) inclui 7 idiomas e contando. Além disso, muitas de nossas documentações têm [traduções mantidas ativamente](https://github.com/vuejs?utf8=%E2%9C%93&q=vuejs.org). Temos muito orgulho do alcance internacional do Vue, mas podemos fazer ainda melhor.
+Vue has spread across the globe, with the core team being in at least half a dozen different timezones. The community is growing all the time and we want to make the documentation accessible to as many people as possible.
 
-## Podemos mesmo traduzir a documentação do Vue 3?
+Providing translations for the documentation is not something that the core team can manage alone. Thankfully, we have a great community of translators making contributions both large and small. If you've been thinking about contributing to the project, perhaps this is a good place to start?
 
-Sim! Estamos prontos para a tradução!
+## Community translations
+
+The table below lists GitHub repositories for community translations. These are translations made by the community, for the community. Some of these translations may be incomplete but they can still make the Vue experience significantly more enjoyable for readers who prefer these languages.
+
+For completeness, we've also included the official documentation in the list.
+
+<guide-contributing-translations />
+
+Thank you to everyone who has contributed to these translations. Your hard work is very much appreciated.
 
 ## Como posso me envolver com traduções?
 

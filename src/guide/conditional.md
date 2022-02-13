@@ -1,5 +1,7 @@
 # Renderização Condicional
 
+<VideoLesson href="https://vueschool.io/lessons/conditional-rendering-in-vue-3?friend=vuejs" title="Aprenda como a renderização condicional funciona com a Vue School">Aprenda como a renderização condicional funciona com uma aula gratuita na Vue School</VideoLesson>
+
 ## `v-if`
 
 A diretiva `v-if` é usada para renderizar condicionalmente um bloco. O bloco só será renderizado se a expressão na diretiva retornar um valor verdadeiro.
@@ -91,4 +93,4 @@ De modo geral, `v-if` tem custo maior nas alternâncias de renderização, enqua
 Usar `v-if` e `v-for` juntos **não é recomendado**. Veja o [guia de estilos](../style-guide/#avoid-v-if-with-v-for-essential) para mais informações.
 :::
 
-Quando `v-if` e `v-for` são usados juntos no mesmo elemento, `v-if` será avaliado primeiro. Veja sobre [Renderização de Listas](list#v-for-with-v-if) para mais detalhes.
+Quando `v-if` e `v-for` são usados juntos no mesmo elemento, `v-if` será avaliado primeiro. Veja sobre [Renderização de Listas](list.html#v-for-with-v-if) para mais detalhes.
