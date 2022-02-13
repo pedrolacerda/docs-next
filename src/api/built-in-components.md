@@ -1,20 +1,20 @@
 # Componentes Integrados
 
-Built-in components can be used directly in templates without needing to be registered.
+Os componentes integrados podem ser usados diretamente em _templates_ sem a necessidade de registro.
 
-The `<keep-alive>`, `<transition>`, `<transition-group>`, and `<teleport>` components can all be tree-shaken by bundlers, so that they are only included in the build if they're used. They can also be imported explicitly if you need direct access to the component itself:
+Os componentes `<keep-alive>`, `<transition>`, `<transition-group>`, e `<teleport>` podem ser todos _tree-shaken_ por empacotadores (_bundlers_), de modo que só são incluídos na construção se forem usados. Eles também podem ser importados explicitamente se você precisar de acesso direto ao próprio componente:
 
 ```js
-// CDN build of Vue
+// Distribuição em CDN do Vue
 const { KeepAlive, Teleport, Transition, TransitionGroup } = Vue
 ```
 
 ```js
-// ESM build of Vue
+// Distribuição em ESM do Vue
 import { KeepAlive, Teleport, Transition, TransitionGroup } from 'vue'
 ```
 
-`<component>` and `<slot>` are component-like features of template syntax. They are not true components and they can't be imported like the components shown above.
+`<component>` e `<slot>` são recursos da sintaxe de _template_ em forma de componentes. Eles não são componentes verdadeiros e não podem ser importados como os componentes mostrados acima.
 
 ## component
 
@@ -41,7 +41,7 @@ import { KeepAlive, Teleport, Transition, TransitionGroup } from 'vue'
   <component :is="href ? 'a' : 'span'"></component>
   ```
 
-  The built-in components `KeepAlive`, `Transition`, `TransitionGroup`, and `Teleport` can all be passed to `is`, but you must register them if you want to pass them by name. For example:
+  Os componentes integrados `KeepAlive`, `Transition`, `TransitionGroup`, e `Teleport` podem ser passados para `is`, mas você deve registrá-los se quiser transmiti-los por nome. Por exemplo: 
 
   ```js
   const { Transition, TransitionGroup } = Vue
@@ -60,7 +60,7 @@ import { KeepAlive, Teleport, Transition, TransitionGroup } from 'vue'
   }
   ```
 
-  Registration is not required if you pass the component itself to `is` rather than its name.
+  O registro não será necessário se você passar o próprio componente para `is` ao invés de seu nome.
 
 - **Ver também:** [Componentes Dinâmicos](../guide/component-dynamic-async.html)
 
