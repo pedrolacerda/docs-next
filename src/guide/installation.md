@@ -39,11 +39,11 @@ Para prototipação ou aprendizagem, você pode utilizar a última versão com:
 
 Para produção, recomendamos vinculá-lo a uma versão e uma distribuição (_build_) específicas, a fim de evitar incompatibilidade de funcionalidades devido a uma nova versão.
 
-## Download and Self Host
+## Baixar e hospedar em seu próprio servidor
 
-If you want to avoid using build tools but can't use a CDN in production then you can download the relevant `.js` file and host it using your own web server. You can then include it using a `<script>` tag, just like with the CDN approach.
+Se você não pode usar uma CDN em produção, ou não deseja fazer uso de ferramentas de construção, você pode baixar o arquivo `.js` e hospedá-lo em seu próprio servidor web. Desta forma, você pode então incluí-lo usando uma tag `<script>`, da mesma forma como feito com a abordagem CDN.
 
-The files can be browsed and downloaded from a CDN such as [unpkg](https://unpkg.com/browse/vue@next/dist/) or [jsDelivr](https://cdn.jsdelivr.net/npm/vue@next/dist/). The various different files are [explained later](#explanation-of-different-builds) but you would typically want to download both a development build and a production build.
+Os arquivos podem ser encontrados e baixados de uma CDN, como [unpkg](https://unpkg.com/browse/vue@next/dist/) ou [jsDelivr](https://cdn.jsdelivr.net/npm/vue@next/dist/). Os vários arquivos diferentes serão [explicados mais tarde](#esclarecimento-sobre-as-diferentes-distribuicoes), mas normalmente você desejará baixar ambas as versões de desenvolvimento e de produção.
 
 ## npm
 
@@ -54,17 +54,17 @@ O método de instalação através do npm é o que recomendamos ao construir apl
 $ npm install vue@next
 ```
 
-Vue also provides accompanying tools for authoring [Single File Components](../guide/single-file-component.html) (SFCs). If you want to use SFCs then you'll also need to install `@vue/compiler-sfc`:
+O Vue também fornece ferramentas de acompanhamento para a criação de [Componentes Single-File](../guide/single-file-component.html) (SFCs). Se você quiser usar SFCs, também precisará instalar `@vue/compiler-sfc`:
 
 ```bash
 $ npm install -D @vue/compiler-sfc
 ```
 
-If you're coming from Vue 2 then note that `@vue/compiler-sfc` replaces `vue-template-compiler`.
+Se você está vindo do Vue 2, observe que `@vue/compiler-sfc` substitui `vue-template-compiler`.
 
-In addition to `@vue/compiler-sfc`, you'll also need a suitable SFC loader or plugin for your chosen bundler. See the [SFC documentation](../guide/single-file-component.html) for more information.
+Além do `@vue/compiler-sfc`, você também precisará de um _loader_ ou plugin SFC adequado para o empacotador escolhido. Consulte a [documentação de SFC](../guide/single-file-component.html) para obter mais informações.
 
-In most cases, the preferred way to create a webpack build with minimal configuration is to use Vue CLI.
+Na maioria dos casos, a maneira preferida de criar uma construção com webpack e configuração mínima é usar o Vue CLI.
 
 ## CLI
 
