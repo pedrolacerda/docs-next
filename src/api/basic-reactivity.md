@@ -19,7 +19,7 @@ function reactive<T extends object>(target: T): UnwrapNestedRefs<T>
 ```
 
 ::: tip Nota
-`reactive` irá desempacotar profundamente todas as [refs](./refs-api.html#ref), enquanto mantém a reativida da ref
+`reactive` desempacotará profundamente todas as [refs](./refs-api.html#ref), enquanto mantém a reatividade da ref
 
 ```ts
 const count = ref(1)
@@ -33,7 +33,7 @@ count.value++
 console.log(count.value) // 2
 console.log(obj.count) // 2
 
-// Isto vai apenas atualizar a ref `count`
+// Isto também vai atualizar a ref `count`
 obj.count++
 console.log(obj.count) // 3
 console.log(count.value) // 3
@@ -77,7 +77,7 @@ original.count++
 copy.count++ // aviso!
 ```
 
-Assim como acontece com [`reactive`](#reactive), se alguma propriedade usar `ref`, este será automaticamente desempacotado quando for acessado pelo proxy:
+Assim como acontece com [`reactive`](#reactive), se alguma propriedade usar `ref`, este será automaticamente desempacotado quando for acessado pelo _proxy_:
 
 ```js
 const raw = {
