@@ -195,9 +195,9 @@
       }
     },
     watch: {
-      // watching top-level property
+      // observando propriedade de nível superior
       a(val, oldVal) {
-        console.log(`new: ${val}, old: ${oldVal}`)
+        console.log(`novo: ${val}, velho: ${oldVal}`)
       },
       // nome do método como string
       b: 'someMethod',
@@ -209,9 +209,9 @@
         },
         deep: true
       },
-      // watching a single nested property:
+      // observando uma única propriedade aninhada:
       'c.d': function (val, oldVal) {
-        // do something
+        // faça algo
       },
       // o callback será chamado imediatamente após o início da observação
       e: {
