@@ -1,14 +1,14 @@
-# Template Refs
+# _refs_ de Template
 
-> This section uses [single-file component](single-file-component.html) syntax for code examples
+> Esta seção usa a sintaxe de [componente single-file](single-file-component.html) para exemplos de código
 
-> This guide assumes that you have already read the [Composition API Introduction](composition-api-introduction.html) and [Reactivity Fundamentals](reactivity-fundamentals.html). Read that first if you are new to Composition API.
+> Este guia pressupõe que você já leu a [Introdução à API de Composição](composition-api-introduction.html) e os [Fundamentos da Reatividade](reactivity-fundamentals.html). Leia lá primeiro se você for novo na API de Composição.
 
-When using the Composition API, the concept of [reactive refs](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) and [template refs](component-template-refs.html) are unified. In order to obtain a reference to an in-template element or component instance, we can declare a ref as usual and return it from [setup()](composition-api-setup.html):
+Ao usar a API de Composição, os conceitos de [_refs_ reativos](reactivity-fundamentals.html#criacao-de-valores-reativos-avulsos-como-refs) e [_refs_ de _template_](component-template-refs.html) são unificados. Para obter uma referência a um elemento do _template_ ou instância de componente, podemos declarar uma referência como de costume e retorná-la de [setup()](composition-api-setup.html):
 
 ```html
 <template>
-  <div ref="root">This is a root element</div>
+  <div ref="root">Este é um elemento raiz</div>
 </template>
 
 <script>
@@ -19,8 +19,8 @@ When using the Composition API, the concept of [reactive refs](reactivity-fundam
       const root = ref(null)
 
       onMounted(() => {
-        // the DOM element will be assigned to the ref after initial render
-        console.log(root.value) // <div>This is a root element</div>
+        // o elemento DOM será atribuído ao ref após a renderização inicial
+        console.log(root.value) // <div>Este é um elemento raiz</div>
       })
 
       return {
@@ -31,11 +31,11 @@ When using the Composition API, the concept of [reactive refs](reactivity-fundam
 </script>
 ```
 
-Here we are exposing `root` on the render context and binding it to the div as its ref via `ref="root"`. In the Virtual DOM patching algorithm, if a VNode's `ref` key corresponds to a ref on the render context, the VNode's corresponding element or component instance will be assigned to the value of that ref. This is performed during the Virtual DOM mount / patch process, so template refs will only get assigned values after the initial render.
+Aqui estamos expondo `root` no contexto de renderização e vinculando-o a div como sua referência via `ref="root"`. No algoritmo de correção (_patch_) do DOM Virtual, se a chave `ref` de um VNode corresponder a uma referência no contexto de renderização, o elemento ou instância de componente correspondente do VNode será atribuído ao valor dessa referência. Isso é realizado durante o processo de montagem / _patch_ do Virtual DOM, portanto, as referências do _template_ só receberão valores atribuídos após a renderização inicial.
 
-Refs used as templates refs behave just like any other refs: they are reactive and can be passed into (or returned from) composition functions.
+Referências usadas como _refs_ de _template_ se comportam como quaisquer outras _refs_: elas são reativas e podem ser passadas (ou retornadas) a funções de composição.
 
-## Usage with JSX
+## Uso com JSX
 
 ```js
 export default {
@@ -47,15 +47,15 @@ export default {
         ref: root
       })
 
-    // with JSX
+    // com JSX
     return () => <div ref={root} />
   }
 }
 ```
 
-## Usage inside `v-for`
+## Uso dentro de `v-for`
 
-Composition API template refs do not have special handling when used inside `v-for`. Instead, use function refs to perform custom handling:
+As _refs_ de _template_ da API de Composição não têm tratamento especial quando usadas dentro de `v-for`. Em vez disso, use a sintaxe de função nas _refs_ para realizar um tratamento personalizado:
 
 ```html
 <template>
@@ -72,7 +72,7 @@ Composition API template refs do not have special handling when used inside `v-f
       const list = reactive([1, 2, 3])
       const divs = ref([])
 
-      // make sure to reset the refs before each update
+      // certifique-se de limpar as refs antes de cada atualização
       onBeforeUpdate(() => {
         divs.value = []
       })
@@ -86,15 +86,15 @@ Composition API template refs do not have special handling when used inside `v-f
 </script>
 ```
 
-## Watching Template Refs
+## Observando _refs_ de Templates
 
-Watching a template ref for changes can be an alternative to the use of lifecycle hooks that was demonstrated in the previous examples.
+Observar uma referência de _template_ por alterações pode ser uma alternativa ao uso de gatilhos de ciclo de vida que foi demonstrado nos exemplos anteriores.
 
-But a key difference to lifecycle hooks is that `watch()` and `watchEffect()` effects are run *before* the DOM is mounted or updated so the template ref hasn't been updated when the watcher runs the effect:
+Mas uma diferença chave para os gatilhos do ciclo de vida é que os efeitos `watch()` e `watchEffect()` são executados *antes* do DOM ser montado ou atualizado, de modo que o _ref_ de _template_ ainda não foi atualizado quando o observador executa o efeito:
 
 ```vue
 <template>
-  <div ref="root">This is a root element</div>
+  <div ref="root">Este é um elemento raiz</div>
 </template>
 
 <script>
@@ -105,8 +105,8 @@ But a key difference to lifecycle hooks is that `watch()` and `watchEffect()` ef
       const root = ref(null)
 
       watchEffect(() => {
-        // This effect runs before the DOM is updated, and consequently,
-        // the template ref does not hold a reference to the element yet.
+        // Este efeito é executado antes que o DOM seja atualizado e, consequentemente,
+        // o ref de template ainda não contém uma referência ao elemento.
         console.log(root.value) // => null
       })
 
@@ -118,11 +118,11 @@ But a key difference to lifecycle hooks is that `watch()` and `watchEffect()` ef
 </script>
 ```
 
-Therefore, watchers that use template refs should be defined with the `flush: 'post'` option. This will run the effect *after* the DOM has been updated and ensure that the template ref stays in sync with the DOM and references the correct element.
+Portanto, observadores que usam _refs_ de _template_ devem ser definidos com a opção `flush: 'post'`. Isso executará o efeito *depois* do DOM ser atualizado e garantirá que o _ref_ de _template_ permaneça em sincronia com o DOM e faça referência ao elemento correto.
 
 ```vue
 <template>
-  <div ref="root">This is a root element</div>
+  <div ref="root">Este é um elemento raiz</div>
 </template>
 
 <script>
@@ -133,7 +133,7 @@ Therefore, watchers that use template refs should be defined with the `flush: 'p
       const root = ref(null)
 
       watchEffect(() => {
-        console.log(root.value) // => <div>This is a root element</div>
+        console.log(root.value) // => <div>Este é um elemento raiz</div>
       }, 
       {
         flush: 'post'
@@ -147,4 +147,4 @@ Therefore, watchers that use template refs should be defined with the `flush: 'p
 </script>
 ```
 
-* See also: [Computed and Watchers](./reactivity-computed-watchers.html#effect-flush-timing)
+* Ver também: [Dados Computados e Observadores](./reactivity-computed-watchers.html#effect-flush-timing)
