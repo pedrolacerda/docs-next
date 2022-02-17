@@ -1,5 +1,5 @@
-# Grid Component
+# Componente de Grade
 
-> This is an example of creating a reusable grid component and using it with external data.
+> Este é um exemplo de como criar um componente de grade reutilizável e usá-lo com dados externos.
 
-<common-codepen-snippet title="Vue 3 Grid Component Example" slug="BaKbowJ" tab="js,result" />
+<common-codepen-snippet title="Exemplo de Componente de Grade no Vue 3" slug="BaKbowJ" tab="js,result" />

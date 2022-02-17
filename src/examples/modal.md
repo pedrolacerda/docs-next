@@ -1,5 +1,5 @@
-# Modal Component
+# Componente Modal
 
-> Features used: component, prop passing, content insertion, transitions.
+> Funcionalidades utilizadas: componente, passagem de prop, inserção de conteúdo, transições.
 
-<common-codepen-snippet title="Vue 3 Modal Component" slug="mdPoyvv" tab="js,result" />
+<common-codepen-snippet title="Componente Modal no Vue 3" slug="mdPoyvv" tab="js,result" />

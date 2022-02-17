@@ -1,5 +1,5 @@
-# GitHub Commits
+# Commits do GitHub
 
-> This example fetches latest Vue.js commits data from GitHub’s API and displays them as a list. You can switch between the master and dev branches.
+> Este exemplo busca os dados de commits do Vue.js mais recentes na API do GitHub e os exibe como uma lista. Você pode alternar entre as _branchs_ `master` e `dev`.
 
-<common-codepen-snippet title="Vue 3 Commits" slug="RwaWmzY" tab="js,result" />
+<common-codepen-snippet title="Commits do Vue 3" slug="RwaWmzY" tab="js,result" />

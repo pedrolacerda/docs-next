@@ -1,5 +1,5 @@
-# Tree View
+# Visualização em Árvore
 
-> Example of a tree view implementation showcasing recursive usage of components.
+> Exemplo de implementação de visualização em árvore mostrando o uso recursivo de componentes.
 
-<common-codepen-snippet title="Vue 3 Tree View" slug="WNwQqbN" tab="js,result" />
+<common-codepen-snippet title="Visualização em Árvore no Vue 3" slug="WNwQqbN" tab="js,result" />
