@@ -3,38 +3,38 @@ badges:
   - breaking
 ---
 
-# Inline Template Attribute <MigrationBadges :badges="$frontmatter.badges" />
+# Atributo Inline Template <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## Visão geral
 
-Support for the [inline-template feature](https://vuejs.org/v2/guide/components-edge-cases.html#Inline-Templates) has been removed.
+O suporte a [funcionalidade inline-template](https://vuejs.org/v2/guide/components-edge-cases.html#Inline-Templates) foi removido.
 
-## 2.x Syntax
+## Sintaxe 2.x
 
-In 2.x, Vue provided the `inline-template` attribute on child components to use its inner content as its template instead of treating it as distributed content.
+Na versão 2.x, o Vue disponibilizava o atributo `inline-template` em componentes filhos para usar seu conteúdo interno como *template* ao invés de o tratar como conteúdo distribuído.
 
 ```html
 <my-component inline-template>
   <div>
-    <p>These are compiled as the component's own template.</p>
-    <p>Not parent's transclusion content.</p>
+    <p>Estes são compilados como template do próprio componente.</p>
+    <p>Não como conteúdo da transclusão dos pais.</p>
   </div>
 </my-component>
 ```
 
-## 3.x Syntax
+## Sintaxe 3.x
 
-This feature will no longer be supported.
+Esta funcionalidade não receberá mais suporte.
 
-## Migration Strategy
+## Estratégia de Migração
 
-Most of the use cases for `inline-template` assumes a no-build-tool setup, where all templates are written directly inside the HTML page.
+A maioria dos casos de uso de `inline-template` assume uma configuração sem ferramentas de compilação, onde todos os templates são escritos diretamente dentro da página HTML.
 
-[Migration build flag: `COMPILER_INLINE_TEMPLATE`](migration-build.html#compat-configuration)
+[Sinalizador da compilação de migração: `COMPILER_INLINE_TEMPLATE`](migration-build.html#compat-configuration)
 
-### Option #1: Use `<script>` tag
+### Opção #1: Utilize a tag `<script>`
 
-The most straightforward workaround in such cases is using `<script>` with an alternative type:
+A solução mais simples nestes casos é utilizar a tag `<script>` com um tipo alternativo:
 
 ```html
 <script type="text/html" id="my-comp-template">
@@ -42,7 +42,7 @@ The most straightforward workaround in such cases is using `<script>` with an al
 </script>
 ```
 
-And in the component, target the template using a selector:
+E no componente, aponte para o *template* utilizando um seletor:
 
 ```js
 const MyComp = {
@@ -51,34 +51,34 @@ const MyComp = {
 }
 ```
 
-This doesn't require any build setup, works in all browsers, is not subject to any in-DOM HTML parsing caveats (e.g. you can use camelCase prop names), and provides proper syntax highlighting in most IDEs. In traditional server-side frameworks, these templates can be split out into server template partials (included into the main HTML template) for better maintainability.
+Isto não requer nenhuma configuração de compilação, funciona em todos os navegadores, não está sujeito a quaisquer ressalvas de análise HTML em DOM (por exemplo, você pode usar nomes de propriedades em camelCase), e fornece destaque de sintaxe na maioria das IDEs. Em *frameworks* tradicionais do lado do servidor, estes *templates* podem ser divididos em partes de *templates* do servidor (incluídas no template HTML principal) para uma melhor manutenção.
 
-### Option #2: Default Slot
+### Opção #2: Slot Padrão
 
-A component previously using `inline-template` can also be refactored using the default slot - which makes the data scoping more explicit while preserving the convenience of writing child content inline:
+Um componente que anteriormente utilizava `inline-template` também pode ser refatorado utilizando o *slot* padrão - o que torna a definição do escopo de dados mais explícita enquanto preserva a conveniência de escrever o conteúdo filho em linha:
 
 ```html
-<!-- 2.x Syntax -->
+<!-- Sintaxe 2.x -->
 <my-comp inline-template :msg="parentMsg">
   {{ msg }} {{ childState }}
 </my-comp>
 
-<!-- Default Slot Version -->
+<!-- Versão com Slot Padrão -->
 <my-comp v-slot="{ childState }">
   {{ parentMsg }} {{ childState }}
 </my-comp>
 ```
 
-The child, instead of providing no template, should now render the default slot\*:
+O componente filho, ao invés de não fornecer nenhum template, agora deve renderizar o *slot* padrão\*:
 
 ```html
 <!--
-  in child template, render default slot while passing
-  in necessary private state of child.
+  no template filho, renderiza o slot padrão enquanto passa
+  o estado privado necessário do filho.
 -->
 <template>
   <slot :childState="childState" />
 </template>
 ```
 
-> - Note: In 3.x, slots can be rendered as the root with native [fragments](/guide/migration/fragments) support!
+> - Nota: na versão 3.x, *slots* podem ser renderizados como raiz com suporte nativo a [fragmentos](/guide/migration/fragments)!
