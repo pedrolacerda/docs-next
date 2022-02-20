@@ -1,10 +1,10 @@
-# Computed and watch
+# Dados Computados e Observadores
 
-> This section uses [single-file component](../guide/single-file-component.html) syntax for code examples
+> Esta seção usa a sintaxe de [Componentes Single-File](../guide/single-file-component.html) para exemplos de código
 
 ## `computed`
 
-Takes a getter function and returns an immutable reactive [ref](./refs-api.html#ref) object for the returned value from the getter.
+Recebe uma função _getter_ e retorna um objeto [ref](./refs-api.html#ref) reativo imutável para o valor retornado do _getter_.
 
 ```js
 const count = ref(1)
@@ -12,10 +12,10 @@ const plusOne = computed(() => count.value + 1)
 
 console.log(plusOne.value) // 2
 
-plusOne.value++ // error
+plusOne.value++ // erro
 ```
 
-Alternatively, it can take an object with `get` and `set` functions to create a writable ref object.
+Alternativamente, ele pode usar um objeto com as funções `get` e `set` para criar um objeto ref gravável.
 
 ```js
 const count = ref(1)
@@ -30,16 +30,16 @@ plusOne.value = 1
 console.log(count.value) // 0
 ```
 
-**Typing:**
+**Tipando:**
 
 ```ts
-// read-only
+// somente leitura
 function computed<T>(
   getter: () => T,
   debuggerOptions?: DebuggerOptions
 ): Readonly<Ref<Readonly<T>>>
 
-// writable
+// gravável
 function computed<T>(
   options: {
     get: () => T
@@ -63,21 +63,21 @@ interface DebuggerEvent {
 
 ## `watchEffect`
 
-Runs a function immediately while reactively tracking its dependencies and re-runs it whenever the dependencies are changed.
+Executa uma função imediatamente enquanto rastreia reativamente suas dependências e a executa novamente sempre que as dependências são alteradas.
 
 ```js
 const count = ref(0)
 
 watchEffect(() => console.log(count.value))
-// -> logs 0
+// -> loga 0
 
 setTimeout(() => {
   count.value++
-  // -> logs 1
+  // -> loga 1
 }, 100)
 ```
 
-**Typing:**
+**Tipando:**
 
 ```ts
 function watchEffect(
@@ -103,32 +103,32 @@ type InvalidateCbRegistrator = (invalidate: () => void) => void
 type StopHandle = () => void
 ```
 
-**See also**: [`watchEffect` guide](../guide/reactivity-computed-watchers.html#watcheffect)
+**Ver também**: [Guia do `watchEffect`](../guide/reactivity-computed-watchers.html#watcheffect)
 
 ## `watchPostEffect` <Badge text="3.2+" />
 
-Alias of `watchEffect` with `flush: 'post'` option.
+Apelido de `watchEffect` com a opção `flush: 'post'`.
 
 ## `watchSyncEffect` <Badge text="3.2+" />
 
-Alias of `watchEffect` with `flush: 'sync'` option.
+Apelido de `watchEffect` com a opção `flush: 'sync'`.
 
 ## `watch`
 
-The `watch` API is the exact equivalent of the Options API [this.\$watch](./instance-methods.html#watch) (and the corresponding [watch](./options-data.html#watch) option). `watch` requires watching a specific data source and applies side effects in a separate callback function. It also is lazy by default - i.e. the callback is only called when the watched source has changed.
+A API do `watch` é o equivalente exato da API de Opções [this.\$watch](./instance-methods.html#watch) (e a opção [watch](./options-data.html#watch) correspondente). `watch` requer a observação de uma fonte de dados específica e aplica efeitos colaterais em uma função _callback_ separada. Também é preguiçoso por padrão - ou seja, o _callback_ só é chamado quando a fonte monitorada é alterada.
 
-- Compared to [watchEffect](#watcheffect), `watch` allows us to:
+- Comparado com [watchEffect](#watcheffect), `watch` nos permite:
 
-  - Perform the side effect lazily;
-  - Be more specific about what state should trigger the watcher to re-run;
-  - Access both the previous and current value of the watched state.
+  - Executar o efeito colateral preguiçosamente;
+  - Ser mais específico sobre qual estado deve fazer com que o observador seja executado novamente;
+  - Acessar o valor anterior e o atual do estado observado.
 
-### Watching a Single Source
+### Observando uma Única Fonte
 
-A watcher data source can either be a getter function that returns a value, or directly a [ref](./refs-api.html#ref):
+A fonte de dados do observador pode ser uma função _getter_ que retorna um valor ou diretamente um [ref](./refs-api.html#ref):
 
 ```js
-// watching a getter
+// observando um getter
 const state = reactive({ count: 0 })
 watch(
   () => state.count,
@@ -137,16 +137,16 @@ watch(
   }
 )
 
-// directly watching a ref
+// observando diretamente uma ref
 const count = ref(0)
 watch(count, (count, prevCount) => {
   /* ... */
 })
 ```
 
-### Watching Multiple Sources
+### Observando Várias Fontes
 
-A watcher can also watch multiple sources at the same time using an array:
+Um observador também pode observar várias fontes ao mesmo tempo usando um array:
 
 ```js
 watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
@@ -154,14 +154,14 @@ watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
 })
 ```
 
-### Shared Behavior with `watchEffect`
+### Comportamento Compartilhado com `watchEffect`
 
-`watch` shares behavior with [`watchEffect`](#watcheffect) in terms of [manual stoppage](../guide/reactivity-computed-watchers.html#stopping-the-watcher), [side effect invalidation](../guide/reactivity-computed-watchers.html#side-effect-invalidation) (with `onInvalidate` passed to the callback as the 3rd argument instead), [flush timing](../guide/reactivity-computed-watchers.html#effect-flush-timing) and [debugging](../guide/reactivity-computed-watchers.html#watcher-debugging).
+`watch` compartilha comportamento com [`watchEffect`](#watcheffect) em termos de [interrupção manual](../guide/reactivity-computed-watchers.html#parando-o-observador), [invalidação de efeito colateral](../guide/reactivity-computed-watchers.html#invalidacao-de-efeito-colateral) (com `onInvalidate` passado para o _callback_ como o terceiro argumento), [momento de limpeza](../guide/reactivity-computed-watchers.html#momento-de-limpeza-do-efeito) e [depuração](../guide/reactivity-computed-watchers.html#depuracao-do-observador).
 
-**Typing:**
+**Tipando:**
 
 ```ts
-// watching single source
+// observando uma única fonte
 function watch<T>(
   source: WatcherSource<T>,
   callback: (
@@ -172,7 +172,7 @@ function watch<T>(
   options?: WatchOptions
 ): StopHandle
 
-// watching multiple sources
+// observando várias fontes
 function watch<T extends WatcherSource<unknown>[]>(
   sources: T
   callback: (
@@ -189,11 +189,11 @@ type MapSources<T> = {
   [K in keyof T]: T[K] extends WatcherSource<infer V> ? V : never
 }
 
-// see `watchEffect` typing for shared options
+// veja a tipagem de `watchEffect` para opções compartilhadas
 interface WatchOptions extends WatchEffectOptions {
   immediate?: boolean // default: false
   deep?: boolean
 }
 ```
 
-**See also**: [`watch` guide](../guide/reactivity-computed-watchers.html#watch)
+**Ver também**: [Guia do `watch`](../guide/reactivity-computed-watchers.html#watch)
