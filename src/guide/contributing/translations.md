@@ -1,18 +1,18 @@
 # Traduzindo
 
-Vue has spread across the globe, with the core team being in at least half a dozen different timezones. The community is growing all the time and we want to make the documentation accessible to as many people as possible.
+Vue se espalhou pelo mundo todo, com o *core team* em pelo menos 12 fusos horários diferentes. A comunidade está crescendo o tempo todo e queremos tornar a documentação acessível para o maior numero de pessoas possível.
 
-Providing translations for the documentation is not something that the core team can manage alone. Thankfully, we have a great community of translators making contributions both large and small. If you've been thinking about contributing to the project, perhaps this is a good place to start?
+Fornecer as traduções não é algo que o *core team* consegue fazer sozinho. Felizmente, nós temos uma ótima comunidade de tradutores, fazendo constantes contribuições. Se você estiver pensando em contribuir com o projeto, talvez aqui seja um bom lugar para começar.
 
-## Community translations
+## Traduções da comunidade
 
-The table below lists GitHub repositories for community translations. These are translations made by the community, for the community. Some of these translations may be incomplete but they can still make the Vue experience significantly more enjoyable for readers who prefer these languages.
+A tabela a baixo lista os repositórios no github da comunidade de traduções. Essas traduções são feitas da comunidade para a comunidade. Algumas dessas traduções podem estar incompletas, mas ainda assim podem tornar a experiencia com o Vue significativamente mais agradável, para os leitores que preferem esses idiomas.
 
-For completeness, we've also included the official documentation in the list.
+Para completar, também incluímos a documentação oficial na lista.
 
 <guide-contributing-translations />
 
-Thank you to everyone who has contributed to these translations. Your hard work is very much appreciated.
+Obrigado a todos que contribuíram com as traduções. Seu trabalho duro é muito apreciado.
 
 ## Como posso me envolver com traduções?
 
