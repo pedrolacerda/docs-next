@@ -32,5 +32,5 @@ Em vez de gerenciar isso à nível de _template_, um método para realizar isso 
 
 ## Veja também
 
-- [Renderização de Listas - Mostrando Resultados Filtrados/Ordenados](/guide/list.html#displaying-filtered-sorted-results)
-- [Renderização de Listas - `v-for` com `v-if`](/guide/list.html#v-for-with-v-if)
+- [Renderização de Listas - Exibindo Resultados Filtrados/Ordenados](/guide/list.html#exibindo-resultados-filtrados-ordenados)
+- [Renderização de Listas - Utilizando `v-if` com `v-for`](/guide/list.html#utilizando-v-if-com-v-for)

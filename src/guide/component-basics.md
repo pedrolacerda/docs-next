@@ -406,17 +406,17 @@ Isso é tudo que você precisa saber sobre componentes dinâmicos por hora mas, 
 
 ## Ressalvas na Análise do _template_ DOM
 
-If you are writing your Vue templates directly in the DOM, Vue will have to retrieve the template string from the DOM. This leads to some caveats due to browsers' native HTML parsing behavior.
+Se você estiver escrevendo seus _templates_ Vue diretamente no DOM, o Vue terá que recuperar a string do _template_ do DOM. Isso leva a algumas ressalvas devido ao comportamento da análise de HTML nativo dos navegadores.
 
-:::tip
-It should be noted that the limitations discussed below only apply if you are writing your templates directly in the DOM. They do NOT apply if you are using string templates from the following sources:
+:::tip Nota
+Deve-se observar que as limitações discutidas abaixo se aplicam apenas se você estiver escrevendo seus _templates_ diretamente no DOM. Eles NÃO se aplicam se você estiver usando _templates_ em string das seguintes fontes:
 
-- String templates (e.g. `template: '...'`)
-- [Single-file (`.vue`) components](single-file-component.html)
+- _Templates_ String (e.g. `template: '...'`)
+- [Componentes Single-file (`.vue`)](single-file-component.html)
 - `<script type="text/x-template">`
 :::
 
-### Element Placement Restrictions
+### Restrições na Colocação de Elementos
 
 Alguns elementos HTML, como `<ul>`, `<ol>`, `<table>` e `<select>` têm restrições do que pode aparecer dentro deles, e alguns elementos como `<li>`, `<tr>`, e `<option>` podem aparecer apenas dentro de certos elementos.
 
@@ -436,8 +436,8 @@ O componente `<blog-post-row>` será removido como um conteúdo inválido, causa
 </table>
 ```
 
-:::tip
-When used on native HTML elements, the value of `is` must be prefixed with `vue:` in order to be interpreted as a Vue component. This is required to avoid confusion with native [customized built-in elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example).
+:::tip Nota
+Quando usado em elementos HTML nativos, o valor de `is` deve ser prefixado com `vue:` para ser interpretado como um componente Vue. Isso é necessário para evitar confusão com [elementos integrados personalizados](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example) nativos.
 :::
 
 ### Insensibilidade entre Maiúsculas e Minúsculas

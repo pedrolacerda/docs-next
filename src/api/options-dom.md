@@ -1,40 +1,40 @@
 # DOM
 
-## template
+## `template`
 
-- **Type:** `string`
+- **Tipo:** `string`
 
-- **Details:**
+- **Detalhes:**
 
-  A string template to be used as the markup for the component instance. The template will **replace** the `innerHTML` of mounted element. Any existing markup inside the mounted element will be ignored, unless content distribution slots are present in the template.
+  Um _template_ string a ser usado como marcação para a instância do componente. O _template_ **substituirá** o `innerHTML` do elemento montado. Qualquer marcação existente dentro do elemento montado será ignorada, a menos que os _slots_ de distribuição de conteúdo estejam presentes no _template_.
 
-  If the string starts with `#` it will be used as a `querySelector` and use the selected element's innerHTML as the template string. This allows the use of the common `<script type="x-template">` trick to include templates.
+  Se a string começar com `#` ela será usada como um `querySelector` e usará o `innerHTML` do elemento selecionado como a _template_ string. Isso permite o uso do truque comum `<script type="x-template">` para incluir _templates_.
 
-  :::tip Note
-  From a security perspective, you should only use Vue templates that you can trust. Never use user-generated content as your template.
+  :::tip Nota
+  De uma perspectiva de segurança, você deve usar apenas _templates_ Vue nos quais possa confiar. Nunca use conteúdo gerado pelo usuário como seu _template_.
   :::
 
-  :::tip Note
-  If render function is present in the Vue option, the template will be ignored.
+  :::tip Nota
+  Se a função de renderização estiver presente na opção Vue, o _template_ será ignorado.
   :::
 
-- **See also:**
-  - [Lifecycle Diagram](../guide/instance.html#lifecycle-diagram)
-  - [Content Distribution with Slots](../guide/component-basics.html#content-distribution-with-slots)
+- **Ver também:**
+   - [Diagrama do ciclo de vida](../guide/instance.html#diagrama-do-ciclo-de-vida)
+   - [Distribuição de conteúdo com _slots_](../guide/component-basics.html#distribuicao-de-conteudo-com-slots)
 
-## render
+## `render`
 
-- **Type:** `Function`
+- **Tipo:** `Function`
 
-- **Details:**
+- **Detalhes:**
 
-  An alternative to string templates allowing you to leverage the full programmatic power of JavaScript.
+  Uma alternativa aos _templates_ string, permitindo que você aproveite todo o poder programático do JavaScript.
 
-- **Usage:**
+- **Uso:**
 
   ```html
   <div id="app" class="demo">
-    <my-title blog-title="A Perfect Vue"></my-title>
+    <my-title blog-title="Uma Vue (view) Perfeita"></my-title>
   </div>
   ```
 
@@ -45,8 +45,8 @@
   app.component('my-title', {
     render() {
       return h(
-        'h1', // tag name,
-        this.blogTitle // tag content
+        'h1', // nome da tag,
+        this.blogTitle // conteúdo da tag
       )
     },
     props: {
@@ -60,8 +60,8 @@
   app.mount('#app')
   ```
 
-  :::tip Note
-  The `render` function has priority over the render function compiled from `template` option or in-DOM HTML template of the mounting element
+  :::tip Nota
+  A função `render` tem prioridade sobre a função de renderização compilada da opção `template` ou o _template_ HTML no-DOM do elemento sendo montado
   :::
 
-- **See also:** [Render Functions](../guide/render-function.html)
+- **Ver também:** [Funções de Renderização](../guide/render-function.html)
