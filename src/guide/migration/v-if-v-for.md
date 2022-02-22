@@ -30,7 +30,7 @@ Em vez de gerenciar isso à nível de _template_, um método para realizar isso 
 
 [Migration build flag: `COMPILER_V_IF_V_FOR_PRECEDENCE`](migration-build.html#compat-configuration)
 
-## See also
+## Veja também
 
-- [List Rendering - Displaying Filtered/Sorted Results](/guide/list.html#displaying-filtered-sorted-results)
-- [List Rendering - `v-for` with `v-if`](/guide/list.html#v-for-with-v-if)
+- [Renderização de Listas - Exibindo Resultados Filtrados/Ordenados](/guide/list.html#exibindo-resultados-filtrados-ordenados)
+- [Renderização de Listas - Utilizando `v-if` com `v-for`](/guide/list.html#utilizando-v-if-com-v-for)
