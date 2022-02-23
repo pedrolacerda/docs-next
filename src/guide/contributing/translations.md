@@ -1,18 +1,18 @@
 # Traduzindo
 
-Vue se espalhou pelo mundo todo, com o *core team* em pelo menos 12 fusos horários diferentes. A comunidade está crescendo o tempo todo e queremos tornar a documentação acessível para o maior numero de pessoas possível.
+Vue se espalhou pelo mundo todo, com o *core team* em pelo menos 12 fusos horários diferentes. A comunidade está crescendo o tempo todo e queremos tornar a documentação acessível para o maior número de pessoas possível.
 
-Fornecer as traduções não é algo que o *core team* consegue fazer sozinho. Felizmente, nós temos uma ótima comunidade de tradutores, fazendo constantes contribuições. Se você estiver pensando em contribuir com o projeto, talvez aqui seja um bom lugar para começar.
+Fornecer traduções para a documentação não é algo que o *core team* consegue fazer sozinho. Felizmente, temos uma grande comunidade de tradutores fazendo contribuições sejam grandes ou pequenas. Se você estiver pensando em contribuir com o projeto, talvez aqui seja um bom lugar para começar.
 
 ## Traduções da comunidade
 
-A tabela a baixo lista os repositórios no github da comunidade de traduções. Essas traduções são feitas da comunidade para a comunidade. Algumas dessas traduções podem estar incompletas, mas ainda assim podem tornar a experiencia com o Vue significativamente mais agradável, para os leitores que preferem esses idiomas.
+A tabela abaixo lista os repositórios das traduções da comunidade no GitHub. Essas traduções são feitas da comunidade para a comunidade. Algumas dessas traduções podem estar incompletas, mas ainda assim podem tornar a experiencia com o Vue significativamente mais agradável para os leitores que preferem esses idiomas.
 
-Para completar, também incluímos a documentação oficial na lista.
+Por completude, também incluímos a documentação oficial na lista.
 
 <guide-contributing-translations />
 
-Obrigado a todos que contribuíram com as traduções. Seu trabalho duro é muito apreciado.
+Obrigado a todos que contribuíram com essas traduções. Seu trabalho duro é muito apreciado.
 
 ## Como posso me envolver com traduções?
 
