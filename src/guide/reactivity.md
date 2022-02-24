@@ -26,7 +26,7 @@ console.log(sum) // 5
 
 val1 = 3
 
-console.log(sum) // Still 5
+console.log(sum) // Ainda 5
 ```
 
 Ao atualizarmos o primeiro valor, a soma não é ajustada.
@@ -53,13 +53,13 @@ const updateSum = () => {
 }
 ```
 
-But how do we tell Vue about this function?
+Mas como informamos o Vue sobre essa função?
 
-Vue keeps track of which function is currently running by using an *effect*. An effect is a wrapper around the function that initiates tracking just before the function is called. Vue knows which effect is running at any given point and can run it again when required.
+O Vue mantém o controle de qual função está sendo executada usando um *efeito*. Um efeito é um _wrapper_ em torno da função que inicia o rastreamento logo antes de a função ser chamada. O Vue sabe qual efeito está sendo executado em um determinado ponto e pode executá-lo novamente quando necessário.
 
-To understand that better, let's try to implement something similar ourselves, without Vue, to see how it might work.
+Para entender melhor, vamos tentar implementar algo semelhante nós mesmos, sem o Vue, para ver como pode funcionar.
 
-What we need is something that can wrap our sum, like this:
+O que precisamos é de algo que possa envolver nossa soma, assim:
 
 ```js
 createEffect(() => {
@@ -67,44 +67,44 @@ createEffect(() => {
 })
 ```
 
-We need `createEffect` to keep track of when the sum is running. We might implement it something like this:
+Precisamos de `createEffect` para acompanhar quando a soma está sendo executada. Podemos implementar algo assim:
 
 ```js
-// Maintain a stack of running effects
+// Mantém uma pilha de efeitos em execução
 const runningEffects = []
 
 const createEffect = fn => {
-  // Wrap the passed fn in an effect function
+  // Envolve o fn passado em uma função de efeito
   const effect = () => {
     runningEffects.push(effect)
     fn()
     runningEffects.pop()
   }
 
-  // Automatically run the effect immediately
+  // Executa automaticamente o efeito imediatamente
   effect()
 }
 ```
 
-When our effect is called it pushes itself onto the `runningEffects` array, before calling `fn`. Anything that needs to know which effect is currently running can check that array.
+Quando nosso efeito é chamado, ele se adiciona ao array `runningEffects`, antes de chamar `fn`. Qualquer coisa que precise saber qual efeito está sendo executado no momento pode verificar esse array.
 
-Effects act as the starting point for many key features. For example, both component rendering and computed properties use effects internally. Any time something magically responds to data changes you can be pretty sure it has been wrapped in an effect.
+Os efeitos atuam como ponto de partida para muitos recursos importantes. Por exemplo, tanto a renderização do componente quanto os dados computados usam efeitos internamente. Sempre que algo responde magicamente a alterações de dados, você pode ter certeza de que foi envolvido em um efeito.
 
-While Vue's public API doesn't include any way to create an effect directly, it does expose a function called `watchEffect` that behaves a lot like the `createEffect` function from our example. We'll discuss that in more detail [later in the guide](/guide/reactivity-computed-watchers.html#watcheffect).
+Embora a API pública do Vue não inclua nenhuma maneira de criar um efeito diretamente, ela expõe uma função chamada `watchEffect` que se comporta muito como a função `createEffect` do nosso exemplo. Discutiremos isso com mais detalhes [mais adiante no guia](/guide/reactivity-computed-watchers.html#watcheffect).
 
-But knowing what code is running is just one part of the puzzle. How does Vue know what values the effect uses and how does it know when they change?
+Mas saber qual código está sendo executado é apenas uma parte do quebra-cabeça. Como o Vue sabe quais valores o efeito usa e como ele sabe quando eles mudam?
 
 ## Como o Vue Rastreia Essas Mudanças
 
 Não podemos rastrear reatribuições de variáveis ​​locais como aquelas em nossos exemplos anteriores, simplesmente não há mecanismo para fazer isso em JavaScript. O que podemos rastrear são as mudanças nas propriedades do objeto.
 
-Quando retornamos um objeto JavaScript simples da função de `data` de um componente, O Vue envolverá esse objeto em um [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) com manipuladores para `get` e `set`. Os proxies foram introduzidos no ES6 e permitem que o Vue 3 evite algumas das limitações de reatividade que existiam nas versões anteriores do Vue.
+Quando retornamos um objeto JavaScript simples da função de `data` de um componente, O Vue envolverá esse objeto em um [Proxy](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Proxy) com manipuladores para `get` e `set`. Os proxies foram introduzidos no ES6 e permitem que o Vue 3 evite algumas das limitações de reatividade que existiam nas versões anteriores do Vue.
 
 <div class="reactivecontent">
   <common-codepen-snippet title="Proxies e a Reatividade do Vue Explicados Visualmente" slug="VwmxZXJ" tab="result" theme="light" :height="500" :editable="false" :preview="false" />
 </div>
 
-A explicação anterior foi breve e requer algum conhecimento de [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) para ser entendida! Então vamos nos aprofundar um pouco. Há muita literatura sobre Proxies, mas o que você realmente precisa saber é que um **Proxy é um objeto que encapsula um outro objeto ou função e permite que você o intercepte.**
+A explicação anterior foi breve e requer algum conhecimento de [Proxies](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Proxy) para ser entendida! Então vamos nos aprofundar um pouco. Há muita literatura sobre Proxies, mas o que você realmente precisa saber é que um **Proxy é um objeto que encapsula um outro objeto ou função e permite que você o intercepte.**
 
 Nós o utilizamos assim: `new Proxy(target, handler)`
 
@@ -231,11 +231,11 @@ vm.val1 = 3
 console.log(vm.sum) // 6
 ```
 
-The object returned by `data` will be wrapped in a reactive proxy and stored as `this.$data`. The properties `this.val1` and `this.val2` are aliases for `this.$data.val1` and `this.$data.val2` respectively, so they go through the same proxy.
+O objeto retornado por `data` será encapsulado em um proxy reativo e armazenado como `this.$data`. As propriedades `this.val1` e `this.val2` são apelidos para `this.$data.val1` e `this.$data.val2` respectivamente, então elas passam pelo mesmo proxy.
 
-Vue will wrap the function for `sum` in an effect. When we try to access `this.sum`, it will run that effect to calculate the value. The reactive proxy around `$data` will track that the properties `val1` and `val2` were read while that effect is running.
+Vue envolverá a função para `sum` em um efeito. Quando tentamos acessar `this.sum`, ele executará esse efeito para calcular o valor. O proxy reativo em torno de `$data` rastreará se as propriedades `val1` e `val2` foram lidas enquanto o efeito está sendo executado.
 
-As of Vue 3, our reactivity is now available in a [separate package](https://github.com/vuejs/vue-next/tree/master/packages/reactivity). The function that wraps `$data` in a proxy is called [`reactive`](/api/basic-reactivity.html#reactive). We can call this directly ourselves, allowing us to wrap an object in a reactive proxy without needing to use a component:
+A partir do Vue 3, nossa reatividade agora está disponível em um [pacote separado](https://github.com/vuejs/vue-next/tree/master/packages/reactivity). A função que envolve `$data` em um proxy é chamada de [`reactive`](/api/basic-reactivity.html#reactive). Podemos chamar isso diretamente nós mesmos, permitindo-nos envolver um objeto em um proxy reativo sem precisar usar um componente:
 
 ```js
 const proxy = reactive({
@@ -244,7 +244,7 @@ const proxy = reactive({
 })
 ```
 
-We'll explore the functionality exposed by the reactivity package over the course of the next few pages of this guide. That includes functions like `reactive` and `watchEffect` that we've already met, as well as ways to use other reactivity features, such as `computed` and `watch`, without needing to create a component.
+Exploraremos a funcionalidade exposta pelo pacote de reatividade ao longo das próximas páginas deste guia. Isso inclui funções como `reactive` e `watchEffect` que já conhecemos, bem como formas de usar outros recursos de reatividade, como `computed` e `watch`, sem a necessidade de criar um componente.
 
 ### Objetos com Proxy Aplicado
 
@@ -305,14 +305,14 @@ console.log(obj.count === 0) // true
 
 Toda instância de componente tem uma instância de observador correspondente, que registra quaisquer propriedades "tocadas" durante a renderização do componente como dependências. Depois, quando um setter de uma dependência é disparado, ele notifica o observador, que por sua vez faz o componente re-renderizar.
 
-## How Rendering Reacts to Changes
+## Como a Renderização Reage às Mudanças
 
-The template for a component is compiled down into a [`render`](/guide/render-function.html) function. The `render` function creates the [VNodes](/guide/render-function.html#the-virtual-dom-tree) that describe how the component should be rendered. It is wrapped in an effect, allowing Vue to track the properties that are 'touched' while it is running.
+O _template_ para um componente é compilado em uma função [`render`](/guide/render-function.html). A função `render` cria os [VNodes](/guide/render-function.html#a-arvore-virtual-dom) que descrevem como o componente deve ser renderizado. Ele é envolvido em um efeito, permitindo que o Vue rastreie as propriedades que são 'tocadas' enquanto ele está em execução.
 
-A `render` function is conceptually very similar to a `computed` property. Vue doesn't track exactly how dependencies are used, it only knows that they were used at some point while the function was running. If any of those properties subsequently changes, it will trigger the effect to run again, re-running the `render` function to generate new VNodes. These are then used to make the necessary changes to the DOM.
+Uma função `render` é conceitualmente muito semelhante a uma propriedade `computed`. O Vue não rastreia exatamente como as dependências são usadas, ele apenas sabe que elas foram usadas em algum momento enquanto a função estava em execução. Se qualquer uma dessas propriedades for alterada posteriormente, o efeito será acionado novamente, executando novamente a função `render` para gerar novos VNodes. Estes são então usados ​​para fazer as alterações necessárias no DOM.
 
 <div class="reactivecontent">
-  <common-codepen-snippet title="Second Reactivity with Proxies in Vue 3 Explainer" slug="wvgqyJK" tab="result" theme="light" :height="500" :editable="false" :preview="false" />
+  <common-codepen-snippet title="Segundo Explicador da Reatividade com Proxies no Vue 3" slug="wvgqyJK" tab="result" theme="light" :height="500" :editable="false" :preview="false" />
 </div>
 
 > Se você está utilizando Vue v2.x ou mais antigo, pode estar interessado em alguns empecilhos da detecção de mudanças que existem nessas versões, [explorados em mais detalhes aqui](change-detection.md).
