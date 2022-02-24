@@ -58,13 +58,13 @@ Como um resultado, isso significa que `config.keyCodes` também está obsoleto e
 
 Para aqueles que utilizam `keyCode` em sua base de código, nós recomendamos convertê-los para os nomes kebab-cased equivalentes.
 
-The keys for some punctuation marks can just be included literally. e.g. For the `,` key:
+As teclas para alguns sinais de pontuação podem ser incluídas literalmente. por exemplo. Para a tecla `,`:
 
 ```html
 <input v-on:keypress.,="commaPress">
 ```
 
-Limitations of the syntax prevent certain characters from being matched, such as `"`, `'`, `/`, `=`, `>`, and `.`. For those characters you should check `event.key` inside the listener instead.
+As limitações da sintaxe impedem que certos caracteres sejam correspondidos, como `"`, `'`, `/`, `=`, `>` e `.`. Para esses caracteres você deve verificar `event.key` dentro do escutador em vez disso.
 
 [Migration build flags:](migration-build.html#compat-configuration)
 
