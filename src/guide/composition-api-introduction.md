@@ -76,7 +76,7 @@ Agora que já sabemos o **porquê**, podemos chegar ao **como**. Para começar a
 A nova opção de componente `setup` é executada **antes** do componente ser criado, uma vez que as `props` estão resolvidas, e serve como ponto de entrada para APIs de composição.
 
 ::: warning Aviso
-You should avoid using `this` inside `setup` as it won't refer to the component instance. `setup` is called before `data` properties, `computed` properties or `methods` are resolved, so they won't be available within `setup`.
+Você deve evitar usar `this` dentro de `setup`, pois não fará referência à instância do componente. `setup` é chamado antes das propriedades `data`, `computed` ou `methods` serem resolvidas, então elas não estarão disponíveis em `setup`.
 :::
 
 A opção `setup` deve ser uma função que aceita `props` e `context`, sobre os quais falaremos [depois](composition-api-setup.html#argumentos). Além disso, tudo o que retornamos de `setup` será exposto ao resto do nosso componente (dados computados, métodos, gatilhos de ciclo de vida e assim por diante), bem como ao _template_ do componente.
