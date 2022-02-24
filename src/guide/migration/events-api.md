@@ -58,17 +58,17 @@ Removemos os métodos `$on`, `$off` e `$once` da instância completamente. `$emi
 
 ## Estratégia de Migração
 
-[Migration build flag: `INSTANCE_EVENT_EMITTER`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `INSTANCE_EVENT_EMITTER`](migration-build.html#compat-configuration)
 
-In Vue 3, it is no longer possible to use these APIs to listen to a component's own emitted events from within a component. There is no migration path for that use case.
+No Vue 3, não é mais possível usar essas APIs para ouvir os próprios eventos emitidos de um componente de dentro de um componente. Não há caminho de migração para esse caso de uso.
 
-### Root Component Events
+### Eventos do Componente Raiz
 
-Static event listeners can be added to the root component by passing them as props to `createApp`:
+Os escutadores de evento estáticos podem ser adicionados ao componente raiz passando-os como props para `createApp`:
 
 ```js
 createApp(App, {
-  // Listen for the 'expand' event
+  // Escuta o evento 'expand'
   onExpand() {
     console.log('expand')
   }
@@ -93,12 +93,12 @@ export default {
 }
 ```
 
-This provides the same event emitter API as in Vue 2.
+Isso fornece a mesma API de emissor de eventos que no Vue 2.
 
-In most circumstances, using a global event bus for communicating between components is discouraged. While it is often the simplest solution in the short term, it almost invariably proves to be a maintenance headache in the long term. Depending on the circumstances, there are various alternatives to using an event bus:
+Na maioria das circunstâncias, o uso de um _event bus_ global para comunicação entre componentes é desencorajado. Embora muitas vezes seja a solução mais simples a curto prazo, quase invariavelmente prova ser uma dor de cabeça de manutenção a longo prazo. Dependendo das circunstâncias, existem várias alternativas ao uso de um _event bus_:
 
-* [Props](/guide/component-basics.html#passing-data-to-child-components-with-props) and [events](/guide/component-basics.html#listening-to-child-components-events) should be your first choice for parent-child communication. Siblings can communicate via their parent.
-* [Provide and inject](/guide/component-provide-inject.html) allow a component to communicate with its slot contents. This is useful for tightly-coupled components that are always used together.
-* `provide`/`inject` can also be used for long-distance communication between components. It can help to avoid 'prop drilling', where props need to be passed down through many levels of components that don't need those props themselves.
-* Prop drilling can also be avoided by refactoring to use slots. If an interim component doesn't need the props then it might indicate a problem with separation of concerns. Introducing a slot in that component allows the parent to create the content directly, so that props can be passed without the interim component needing to get involved.
-* [Global state management](/guide/state-management.html), such as [Vuex](https://next.vuex.vuejs.org/).
+* [Props](/guide/component-basics.html#passando-dados-aos-filhos-com-propriedades) e [eventos](/guide/component-basics.html#escutando-eventos-dos-filhos) deve ser sua primeira escolha para comunicação entre pais e filhos. Irmãos podem se comunicar através de seus pais.
+* [Prover e injetar](/guide/component-provide-inject.html) permite que um componente se comunique com seu conteúdo de slot. Isso é útil para componentes fortemente acoplados que são sempre usados ​​juntos.
+* `provide`/`inject` também pode ser usado para comunicação de longa distância entre componentes. Isso pode ajudar a evitar a 'perfuração com props', onde as props precisam ser passadas abaixo por muitos níveis de componentes que não precisam delas.
+* A perfuração com props também pode ser evitada refatorando para usar slots. Se um componente provisório não precisar das props, isso pode indicar um problema com a separação de preocupações. A introdução de um slot nesse componente permite que o pai crie o conteúdo diretamente, para que as props possam ser passadas sem que o componente provisório precise se envolver.
+* [Gerenciamento de estado global](/guide/state-management.html), como [Vuex](https://next.vuex.vuejs.org/).
