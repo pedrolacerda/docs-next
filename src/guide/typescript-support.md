@@ -153,30 +153,30 @@ const Component = defineComponent({
 })
 ```
 
-### Augmenting Types for `globalProperties`
+### Ampliando Tipos para `globalProperties`
 
-Vue 3 provides a [`globalProperties` object](../api/application-config.html#globalproperties) that can be used to add a global property that can be accessed in any component instance. For example, a [plugin](./plugins.html#writing-a-plugin) might want to inject a shared global object or function.
+O Vue 3 fornece um [objeto `globalProperties`](../api/application-config.html#globalproperties) que pode ser usado para adicionar uma propriedade global que pode ser acessada em qualquer instância do componente. Por exemplo, um [plugin](./plugins.html#escrevendo-um-plugin) pode querer injetar um objeto ou função global compartilhado.
 
 ```ts
-// User Definition
+// Definição do Usuário
 import axios from 'axios'
 
 const app = Vue.createApp({})
 app.config.globalProperties.$http = axios
 
-// Plugin for validating some data
+// Plugin para validar alguns dados
 export default {
   install(app, options) {
     app.config.globalProperties.$validate = (data: object, rule: object) => {
-      // check whether the object meets certain rules
+      // verifica se o objeto atende a certas regras
     }
   }
 }
 ```
 
-In order to tell TypeScript about these new properties, we can use [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+Para informar o TypeScript sobre essas novas propriedades, podemos usar [aumento de módulos](https://www.typescriptlang.org/pt/docs/handbook/declaration-merging.html#aumento-de-m%C3%B3dulos).
 
-In the above example, we could add the following type declaration:
+No exemplo acima, poderíamos adicionar a seguinte declaração de tipo:
 
 ```ts
 import axios from 'axios'
@@ -189,15 +189,15 @@ declare module '@vue/runtime-core' {
 }
 ```
 
-We can put this type declaration in the same file, or in a project-wide `*.d.ts` file (for example, in the `src/typings` folder that is automatically loaded by TypeScript). For library/plugin authors, this file should be specified in the `types` property in `package.json`.
+Podemos colocar esta declaração de tipo no mesmo arquivo, ou em um arquivo `*.d.ts` acessível por todo o projeto (por exemplo, na pasta `src/typings` que é carregada automaticamente pelo TypeScript). Para autores de biblioteca/plugin, este arquivo deve ser especificado na propriedade `types` em `package.json`.
 
-::: warning Make sure the declaration file is a TypeScript module
-In order to take advantage of module augmentation, you will need to ensure there is at least one top-level `import` or `export` in your file, even if it is just `export {}`.
+::: warning Verifique se o arquivo de declaração é um módulo TypeScript
+Para aproveitar o aumento do módulo, você precisará garantir que haja pelo menos um `import` ou `export` de nível superior em seu arquivo, mesmo que seja apenas `export {}`.
 
-[In TypeScript](https://www.typescriptlang.org/docs/handbook/modules.html), any file containing a top-level `import` or `export` is considered a 'module'. If type declaration is made outside of a module, it will overwrite the original types rather than augmenting them.
+[No TypeScript](https://www.typescriptlang.org/pt/docs/handbook/modules.html), qualquer arquivo que contenha um `import` ou `export` de nível superior é considerado um 'módulo'. Se a declaração de tipo for feita fora de um módulo, ela substituirá os tipos originais em vez de aumentá-los.
 :::
 
-For more information about the `ComponentCustomProperties` type, see its [definition in `@vue/runtime-core`](https://github.com/vuejs/vue-next/blob/2587f36fe311359e2e34f40e8e47d2eebfab7f42/packages/runtime-core/src/componentOptions.ts#L64-L80) and [the TypeScript unit tests](https://github.com/vuejs/vue-next/blob/master/test-dts/componentTypeExtensions.test-d.tsx) to learn more.
+Para obter mais informações sobre o tipo `ComponentCustomProperties`, consulte sua [definição em `@vue/runtime-core`](https://github.com/vuejs/vue-next/blob/2587f36fe311359e2e34f40e8e47d2eebfab7f42/packages/runtime-core/src/componentOptions.ts#L64-L80) e [os testes de unidade do TypeScript](https://github.com/vuejs/vue-next/blob/master/test-dts/componentTypeExtensions.test-d.tsx) para saber mais .
 
 ### Anotando Tipos de Retorno
 
@@ -376,9 +376,9 @@ year.value = 2020 // ok!
 Se o tipo do genérico é desconhecido, é recomendado converter `ref` para `Ref<T>`.
 :::
 
-### Typing Template Refs
+### Tipando Refs de _Template_
 
-Sometimes you might need to annotate a template ref for a child component in order to call its public method. For example, we have a `MyModal` child component with a method that opens the modal:
+Às vezes você pode precisar anotar um ref de _template_ para um componente filho para poder chamar seu método público. Por exemplo, temos um componente filho `MyModal` com um método que abre o modal:
 
 ```ts
 import { defineComponent, ref } from 'vue'
@@ -396,7 +396,7 @@ const MyModal = defineComponent({
 })
 ```
 
-We want to call this method via a template ref from the parent component:
+Queremos chamar esse método por meio de um ref de _template_ do componente pai:
 
 ```ts
 import { defineComponent, ref } from 'vue'
@@ -418,7 +418,7 @@ const app = defineComponent({
     MyModal
   },
   template: `
-    <button @click="openModal">Open from parent</button>
+    <button @click="openModal">Abrir pelo pai</button>
     <my-modal ref="modal" />
   `,
   setup() {
@@ -432,7 +432,7 @@ const app = defineComponent({
 })
 ```
 
-While this will work, there is no type information about `MyModal` and its available methods. To fix this, you should use `InstanceType` when creating a ref:
+Embora isso funcione, não há informações de tipo sobre `MyModal` e seus métodos disponíveis. Para corrigir isso, você deve usar `InstanceType` ao criar uma ref:
 
 ```ts
 setup() {
@@ -445,7 +445,7 @@ setup() {
 }
 ```
 
-Please note that you would also need to use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) or any other way to check that `modal.value` is not undefined.
+Observe que você também precisaria usar [encadeamento opcional](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Optional_chaining) ou qualquer outra maneira de verificar que `modal.value` não é `undefined`.
 
 ### Tipando `reactive`
 
