@@ -298,14 +298,14 @@
   <svg><a :xlink:special="foo"></a></svg>
   ```
 
-  When setting a binding on an element, Vue by default checks whether the element has the key defined as a property using an `in` operator check. If the property is defined, Vue will set the value as a DOM property instead of an attribute. This should work in most cases, but you can override this behavior by explicitly using `.prop` or `.attr` modifiers. This is sometimes necessary, especially when [working with custom elements](/guide/web-components.html#passing-dom-properties).
+  Ao definir um vínculo em um elemento, o Vue por padrão verifica se o elemento tem a chave definida como uma propriedade usando uma verificação com operador `in`. Se a propriedade estiver definida, o Vue definirá o valor como uma propriedade DOM ao invés de um atributo. Isso deve funcionar na maioria dos casos, mas você pode substituir esse comportamento explicitamente usando os modificadores `.prop` ou `.attr`. Isso às vezes é necessário, especialmente ao [trabalhar com elementos personalizados](/guide/web-components.html#passing-dom-properties).
 
-  The `.prop` modifier also has a dedicated shorthand, `.`:
+  O modificador `.prop` também tem uma abreviação dedicada, `.`:
 
   ```html
   <div :someProperty.prop="someObject"></div>
 
-  <!-- equivalent to -->
+  <!-- equivalente a -->
   <div .someProperty="someObject"></div>
   ```
 
@@ -463,7 +463,7 @@
   </ul>
   ```
 
-  Since 3.2, you can also memoize part of the template with invalidation conditions using [`v-memo`](#v-memo).
+  Desde a versão 3.2, você também pode memorizar parte do _template_ com condições de invalidação usando [`v-memo`](#v-memo).
 
 - **Ver também:**
   - [Sintaxe de Templates - Interpolações](../guide/template-syntax.html#texto)
@@ -471,11 +471,11 @@
 
 ## v-memo <Badge text="3.2+" />
 
-- **Expects:** `Array`
+- **Espera:** `Array`
 
-- **Details:**
+- **Detalhes:**
 
-  Memoize a sub-tree of the template. Can be used on both elements and components. The directive expects a fixed-length array of dependency values to compare for the memoization. If every value in the array was the same as last render, then updates for the entire sub-tree will be skipped. For example:
+  Memorize uma subárvore do _template_. Pode ser usado em elementos e componentes. A diretiva espera um array com comprimento fixo e valores das dependências para comparar na memorização. Se todos os valores do array forem iguais à última renderização, as atualizações de toda a subárvore serão ignoradas. Por exemplo:
 
   ```html
   <div v-memo="[valueA, valueB]">
@@ -483,32 +483,32 @@
   </div>
   ```
 
-  When the component re-renders, if both `valueA` and `valueB` remain the same, all updates for this `<div>` and its children will be skipped. In fact, even the Virtual DOM VNode creation will also be skipped since the memoized copy of the sub-tree can be reused.
+  Quando o componente for renderizado novamente, se `valueA` e `valueB` permanecerem os mesmos, todas as atualizações para esta `<div>` e seus filhos serão ignoradas. Na verdade, mesmo a criação do VNode no DOM Virtual também será pulada, pois a cópia memorizada da subárvore pode ser reutilizada.
 
-  It is important to specify the memoization array correctly, otherwise we may skip updates that should indeed be applied. `v-memo` with an empty dependency array (`v-memo="[]"`) would be functionally equivalent to `v-once`.
+  É importante especificar o array de memorização corretamente, caso contrário podemos pular atualizações que realmente deveriam ser aplicadas. `v-memo` com um array de dependências vazio (`v-memo="[]"`) seria funcionalmente equivalente a `v-once`.
 
-  **Usage with `v-for`**
+  **Uso com `v-for`**
 
-  `v-memo` is provided solely for micro optimizations in performance-critical scenarios and should be rarely needed. The most common case where this may prove helpful is when rendering large `v-for` lists (where `length > 1000`):
+  O `v-memo` é fornecido apenas para micro otimizações em cenários de desempenho crítico e raramente deve ser necessário. O caso mais comum em que isso pode ser útil é ao renderizar grandes listas `v-for` (onde `length > 1000`):
 
   ```html
   <div v-for="item in list" :key="item.id" v-memo="[item.id === selected]">
-    <p>ID: {{ item.id }} - selected: {{ item.id === selected }}</p>
-    <p>...more child nodes</p>
+    <p>ID: {{ item.id }} - selecionado: {{ item.id === selected }}</p>
+    <p>...mais nós filhos</p>
   </div>
   ```
 
-  When the component's `selected` state changes, a large amount of VNodes will be created even though most of the items remained exactly the same. The `v-memo` usage here is essentially saying "only update this item if it went from non-selected to selected, or the other way around". This allows every unaffected item to reuse its previous VNode and skip diffing entirely. Note we don't need to include `item.id` in the memo dependency array here since Vue automatically infers it from the item's `:key`.
+  Quando o estado de `selected` no componente muda, uma grande quantidade de VNodes será criada mesmo que a maioria dos itens permaneçam exatamente os mesmos. O uso do `v-memo` aqui está basicamente dizendo "apenas atualize este item se ele for de não selecionado para selecionado, ou o contrário". Isso permite que cada item não afetado reutilize seu VNode anterior e pule totalmente a diferenciação. Note que não precisamos incluir `item.id` no array de dependências do _memo_ aqui já que o Vue automaticamente o infere do `:key` do item.
 
-  :::warning
-  When using `v-memo` with `v-for`, make sure they are used on the same element. **`v-memo` does not work inside `v-for`.**
+  :::warning Aviso
+  Ao usar `v-memo` com `v-for`, certifique-se de que eles sejam usados ​​no mesmo elemento. **`v-memo` não funciona dentro de `v-for`.**
   :::
 
-  `v-memo` can also be used on components to manually prevent unwanted updates in certain edge cases where the child component update check has been de-optimized. But again, it is the developer's responsibility to specify correct dependency arrays to avoid skipping necessary updates.
+  O `v-memo` também pode ser usado em componentes para impedir manualmente atualizações indesejadas em certos casos extremos em que a verificação de atualização do componente filho foi desotimizada. Mas novamente, é responsabilidade do desenvolvedor especificar os arrays de dependências corretas para evitar pular as atualizações necessárias.
 
-- **See also:**
+- **Ver também:**
   - [v-once](#v-once)
 
 ## v-is <Badge text="deprecated" type="warning" />
 
-Deprecated in 3.1.0. Use [`is` attribute with `vue:` prefix](/api/special-attributes.html#is) instead.
+Obsoleto na 3.1.0. Use [o atributo `is` com o prefixo `vue:`](/api/special-attributes.html#is).

@@ -246,9 +246,9 @@ render() {
 }
 ```
 
-## Creating Component VNodes
+## Criando VNodes de Componentes
 
-To create a VNode for a component, the first argument passed to `h` should be the component itself:
+Para criar um VNode para um componente, o primeiro argumento passado para `h` deve ser o próprio componente:
 
 ```js
 render() {
@@ -256,7 +256,7 @@ render() {
 }
 ```
 
-If we need to resolve a component by name then we can call `resolveComponent`:
+Se precisarmos resolver um componente pelo nome, podemos chamar `resolveComponent`:
 
 ```js
 const { h, resolveComponent } = Vue
@@ -269,12 +269,12 @@ render() {
 }
 ```
 
-`resolveComponent` is the same function that templates use internally to resolve components by name.
+`resolveComponent` é a mesma função que os _templates_ usam internamente para resolver componentes por nome.
 
-A `render` function will normally only need to use `resolveComponent` for components that are [registered globally](/guide/component-registration.html#global-registration). [Local component registration](/guide/component-registration.html#local-registration) can usually be skipped altogether. Consider the following example:
+Uma função `render` normalmente só precisa usar `resolveComponent` para componentes que são [registrados globalmente](/guide/component-registration.html#registro-global). Assim o [registro local de componentes](/guide/component-registration.html#registro-local) geralmente pode ser ignorado por completo. Considere o seguinte exemplo:
 
 ```js
-// We can simplify this
+// Podemos simplificar isso
 components: {
   ButtonCounter
 },
@@ -283,7 +283,7 @@ render() {
 }
 ```
 
-Rather than registering a component by name and then looking it up we can use it directly instead:
+Em vez de registrar um componente pelo nome e depois procurá-lo, podemos usá-lo diretamente:
 
 ```js
 render() {
@@ -319,7 +319,7 @@ render() {
 }
 ```
 
-In a template it can be useful to use a `<template>` tag to hold a `v-if` or `v-for` directive. When migrating to a `render` function, the `<template>` tag is no longer required and can be discarded.
+Em um _template_ pode ser útil usar uma tag `<template>` para conter uma diretiva `v-if` ou `v-for`. Ao migrar para uma função `render`, a tag `<template>` não é mais necessária e pode ser descartada.
 
 ### `v-model`
 
@@ -437,12 +437,12 @@ render() {
 }
 ```
 
-The slots are passed as functions, allowing the child component to control the creation of each slot's contents. Any reactive data should be accessed within the slot function to ensure that it's registered as a dependency of the child component and not the parent. Conversely, calls to `resolveComponent` should be made outside the slot function, otherwise they'll resolve relative to the wrong component:
+Os slots são passados ​​como funções, permitindo que o componente filho controle a criação do conteúdo de cada slot. Quaisquer dados reativos devem ser acessados ​​dentro da função do slot para garantir que sejam registrados como uma dependência do componente filho e não do pai. Por outro lado, chamadas ao `resolveComponent` devem ser feitas fora da função do slot, caso contrário, elas serão resolvidas em relação ao componente errado:
 
 ```js
 // `<MyButton><MyIcon :name="icon" />{{ text }}</MyButton>`
 render() {
-  // Calls to resolveComponent should be outside the slot function
+  // Chamadas para resolveComponent devem estar fora da função slot
   const Button = resolveComponent('MyButton')
   const Icon = resolveComponent('MyIcon')
 
@@ -450,10 +450,10 @@ render() {
     Button,
     null,
     {
-      // Use an arrow function to preserve the `this` value
+      // Use uma arrow function para preservar o valor de `this`
       default: (props) => {
-        // Reactive properties should be read inside the slot function
-        // so that they become dependencies of the child's rendering
+        // Propriedades reativas devem ser lidas dentro da função slot
+        // para que se tornem dependências da renderização do filho
         return [
           h(Icon, { name: this.icon }),
           this.text
@@ -464,7 +464,7 @@ render() {
 }
 ```
 
-If a component receives slots from its parent, they can be passed on directly to a child component:
+Se um componente recebe slots de seu pai, eles podem ser passados ​​diretamente para um componente filho:
 
 ```js
 render() {
@@ -472,7 +472,7 @@ render() {
 }
 ```
 
-They can also be passed individually or wrapped as appropriate:
+Eles também podem ser passados ​​individualmente ou envolvidos conforme apropriado:
 
 ```js
 render() {
@@ -480,24 +480,24 @@ render() {
     Panel,
     null,
     {
-      // If we want to pass on a slot function we can
+      // Se quisermos passar uma função de slot podemos
       header: this.$slots.header,
 
-      // If we need to manipulate the slot in some way
-      // then we need to wrap it in a new function
+      // Se precisarmos manipular o slot de alguma forma
+      // então precisamos envolvê-lo em uma nova função
       default: (props) => {
         const children = this.$slots.default ? this.$slots.default(props) : []
 
-        return children.concat(h('div', 'Extra child'))
+        return children.concat(h('div', 'Filho extra'))
       }
     }
   )
 }
 ```
 
-### `<component>` and `is`
+### `<component>` e `is`
 
-Behind the scenes, templates use `resolveDynamicComponent` to implement the `is` attribute. We can use the same function if we need all the flexibility provided by `is` in our `render` function:
+Nos bastidores, os _templates_ usam `resolveDynamicComponent` para implementar o atributo `is`. Podemos usar a mesma função se precisarmos de toda a flexibilidade fornecida por `is` em nossa função `render`:
 
 ```js
 const { h, resolveDynamicComponent } = Vue
@@ -511,13 +511,13 @@ render() {
 }
 ```
 
-Just like `is`, `resolveDynamicComponent` supports passing a component name, an HTML element name, or a component options object.
+Assim como `is`, `resolveDynamicComponent` suporta a passagem de um nome de componente, um nome de elemento HTML ou um objeto de opções de componente.
 
-However, that level of flexibility is usually not required. It's often possible to replace `resolveDynamicComponent` with a more direct alternative.
+No entanto, esse nível de flexibilidade geralmente não é necessário. Muitas vezes é possível substituir `resolveDynamicComponent` por uma alternativa mais direta.
 
-For example, if we only need to support component names then `resolveComponent` can be used instead.
+Por exemplo, se precisarmos apenas oferecer suporte a nomes de componentes, então `resolveComponent` pode ser usado.
 
-If the VNode is always an HTML element then we can pass its name directly to `h`:
+Se o VNode for sempre um elemento HTML, podemos passar seu nome diretamente para `h`:
 
 ```js
 // `<component :is="bold ? 'strong' : 'em'"></component>`
@@ -526,13 +526,13 @@ render() {
 }
 ```
 
-Similarly, if the value passed to `is` is a component options object then there's no need to resolve anything, it can be passed directly as the first argument of `h`.
+Da mesma forma, se o valor passado para `is` for um objeto de opções de componente, então não há necessidade de resolver nada, ele pode ser passado diretamente como o primeiro argumento de `h`.
 
-Much like a `<template>` tag, a `<component>` tag is only required in templates as a syntactical placeholder and should be discarded when migrating to a `render` function.
+Assim como uma tag `<template>`, uma tag `<component>` só é necessária em _templates_ como um espaço reservado sintático e deve ser descartada ao migrar para uma função `render`.
 
-### Custom Directives
+### Diretivas Personalizadas
 
-Custom directives can be applied to a VNode using [`withDirectives`](/api/global-api.html#withdirectives):
+Diretivas personalizadas podem ser aplicadas a um VNode usando [`withDirectives`](/api/global-api.html#withdirectives):
 
 ```js
 const { h, resolveDirective, withDirectives } = Vue
@@ -549,13 +549,13 @@ render () {
 }
 ```
 
-[`resolveDirective`](/api/global-api.html#resolvedirective) is the same function that templates use internally to resolve directives by name. That is only necessary if you don't already have direct access to the directive's definition object.
+[`resolveDirective`](/api/global-api.html#resolvedirective) é a mesma função que os _templates_ usam internamente para resolver diretivas por nome. Isso só é necessário se você ainda não tiver acesso direto ao objeto de definição da diretiva.
 
-### Built-in Components
+### Componentes Integrados
 
-[Built-in components](/api/built-in-components.html) such as `<keep-alive>`, `<transition>`, `<transition-group>`, and `<teleport>` are not registered globally by default. This allows bundlers to perform tree-shaking, so that the components are only included in the build if they are used. However, that also means we can't access them using `resolveComponent` or `resolveDynamicComponent`.
+[Componentes integrados](/api/built-in-components.html), como `<keep-alive>`, `<transition>`, `<transition-group>` e `<teleport>` por padrão não são registrados globalmente. Isso permite que empacotadores executem o _tree-shaking_ para que os componentes sejam incluídos na compilação apenas se forem usados. No entanto, isso também significa que não podemos acessá-los usando `resolveComponent` ou `resolveDynamicComponent`.
 
-Templates have special handling for those components, automatically importing them when they are used. When we're writing our own `render` functions, we need to import them ourselves:
+_Templates_ possuem tratamento especial para esses componentes, importando-os automaticamente quando utilizados. Quando estamos escrevendo nossas próprias funções `render`, precisamos importá-las nós mesmos:
 
 ```js
 const { h, KeepAlive, Teleport, Transition, TransitionGroup } = Vue
@@ -567,32 +567,32 @@ render () {
 }
 ```
 
-## Return Values for Render Functions
+## Valores de Retorno para Funções de Renderização
 
-In all of the examples we've seen so far, the `render` function has returned a single root VNode. However, there are alternatives.
+Em todos os exemplos que vimos até agora, a função `render` retornou um único VNode raiz. No entanto, existem alternativas.
 
-Returning a string will create a text VNode, without any wrapping element:
+Retornar uma string criará um VNode de texto, sem nenhum elemento de encapsulamento:
 
 ```js
 render() {
-  return 'Hello world!'
+  return 'Olá mundo!'
 }
 ```
 
-We can also return an array of children, without wrapping them in a root node. This creates a fragment:
+Também podemos retornar um array de filhos, sem envolvê-los em um nó raiz. Isso cria um fragmento:
 
 ```js
-// Equivalent to a template of `Hello<br>world!`
+// Equivalente a um template de `Olá<br>mundo!`
 render() {
   return [
-    'Hello',
+    'Olá',
     h('br'),
-    'world!'
+    'mundo!'
   ]
 }
 ```
 
-If a component needs to render nothing, perhaps because data is still loading, it can just return `null`. This will be rendered as a comment node in the DOM.
+Se um componente não precisar renderizar nada, talvez porque os dados ainda estão sendo carregados, ele pode simplesmente retornar `null`. Isso será renderizado como um nó de comentário no DOM.
 
 ## JSX
 
@@ -636,11 +636,11 @@ app.mount('#demo')
 
 Para saber mais sobre como JSX mapeia para o JavaScript, veja a [documentação de uso](https://github.com/vuejs/jsx-next#installation).
 
-## Functional Components
+## Componentes Funcionais
 
-Functional components are an alternative form of component that don't have any state of their own. They are rendered without creating a component instance, bypassing the usual component lifecycle.
+Componentes funcionais são uma forma alternativa de componente que não possui nenhum estado próprio. Eles são renderizados sem criar uma instância de componente, ignorando o ciclo de vida normal do componente.
 
-To create a functional component we use a plain function, rather than an options object. The function is effectively the `render` function for the component. As there is no `this` reference for a functional component, Vue will pass in the `props` as the first argument:
+Para criar um componente funcional, usamos uma função simples, em vez de um objeto de opções. A função é efetivamente a função `render` para o componente. Como não há referência de `this` para um componente funcional, o Vue passará o `props` como primeiro argumento:
 
 ```js
 const FunctionalComponent = (props, context) => {
@@ -648,18 +648,18 @@ const FunctionalComponent = (props, context) => {
 }
 ```
 
-The second argument, `context`, contains three properties: `attrs`, `emit`, and `slots`. These are equivalent to the instance properties [`$attrs`](/api/instance-properties.html#attrs), [`$emit`](/api/instance-methods.html#emit), and [`$slots`](/api/instance-properties.html#slots) respectively.
+O segundo argumento, `context`, contém três propriedades: `attrs`, `emit` e `slots`. Elas são equivalentes às propriedades de instância [`$attrs`](/api/instance-properties.html#attrs), [`$emit`](/api/instance-methods.html#emit) e [`$slots`](/api/instance-properties.html#slots) respectivamente.
 
-Most of the usual configuration options for components are not available for functional components. However, it is possible to define [`props`](/api/options-data.html#props) and [`emits`](/api/options-data.html#emits) by adding them as properties:
+A maioria das opções de configuração usuais para componentes não está disponível para componentes funcionais. No entanto, é possível definir [`props`](/api/options-data.html#props) e [`emits`](/api/options-data.html#emits) adicionando-os como propriedades:
 
 ```js
 FunctionalComponent.props = ['value']
 FunctionalComponent.emits = ['click']
 ```
 
-If the `props` option is not specified, then the `props` object passed to the function will contain all attributes, the same as `attrs`. The prop names will not be normalized to camelCase unless the `props` option is specified.
+Se a opção `props` não for especificada, então o objeto `props` passado para a função conterá todos os atributos, o mesmo que `attrs`. Os nomes das props não serão normalizados para camelCase a menos que a opção `props` seja especificada.
 
-Functional components can be registered and consumed just like normal components. If you pass a function as the first argument to `h`, it will be treated as a functional component.
+Componentes funcionais podem ser registrados e consumidos como componentes normais. Se você passar uma função como primeiro argumento para `h`, ela será tratada como um componente funcional.
 
 ## Compilação de _Template_
 

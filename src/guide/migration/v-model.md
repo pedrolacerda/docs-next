@@ -191,6 +191,6 @@ Nós recomendamos:
 
 Para mais informações na nova sintaxe do `v-model`, veja:
 
-- [Utilizando `v-model` em Componentes](../component-basics.html#using-v-model-on-components)
-- [Argumentos do `v-model`](../component-custom-events.html#v-model-arguments)
-- [Tratando modificadores do `v-model`](../component-custom-events.html#handling-v-model-modifiers)
+- [Utilizando `v-model` em Componentes](../component-basics.html#usando-v-model-em-componentes)
+- [Argumentos do `v-model`](../component-custom-events.html#argumentos-do-v-model)
+- [Tratando modificadores do `v-model`](../component-custom-events.html#manipulando-modificadores-do-v-model)

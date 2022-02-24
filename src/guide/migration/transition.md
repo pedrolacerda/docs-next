@@ -61,7 +61,7 @@ Os nomes de propriedades do componente `<transition>` relacionadas também foram
 2. Substitua instâncias de `.v-leave` por `.v-leave-from`
 3. Substitua instâncias de nomes de propriedades relacionadas, como acima.
 
-## See also
+## Ver também
 
-- [`<Transition>` as a root can no longer be toggled from the outside](/guide/migration/transition-as-root.html)
-- [`<TransitionGroup>` now renders no wrapper element by default](/guide/migration/transition-group.html)
+- [`<Transition>` como uma raiz não pode mais ser alternada do lado de fora](/guide/migration/transition-as-root.html)
+- [`<TransitionGroup>` agora não renderiza nenhum elemento _wrapper_ por padrão](/guide/migration/transition-group.html)
