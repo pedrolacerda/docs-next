@@ -28,7 +28,7 @@ Recomenda-se evitar o uso de ambos no mesmo elemento devido à ambiguidade da si
 
 Em vez de gerenciar isso à nível de _template_, um método para realizar isso é criar um dado computado (computed property) que filtre uma lista para os elementos visíveis.
 
-[Migration build flag: `COMPILER_V_IF_V_FOR_PRECEDENCE`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `COMPILER_V_IF_V_FOR_PRECEDENCE`](migration-build.html#configuracao-de-compatibilidade)
 
 ## Veja também
 

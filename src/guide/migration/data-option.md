@@ -111,7 +111,7 @@ Na v3.0, o resultado será:
 }
 ```
 
-[Migration build flag: `OPTIONS_DATA_FN`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `OPTIONS_DATA_FN`](migration-build.html#configuracao-de-compatibilidade)
 
 ## Estratégias de Migração
 
@@ -122,7 +122,7 @@ Para usuários que dependem da declaração em objeto, é recomendado:
 
 Para usuários que dependem do comportamento de mesclagem profunda dos _mixins_, é recomendado refatorar seu código para evitar tal dependência completamente, já que mesclagens profundas de _mixins_ são muito implícitas e podem fazer a lógica do código ser mais difícil de entender e depurar.
 
-[Migration build flags:](migration-build.html#compat-configuration)
+[Sinalizadores na compilação de migração:](migration-build.html#configuracao-de-compatibilidade)
 
 - `OPTIONS_DATA_FN`
 - `OPTIONS_DATA_MERGE`

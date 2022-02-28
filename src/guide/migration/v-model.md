@@ -182,7 +182,7 @@ Nós recomendamos:
   }
   ```
 
-[Migration build flags:](migration-build.html#compat-configuration)
+[Sinalizadores na compilação de migração:](migration-build.html#configuracao-de-compatibilidade)
 
 - `COMPONENT_V_MODEL`
 - `COMPILER_V_BIND_SYNC`

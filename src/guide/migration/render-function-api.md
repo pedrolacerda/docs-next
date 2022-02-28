@@ -180,7 +180,7 @@ Para mais informações, veja [O RFC* das mudanças da API da Função de Render
 
 ## Estratégia de Migração
 
-[Migration build flag: `RENDER_FUNCTION`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `RENDER_FUNCTION`](migration-build.html#configuracao-de-compatibilidade)
 
 ### Autores de Biblioteca
 

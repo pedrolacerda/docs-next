@@ -51,7 +51,7 @@ The option also accepts an object, which allows the developer to define validato
 
 For more information on this, please read the [API documentation for this feature](../../api/options-data.md#emits).
 
-## Migration Strategy
+## Estratégia de Migração
 
 It is highly recommended that you document all of the events emitted by each of your components using `emits`.
 

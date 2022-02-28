@@ -56,11 +56,11 @@ when used like this:
 </label>
 ```
 
-## Migration Strategy
+## Estratégia de Migração
 
 In components that use `inheritAttrs: false`, make sure that styling still works as intended. If you previously relied on the special behavior of `class` and `style`, some visuals might be broken as these attributes might now be applied to another element.
 
-[Migration build flag: `INSTANCE_ATTRS_CLASS_STYLE`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `INSTANCE_ATTRS_CLASS_STYLE`](migration-build.html#configuracao-de-compatibilidade)
 
 ## See also
 

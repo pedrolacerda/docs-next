@@ -106,6 +106,6 @@ mounted(el, binding, vnode) {
 Com o suporte à [fragmentos](/guide/migration/fragments.html#overview), os componentes podem ter mais de um nó raiz. Quando aplicada a um componente de múltiplas raízes, uma diretiva personalizada será ignorada e um aviso será lançado.
 :::
 
-## Migration Strategy
+## Estratégia de Migração
 
-[Migration build flag: `CUSTOM_DIR`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `CUSTOM_DIR`](migration-build.html#configuracao-de-compatibilidade)

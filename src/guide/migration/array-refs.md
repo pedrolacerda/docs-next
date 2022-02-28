@@ -71,9 +71,9 @@ Observe que:
 
 - Isso também permite que `itemRefs` sejam reativos e observados, se necessário.
 
-## Migration Strategy
+## Estratégia de Migração
 
-[Migration build flags:](migration-build.html#compat-configuration)
+[Sinalizadores na compilação de migração:](migration-build.html#configuracao-de-compatibilidade)
 
 - `V_FOR_REF`
 - `COMPILER_V_FOR_REF`

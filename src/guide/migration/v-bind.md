@@ -45,4 +45,4 @@ Na v3.x, se um elemento tem tanto o `v-bind="object"` quanto um atributo individ
 
 Se você está confiando nessa funcionalidade de sobrescrita do `v-bind`, nós atualmente recomendamos você à garantir que seu atributo `v-bind` seja definido sempre antes dos atributos individuais.
 
-[Migration build flag: `COMPILER_V_BIND_OBJECT_ORDER`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `COMPILER_V_BIND_OBJECT_ORDER`](migration-build.html#configuracao-de-compatibilidade)

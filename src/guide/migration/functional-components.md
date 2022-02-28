@@ -117,4 +117,4 @@ Para mais informação sobre o uso dos novos componentes funcionais e as mudanç
 
 - [Migração: API da Função de Renderização](/guide/migration/render-function-api.html)
 - [Guia: Funções de Renderização](/guide/render-function.html)
-- [Migration build flag: `COMPONENT_FUNCTIONAL`](migration-build.html#compat-configuration)
+- [Sinalizador na compilação de migração: `COMPONENT_FUNCTIONAL`](migration-build.html#configuracao-de-compatibilidade)

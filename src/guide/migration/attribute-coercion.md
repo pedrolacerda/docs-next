@@ -140,7 +140,7 @@ Na v3.x, `null` ou `undefined` devem ser usados para remover explicitamente um a
   </tbody>
 </table>
 
-[Migration build flags:](migration-build.html#compat-configuration)
+[Sinalizadores na compilação de migração:](migration-build.html#configuracao-de-compatibilidade)
 
 - `ATTR_FALSE_VALUE`
 - `ATTR_ENUMERATED_COERSION`

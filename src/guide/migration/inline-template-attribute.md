@@ -30,7 +30,7 @@ Esta funcionalidade não receberá mais suporte.
 
 A maioria dos casos de uso de `inline-template` assume um ambiente sem ferramentas de compilação, onde todos os _templates_ são escritos diretamente dentro da página HTML.
 
-[Sinalizador na compilação de migração: `COMPILER_INLINE_TEMPLATE`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `COMPILER_INLINE_TEMPLATE`](migration-build.html#configuracao-de-compatibilidade)
 
 ### Opção #1: Utilize a tag `<script>`
 
