@@ -31,6 +31,6 @@ export default {
 }
 ```
 
-## Migration Strategy
+## Estratégia de Migração
 
-[Migration build flag: `PROPS_DEFAULT_THIS`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `PROPS_DEFAULT_THIS`](migration-build.html#configuracao-de-compatibilidade)

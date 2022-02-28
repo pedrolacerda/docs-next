@@ -66,7 +66,7 @@ As teclas para alguns sinais de pontuação podem ser incluídas literalmente. p
 
 As limitações da sintaxe impedem que certos caracteres sejam correspondidos, como `"`, `'`, `/`, `=`, `>` e `.`. Para esses caracteres você deve verificar `event.key` dentro do escutador em vez disso.
 
-[Migration build flags:](migration-build.html#compat-configuration)
+[Sinalizadores na compilação de migração:](migration-build.html#configuracao-de-compatibilidade)
 
 - `CONFIG_KEY_CODES`
 - `V_ON_KEYCODE_MODIFIER`

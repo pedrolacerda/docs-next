@@ -96,7 +96,7 @@ Na v3.0, estamos limitando o tratamento especial do Vue ao atributo `is` apenas 
     document.createElement('button', { is: 'plastic-button' })
     ```
 
-[Sinalizador na compilação de migração: `COMPILER_IS_ON_ELEMENT`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `COMPILER_IS_ON_ELEMENT`](migration-build.html#configuracao-de-compatibilidade)
 
 ## Prefixo `vue:` para _Workarounds_ na Análise do _template_ no DOM
 

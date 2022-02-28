@@ -95,7 +95,7 @@ No Vue 3.x, a dica _"use production build"_ só aparecerá ao usar o _"dev + ful
 
 Para construções de módulos ES, como são usados ​​com empacotadores e, na maioria dos casos, uma CLI ou _boilerplate_ configuraria o ambiente de produção corretamente, essa dica não aparecerá mais.
 
-[Sinalizador na compilação de migração: `CONFIG_PRODUCTION_TIP`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `CONFIG_PRODUCTION_TIP`](migration-build.html#configuracao-de-compatibilidade)
 
 ### `config.ignoredElements` Agora É `config.compilerOptions.isCustomElement`
 
@@ -118,7 +118,7 @@ No Vue 3, a verificação de se um elemento é um componente foi movida para a f
 - Esta será uma nova opção de nível superior na configuração do Vue CLI.
 :::
 
-[Sinalizador na compilação de migração: `CONFIG_IGNORED_ELEMENTS`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `CONFIG_IGNORED_ELEMENTS`](migration-build.html#configuracao-de-compatibilidade)
 
 ### `Vue.prototype` Substituído por `config.globalProperties`
 
@@ -139,7 +139,7 @@ app.config.globalProperties.$http = () => {}
 
 Usar `provide` (discutido [abaixo](#prover-injetar)) também deve ser considerado como uma alternativa para `globalProperties`.
 
-[Sinalizador na compilação de migração: `GLOBAL_PROTOTYPE`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `GLOBAL_PROTOTYPE`](migration-build.html#configuracao-de-compatibilidade)
 
 ### `Vue.extend` Removido
 
@@ -189,7 +189,7 @@ Observe que, embora o tipo de retorno de `defineComponent` seja um tipo estilo c
 
 No Vue 3, é altamente recomendável favorecer a composição via [API de Composição](/api/composition-api.html) sobre herança e mixins. Se por algum motivo você ainda precisar de herança de componentes, você pode usar a [opção `extends`](/api/options-composition.html#extends) em vez de `Vue.extend`.
 
-[Sinalizador na compilação de migração: `GLOBAL_EXTEND`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `GLOBAL_EXTEND`](migration-build.html#configuracao-de-compatibilidade)
 
 ### Uma Nota para Autores de Plugins
 
@@ -244,7 +244,7 @@ app.directive('focus', {
 app.mount('#app')
 ```
 
-[Sinalizador na compilação de migração: `GLOBAL_MOUNT`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `GLOBAL_MOUNT`](migration-build.html#configuracao-de-compatibilidade)
 
 ## Prover / Injetar
 

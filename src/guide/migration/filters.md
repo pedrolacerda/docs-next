@@ -73,7 +73,7 @@ Utilizando o exemplo acima, aqui está um exemplo de como isso pode ser implemen
 
 Ao invés de utilizar filtros, recomendamos substituí-los por propriedades computadas ou métodos.
 
-[Migration build flags:](migration-build.html#compat-configuration)
+[Sinalizadores na compilação de migração:](migration-build.html#configuracao-de-compatibilidade)
 
 - `FILTERS`
 - `COMPILER_FILTERS`

@@ -39,11 +39,11 @@ Or just `vnode` if you're using camel case:
 </template>
 ```
 
-## Migration Strategy
+## Estratégia de Migração
 
 In most cases it should just require changing the prefix. The lifecycle hooks `beforeDestroy` and `destroyed` have been renamed to `beforeUnmount` and `unmounted` respectively, so the corresponding event names will also need to be updated.
 
-[Migration build flags: `INSTANCE_EVENT_HOOKS`](migration-build.html#compat-configuration)
+[Sinalizadores na compilação de migração: `INSTANCE_EVENT_HOOKS`](migration-build.html#configuracao-de-compatibilidade)
 
 ## See Also
 

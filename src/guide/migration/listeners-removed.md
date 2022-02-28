@@ -61,11 +61,11 @@ If this component received an `id` attribute and a `v-on:close` listener, the `$
 }
 ```
 
-## Migration Strategy
+## Estratégia de Migração
 
 Remove all usages of `$listeners`.
 
-[Migration build flag: `INSTANCE_LISTENERS`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `INSTANCE_LISTENERS`](migration-build.html#configuracao-de-compatibilidade)
 
 ## See also
 

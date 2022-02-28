@@ -40,9 +40,9 @@ Se você quiser testar rapidamente o Vue 3 em um novo projeto:
   # selecione a predefinição vue 3
   ```
 
-## Migration Build
+## Compilação de Migração
 
-Se você tem um projeto ou biblioteca do Vue 2 existente que pretende atualizar para o Vue 3, fornecemos uma versão do Vue 3 que oferece APIs compatíveis com o Vue 2. Verifique a página [Migration Build](./migration-build.html) para obter mais detalhes.
+Se você tem um projeto ou biblioteca do Vue 2 existente que pretende atualizar para o Vue 3, fornecemos uma versão do Vue 3 que oferece APIs compatíveis com o Vue 2. Verifique a página [Compilação de Migração](./migration-build.html) para obter mais detalhes.
 
 ## Principais Recursos Novos
 

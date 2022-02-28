@@ -58,7 +58,7 @@ Removemos os métodos `$on`, `$off` e `$once` da instância completamente. `$emi
 
 ## Estratégia de Migração
 
-[Sinalizador na compilação de migração: `INSTANCE_EVENT_EMITTER`](migration-build.html#compat-configuration)
+[Sinalizador na compilação de migração: `INSTANCE_EVENT_EMITTER`](migration-build.html#configuracao-de-compatibilidade)
 
 No Vue 3, não é mais possível usar essas APIs para ouvir os próprios eventos emitidos de um componente de dentro de um componente. Não há caminho de migração para esse caso de uso.
 

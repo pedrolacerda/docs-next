@@ -33,7 +33,7 @@ This worked by accident, not by design. A `<transition>` is supposed to be trigg
 
 This quirk has now been removed.
 
-## Migration Strategy
+## Estratégia de Migração
 
 A similar effect can be achieved by passing a prop to the component instead:
 
