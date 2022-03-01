@@ -1,5 +1,7 @@
 # Registro de Componentes
 
+<VideoLesson href="https://vueschool.io/lessons/vue-3-global-vs-local-vue-components?friend=vuejs" title="Free Vue.js Component Registration lesson">Learn how component registration works with a free lesson on Vue School</VideoLesson>
+
 > Esta página assume que você já leu o [Básico sobre Componentes](component-basics.md). Leia lá primeiro se você for novo no assunto de componentização.
 
 ## Nomes de Componentes

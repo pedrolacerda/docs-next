@@ -2,7 +2,7 @@
 
 > Esta página assume que você já leu o [Básico sobre Componentes](component-basics.md). Leia lá primeiro se você for novo em componentes.
 
-Um atributo de componente não-propriedade é um atributo ou ouvinte de evento que é passado para um componente, mas não tem uma propriedade correspondente definida em [props](component-props) ou [emits](component-custom-events.html#defining-custom-events). Os exemplos comuns disto incluem atributos `class`, `style`, e `id`. Você pode acessar esses atributos por meio da propriedade `$attrs`.
+Um atributo de componente não-propriedade é um atributo ou ouvinte de evento que é passado para um componente, mas não tem uma propriedade correspondente definida em [props](component-props.html) ou [emits](component-custom-events.html#defining-custom-events). Os exemplos comuns disto incluem atributos `class`, `style`, e `id`. Você pode acessar esses atributos por meio da propriedade `$attrs`.
 
 ## Herança de Atributos
 
@@ -82,7 +82,7 @@ Se você **não** deseja que um componente herde atributos automaticamente, voc�
 
 O cenário comum para desativar uma herança de atributo é quando os atributos precisam ser aplicados a outros elementos além do nó raiz.
 
-Ao definir a opção `inheritAttrs` para `false`, você pode controlar a aplicação em outros atributos dos elementos, para que usem a propriedade `$attrs` do componente, que inclui todos os atributos não incluídos às propriedades `props` e `emits` do componente (por exemplo, `class`, `style`, eventos `v-on`, etc.).
+Ao definir a opção `inheritAttrs` para `false`, você poderá aplicar atributos ao elemento de sua escolha usando a propriedade `$attrs` do componente, que inclui todos os atributos não incluídos às propriedades `props` e `emits` do componente (por exemplo, `class`, `style`, eventos `v-on`, etc.).
 
 Usando nosso exemplo de componente _date-picker_ da [seção anterior](#heranca-de-atributos), no caso de precisarmos aplicar todos os atributos não-propriedade ao elemento `input` ao invés do elemento `div` raiz, podemos fazer usando o atalho `v-bind`.
 

@@ -1284,6 +1284,7 @@ Esta é a ordem padrão que recomendamos para opções de componente. Elas são 
     - `inheritAttrs`
     - `props`
     - `emits`
+    - `expose`
 
 6. **API de Composição** (ponto de entrada para usar a API de Composição)
     - `setup`
@@ -1484,7 +1485,7 @@ Prefira seletores de classe ao invés de seletores de elemento em estilos `scope
 ::: details Explicação Detalhada
 Para usar o escopo em estilos, o Vue adiciona um atributo único aos elementos de componente, como um `data-v-f3f3eg9`. Então os seletores são modificados para que apenas os elementos correspondentes com este atributo sejam selecionados. (ex.: `button[data-v-f3f3eg9]`).
 
-O problema é que um grande número de [seletores de elemento](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (ex.: `button[data-v-f3f3eg9]`) serão consideravelmente mais lentos do que [seletores de classe](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (ex.: `.btn-close[data-v-f3f3eg9]`), então seletores de classe devem ser preferidos sempre que possível.
+O problema é que um grande número de seletores de elemento (ex.: `button[data-v-f3f3eg9]`) serão consideravelmente mais lentos do que seletores de classe (ex.: `.btn-close[data-v-f3f3eg9]`), então seletores de classe devem ser preferidos sempre que possível.
 :::
 
 <div class="style-example style-example-bad">

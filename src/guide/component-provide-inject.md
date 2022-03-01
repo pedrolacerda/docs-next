@@ -67,7 +67,7 @@ app.component('todo-list', {
 })
 ```
 
-Para acessar as propriedades da instância do componente, precisamos converter `provide` em uma função que retorna um objeto
+Para acessar as propriedades da instância do componente, precisamos converter `provide` em uma função que retorna um objeto:
 
 ```js
 app.component('todo-list', {

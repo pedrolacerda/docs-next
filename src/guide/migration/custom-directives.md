@@ -15,8 +15,8 @@ Além disso, a string `expression` não é mais passada como parte do objeto `bi
 
 No Vue 2, as diretivas personalizadas foram criadas usando os gatilhos listados abaixo para atingir um ciclo de vida de um elemento, todos opcionais:
 
-- **bind** - Ocorre quando a diretiva é vinculada ao elemento. Ocorre apenas uma vez.
-- **inserted** - Ocorre quando o elemento é inserido no DOM pai.
+- **bind** - Chamado quando a diretiva é vinculada ao elemento. Chamado apenas uma vez.
+- **inserted** - Chamado quando o elemento é inserido no DOM pai.
 - **update** - Este gatilho é chamado quando o elemento é atualizado, mas os filhos ainda não foram atualizados.
 - **componentUpdated** - Este gatilho é chamado assim que o componente e os filhos forem atualizados.
 - **unbind** - Este gatilho é chamado assim que a diretiva é removida. Também chamado apenas uma vez.
@@ -45,7 +45,7 @@ No Vue 3, no entanto, criamos uma API mais coesa para diretivas personalizadas. 
 - bind → **beforeMount**
 - inserted → **mounted**
 - **beforeUpdate**: novo! É chamado antes que o próprio elemento seja atualizado, muito semelhante aos gatilhos de ciclo de vida do componente.
-- update → removido! Havia muitas semelhanças com "updated", então era redundante. Em vez disso, use "updated".
+- update → removido! Havia muitas semelhanças com `updated`, então era redundante. Em vez disso, use `updated`.
 - componentUpdated → **updated**
 - **beforeUnmount**: novo! Semelhante aos gatilhos de ciclo de vida do componente, será chamado logo antes de um elemento ser desmontado.
 - unbind -> **unmounted**

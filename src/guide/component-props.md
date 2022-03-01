@@ -2,6 +2,8 @@
 
 > Esta página assume que você já leu o [Básico sobre Componentes](component-basics.md). Leia lá primeiro caso seja novo com componentes.
 
+<VideoLesson href="https://vueschool.io/lessons/vue-3-reusable-components-with-props?friend=vuejs" title="Free Vue.js Component Props Lesson">Learn how component props work with a free lesson on Vue School</VideoLesson>
+
 ## Tipos de Propriedades
 
 Até agora, nós apenas vimos propriedades listadas como um Array de Strings:
@@ -61,6 +63,7 @@ Em ambos os exemplos acima nós passamos valores de String, mas _qualquer_ tipo 
 
 ```html
 <!-- Incluir a propriedade, sem valor nenhum, implica em `true`. -->
+<!-- Se você não definir o tipo de is-published como Boolean em props, será uma string vazia em vez de um valor "true". -->
 <blog-post is-published></blog-post>
 
 <!-- Apesar de `false` ser estático, precisamos do v-bind para dizer -->
@@ -151,8 +154,8 @@ computed: {
 }
 ```
 
-::: tip Observação
-Observe que objetos e Arrays em JavaScript são passados por referência, então se a propriedade for um Array ou objeto, alterar o objeto ou Array em si dentro do componente filho **irá** afetar o estado do pai.
+::: warning Aviso
+Observe que objetos e arrays em JavaScript são passados por referência, então se a propriedade for um array ou objeto, alterar o objeto ou array em si dentro do componente filho **vai** afetar o estado pai e o Vue não pode avisá-lo sobre isso. Como regra geral, você deve evitar alterar qualquer prop, incluindo objetos e arrays, pois isso ignora a vinculação de dados unidirecional e pode causar resultados indesejados.
 :::
 
 ## Validação de Propriedades

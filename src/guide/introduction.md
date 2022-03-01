@@ -219,15 +219,19 @@ O sistema de componentes também é outro importante conceito no Vue, por ser um
 
 ![Árvore de Componentes](/images/components.png)
 
-No Vue, um componente é essencialmente uma instância com opções pré-definidas. Registrar um componente no Vue é trivial: criamos um objeto para o componente assim como fizemos com os objetos `App` e o utilizamos na opção `components` de seu elemento pai:
+No Vue, um componente é essencialmente uma instância com opções pré-definidas. Registrar um componente no Vue é trivial: criamos um objeto para o componente assim como fizemos com o objeto `app` e o utilizamos na opção `components` de seu elemento pai:
 
 ```js
-// Cria uma aplicação Vue
-const app = Vue.createApp(...)
-
-// Define um novo componente chamado todo-item
-app.component('todo-item', {
+const TodoItem = {
   template: `<li>Isto é uma tarefa</li>`
+}
+
+// Cria uma aplicação Vue
+const app = Vue.createApp({
+  components: {
+    TodoItem // Registra um novo componente
+  },
+  ... // Outras propriedades para o componente
 })
 
 // Monta a aplicação Vue
@@ -246,10 +250,10 @@ Agora você pode compor com ele no _template_ de outro componente:
 Mas isto renderizaria o mesmo texto toda vez que um item fosse utilizado, o que não é lá muito interessante. Devemos poder passar os dados do escopo superior (_parent_) para os componentes filhos. Vamos modificar o componente para fazê-lo aceitar uma [prop](component-basics.html#passing-data-to-child-components-with-props):
 
 ```js
-app.component('todo-item', {
+const TodoItem = {
   props: ['todo'],
   template: `<li>{{ todo.text }}</li>`
-})
+}
 ```
 
 Agora podemos passar o dado `todo` em cada repetição de componente usando `v-bind`:
@@ -273,6 +277,11 @@ Agora podemos passar o dado `todo` em cada repetição de componente usando `v-b
 ```
 
 ```js
+const TodoItem = {
+  props: ['todo'],
+  template: `<li>{{ todo.text }}</li>`
+}
+
 const TodoList = {
   data() {
     return {
@@ -282,15 +291,13 @@ const TodoList = {
         { id: 2, text: 'Qualquer outra coisa que humanos podem comer' }
       ]
     }
+  },
+  components: {
+    TodoItem
   }
 }
 
 const app = Vue.createApp(TodoList)
-
-app.component('todo-item', {
-  props: ['todo'],
-  template: `<li>{{ todo.text }}</li>`
-})
 
 app.mount('#todo-list-app')
 ```

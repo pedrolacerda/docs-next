@@ -2,6 +2,8 @@
 
 > Esta página assume que você já leu o [Básico sobre Componentes](component-basics.md). Se você não está familizariado com componentes, recomendamos lê-lo primeiro.
 
+<VideoLesson href="https://vueschool.io/lessons/vue-3-component-slots?friend=vuejs" title="Free Vue.js Slots lesson">Learn slot basics with a free lesson on Vue School</VideoLesson>
+
 ## Conteúdo do _Slot_
 
 Vue implementa uma API de distribuição de conteúdo inspirada no [rascunho da especificação de _Web Components_](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md), utilizando o elemento `<slot>` como saída de distribuição de conteúdo.
@@ -89,8 +91,8 @@ O _slot_ *não* possui acesso ao escopo de `<todo-button>`. Por exemplo, se tent
   Ao clicar aqui, este item realizará a ação {{ action }}
   <!--
   `action` retornará `undefined` neste caso, já que
-  o conteúdo de `action` é apenas _transmitido_ para `<todo-button>`,
-  ao invés de ser _definido_ como um dado de `<todo-button>`.
+  o conteúdo é apenas transmitido para `<todo-button>`,
+  ao invés de ser definido como um dado de `<todo-button>`.
   -->
 </todo-button>
 ```

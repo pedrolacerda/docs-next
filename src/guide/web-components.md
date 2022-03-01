@@ -14,6 +14,14 @@ By default, Vue will attempt to resolve a non-native HTML tag as a registered Vu
 
 If you are using Vue with a build setup, the option should be passed via build configs since it is a compile-time option.
 
+#### Example In-Browser Config
+
+```js
+// Only works if using in-browser compilation.
+// If using build tools, see config examples below.
+app.config.compilerOptions.isCustomElement = tag => tag.includes('-')
+```
+
 #### Example Vite Config
 
 ```js
@@ -112,7 +120,7 @@ document.body.appendChild(
 
 - When the element's `disconnectedCallback` is invoked, Vue will check whether the element is detached from the document after a microtask tick.
 
-  - If the element is still in the document, it's a move and the component instance will be perserved;
+  - If the element is still in the document, it's a move and the component instance will be preserved;
 
   - If the element is detached from the document, it's a removal and the component instance will be unmounted.
 

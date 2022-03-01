@@ -7,10 +7,9 @@ export default {
   ],
   "special_sponsors": [
     {
-      "url": "https://autocode.com",
-      "img": "autocode.svg",
-      "name": "Autocode",
-      "description": "Construa workflows de app à app e conecte APIs"
+      "url": "https://www.dcloud.io/hbuilderx.html?hmsr=vue-en&hmpl=&hmcu=&hmkw=&hmci=",
+      "img": "hbuilder.png",
+      "name": "HBuilder"
     }
   ],
   "platinum_sponsors": [

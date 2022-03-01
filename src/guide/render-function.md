@@ -350,7 +350,7 @@ render() {
 
 #### Modificadores de Eventos
 
-Os modificadores de evento `.passive`, `.capture` e `.once`, podem ser concatenados após o nome do evento usando _camel case_.
+Os modificadores de evento `.passive`, `.capture` e `.once`, podem ser concatenados após o nome do evento usando _camelCase_.
 
 Por exemplo:
 

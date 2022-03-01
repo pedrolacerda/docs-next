@@ -140,7 +140,7 @@ Todos os gatilhos de ciclo de vida têm seu contexto `this` vinculado automatica
 
 - **Detalhes:**
 
-  Invocada após uma instância ser desmontada. Quando esse gatilho é invocado, todas as diretivas da instância já foram desligadas, todas escutas de evento foram removidas e todos componentes filhos também foram desmontados.
+  Invocada após uma instância ser desmontada. Quando esse gatilho é invocado, todas as diretivas da instância já foram desligadas, todas as escutas de evento foram removidas e todas as instâncias de componentes filhos também foram desmontadas.
 
   **Esse gatilho não é invocado durante a renderização do lado do servidor.**
 

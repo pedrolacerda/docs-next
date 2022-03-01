@@ -27,6 +27,6 @@ watch: {
 
 ## Estratégia de Migração
 
-Se você depende da observação de mutações de Arrays, adicione a propriedade `deep` para garantir que seu retorno de chamada (_callback_) seja disparado corretamente.
+Se você depende da observação de mutações de Arrays, adicione a opção `deep` para garantir que seu retorno de chamada (_callback_) seja disparado corretamente.
 
 [Sinalizador na compilação de migração: `WATCH_ARRAY`](migration-build.html#configuracao-de-compatibilidade)

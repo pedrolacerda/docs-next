@@ -2,9 +2,9 @@
 
 ## key
 
-- **Espera:** `number | string`
+- **Espera:** `number | string | symbol`
 
-  O atributo especial `key` é usado principalmente como uma dica para o algoritmo de DOM virtual do Vue identificar VNodes quando comparar a nova lista de nós com a anterior. Sem as chaves (`key`), o Vue usa um algoritmo que minimiza a movimentação de elementos e tenta corrigir/reusar elementos do mesmo tipo no local, tanto quanto possível. Com as chaves, ele reordenará os elementos com base na alteração da ordem das chaves, e os elementos com chaves que não estão mais presentes sempre serão removidos/destruídos.
+  O atributo especial `key` é usado principalmente como uma dica para o algoritmo de DOM virtual do Vue identificar VNodes ao comparar a nova lista de nós com a anterior. Sem as chaves (`key`), o Vue usa um algoritmo que minimiza a movimentação de elementos e tenta corrigir/reusar elementos do mesmo tipo no local, tanto quanto possível. Com as chaves, ele reordenará os elementos com base na alteração da ordem das chaves, e os elementos com chaves que não estão mais presentes sempre serão removidos/destruídos.
 
   Filhos do mesmo pai comum devem ter **chaves únicas**. Chaves duplicadas causarão erros de renderização.
 

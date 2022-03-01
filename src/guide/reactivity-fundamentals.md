@@ -1,5 +1,7 @@
 # Fundamentos da Reatividade
 
+> Esta seção usa a sintaxe de [componente single-file](single-file-component.html) para exemplos de código
+
 ## Declarando Estado Reativo
 
 Para criar um estado reativo a partir de um objeto JavaScript, podemos usar o método `reactive`:

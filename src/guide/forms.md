@@ -269,10 +269,10 @@ Por padrão, `v-model` sincroniza o elemento _input_ com os dados após cada eve
 Se você deseja que a entrada do usuário seja automaticamente tipificada como um Number, pode adicionar o modificador `number` ao `v-model` do elemento:
 
 ```html
-<input v-model.number="age" type="number" />
+<input v-model.number="age" type="text" />
 ```
 
-Isto geralmente é útil, porque mesmo com `type="number"`, o valor do elemento HTML _input_ sempre retorna uma string. Se o valor não puder ser convertido com `parseFloat()`, então o valor original é retornado.
+Isso geralmente é útil quando o tipo dp _input_ é `text`. Se o tipo do _input_ for `number`, o Vue pode converter automaticamente o valor bruto da string para número, e você não precisa adicionar o modificador `.number` ao `v-model`. Se o valor não puder ser convertido com `parseFloat()`, então o valor original é retornado.
 
 ### `.trim`
 

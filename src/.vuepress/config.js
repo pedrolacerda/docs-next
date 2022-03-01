@@ -274,7 +274,7 @@ module.exports = {
       'link',
       {
         href:
-          'https://fonts.googleapis.com/css?family=Inter:300,400,500,600|Open+Sans:400,600;display=swap',
+        'https://fonts.googleapis.com/css?family=Inter:300,400,500,600|Open+Sans:400,600;display=swap',
         rel: 'stylesheet'
       }
     ],
@@ -296,6 +296,7 @@ module.exports = {
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
     [
       'meta',
       { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
@@ -510,7 +511,7 @@ module.exports = {
       custom: 'CKYD62QM',
       placement: 'vuejsorg'
     },
-    topBanner: false
+    topBanner: true
   },
   plugins: [
     [

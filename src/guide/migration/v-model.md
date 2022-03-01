@@ -86,7 +86,7 @@ Em seguida, o pai pode ouvir esse evento e atualizar uma propriedade de dados lo
 <ChildComponent :title="pageTitle" @update:title="pageTitle = $event" />
 ```
 
-Por conveniência, tínhamos uma abreviatura para esse padrão com o modificador .sync:
+Por conveniência, tínhamos uma abreviatura para esse padrão com o modificador `.sync`:
 
 ```html
 <ChildComponent :title.sync="pageTitle" />

@@ -20,7 +20,7 @@ Embora tenhamos nos esforçado para fazer a compilação de migração imitar o 
 
 - Suporte ao Internet Explorer 11: [O Vue 3 abandonou oficialmente o plano de suporte ao IE11](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0038-vue3-ie11-support.md). Se você ainda precisar dar suporte ao IE11 ou abaixo, terá que permanecer no Vue 2.
 
-- Renderização do lado do servidor: a compilação de migração pode ser usada para SSR, mas a migração de uma configuração de SSR personalizada é muito mais complexa. A ideia geral é substituir `vue-server-renderer` por [`@vue/server-renderer`](https://github.com/vuejs/vue-next/tree/master/packages/server-renderer). O Vue 3 não fornece mais um renderizador de pacote (_bundle_) e é recomendado usar o Vue 3 SSR com [Vite](https://vitejs.dev/guide/ssr.html). Se você estiver usando [Nuxt.js](https://nuxtjs.org/), provavelmente é melhor esperar pelo Nuxt 3.
+- Renderização do lado do servidor: a compilação de migração pode ser usada para SSR, mas a migração de uma configuração de SSR personalizada é muito mais complexa. A ideia geral é substituir `vue-server-renderer` por [`@vue/server-renderer`](https://github.com/vuejs/vue-next/tree/master/packages/server-renderer). O Vue 3 não fornece mais um renderizador de pacote (_bundle_) e é recomendado usar o Vue 3 SSR com [Vite](https://vitejs.dev/guide/ssr.html). Se estiver usando [Nuxt.js](https://nuxtjs.org/), você pode testar [Nuxt Bridge, uma camada de compatibilidade do Nuxt.js 2 para 3](https://v3.nuxtjs.org/getting-started/bridge/). Para projetos de produção complexos, provavelmente é melhor esperar pelo [Nuxt 3 (atualmente em beta)](https://v3.nuxtjs.org/getting-started/introduction).
 
 ### Expectativas
 
@@ -155,11 +155,22 @@ O fluxo de trabalho a seguir percorre as etapas de migração de um aplicativo V
 
    </details>
 
-4. Neste ponto, seu aplicativo pode encontrar alguns erros/avisos em tempo de compilação (ex.: uso de filtros). Corrija-os primeiro. Se todos os avisos do compilador desaparecerem, você também poderá definir o compilador para o modo Vue 3.
+4. If you are using TypeScript, you will also need to modify `vue`'s typing to expose the default export (which is no longer present in Vue 3) by adding a `*.d.ts` file with the following:
+
+   ```ts
+   declare module 'vue' {
+     import { CompatVue } from '@vue/runtime-dom'
+     const Vue: CompatVue
+     export default Vue
+     export * from '@vue/runtime-dom'
+   }
+   ```
+
+5. Neste ponto, seu aplicativo pode encontrar alguns erros/avisos em tempo de compilação (ex.: uso de filtros). Corrija-os primeiro. Se todos os avisos do compilador desaparecerem, você também poderá definir o compilador para o modo Vue 3.
 
    [Exemplo de commit](https://github.com/vuejs/vue-hackernews-2.0/commit/b05d9555f6e115dea7016d7e5a1a80e8f825be52)
 
-5. Depois de corrigir os erros, o aplicativo poderá ser executado se não estiver sujeito às [limitações](#limitacoes-conhecidas) mencionadas acima.
+6. Depois de corrigir os erros, o aplicativo poderá ser executado se não estiver sujeito às [limitações](#limitacoes-conhecidas) mencionadas acima.
 
    Você provavelmente verá MUITOS avisos na linha de comando e no console do navegador. Aqui estão algumas dicas gerais:
 
@@ -171,29 +182,29 @@ O fluxo de trabalho a seguir percorre as etapas de migração de um aplicativo V
 
    - Se você estiver usando `vue-router`, observe que `<transition>` e `<keep-alive>` não funcionarão com `<router-view>` até que você atualize para `vue-router` v4.
 
-6. Atualize [nomes de classe em `<transition>`](/guide/migration/transition.html). Este é o único recurso que não possui um aviso de tempo de execução. Você pode fazer uma pesquisa em todo o projeto para nomes de classes CSS `.*-enter` e `.*-leave`.
+7. Atualize [nomes de classe em `<transition>`](/guide/migration/transition.html). Este é o único recurso que não possui um aviso de tempo de execução. Você pode fazer uma pesquisa em todo o projeto para nomes de classes CSS `.*-enter` e `.*-leave`.
 
    [Exemplo de commit](https://github.com/vuejs/vue-hackernews-2.0/commit/d300103ba622ae26ac26a82cd688e0f70b6c1d8f)
 
-7. Atualize a entrada do aplicativo para usar a [nova API de montagem global](/guide/migration/global-api.html#uma-nova-api-global-createapp).
+8. Atualize a entrada do aplicativo para usar a [nova API de montagem global](/guide/migration/global-api.html#uma-nova-api-global-createapp).
 
    [Exemplo de commit](https://github.com/vuejs/vue-hackernews-2.0/commit/a6e0c9ac7b1f4131908a4b1e43641f608593f714)
 
-8. [Atualize `vuex` para v4](https://vuex.vuejs.org/ptbr/guide/migrating-to-4-0-from-3-x.html).
+9. [Atualize `vuex` para v4](https://vuex.vuejs.org/ptbr/guide/migrating-to-4-0-from-3-x.html).
 
    [Exemplo de commit](https://github.com/vuejs/vue-hackernews-2.0/commit/5bfd4c61ee50f358cd5daebaa584f2c3f91e0205)
 
-9. [Atualize o `vue-router` para v4](https://next.router.vuejs.org/guide/migration/index.html). Se você também usa `vuex-router-sync`, você pode substituí-lo por um _store getter_.
+10. [Atualize o `vue-router` para v4](https://next.router.vuejs.org/guide/migration/index.html). Se você também usa `vuex-router-sync`, você pode substituí-lo por um _store getter_.
 
-   Após a atualização, para usar `<transition>` e `<keep-alive>` com `<router-view>` requer o uso da nova [sintaxe baseada em slot com escopo](https://next.router.vuejs.org/guide/migration/index.html#router-view-keep-alive-and-transition).
+    Após a atualização, para usar `<transition>` e `<keep-alive>` com `<router-view>` requer o uso da nova [sintaxe baseada em slot com escopo](https://next.router.vuejs.org/guide/migration/index.html#router-view-keep-alive-and-transition).
 
-   [Exemplo de commit](https://github.com/vuejs/vue-hackernews-2.0/commit/758961e73ac4089890079d4ce14996741cf9344b)
+    [Exemplo de commit](https://github.com/vuejs/vue-hackernews-2.0/commit/758961e73ac4089890079d4ce14996741cf9344b)
 
-10. Retire os avisos individuais. Observe que alguns recursos têm comportamento conflitante entre o Vue 2 e o Vue 3 - por exemplo, a API da função de renderização ou o componente funcional vs. a alteração de componente assíncrona. Para migrar para a API do Vue 3 sem afetar o restante do aplicativo, você pode optar pelo comportamento do Vue 3 por componente com a [opção `compatConfig`](#configuracao-por-componente).
+11. Retire os avisos individuais. Observe que alguns recursos têm comportamento conflitante entre o Vue 2 e o Vue 3 - por exemplo, a API da função de renderização ou o componente funcional vs. a alteração de componente assíncrona. Para migrar para a API do Vue 3 sem afetar o restante do aplicativo, você pode optar pelo comportamento do Vue 3 por componente com a [opção `compatConfig`](#configuracao-por-componente).
 
     [Exemplo de commit](https://github.com/vuejs/vue-hackernews-2.0/commit/d0c7d3ae789be71b8fd56ce79cb4cb1f921f893b)
 
-11. Quando todos os avisos forem corrigidos, você poderá remover a compilação de migração e alternar para o Vue 3 propriamente dito. Observe que você pode não conseguir fazer isso se ainda tiver dependências que dependem do comportamento do Vue 2.
+12. Quando todos os avisos forem corrigidos, você poderá remover a compilação de migração e alternar para o Vue 3 propriamente dito. Observe que você pode não conseguir fazer isso se ainda tiver dependências que dependem do comportamento do Vue 2.
 
     [Exemplo de commit](https://github.com/vuejs/vue-hackernews-2.0/commit/9beb45490bc5f938c9e87b4ac1357cfb799565bd)
 

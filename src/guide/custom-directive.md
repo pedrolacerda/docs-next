@@ -49,7 +49,7 @@ As funções de hook são as funções que são executadas conforme o estado da 
 
 - `beforeMount`: Executa quando a diretiva é ligada pela primeira vez ao elemento e antes que o componente pai seja montado. Aí é onde você pode fazer o trabalho de configuração inicial.
 
-- `mounted`: Executa quando o componente pai do elemento ligado é montado.
+- `mounted`: Executa antes que o componente pai do elemento vinculado é montado.
 
 - `beforeUpdate`: Executa antes que o VNode contido no componente seja atualizado.
 

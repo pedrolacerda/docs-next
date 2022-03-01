@@ -52,11 +52,11 @@ Vue.config.ignoredElements = ['plastic-button']
   ]
   ```
 
-- Se estiver usando a compilação de _template_ _on-the-fly_, passe-o via `app.config.isCustomElement`:
+- Se estiver usando a compilação de _template_ _on-the-fly_, passe-o via `app.config.compilerOptions.isCustomElement`:
 
   ```js
   const app = Vue.createApp({})
-  app.config.isCustomElement = tag => tag === 'plastic-button'
+  app.config.compilerOptions.isCustomElement = tag => tag === 'plastic-button'
   ```
 
   É importante observar que a configuração em tempo de execução afeta apenas a compilação do _template_ em tempo de execução - não afetará os _templates_ pré-compilados.
@@ -125,6 +125,6 @@ Com a mudança de comportamento de `is`, um prefixo `vue:` agora é necessário 
 
 ## Estratégia de Migração
 
-- Substitua `config.ignoredElements` por `vue-loader`'s `compilerOptions` (com a etapa de compilação) ou `app.config.isCustomElement` (com compilação de _template_ _on-the-fly_)
+- Substitua `config.ignoredElements` por `vue-loader`'s `compilerOptions` (com a etapa de compilação) ou `app.config.compilerOptions.isCustomElement` (com compilação de _template_ _on-the-fly_)
 
 - Altere todas as tags não-`<component>` com uso de `is` para `<component is="...">` (para _templates_ SFC) ou prefixe-as com `vue:` (para _templates_ no DOM).

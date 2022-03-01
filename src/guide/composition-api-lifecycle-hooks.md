@@ -1,5 +1,7 @@
 # Gatilhos de Ciclo de Vida
 
+> Esta seção usa a sintaxe de [componente single-file](single-file-component.html) para exemplos de código
+
 > Este guia assume que você já leu a [Introdução à API de Composição](composition-api-introduction.html) e [Fundamentos da Reatividade](reactivity-fundamentals.html). Leia elas primeiro se você for novo no assunto de API de Composição.
 
 <VideoLesson href="https://www.vuemastery.com/courses/vue-3-essentials/lifecycle-hooks" title="Saiba mais sobre como os Gatilhos de Ciclo de Vida funcionam com o Vue Mastery">Assista à um vídeo grátis sobre Gatilhos de Ciclo de Vida no Vue Mastery</VideoLesson>

@@ -1,5 +1,7 @@
 # Componentes Single-File
 
+<VideoLesson href="https://vueschool.io/lessons/vue-3-introduction-to-single-file-components?friend=vuejs" title="Free Vue.js Single File Components Lesson">Learn about single file components with a free video lesson on Vue School</VideoLesson>
+
 ## Introdução
 
 Componentes Single-File do Vue (também conhecido como arquivos `*.vue`, abreviado como **SFC**) é um formato de arquivo especial que nos permite encapsular o *template*, lógica **e** estilização de um componente Vue em um único arquivo. Aqui está um exemplo de SFC:
@@ -73,7 +75,7 @@ O SFC é um recurso definidor do Vue como um framework e é a abordagem recomend
 - Geração de Site Estático (SSG)
 - Quaisquer frontends não triviais em que uma etapa de compilação possa ser justificada para uma melhor experiência de desenvolvimento (DX).
 
-Dito isso, percebemos que existem cenários em que os SFCs podem parecer um exagero. É por isso que o Vue ainda pode ser usado via JavaScript simples sem uma etapa de compilação. Se você está apenas procurando aprimorar HTML amplamente estático com interações leves, também pode conferir [petite-vue](https://github.com/vuejs/petite-vue), um subconjunto de 5kb do Vue otimizado para aprimoramento progressivo.
+Dito isso, percebemos que existem cenários em que os SFCs podem parecer um exagero. É por isso que o Vue ainda pode ser usado via JavaScript simples sem uma etapa de compilação. Se você está apenas procurando aprimorar HTML amplamente estático com interações leves, também pode conferir [petite-vue](https://github.com/vuejs/petite-vue), um subconjunto de 6kb do Vue otimizado para aprimoramento progressivo.
 
 ## E Quanto à Separação de Preocupações?
 

@@ -93,7 +93,7 @@ A seguir, uma lista de mudanças incompatíveis com v2.x:
 ### Elementos Personalizados
 
 - [A lista de permissões para elementos personalizados agora é realizada durante a compilação do _template_](/guide/migration/custom-elements-interop.html)
-- [A propriedade especial `is` está restrita apenas à _tag_ `<component>`](/guide/migration/custom-elements-interop.html#customized-built-in-elements)
+- [O atributo especial `is` está restrito apenas à _tag_ `<component>`](/guide/migration/custom-elements-interop.html#customized-built-in-elements)
 
 ### Outras Mudanças Menores
 
@@ -161,11 +161,11 @@ Estamos trabalhando em uma nova versão do _Devtools_ com uma nova interface e r
 
   - Nota: o canal beta pode entrar em conflito com a versão estável do _devtools_, então pode ser necessário desabilitar temporariamente a versão estável para que a versão beta funcione corretamente.
 
-- Para navegador Firefox: [Baixe a extensão assinada](https://github.com/vuejs/vue-devtools/releases/tag/v6.0.0-beta.2) (Arquivo `.xpi` em Assets)
+- Para navegador Firefox: [Baixe a extensão assinada](https://github.com/vuejs/vue-devtools/releases/tag/v6.0.0-beta.20) (Arquivo `.xpi` em Assets)
 
 ### Suporte de IDE
 
-É recomendado o uso do [VSCode](https://code.visualstudio.com/) com a extensão oficial [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur), qual provê suporte à IDE para Vue 3.
+É recomendado o uso do [VSCode](https://code.visualstudio.com/) com a extensão oficial [Volar](https://github.com/johnsoncodehk/volar), qual provê suporte à IDE para Vue 3.
 
 ### Outros Projetos
 

@@ -96,7 +96,8 @@ app.directive('my-directive', {
   mounted() {},
   // chamado antes que o VNode do componente contido seja atualizado
   beforeUpdate() {},
-  // chamado depois que o VNode do componente contido e de seus filhos tenha atualizado
+  // chamado depois que o VNode do componente contido e de seus filhos
+  // tenha atualizado
   updated() {},
   // chamado antes que o componente pai do elemento vinculado seja desmontado
   beforeUnmount() {},
@@ -234,7 +235,7 @@ app.mount('#my-app')
   Prover valores por meio da aplicação é especialmente útil quando ao escrever plugins, pois os plugins normalmente não seriam capazes de prover valores usando componentes. É uma alternativa ao uso de [globalProperties](application-config.html#globalproperties).
 
   :::tip Nota
-  Os vínculos `provide` e `inject` NÃO são reativos. Isto é intencional. No entanto, se você passar um objeto observado, as propriedades desse objeto permanecerão reativas.
+  Os vínculos `provide` e `inject` NÃO são reativos. Isto é intencional. No entanto, se você passar um objeto reativo, as propriedades desse objeto permanecerão reativas.
   :::
 
 - **Exemplo:**
@@ -297,9 +298,9 @@ setTimeout(() => app.unmount(), 5000)
 
 - **Uso:**
 
-  Instalar um plugin Vue.js. Se o plugin é um objeto, deve expor um método `install`. Se for uma função em si, será tratado como o método de instalação.
+  Instalar um plugin Vue.js. Se o plugin é um objeto, deve expor um método `install`. Se for uma função em si, esta será tratada como o método `install`.
 
-  O método de instalação será chamado com a aplicação como seu primeiro argumento. Quaisquer `options` passadas para `use` serão passadas em argumentos subsequentes.
+  O método `install` será chamado com a aplicação como seu primeiro argumento. Quaisquer `options` passadas para `use` serão passadas em argumentos subsequentes.
 
   Quando esse método é chamado no mesmo plugin várias vezes, o plugin será instalado apenas uma vez.
 

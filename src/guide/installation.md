@@ -17,6 +17,8 @@ Notas de lançamento detalhadas para cada versão estão disponíveis no [GitHub
 
 ## Vue Devtools
 
+<VideoLesson href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3?friend=vuejs" title="Learn how to install Vue Devtools on Vue School">Learn how to install and use Vue Devtools in a free Vue School lesson</VideoLesson>
+
 > Atualmente em versão Beta - integração com Vuex e Router ainda em andamento
 
 <VideoLesson href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3?friend=vuejs" title="Aprenda a instalar o Vue Devtools na Vue School">Aprenda como instalar e usar o Vue Devtools em uma aula gratuita da Vue School</VideoLesson>
@@ -68,10 +70,10 @@ Na maioria dos casos, a maneira preferida de criar uma construção com webpack 
 
 ## CLI
 
-Vue oferece uma [CLI oficial](https://github.com/vuejs/vue-cli) para projetar, rapidamente, ambiciosas _Single Page Applications_. Esta oferece conjuntos prontos de configurações de distribuição para um processo de desenvolvimento _frontend_ moderno. Basta apenas alguns minutos para ter tudo funcionando e sendo executado com _hot-reload_, _lint-on-save_ e distribuições (_builds_) prontas para produção. Confira a [documentação da Vue CLI](https://cli.vuejs.org) para mais detalhes.
+Vue oferece uma [CLI oficial](https://cli.vuejs.org/) para projetar, rapidamente, ambiciosas _Single Page Applications_. Esta oferece conjuntos prontos de ambientes de compilação para um processo de desenvolvimento _frontend_ moderno. Basta apenas alguns minutos para ter tudo funcionando e sendo executado com _hot-reload_, _lint-on-save_ e distribuições (_builds_) prontas para produção.
 
 ::: tip
-A CLI pressupõe que você já possui conhecimento prévio em Node.js e das ferramentas de distribuição (_build tools_) associadas. Se Vue ou as ferramentas de distribuição _frontend_ associadas são assuntos novos para você, recomendamos fortemente que você passe por todo [o guia](./introduction.html) sem qualquer ferramenta de distribuição, antes de utilizar a CLI.
+A CLI pressupõe que você já possui conhecimento prévio em Node.js e das ferramentas de construção (_build tools_) associadas. Se Vue ou as ferramentas de construção _frontend_ associadas são assuntos novos para você, recomendamos fortemente que você passe por todo [o guia](./introduction.html) sem qualquer ferramenta de construção, antes de utilizar a CLI.
 :::
 
 Para o Vue 3, você deve utilizar, no mínimo, a Vue CLI v4.5, disponível no npm como `@vue/cli`. Para atualizá-lo, você deve reinstalar o pacote `@vue/cli` globalmente, em sua última versão:
@@ -90,7 +92,7 @@ vue upgrade --next
 
 ## Vite
 
-[Vite](https://github.com/vitejs/vite) é uma ferramenta de distribuição (_build tool_) para desenvolvimento _Web_ que permite servir código de maneira ultra rápida devido à sua abordagem de importação _ES Module_ nativa.
+[Vite](https://vitejs.dev/) é uma ferramenta de construção (_build tool_) para desenvolvimento _Web_ que permite servir código de maneira ultra rápida devido à sua abordagem de importação _ES Module_ nativa.
 
 Projetos Vue podem ser rapidamente inicializados com Vite ao executar os seguintes comandos no seu _terminal_:
 
@@ -116,6 +118,15 @@ $ yarn create vite-app <nome-do-projeto>
 $ cd <nome-do-projeto>
 $ yarn
 $ yarn dev
+```
+
+Ou com pnpm:
+
+```bash
+$ pnpm create vite <nome-do-projeto> -- --template vue
+$ cd <nome-do-projeto>
+$ pnpm install
+$ pnpm dev
 ```
 
 ## Esclarecimento sobre as diferentes Distribuições

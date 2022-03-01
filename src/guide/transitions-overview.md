@@ -181,7 +181,7 @@ A atenuação pode inclusive transmitir a qualidade do material sendo animado. O
 
 <common-codepen-snippet title="Demo de Bola Quicando" slug="wvgqyyW" :height="500" :editable="false" user="Vue"/>
 
-Você pode obter muitos efeitos únicos e fazer sua animação bem estilosa ajustando sua atenuação. O CSS lhe permite modificar isso ajustando uma propriedade bezier cúbica, [este playground](https://cubic-bezier.com/#.17,.67,.83,.67) por Lea Verou é muito útil para explorar isso.
+Você pode obter muitos efeitos únicos e fazer sua animação bem estilosa ajustando sua atenuação. O CSS lhe permite modificar isso ajustando os parâmetros da função _cubic-bezier_, [este playground](https://cubic-bezier.com/#.17,.67,.83,.67) por Lea Verou é muito útil para explorar isso.
 
 Apesar de que você possa alcançar grandes efeitos para animações simples com as duas alças que a acentuação por bezier-cúbico oferece, Javascript permite múltiplas alças, e portanto, permite muito mais variação.
 

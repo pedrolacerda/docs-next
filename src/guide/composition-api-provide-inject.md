@@ -1,5 +1,7 @@
 # Prover e Injetar Dados
 
+> Esta seção usa a sintaxe de [componente single-file](single-file-component.html) para exemplos de código
+
 > Este guia assume que você já leu as seções [Prover e Injetar Dados](component-provide-inject.html), [Introdução a API de Composição](composition-api-introduction.html) e [Fundamentos de Reatividade](reactivity-fundamentals.html).
 
 Podemos [prover e injetar dados](component-provide-inject.html) com a API de Composição também. Ambos só podem ser chamados durante [`setup()`](composition-api-setup.html) com uma instância ativa atual.

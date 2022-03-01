@@ -294,7 +294,7 @@ A função `setup` é uma nova opção de componente. Ela serve como ponto de en
 
   O objeto `props` é imutável para o código do usuário durante o desenvolvimento (irá emitir um aviso se o código do usuário tentar alterá-lo).
 
-  O segundo argumento fornece um objeto de contexto que expõe uma lista seletiva de propriedades que foram expostas anteriormente em `this`:
+  O segundo argumento fornece um objeto de contexto que expõe vários objetos e funções que podem ser úteis no `setup`:
 
   ```js
   const MyComponent = {
@@ -302,10 +302,13 @@ A função `setup` é uma nova opção de componente. Ela serve como ponto de en
       context.attrs
       context.slots
       context.emit
+      context.expose
     }
   }
   ```
 
+  `attrs`, `slots`, and `emit` are equivalent to the instance properties [`$attrs`](/api/instance-properties.html#attrs), [`$slots`](/api/instance-properties.html#slots), and [`$emit`](/api/instance-methods.html#emit) respectively.
+  
   `attrs` e `slots` são _proxies_ para os valores correspondentes na instância interna do componente. Isso garante que eles sempre exponham os valores mais recentes, mesmo após as atualizações, para que possamos desestruturá-los sem nos preocupar em acessar uma referência obsoleta:
 
   ```js
@@ -315,6 +318,26 @@ A função `setup` é uma nova opção de componente. Ela serve como ponto de en
       function onClick() {
         console.log(attrs.foo) // garantido ser a referência mais recente
       }
+    }
+  }
+  ```
+
+  `expose`, added in Vue 3.2, is a function that allows specific properties to be exposed via the public component instance. By default, the public instance retrieved using refs, `$parent`, or `$root` is equivalent to the internal instance used by the template. Calling `expose` will create a separate public instance with the properties specified:
+
+  ```js
+  const MyComponent = {
+    setup(props, { expose }) {
+      const count = ref(0)
+      const reset = () => count.value = 0
+      const increment = () => count.value++
+
+      // Only reset will be available externally, e.g. via $refs
+      expose({
+        reset
+      })
+
+      // Internally, the template has access to count and increment
+      return { count, increment }
     }
   }
   ```

@@ -26,7 +26,7 @@ app.config.errorHandler = (err, vm, info) => {
 }
 ```
 
-Atribua um manipulador para erros não capturados durante a função de renderização do componente e os observadores. O manipulador é chamado com o erro e a instância da aplicação.
+Atribua um manipulador para erros não capturados durante a função de renderização do componente e os observadores. O manipulador é chamado com o erro e a instância da aplicação correspondente.
 
 > Os serviços de rastreamento de erros [Sentry](https://sentry.io/for/vue/) e [Bugsnag](https://docs.bugsnag.com/platforms/browsers/vue/) fornecem integrações oficiais usando essa opção.
 

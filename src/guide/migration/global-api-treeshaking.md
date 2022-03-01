@@ -107,7 +107,7 @@ export function render() {
 
 Isso significa essencialmente que o componente `Transition` só é importado quando o aplicativo realmente faz uso dele. Em outras palavras, se o aplicativo não tiver nenhum componente `<transition>`, o código que suporta esse recurso não estará presente no pacote final.
 
-Com o *tree-shaking* global, o usuário “paga” apenas pelos recursos que realmente usa. Melhor ainda, sabendo que os recursos opcionais não aumentarão o tamanho do pacote para aplicativos que não os utilizam, o tamanho do framework se tornou muito menos uma preocupação para recursos centrais adicionais no futuro, se é que o fará.
+Com o *tree-shaking* global, os usuários “pagam” apenas pelos recursos que realmente usam. Melhor ainda, sabendo que os recursos opcionais não aumentarão o tamanho do pacote para aplicativos que não os utilizam, o tamanho do framework se tornou muito menos uma preocupação para recursos centrais adicionais no futuro, isso se houver.
 
 ::: warning Importante
 O que foi dito acima se aplica apenas as [Construções de Módulos ES](/guide/installation.html#explanation-of-different-builds) para uso com empacotadores capazes de aplicar *tree-shaking* - o construtor UMD ainda inclui todos os recursos e expõe tudo na variável global Vue (e o compilador produzirá a saída apropriada para usar APIs fora do global em vez de importar).
